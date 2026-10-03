@@ -1,0 +1,1293 @@
+[
+  {
+    "link": "https://www.coalitionforsecureai.org/wp-content/uploads/2026/09/model-context-protocol-security-v2.0.pdf",
+    "include": true,
+    "include_reason": "Workstream paper that defines 34 MCP threats in 12 categories and control requirements for four assurance levels.",
+    "axioms": [
+      {
+        "text": "LLMs have no syntactic or semantic way to separate control instructions from data, so any adversary-controllable input can alter execution flow.",
+        "ref": "p. 46"
+      },
+      {
+        "text": "An LLM transforms malicious payloads without sanitizing them, so input routed through a model is no safer than direct user input.",
+        "ref": "p. 45"
+      },
+      {
+        "text": "Model-level controls such as trained refusals and safety classifiers fail under prompt injection, judgment errors, or a swap to a weaker model.",
+        "ref": "p. 12"
+      },
+      {
+        "text": "Users habituate to frequent consent prompts and approve dangerous or malicious actions without review.",
+        "ref": "p. 12"
+      },
+      {
+        "text": "Identity and capability claims carried in _meta are asserted by the caller and carry no proof of who the caller is.",
+        "ref": "p. 17"
+      },
+      {
+        "text": "Documented incidents include cross-tenant exposure in Asana's MCP server, a CVSS 8.8 missing capability check in a WordPress plugin, and prompt-injected table exposure through Supabase.",
+        "ref": "p. 7"
+      },
+      {
+        "text": "A server deployed securely one day can be compromised through an upstream dependency update two days later.",
+        "ref": "p. 39"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "MCP servers never pass user OAuth tokens through to upstream APIs; downstream access uses RFC 8693 token exchange that yields a distinct scoped token per resource.",
+        "ref": "p. 13, p. 26"
+      },
+      {
+        "text": "Servers reconcile _meta identity and capability claims against the authenticated principal and treat a mismatch as a security failure, never resolving it in favor of the claim.",
+        "ref": "p. 17"
+      },
+      {
+        "text": "Authorization is evaluated on every request that presents a task ID, handle, or resource URI; possession of a reference never substitutes for authorization.",
+        "ref": "p. 17, p. 20"
+      },
+      {
+        "text": "Gateways and servers reject requests whose MCP-Protocol-Version, Mcp-Method, or Mcp-Name headers disagree with the JSON-RPC body before routing or authorization.",
+        "ref": "p. 17"
+      },
+      {
+        "text": "Client-held sealed state such as requestState is integrity-protected with an HMAC or AEAD and rejected when verification fails.",
+        "ref": "p. 17, p. 20"
+      },
+      {
+        "text": "Tool implementations do not rely on the LLM to perform security-critical operations, validate inputs, or enforce constraints.",
+        "ref": "p. 18"
+      },
+      {
+        "text": "MCP servers that touch files, run commands, open network connections, or execute LLM-generated code always run in a sandbox; a container alone is not a strong boundary.",
+        "ref": "p. 15, p. 16"
+      },
+      {
+        "text": "A Level 1 deployment has no access to production credentials, live data, or production endpoints; one that touches real credentials is misclassified.",
+        "ref": "p. 39"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Least privilege: MCP servers request reduced scopes, drop write scopes when only reads are needed, and use runtime scope challenges for step-up.",
+        "ref": "p. 13"
+      },
+      {
+        "text": "Scope narrowing on delegation: at Level 3, each delegation hop narrows scope and cannot exceed the delegating principal's effective permissions.",
+        "ref": "p. 25"
+      },
+      {
+        "text": "Risk-tiered assurance: operators select Level 1 to 4 by data sensitivity, blast radius, and regulatory context, and do not treat Level 4 as a universal target.",
+        "ref": "p. 39"
+      },
+      {
+        "text": "Centralized enforcement: Level 3 and 4 deployments place token validation, TBAC evaluation, workload identity exchange, and audit logging in an agent gateway.",
+        "ref": "p. 39"
+      },
+      {
+        "text": "Purpose-built tools: server developers give each tool one defined purpose, such as executing a prepared statement instead of any SQL statement.",
+        "ref": "p. 18"
+      },
+      {
+        "text": "Verified provenance: deploying organizations verify code signatures and SBOMs before installing an MCP server and allow only approved sources and signing keys.",
+        "ref": "p. 16"
+      },
+      {
+        "text": "Traceable decisions: hosts, clients, and servers log each tool chosen, its parameters, and the triggering prompt, redacting arguments by data classification.",
+        "ref": "p. 18, p. 19"
+      },
+      {
+        "text": "Locked confirmation: organizations deploy MCP hosts with a configuration that unprivileged users cannot change and that keeps tool confirmation prompts on.",
+        "ref": "p. 18"
+      }
+    ],
+    "opencre_topics": [
+      "Authentication",
+      "Access Control",
+      "Session Management",
+      "Input Validation",
+      "Supply Chain",
+      "Log Management"
+    ],
+    "tab": "MOSAIC",
+    "publication": "Model Context Protocol (MCP) Security V2.0",
+    "written": true
+  },
+  {
+    "link": "https://www.coalitionforsecureai.org/wp-content/uploads/2026/09/Addendum-MCP-and-PQC.pdf",
+    "include": true,
+    "include_reason": "Companion addendum that states where post-quantum cryptography belongs in MCP deployments and which migrations to defer.",
+    "axioms": [
+      {
+        "text": "Classical key exchange (RSA, ECDH) falls to Shor's algorithm, so MCP traffic captured today can be decrypted after Q-day.",
+        "ref": "p. 3"
+      },
+      {
+        "text": "Data crossing an MCP boundary whose sensitivity outlasts the quantum timeline, such as biometrics, identity roots, and long-term contracts, is exposed to harvest-now-decrypt-later capture today.",
+        "ref": "p. 3"
+      },
+      {
+        "text": "A quantum adversary can forge signatures only after Q-day, so signature migration carries less urgency than key exchange.",
+        "ref": "p. 3, p. 5"
+      },
+      {
+        "text": "Signature migration moves slower because JOSE/JWT, OAuth/OIDC, code signing, and certificate chains lack stable PQ variants.",
+        "ref": "p. 3"
+      },
+      {
+        "text": "Hybrid classical plus ML-KEM key exchange is arriving in OpenSSL, BoringSSL, rustls, CDNs, service meshes, and cloud TLS.",
+        "ref": "p. 4"
+      },
+      {
+        "text": "Grover's algorithm gives only a modest speedup against symmetric primitives, which 256-bit constructions absorb.",
+        "ref": "p. 5"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "MCP tool and server authors must not write cryptographic code; TLS libraries, proxies, and managed platforms supply it.",
+        "ref": "p. 3"
+      },
+      {
+        "text": "Deployments must not build their own PQC or MCP-specific cryptographic framings.",
+        "ref": "p. 4"
+      },
+      {
+        "text": "MCP deployments do not create MCP-specific PQ-signed variants of existing protocols before upstream standards exist.",
+        "ref": "p. 5"
+      },
+      {
+        "text": "Long-lived data traversing MCP is encrypted at rest with AES-256 where CNSA 2.0 applies; AES-128 is acceptable only where CNSA 2.0 does not bind.",
+        "ref": "p. 5"
+      },
+      {
+        "text": "Symmetric primitives stay off the ML-KEM and ML-DSA migration timeline unless a specific reason applies.",
+        "ref": "p. 5"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Externalize cryptography: operators terminate hybrid PQ TLS at a reverse proxy, sidecar, or gateway so the MCP server consumes plain HTTP inside the trust boundary.",
+        "ref": "p. 4"
+      },
+      {
+        "text": "Single control point: platform teams roll out PQ transport changes at the proxy or gateway layer, independent of MCP code releases.",
+        "ref": "p. 4"
+      },
+      {
+        "text": "Inventory before migrating: teams list every cryptographic surface, including transport, workload identity, tokens, signed receipts, and data at rest.",
+        "ref": "p. 4"
+      },
+      {
+        "text": "Follow upstream protocols: teams track JOSE, TUF/Sigstore, and code-signing releases and adopt PQ signatures when their libraries do.",
+        "ref": "p. 5"
+      },
+      {
+        "text": "Prioritize by sensitivity horizon: teams move data whose confidentiality must outlast Q-day to PQ transport first.",
+        "ref": "p. 3"
+      },
+      {
+        "text": "Revisit on triggers: teams reassess when ML-KEM and ML-DSA become TLS defaults, JOSE PQ variants stabilize, or Q-day estimates shift.",
+        "ref": "p. 5"
+      }
+    ],
+    "opencre_topics": [
+      "Cryptography",
+      "Data Protection",
+      "Secure Product Design"
+    ],
+    "tab": "MOSAIC",
+    "publication": "Addendum: Post-Quantum Cryptography Considerations for MCP",
+    "written": true
+  },
+  {
+    "link": "https://www.coalitionforsecureai.org/wp-content/uploads/2026/09/Zero-Trust-for-AI-Systems.pdf",
+    "include": true,
+    "include_reason": "Workstream paper that places identity, delegation, and policy decision points relative to the AI threat boundary and maps controls to DoD ZTRA and CISA ZTMM.",
+    "axioms": [
+      {
+        "text": "LLM-based AI systems behave non-deterministically, so their reasoning and alignment cannot be modeled in advance.",
+        "ref": "p. 6"
+      },
+      {
+        "text": "Tracing why an LLM with billions of parameters produced a given output is not practical, so its intent stays inscrutable.",
+        "ref": "p. 6"
+      },
+      {
+        "text": "AI systems reason and act at machine speed, faster than any human can oversee.",
+        "ref": "p. 7"
+      },
+      {
+        "text": "Frontier models under test in July and August 2026 bypassed controls, escaped sandboxes, and attacked other organizations' infrastructure.",
+        "ref": "p. 3"
+      },
+      {
+        "text": "Rapid adoption of new AI frameworks, tools, and models produces unvetted supply chains of data and code.",
+        "ref": "p. 7"
+      },
+      {
+        "text": "Eliminating every element of implicit trust is not possible, so each organization defines its trust policies first.",
+        "ref": "p. 16"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "Authorization decisions are never delegated to the model; a deterministic orchestration layer and policy decision point make them.",
+        "ref": "p. 10"
+      },
+      {
+        "text": "Everything inside the AI threat boundary, including the model, its context, and its weights, is treated as untrusted.",
+        "ref": "p. 10"
+      },
+      {
+        "text": "An agent's delegated permissions are a subset of the initiating user's permissions, so the agent cannot reach data or systems the user cannot.",
+        "ref": "p. 6"
+      },
+      {
+        "text": "Every MCP tool call, RAG lookup, and data or API access is a separate authorization event checked against the PDP with the user plus agent identity.",
+        "ref": "p. 10"
+      },
+      {
+        "text": "Model inputs are treated as hostile, and model outputs and reasoning are validated before they influence decisions or actions.",
+        "ref": "p. 12"
+      },
+      {
+        "text": "Zero Trust does not stop misaligned reasoning: an agent can still take any unintended action the user is permitted to take.",
+        "ref": "p. 6"
+      },
+      {
+        "text": "An inventory of AI systems, models, agents, and data, with policy to govern them, exists before any Zero Trust control is adopted.",
+        "ref": "p. 8, p. 13"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Complete mediation: the policy decision point checks the delegation chain, the agent identity, and whether the requested action and parameters fall within delegated scope.",
+        "ref": "p. 8"
+      },
+      {
+        "text": "Least privilege: the identity provider exchanges the user token for a time-limited user plus agent token scoped to one session's downstream calls.",
+        "ref": "p. 10"
+      },
+      {
+        "text": "Never trust, always verify: the orchestration layer re-verifies the propagated identity at every connector before any data or tool access.",
+        "ref": "p. 10"
+      },
+      {
+        "text": "Just-in-time secrets: the orchestration layer pulls static secrets from the vault only when a downstream call needs them.",
+        "ref": "p. 10"
+      },
+      {
+        "text": "Enforcement-side audit: policy enforcement points log the original subject, the delegated scope, and the action taken, independent of the agent's own reporting.",
+        "ref": "p. 8"
+      },
+      {
+        "text": "Human oversight for exceptions: the application requires human or AI-as-judge approval for any action not explicitly authorized in the current context.",
+        "ref": "p. 14"
+      },
+      {
+        "text": "Phased maturity: organizations first bind agent sessions to user identity at an API gateway, then add per-hop token exchange, then evaluate delegation metadata at the PDP.",
+        "ref": "p. 8"
+      },
+      {
+        "text": "Defense in depth: teams layer model alignment and safety mechanisms on top of Zero Trust controls, because controls cannot cover every model behavior.",
+        "ref": "p. 6"
+      }
+    ],
+    "opencre_topics": [
+      "Access Control",
+      "Authentication",
+      "Input Validation",
+      "Data Protection",
+      "Log Management",
+      "Supply Chain"
+    ],
+    "tab": "MOSAIC",
+    "publication": "Zero Trust for AI Systems",
+    "written": true
+  },
+  {
+    "link": "https://genai.owasp.org/2026/09/01/owasp-genai-security-project-unveils-2026-top-10-for-llm-applications-new-agent-control-standard-and-sponsors-as-community-tops-30000-members/",
+    "include": false,
+    "include_reason": "News post announcing the OWASP GenAI LLM Top 10 2026; add the paper itself as its own row from https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/",
+    "axioms": [],
+    "invariables": [],
+    "principles": [],
+    "opencre_topics": [],
+    "tab": "MOSAIC",
+    "publication": "OWASP GenAI Security Project Unveils 2026 Top 10 for LLM Applications, New Agent Control Standard and Sponsors as Community Tops 30,000 Members",
+    "written": false
+  },
+  {
+    "link": "https://genai.owasp.org/2026/04/14/finbot-ctf-is-live-a-hands-on-companion-to-the-owasp-genai-security-project/",
+    "include": false,
+    "include_reason": "Blog post introducing the FinBot CTF training environment; it states no controls or requirements. The related framework is the OWASP Top 10 for Agentic Applications 2026.",
+    "axioms": [],
+    "invariables": [],
+    "principles": [],
+    "opencre_topics": [],
+    "tab": "MOSAIC",
+    "publication": "FinBot CTF Is Live: A Hands-On Companion to the OWASP GenAI Security Project",
+    "written": false
+  },
+  {
+    "link": "https://genai.owasp.org/2026/04/14/owasp-genai-exploit-round-up-report-q1-2026/",
+    "include": true,
+    "include_reason": "Quarterly incident report whose body maps eight Q1 2026 AI incidents to the OWASP LLM and Agentic Top 10 lists with mitigations for each.",
+    "axioms": [
+      {
+        "text": "Consumer AI tools compress attacker effort in reconnaissance, scripting, and exploit iteration, which raises the speed and scale of intrusions.",
+        "ref": "Incident 1, Mexican government breach"
+      },
+      {
+        "text": "An agent connected to a live account can ignore stop commands and take destructive actions, as an OpenClaw agent did when it deleted a user's email.",
+        "ref": "Incident 2, OpenClaw inbox deletion"
+      },
+      {
+        "text": "Engineers act on agent advice without independent checks; one Meta change based on agent advice exposed sensitive data internally for two hours.",
+        "ref": "Incident 3, Meta internal agent leak"
+      },
+      {
+        "text": "Managed agent platforms can hand agents excessive default permissions through provider-managed service accounts, as Vertex AI Agent Engine did.",
+        "ref": "Incident 4, Vertex AI Double Agent"
+      },
+      {
+        "text": "A source leak of agent tooling becomes a malware lure within hours through fake leak-themed repositories.",
+        "ref": "Incident 5, Claude Code source leak"
+      },
+      {
+        "text": "Most AI security events stem from misconfiguration, design flaws, supply chain weakness, or prompt injection and receive no CVE identifier.",
+        "ref": "Key Observation on CVEs"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "Delete, send, pay, and publish permissions in personal agents are privileged actions that require hard confirmation and easy rollback.",
+        "ref": "Incident 2, Call to Action"
+      },
+      {
+        "text": "Every agent recommendation that can alter permissions, visibility, or policy passes deterministic validation and human review before execution.",
+        "ref": "Incident 3, Call to Action"
+      },
+      {
+        "text": "Agent identities receive the same review as privileged admin access.",
+        "ref": "Incident 4, Call to Action"
+      },
+      {
+        "text": "Configuration fields in AI orchestration tools can be code execution paths, as the Flowise CustomMCP flaw (CVE-2025-59528) showed.",
+        "ref": "Incident 7, Flowise RCE"
+      },
+      {
+        "text": "Logs, links, and external references consumed by AI assistants are untrusted input.",
+        "ref": "Incident 8, GrafanaGhost"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Least agency by default: managed agent platforms scope service-agent permissions per deployment and issue short-lived credentials.",
+        "ref": "Incident 4, Potential Mitigations"
+      },
+      {
+        "text": "Pivot testing: organizations on managed agent platforms test whether agents can reach other projects, buckets, registries, or model infrastructure.",
+        "ref": "Incident 4, Call to Action"
+      },
+      {
+        "text": "Release hygiene: AI tool publishers strip source maps from production packages, sign releases, and scan artifacts before publishing.",
+        "ref": "Incident 5, Potential Mitigations"
+      },
+      {
+        "text": "Dependency trust: AI builders pin and verify dependencies, sign and scan updates, and review AI data vendors' dependency trust and logging.",
+        "ref": "Incident 6, Mercor and LiteLLM"
+      },
+      {
+        "text": "Emergency patching: organizations set emergency patch deadlines for AI frameworks and assume compromise of vulnerable internet-facing nodes.",
+        "ref": "Incident 7, Call to Action"
+      },
+      {
+        "text": "Egress restriction: operators restrict outbound connections and external rendering from AI orchestration and observability hosts.",
+        "ref": "Incidents 7 and 8, Potential Mitigations"
+      }
+    ],
+    "opencre_topics": [
+      "Access Control",
+      "Input Validation",
+      "Supply Chain",
+      "Vulnerability Management",
+      "Secure Product Design"
+    ],
+    "tab": "MOSAIC",
+    "publication": "OWASP GenAI Exploit Round-up Report Q1 2026",
+    "written": true
+  },
+  {
+    "link": "https://genai.owasp.org/2025/07/14/owasp-gen-ai-incident-exploit-round-up-q225/",
+    "include": true,
+    "include_reason": "Quarterly incident report whose body maps fourteen Q2 2025 GenAI exploits to the OWASP LLM Top 10 with mitigations for each.",
+    "axioms": [
+      {
+        "text": "Hidden instructions in tool descriptions can lead a model to exfiltrate data without the user's awareness.",
+        "ref": "Exploit 1, GPT-4.1 tool poisoning"
+      },
+      {
+        "text": "Voice clones built from public samples defeat bank voice authentication; one Hong Kong case moved about $25 million.",
+        "ref": "Exploit 2, deepfake voice banking scam"
+      },
+      {
+        "text": "Attackers use AI to automate scanning and credential stuffing, which speeds discovery of valid logins across platforms.",
+        "ref": "Exploit 9, AI-driven credential attacks"
+      },
+      {
+        "text": "Weak credentials on AI vendor back ends expose large datasets; a 123456 admin password on McHire exposed up to 64 million applicant records.",
+        "ref": "Exploit 11, McDonald's hiring bot"
+      },
+      {
+        "text": "Malware can carry prompt-injection strings aimed at AI-based scanners, such as the Skynet sample that told the model to report no malware.",
+        "ref": "Exploit 13, Skynet malware"
+      },
+      {
+        "text": "Instructions hidden in a received email can make M365 Copilot exfiltrate internal data with no user click.",
+        "ref": "Exploit 14, M365 Copilot zero-click"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "Third-party tool descriptions are validated and sanitized before a model reads them.",
+        "ref": "Exploit 1, Potential Mitigations"
+      },
+      {
+        "text": "Voice alone does not authenticate high-risk transactions; banks combine it with other verification factors.",
+        "ref": "Exploit 2, Potential Mitigations"
+      },
+      {
+        "text": "Serialized data received by AI serving frameworks is untrusted, since pickle-based IPC in TensorRT-LLM allowed arbitrary code execution (CVE-2025-23254).",
+        "ref": "Exploit 6, TensorRT-LLM"
+      },
+      {
+        "text": "An AI verdict is never the sole basis for a malware decision.",
+        "ref": "Exploit 13, Potential Mitigations"
+      },
+      {
+        "text": "AI assistants do not execute actions without oversight.",
+        "ref": "Exploit 14, Call to Action"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Safe serialization: developers replace pickle IPC with JSON under strict schema validation, and TensorRT-LLM users upgrade to 0.18.2 or later.",
+        "ref": "Exploit 6, Potential Mitigations"
+      },
+      {
+        "text": "Multi-factor verification: banks combine voice with other factors and limit voice authentication for high-risk transactions.",
+        "ref": "Exploit 2, Potential Mitigations"
+      },
+      {
+        "text": "Vendor review: organizations audit authentication on AI-powered endpoints and require MFA and security audits from AI vendors.",
+        "ref": "Exploit 11, Call to Action"
+      },
+      {
+        "text": "Explicit triggers: enterprises disable auto-read input triggers so assistants act only on explicit user commands.",
+        "ref": "Exploit 14, Potential Mitigations"
+      },
+      {
+        "text": "Interaction logging: security teams log AI interactions and monitor for anomalous data flows.",
+        "ref": "Exploit 14, Call to Action"
+      },
+      {
+        "text": "Configuration audit: AI system operators add automated detection of misconfigured storage to deployment pipelines.",
+        "ref": "Exploit 4, Call to Action"
+      }
+    ],
+    "opencre_topics": [
+      "Authentication",
+      "Input Validation",
+      "Access Control",
+      "Log Management",
+      "Vulnerability Management"
+    ],
+    "tab": "MOSAIC",
+    "publication": "OWASP Gen AI Incident & Exploit Round-up, Q2’25",
+    "written": true
+  },
+  {
+    "link": "https://genai.owasp.org/2026/03/17/owasp-genai-security-project-expands-ai-security-frameworks-ahead-of-rsa-2026-celebrates-continued-sponsor-support/",
+    "include": false,
+    "include_reason": "Press release announcing the Q2 2026 Landscape Guide, sponsors, and RSA events. Papers it lists that may need their own rows: https://genai.owasp.org/resource/a-practical-guide-for-secure-mcp-server-development/ and https://genai.owasp.org/resource/owasp-vendor-evaluation-criteria-for-ai-red-teaming-providers-tooling-v1-0/",
+    "tab": "MOSAIC",
+    "publication": "OWASP GenAI Security Project Expands AI Security Frameworks Ahead of RSA 2026, Celebrates Continued Sponsor Support",
+    "written": false
+  },
+  {
+    "link": "https://genai.owasp.org/2025/12/18/evolving-ai-transparency-the-journey-of-the-aibom-generator-and-its-new-home-at-owasp/",
+    "include": false,
+    "include_reason": "Blog post about contributing the AIBOM Generator tool to OWASP (https://genai.owasp.org/resource/owasp-aibom-generator/); a tool, not a paper. The OWASP AIBOM Generation Handbook it mentions is still in development.",
+    "tab": "MOSAIC",
+    "publication": "Evolving AI Transparency: The Journey of the AIBOM Generator and Its New Home at OWASP",
+    "written": false
+  },
+  {
+    "link": "https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agentic-security-in-the-age-of-autonomous-ai/",
+    "include": false,
+    "include_reason": "Blog post announcing the OWASP Top 10 for Agentic Applications 2026; add the paper as its own row from https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
+    "tab": "MOSAIC",
+    "publication": "OWASP Top 10 for Agentic Applications – The Benchmark for Agentic Security in the Age of Autonomous AI",
+    "written": false
+  },
+  {
+    "link": "https://genai.owasp.org/2025/12/09/owasp-genai-security-project-releases-top-10-risks-and-mitigations-for-agentic-ai-security/",
+    "include": false,
+    "include_reason": "Press release announcing the OWASP Top 10 for Agentic Applications 2026 (https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/); it also lists Agentic AI Threats and Mitigations at https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/",
+    "tab": "MOSAIC",
+    "publication": "OWASP GenAI Security Project Releases Top 10 Risks and Mitigations for Agentic AI Security",
+    "written": false
+  },
+  {
+    "link": "https://genai.owasp.org/2025/07/22/owasp-agentic-ai-taxonomy-in-action-from-theory-to-tools/",
+    "include": false,
+    "include_reason": "Blog post featuring three vendor tools that use the OWASP Agentic AI Threats and Mitigations taxonomy; add the taxonomy as its own row from https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/",
+    "tab": "MOSAIC",
+    "publication": "OWASP Agentic AI Taxonomy in Action: From Theory to Tools",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/sans-names-the-five-winners-of-find-evil-2026",
+    "include": false,
+    "include_reason": "Press release naming the Find Evil! hackathon winners (open-source DFIR agent harnesses at findevil.devpost.com); no paper. The companion article Find Evil! Winners: Five Open Source DFIR Agents is also a news story.",
+    "tab": "MOSAIC",
+    "publication": "SANS Names the Five Winners of Find Evil!, the Largest Practitioner Evaluation of Autonomous AI Incident Response Agents",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/ai-second-biggest-human-risk-workplace-sans-institutes-2026-security-awareness-culture-report-finds",
+    "include": false,
+    "include_reason": "Press release for the SANS 2026 Security Awareness and Culture Report (https://go.sans.org/1xCbxt, registration required); the report is mainly about awareness program staffing, with one section on AI human risk.",
+    "tab": "MOSAIC",
+    "publication": "AI Is the Second-Biggest Human Risk in the Workplace, SANS Institute's 2026 Security Awareness & Culture Report Finds",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/ai-use-cybersecurity-jumped-from-50-to-78-year-ai-related-failures-rose-sharply-too-new-sans-institute-survey-reveals-governance-gap",
+    "include": false,
+    "include_reason": "Press release announcing the 2026 SANS AI Survey; add the survey report as its own row if it qualifies, from https://www.sans.org/white-papers/2026-sans-ai-survey-insights",
+    "tab": "MOSAIC",
+    "publication": "AI Use in Cybersecurity Jumped From 50% to 78% in a Year. AI-Related Failures Rose Sharply Too. New SANS Institute Survey Reveals a Governance Gap.",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/sans-ias-unite-to-accelerate-cybersecurity-research-talent-age-of-ai",
+    "include": false,
+    "include_reason": "Press release announcing a SANS and Yokohama National University research and training partnership; no paper.",
+    "tab": "MOSAIC",
+    "publication": "SANS Institute and Yokohama National University Institute of Advanced Sciences (IAS) Unite to Accelerate Cybersecurity Research and Talent in the Age of AI",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/sans-cyber-workforce-academy-opens-applications-expanded-maryland-program-adding-icsot-ai-security-tracks",
+    "include": false,
+    "include_reason": "Press release opening applications for a Maryland training program; no paper.",
+    "tab": "MOSAIC",
+    "publication": "SANS Cyber Workforce Academy Opens Applications for Expanded Maryland Program, Adding ICS/OT and AI Security Tracks",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/sans-institute-expands-cyber-leaders-podcast-with-new-episodes-tackling-ai-risk-geopolitical-conflict-frontline-defense",
+    "include": false,
+    "include_reason": "Press release announcing new Cyber Leaders podcast episodes; no paper.",
+    "tab": "MOSAIC",
+    "publication": "SANS Institute Expands Cyber Leaders Podcast with New Episodes Tackling AI Risk, Geopolitical Conflict, and Frontline Defense",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/ai-security-maturity-model-close-gap-between-enterprise-ai-adoption-governance",
+    "include": false,
+    "include_reason": "Press release announcing the SANS AI Security Maturity Model eBook; add it as its own row from https://www.sans.org/mlp/2026-ai-security-maturity-model-ebook (registration required). Its companion, the SANS Secure AI Blueprint, is at https://www.sans.org/white-papers/own-ai-securely-sans-secure-ai-blueprint",
+    "tab": "MOSAIC",
+    "publication": "SANS Institute Releases AI Security Maturity Model to Close the Gap Between Enterprise AI Adoption and the Governance to Control It",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/global-ai-security-standard-organizations-gather-mosaic-reduce-fragmentation",
+    "include": false,
+    "include_reason": "News post announcing the formation of MOSAIC; no paper. The shared taxonomy it mentions is in beta at https://www.opencre.org",
+    "tab": "MOSAIC",
+    "publication": "Global AI Security Standard Organizations Gather Under MOSAIC to Reduce Fragmentation",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/emergency-strategy-briefing-ai-driven-vulnerability-discovery-compresses-exploit-timelines",
+    "include": false,
+    "include_reason": "Press release announcing The AI Vulnerability Storm: Building a Mythos-Ready Security Program (risk register and priority actions); add the paper as its own row from https://labs.cloudsecurityalliance.org/mythos-ciso/",
+    "tab": "MOSAIC",
+    "publication": "SANS Institute, Cloud Security Alliance, [un]prompted, and OWASP GenAI Security Project Release Emergency Strategy Briefing as AI-Driven Vulnerability Discovery Compresses Exploit Timelines from Weeks to Hours",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/sans-research-cybersecurity-talent-shortage-narrative-wrong-real-crisis-what-your-team-doesnt-know-starting-ai",
+    "include": false,
+    "include_reason": "Press release for the 2026 SANS GIAC Cybersecurity Workforce Research Report (https://www.sans.org/white-papers/2026-cybersecurity-workforce-research-report); a workforce survey, not AI security guidance.",
+    "tab": "MOSAIC",
+    "publication": "SANS Research: The Cybersecurity Talent Shortage Narrative Is Wrong. The Real Crisis Is What Your Team Doesn't Know, Starting with AI",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/sans-siberx-introduce-now-ai-leaders-manage-ai-risk-strengthen-security-controls-defend-enterprise",
+    "include": false,
+    "include_reason": "Press release announcing the NOW // AI executive simulation program; a training event, no paper.",
+    "tab": "MOSAIC",
+    "publication": "SANS and siberX Introduce NOW // AI to Help Leaders Manage AI Risk, Strengthen Security Controls, and Defend Enterprise Value",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/sans-institute-launches-season-3-of-cyber-leaders-podcast",
+    "include": false,
+    "include_reason": "Press release announcing season 3 of the Cyber Leaders podcast; no paper.",
+    "tab": "MOSAIC",
+    "publication": "SANS Institute Launches Season 3 of “Cyber Leaders” Podcast, Featuring Unfiltered AI, Quantum, and Crisis Decision-Making Insights",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/launch-cloud-security-exchange-ebook-tackle-ai-powered-threats",
+    "include": false,
+    "include_reason": "Press release announcing the 2025 Cloud Security Exchange eBook on cloud defense against AI-driven threats; add it as its own row if it qualifies, from https://www.sans.org/white-papers/securing-cloud-persistent-challenges-emerging-threats-rise-ai-defense",
+    "tab": "MOSAIC",
+    "publication": "SANS Institute, AWS, Microsoft and Google Cloud Launch Cloud Security Exchange eBook to Tackle AI-Powered Threats",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/secure-ai-blueprint-provides-roadmap-leaders-need",
+    "include": false,
+    "include_reason": "Press release announcing the SANS Secure AI Blueprint (Own AI Securely); add the blueprint as its own row from https://www.sans.org/white-papers/own-ai-securely-sans-secure-ai-blueprint",
+    "tab": "MOSAIC",
+    "publication": "SANS Secure AI Blueprint Provides the Roadmap Leaders Need to Adopt AI While Minimizing Risk",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/sans-launches-cloud-security-exchange-2025",
+    "include": false,
+    "include_reason": "Press release announcing the Cloud Security Exchange 2025 event; the eBook it launched is the one named on the row for the Cloud Security Exchange eBook release.",
+    "tab": "MOSAIC",
+    "publication": "SANS Institute Launches Cloud Security Exchange 2025 to Equip Teams with Real-World Defenses for AI-Driven Threats",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/building-safer-ai-future-sans-leads-coordinated-effort-secure-artificial-intelligence",
+    "include": false,
+    "include_reason": "Press release announcing the SANS Critical AI Security Guidelines v1.0 (access controls, data protection, deployment, inference security, monitoring, GRC); add the guidelines as their own row from https://www.sans.org/mlp/critical-ai-security-guidelines/",
+    "tab": "MOSAIC",
+    "publication": "Building a Safer AI Future: SANS Leads Coordinated Effort to Secure Artificial Intelligence",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/advancing-threat-detection-2025-ai-automation-future-of-cybersecurity",
+    "include": false,
+    "include_reason": "Press release for a SANS and Anvilogic detection engineering survey webcast; no AI security paper.",
+    "tab": "MOSAIC",
+    "publication": "Advancing Threat Detection in 2025: AI, Automation, and the Future of Cybersecurity",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/sans-institute-launches-ai-cybersecurity-hackathon-develop-first-generation-open-source-ai-security-tools",
+    "include": false,
+    "include_reason": "Press release launching the 2025 SANS AI Cybersecurity Hackathon; an event, no paper.",
+    "tab": "MOSAIC",
+    "publication": "SANS Institute Launches AI Cybersecurity Hackathon to Develop the First Generation of Open-Source AI Security Tools",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/sans-institute-releases-2024-detection-response-survey-highlighting-ai-automation-cloud-security-challenges",
+    "include": false,
+    "include_reason": "Press release for the SANS 2024 Detection and Response Survey webcast; a SOC survey, not AI security guidance.",
+    "tab": "MOSAIC",
+    "publication": "SANS Institute Releases 2024 Detection & Response Survey Highlighting AI, Automation, and Cloud Security Challenges",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/building-ai-security-confidence-sans-unveils-toolkit-guide-secure-ai-adoption",
+    "include": false,
+    "include_reason": "Press release for the SANS AI Toolkit for Cybersecurity Awareness Month 2024 (https://www.sans.org/mlp/ssa-cybersecurity-awareness-month-kit/); awareness materials, no security controls.",
+    "tab": "MOSAIC",
+    "publication": "Building AI Security Confidence: SANS Unveils Toolkit to Guide Secure AI Adoption",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/unlock-future-cybersecurity-exclusive-next-era-ai-insights-cutting-edge-training-sans-network-security-2024",
+    "include": false,
+    "include_reason": "Press release promoting the SANS Network Security 2024 training event; no paper.",
+    "tab": "MOSAIC",
+    "publication": "Unlock the Future of Cybersecurity: Exclusive, Next Era AI Insights and Cutting-Edge Training at SANS Network Security 2024",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/bridging-gender-gap-cybersecurity-sans-women-cybersecurity-unveil-international-womens-day-scholarship",
+    "include": false,
+    "include_reason": "Press release announcing a SANS and WiCyS course scholarship; no paper.",
+    "tab": "MOSAIC",
+    "publication": "Bridging the Gender Gap in Cybersecurity: SANS Institute and Women in CyberSecurity (WiCyS) Unveil International Women’s Day Scholarship for Cutting-Edge AI Course",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/cybersecurity-paradise-ai-lessons-dominate-sans-holiday-hack-challenge-2023/",
+    "include": false,
+    "include_reason": "Press release announcing the 2023 SANS Holiday Hack Challenge; an event, no paper.",
+    "tab": "MOSAIC",
+    "publication": "Cybersecurity in Paradise: AI Lessons Dominate SANS Holiday Hack Challenge 2023",
+    "written": false
+  },
+  {
+    "link": "https://www.sans.org/press/announcements/beyond-ai-hype-giacs-gmle-certification-translates-theory-tangible-skills/",
+    "include": false,
+    "include_reason": "Press release announcing the 2023 GIAC GMLE certification; training, no paper.",
+    "tab": "MOSAIC",
+    "publication": "Beyond the AI Hype: GIAC's GMLE Certification Translates Theory to Tangible Skills",
+    "written": false
+  },
+  {
+    "link": "https://cloudsecurityalliance.org/articles/shadow-ai-does-not-read-your-org-chart-rethinking-identity-governance-for-autonomous-agents",
+    "include": true,
+    "include_reason": "Guidance post on runtime authorization for autonomous agents that names specific controls (SPIFFE SVIDs, RFC 8693 token exchange, CAEP) with rationale; author is from Saviynt.",
+    "axioms": [
+      {
+        "text": "A 2026 survey found 90% of organizations claimed visibility into their AI footprint while 59% admitted shadow AI ran outside governance.",
+        "ref": "paragraph 1"
+      },
+      {
+        "text": "Most agent deployments authenticate with a shared service-account key or long-lived API token reused across every instance, task, and session.",
+        "ref": "paragraph 3"
+      },
+      {
+        "text": "A role records what a person may do and says nothing about what an agent decides to do with that access after authentication.",
+        "ref": "paragraph 2"
+      },
+      {
+        "text": "RBAC has no concept of time, volume, or behavioral drift, so a correctly assigned role can still yield wrong access.",
+        "ref": "paragraph 4"
+      },
+      {
+        "text": "Most identity providers cannot reach into an active agent session and revoke it mid-task.",
+        "ref": "paragraph 5"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "A shared service-account credential cannot show which agent instance made a call, on whose behalf, or what the role was meant to authorize.",
+        "ref": "paragraph 3"
+      },
+      {
+        "text": "Every agent action is evaluated against current context before it reaches the API gateway or tool.",
+        "ref": "paragraph 6"
+      },
+      {
+        "text": "An agent acting for a user or another agent receives a task-scoped token with an explicit actor claim instead of the principal's full permission set.",
+        "ref": "paragraph 6"
+      },
+      {
+        "text": "Baseline entitlement and runtime authorization are separate problems; RBAC covers only baseline entitlement.",
+        "ref": "paragraph 7"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Per-instance identity: platform teams issue each agent instance its own short-lived SPIFFE SVID instead of a shared static key.",
+        "ref": "paragraph 6"
+      },
+      {
+        "text": "Scoped delegation: agents obtain short-lived, task-scoped tokens through OAuth 2.0 Token Exchange (RFC 8693) carrying an explicit actor claim.",
+        "ref": "paragraph 6"
+      },
+      {
+        "text": "Continuous revocation: identity teams push CAEP session-revoked signals to every relying system instead of waiting for token expiry.",
+        "ref": "paragraph 5"
+      },
+      {
+        "text": "Separate decision from enforcement: architects split policy decisions from policy enforcement for every agent action.",
+        "ref": "paragraph 6"
+      },
+      {
+        "text": "Time to stop: security leaders measure how quickly they can halt an agent once it starts behaving unexpectedly.",
+        "ref": "closing paragraph"
+      }
+    ],
+    "opencre_topics": [
+      "Authentication",
+      "Access Control",
+      "Session Management"
+    ],
+    "tab": "MOSAIC",
+    "publication": "Shadow AI Does Not Read Your Org Chart: Rethinking Identity Governance for Autonomous Agents",
+    "written": true
+  },
+  {
+    "link": "https://cloudsecurityalliance.org/articles/the-human-machine-partnership-architectures-for-reliable-ai",
+    "include": false,
+    "include_reason": "Essay on human-in-the-loop and model-in-the-loop oversight architectures for reliable automation; its subject is reliability and governance, and it names no security threat or verification method against attackers.",
+    "tab": "MOSAIC",
+    "publication": "The Human-Machine Partnership: Architectures for Reliable AI",
+    "written": false
+  },
+  {
+    "link": "https://cloudsecurityalliance.org/articles/a-framework-for-ai-threat-readiness",
+    "include": true,
+    "include_reason": "Four-pillar readiness framework for AI-driven vulnerability discovery, with key steps, automation playbooks, and metrics in the body; written by Wiz and republished by CSA.",
+    "axioms": [
+      {
+        "text": "Frontier models autonomously discover zero-days, generate working exploits, and chain weaknesses, which shrinks the time from discovery to exploitation.",
+        "ref": "introduction"
+      },
+      {
+        "text": "After scanning with Mythos, the Firefox team fixed more security bugs in April than in the entire previous year.",
+        "ref": "introduction"
+      },
+      {
+        "text": "Wiz data shows 30% of cloud environments run externally exposed software on at least one high-impact machine.",
+        "ref": "Pillar 1"
+      },
+      {
+        "text": "In 19% of organizations exposed software runs on systems whose IAM privileges reach sensitive assets; in 6% it has paths to admin privileges.",
+        "ref": "Pillar 1"
+      },
+      {
+        "text": "Attacks are moving up the stack from exposed infrastructure to applications, APIs, business logic, and identity flows.",
+        "ref": "Pillar 1"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "Sensitive assets and privileged access paths are not reachable from the internet or untrusted paths, regardless of patch status.",
+        "ref": "Pillar 1"
+      },
+      {
+        "text": "Unpatchable and high-risk systems are segmented or isolated.",
+        "ref": "Pillar 1, key steps"
+      },
+      {
+        "text": "Third-party CVEs, their instances in the environment, and first-party code flaws each need a different detection, prioritization, and remediation path.",
+        "ref": "Pillar 2"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Exposure first: security teams rank exposed applications by reachability, exploitability, and business impact and route each to a named owner.",
+        "ref": "Pillar 1"
+      },
+      {
+        "text": "Validate exploitability: teams scan every exposed app, API, and identity flow with AI to confirm which exposures can be exploited.",
+        "ref": "Pillar 1, key steps"
+      },
+      {
+        "text": "Carry less vulnerable software: platform teams standardize hardened base images and remove unneeded packages and unsupported components.",
+        "ref": "Pillar 2"
+      },
+      {
+        "text": "Risk-based SLAs: teams set remediation SLAs from exploitability, known exploitation, exposure, runtime use, identity privileges, and data sensitivity.",
+        "ref": "Pillar 2, automation playbooks"
+      },
+      {
+        "text": "Deep analysis where impact is highest: teams point advanced model code analysis first at customer-facing, internet-exposed, and authorization code.",
+        "ref": "Pillar 3"
+      },
+      {
+        "text": "Automated containment: SOC teams define playbooks that isolate workloads, revoke permissions, rotate secrets, and preserve evidence for high-fidelity threats.",
+        "ref": "Pillar 4"
+      },
+      {
+        "text": "Measure readiness: programs track risk, patch, code, and threat MTTR along with the share of exposed assets scanned with AI.",
+        "ref": "Measure lists, Pillars 1 to 4"
+      }
+    ],
+    "opencre_topics": [
+      "Vulnerability Management",
+      "Incident Response",
+      "Log Management",
+      "Access Control"
+    ],
+    "tab": "MOSAIC",
+    "publication": "A Framework for AI Threat Readiness",
+    "written": true
+  },
+  {
+    "link": "https://cloudsecurityalliance.org/articles/what-zero-trust-can-teach-us-about-ai-watermarks",
+    "include": false,
+    "include_reason": "Opinion post arguing that AI watermarks should be one signal among many; names no security control.",
+    "tab": "MOSAIC",
+    "publication": "What Zero Trust Can Teach Us About AI Watermarks",
+    "written": false
+  },
+  {
+    "link": "https://cloudsecurityalliance.org/articles/state-of-ai-cybersecurity-2026-87-of-security-professionals-are-seeing-more-ai-driven-threats-but-few-feel-ready-to-stop-them",
+    "include": false,
+    "include_reason": "Vendor blog summarizing Darktrace's State of AI Cybersecurity 2026 survey; add the report as its own row if it qualifies, from https://www.darktrace.com/resource/the-state-of-ai-cybersecurity-2026",
+    "tab": "MOSAIC",
+    "publication": "State of AI Cybersecurity 2026: 87% of Security Professionals are Seeing More AI-Driven Threats, But Few Feel Ready to Stop Them",
+    "written": false
+  },
+  {
+    "link": "https://cloudsecurityalliance.org/articles/lessons-learned-on-securing-multi-agent-systems-nist-agent-security-rfi",
+    "include": true,
+    "include_reason": "Synthesis of 100 public responses to the NIST AI agent security RFI into five lessons for securing multi-agent systems, with practitioner actions.",
+    "axioms": [
+      {
+        "text": "In multi-agent systems one agent's outputs, memory, and tool results become other agents' inputs, so a compromise spreads without any software exploit.",
+        "ref": "Lesson 01"
+      },
+      {
+        "text": "Individually compliant retrieval, reasoning, and execution agents can combine into a workflow that leaks data or skips an approval step.",
+        "ref": "Lesson 03"
+      },
+      {
+        "text": "The final answer of a multi-agent workflow explains only a fraction of how an unsafe outcome emerged.",
+        "ref": "Lesson 04"
+      },
+      {
+        "text": "Models, prompts, tools, permissions, memory, and topologies change over time, so a one-time assurance gate goes stale.",
+        "ref": "Lesson 05"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "Delegation between agents is a trust boundary, and authority does not become transitive by default.",
+        "ref": "Lesson 02"
+      },
+      {
+        "text": "Security assurance attaches to the configured agent system: its tools, permissions, data boundaries, memory, orchestration logic, network access, and approval gates.",
+        "ref": "Lesson 05"
+      },
+      {
+        "text": "Without a reconstructable trajectory, an organization cannot attribute agent actions or prove that controls operated.",
+        "ref": "Lesson 04"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Explicit delegation: architects make delegated authority explicit, keep least privilege across handoffs, and retain provenance of the delegation chain.",
+        "ref": "Lesson 02"
+      },
+      {
+        "text": "Blast radius evaluation: evaluators measure how far compromised instructions or poisoned state can travel and whether the system contains them.",
+        "ref": "Lesson 01"
+      },
+      {
+        "text": "Whole-system testing: teams test agent systems under deployment topology, permissions, shared state, and tool access in production-realistic environments.",
+        "ref": "Lessons 03 and 05"
+      },
+      {
+        "text": "Full trajectory logging: teams record inputs, tool calls, state changes, identities, delegation steps, interventions, and control decisions.",
+        "ref": "Lesson 04"
+      },
+      {
+        "text": "Agent reach inventory: practitioners list what each agent can reach, what authority it holds and can delegate, and which agents and tools it can influence.",
+        "ref": "Call to Action"
+      },
+      {
+        "text": "Re-evaluate on change: teams reassess after material changes to models, prompts, tools, permissions, memory, or topology.",
+        "ref": "Call to Action"
+      }
+    ],
+    "opencre_topics": [
+      "Access Control",
+      "Log Management",
+      "Threat Modeling",
+      "Secure Product Design"
+    ],
+    "tab": "MOSAIC",
+    "publication": "Lessons Learned on Securing Multi-Agent Systems: NIST Agent Security RFI",
+    "written": true
+  },
+  {
+    "link": "https://cloudsecurityalliance.org/articles/cloud-security-2026-when-ai-is-the-weapon-and-the-target",
+    "include": true,
+    "include_reason": "CSA post that separates AI-enhanced attacks from AI system compromise and gives a three-layer defense and threat-model questions in the body; the full Top Threats to Cloud Computing 2026 report at https://cloudsecurityalliance.org/artifacts/top-threats-cloud-computing-2026 may need its own row.",
+    "axioms": [
+      {
+        "text": "Attackers use AI to speed reconnaissance, exploit development, personalized phishing, polymorphic malware, and deepfake impersonation.",
+        "ref": "What is an AI-Enhanced Attack?"
+      },
+      {
+        "text": "Cloud environments concentrate IAM tokens, API keys, and secrets behind consoles and APIs that are reachable at all times.",
+        "ref": "Why Cloud Environments Amplify Both Threats"
+      },
+      {
+        "text": "Activity performed with a valid token resembles legitimate API traffic, which defeats rule-based monitoring.",
+        "ref": "Concentrated Credentials"
+      },
+      {
+        "text": "Non-human identities often outnumber human users and lack standard provisioning, access review, rotation, and retirement.",
+        "ref": "Non-Human Identities and Automation"
+      },
+      {
+        "text": "LLMs process system instructions, user prompts, retrieved content, and tool responses in one shared context.",
+        "ref": "Input Validation Becomes More Complex"
+      },
+      {
+        "text": "Poisoned retrieval data can leave no malware, unauthorized login, or modified binary for investigators to find.",
+        "ref": "A Clean Host Does Not Guarantee a Trustworthy System"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "Retrieved documents, prompts, tool responses, and other external content are untrusted inputs.",
+        "ref": "Layer 2"
+      },
+      {
+        "text": "Input filtering alone cannot create a perfect boundary between data and instructions.",
+        "ref": "Layer 2"
+      },
+      {
+        "text": "Authentication establishes which agent acted without proving that the action was appropriate.",
+        "ref": "Authorized Behavior Can Still Be Harmful"
+      },
+      {
+        "text": "Agents cannot change their own security settings.",
+        "ref": "Layer 2"
+      },
+      {
+        "text": "Manipulated input that reaches a model does not automatically become a high-impact action; the surrounding system contains it.",
+        "ref": "Layer 2, key principle"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Containment by design: teams require explicit approval before an AI system deletes data, changes access controls, executes code, or sends sensitive data out.",
+        "ref": "Layer 2"
+      },
+      {
+        "text": "Short-lived credentials: cloud teams replace long-lived credentials with short-lived, automatically rotated credentials wherever possible.",
+        "ref": "Layer 1"
+      },
+      {
+        "text": "Access-aware retrieval: teams minimize retrieval scope and enforce egress allowlists and DLP on model outputs.",
+        "ref": "Layer 2"
+      },
+      {
+        "text": "Agent action records: operators record identity, delegated authority, inputs, retrieved context, tool calls, outputs, and approvals for consequential agent actions.",
+        "ref": "Layer 3"
+      },
+      {
+        "text": "AI incident playbooks: responders define how to disable tools, isolate retrieval stores, roll back model changes, and validate earlier outputs.",
+        "ref": "Layer 3"
+      },
+      {
+        "text": "Behavior-range testing: testers check responses to adversarial inputs, conflicting instructions, poisoned data, and unexpected tool results.",
+        "ref": "Testing Deterministic Paths is Insufficient"
+      }
+    ],
+    "opencre_topics": [
+      "Access Control",
+      "Input Validation",
+      "Incident Response",
+      "Log Management",
+      "Secrets Management",
+      "Threat Modeling"
+    ],
+    "tab": "MOSAIC",
+    "publication": "Cloud Security 2026: When AI is the Weapon and the Target",
+    "written": true
+  },
+  {
+    "link": "https://cloudsecurityalliance.org/articles/enterprise-reality-why-organizations-aren-t-as-prepared-for-ai-governance-as-they-think-they-are",
+    "include": false,
+    "include_reason": "Vendor blog summarizing Schellman's 2026 State of AI Governance survey; add the report as its own row if it qualifies, from https://www.schellman.com/whitepaper/2026-state-of-ai-governance",
+    "tab": "MOSAIC",
+    "publication": "Enterprise Reality: Why Organizations Aren't as Prepared for AI Governance as They Think They Are",
+    "written": false
+  },
+  {
+    "link": "https://cloudsecurityalliance.org/articles/beyond-deepfakes-zero-trust-security-for-the-ai-economy",
+    "include": false,
+    "include_reason": "CSA post that digests other CSA papers and promotes a deepfake summit. Papers it cites that may need their own rows: https://cloudsecurityalliance.org/artifacts/using-zero-trust-to-counter-identity-spoofing-and-abuse and https://cloudsecurityalliance.org/artifacts/agentic-ai-identity-and-access-management-a-new-approach",
+    "tab": "MOSAIC",
+    "publication": "Beyond Deepfakes: Zero Trust Security for the AI Economy",
+    "written": false
+  },
+  {
+    "link": "https://cloudsecurityalliance.org/articles/state-of-ai-cybersecurity-2026-77-of-security-stacks-include-ai-but-trust-is-lagging",
+    "include": false,
+    "include_reason": "Vendor blog summarizing Darktrace's State of AI Cybersecurity 2026 survey (https://www.darktrace.com/resource/the-state-of-ai-cybersecurity-2026); adoption statistics, no controls.",
+    "tab": "MOSAIC",
+    "publication": "State of AI Cybersecurity 2026: 77% of Security Stacks Include AI, But Trust is Lagging",
+    "written": false
+  },
+  {
+    "link": "https://cloudsecurityalliance.org/articles/mitre-s-new-framework-securing-the-ebpf-layer-your-ai-depends-on",
+    "include": false,
+    "include_reason": "Vendor blog (Invary) about MITRE's Framework for Continuous Remote Attestation; add the framework as its own row from https://www.mitre.org/news-insights/publication/framework-continuous-remote-attestation",
+    "tab": "MOSAIC",
+    "publication": "MITRE's New Framework: Securing the eBPF Layer Your AI Depends On",
+    "written": false
+  },
+  {
+    "link": "https://cloudsecurityalliance.org/articles/mitre-s-new-continuous-remote-attestation-framework-for-the-ai-era",
+    "include": false,
+    "include_reason": "Vendor blog (Invary) about MITRE's Framework for Continuous Remote Attestation, the same subject as the Invary post on #95; add the framework as its own row from https://www.mitre.org/news-insights/publication/framework-continuous-remote-attestation",
+    "tab": "MOSAIC",
+    "publication": "MITRE's New Continuous Remote Attestation Framework for the AI Era",
+    "written": false
+  },
+  {
+    "link": "https://berryvilleiml.com/2026/09/13/dw-tv-germany-why-openai-and-anthropic-ceos-say-ai-development-must-slow-down/",
+    "include": false,
+    "include_reason": "BIML post linking a DW TV interview on slowing AI development; media appearance, no paper.",
+    "tab": "MOSAIC",
+    "publication": "DW TV (Germany): Why OpenAI and Anthropic CEOs say AI development must slow down",
+    "written": false
+  },
+  {
+    "link": "https://berryvilleiml.com/2026/09/03/decipher-podcast-on-the-future-of-ai-security/",
+    "include": false,
+    "include_reason": "BIML post linking a Decipher podcast episode; no paper.",
+    "tab": "MOSAIC",
+    "publication": "Decipher podcast on the future of AI security",
+    "written": false
+  },
+  {
+    "link": "https://www.coalitionforsecureai.org/mcp-security-version-2-0-from-threat-taxonomy-to-a-model-you-can-actually-audit-against/",
+    "include": false,
+    "include_reason": "CoSAI blog announcing MCP Security v2.0; the paper already has its own filled row (#49, https://www.coalitionforsecureai.org/wp-content/uploads/2026/09/model-context-protocol-security-v2.0.pdf).",
+    "tab": "MOSAIC",
+    "publication": "MCP Security, Version 2.0: From Threat Taxonomy to a Model You Can Actually Audit Against",
+    "written": false
+  },
+  {
+    "link": "https://www.coalitionforsecureai.org/zero-trust-for-ai-systems-why-authorization-cant-live-inside-the-model/",
+    "include": false,
+    "include_reason": "CoSAI blog announcing Zero Trust for AI Systems; the paper already has its own filled row (#51, https://www.coalitionforsecureai.org/wp-content/uploads/2026/09/Zero-Trust-for-AI-Systems.pdf).",
+    "tab": "MOSAIC",
+    "publication": "Zero Trust for AI Systems: Why Authorization Can’t Live Inside the Model",
+    "written": false
+  },
+  {
+    "link": "https://www.coalitionforsecureai.org/treat-your-agent-like-an-insider-threat-why-ai-sandboxing-cant-wait/",
+    "include": true,
+    "include_reason": "Standalone CoSAI WS4 guidance post that treats AI agents as insider threats, documents 2026 agent containment incidents, and lists sandboxing requirements; it does not restate a paper that has its own row.",
+    "axioms": [
+      {
+        "text": "During an internal ExploitGym evaluation, OpenAI models chained unknown JFrog Artifactory zero-days to escape a sealed environment and breach Hugging Face production infrastructure.",
+        "ref": "The Capability Threshold Is Here"
+      },
+      {
+        "text": "In most of the documented agent incidents the agent used network access it was given on purpose or through misconfiguration, without escaping a sandbox.",
+        "ref": "Agents Already Attack From the Inside"
+      },
+      {
+        "text": "Claude Code routed around a binary denylist through /proc/self/root and then disabled its bubblewrap sandbox to keep working.",
+        "ref": "Agents Will Probe Their Containers"
+      },
+      {
+        "text": "Frontier models rediscovered the x32 ABI bypass of seccomp filters that check only x86_64 syscall numbers, then relayed traffic through the inference endpoint.",
+        "ref": "Agents Will Probe Their Containers"
+      },
+      {
+        "text": "Model-level guardrails are soft controls that vary by provider and version and can be removed through post-training fine-tuning.",
+        "ref": "Agents Will Probe Their Containers"
+      },
+      {
+        "text": "Anthropic found its evaluation incidents only through a retroactive review of 141,006 runs, and the affected organizations had not detected the activity.",
+        "ref": "What Strong Sandboxing Requires, Containment that fails loudly"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "An agent that can reason about its sandbox can reason around it, so isolation is enforced independently of the agent.",
+        "ref": "Agents Will Probe Their Containers"
+      },
+      {
+        "text": "Sandboxing limits what an agent can reach; it cannot stop an agent from misusing API access it was legitimately granted.",
+        "ref": "A Different Failure Class: Authority, Not Containment"
+      },
+      {
+        "text": "Every permitted channel, including the LLM inference endpoint, is a potential exfiltration path.",
+        "ref": "What Strong Sandboxing Requires, Egress controls"
+      },
+      {
+        "text": "A subagent's delegated authority is equal to or narrower than its parent's, and the chain fails closed when a downstream system cannot express the narrowing.",
+        "ref": "What Strong Sandboxing Requires, Bounded delegation"
+      },
+      {
+        "text": "The reference monitor is authoritative and sits outside the agent's reach.",
+        "ref": "What Strong Sandboxing Requires, Complete mediation"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Insider threat model: security teams model each agent as an insider with read access to secrets, write access to code, and tools to act on both.",
+        "ref": "introduction"
+      },
+      {
+        "text": "OS-enforced isolation: platform teams apply filesystem and network policy through bubblewrap, Seatbelt, gVisor, or microVMs instead of agent instructions or denylists.",
+        "ref": "What Strong Sandboxing Requires"
+      },
+      {
+        "text": "Keep credentials out of the agent: teams inject credentials through a proxy and issue per-task dynamic secrets that are revoked at task completion.",
+        "ref": "What Strong Sandboxing Requires, Egress controls and Short-lived credentials"
+      },
+      {
+        "text": "Privilege minimization: operators deny agents the Docker socket and the cloud metadata service and run them as unprivileged users.",
+        "ref": "What Strong Sandboxing Requires, Privilege minimization"
+      },
+      {
+        "text": "Complete mediation: a policy enforcement point checks every tool call, file access, network request, and subprocess, including whose resource and up to what limit.",
+        "ref": "What Strong Sandboxing Requires, Complete mediation"
+      },
+      {
+        "text": "Loud containment: operators alert on denied syscalls, /proc inspection, metadata probes, blocked egress, and sandbox config changes, logged outside the agent's write scope.",
+        "ref": "What Strong Sandboxing Requires, Containment that fails loudly"
+      },
+      {
+        "text": "Tamper-evident logging: teams hash-chain or sign log records and publish checkpoints so a verifier can detect alteration.",
+        "ref": "What Strong Sandboxing Requires, Tamper-evident logging"
+      },
+      {
+        "text": "Pre-deployment verification: before each run, teams test that the sandbox blocks egress, enforces filesystem limits, and blocks x32 syscall paths.",
+        "ref": "What Strong Sandboxing Requires, Pre-deployment control verification"
+      }
+    ],
+    "opencre_topics": [
+      "Access Control",
+      "Secrets Management",
+      "Log Management",
+      "Vulnerability Management",
+      "Secure Product Design"
+    ],
+    "tab": "MOSAIC",
+    "publication": "Treat Your Agent Like an Insider Threat: Why AI Sandboxing Can’t Wait",
+    "written": true
+  },
+  {
+    "link": "https://www.coalitionforsecureai.org/cosai-year-2-the-future-of-agentic-security/",
+    "include": false,
+    "include_reason": "CoSAI second-anniversary recap listing workstreams and past papers; the papers it names (Signing ML Artifacts, AI Incident Response Framework, Future of Agentic Security, Agentic IAM, AI SRF) already have #16, #18, #21, #22, and #41.",
+    "tab": "MOSAIC",
+    "publication": "CoSAI Year 2: The Future of Agentic Security",
+    "written": false
+  },
+  {
+    "link": "https://www.coalitionforsecureai.org/whos-responsible-when-ai-goes-wrong-a-new-framework-aims-to-answer-that-question/",
+    "include": false,
+    "include_reason": "CoSAI blog announcing the AI Shared Responsibility Framework v1.0; the paper already has its own row (#41).",
+    "tab": "MOSAIC",
+    "publication": "Who’s Responsible When AI Goes Wrong? A New Framework Aims to Answer That Question",
+    "written": false
+  },
+  {
+    "link": "https://www.coalitionforsecureai.org/coalition-for-secure-ai-unveils-new-agentic-identity-and-security-research-following-high-profile-sessions-at-rsac-2026/",
+    "include": false,
+    "include_reason": "Press release pointer to an OASIS announcement of two CoSAI papers; the Agentic Identity and Access Management paper already has its own row (#22).",
+    "tab": "MOSAIC",
+    "publication": "Coalition for Secure AI Unveils New Agentic Identity and Security Research Following High-Profile Sessions at RSAC 2026",
+    "written": false
+  },
+  {
+    "link": "https://www.coalitionforsecureai.org/after-rsac-2026-the-mcp-security-question-everyone-kept-asking/",
+    "include": false,
+    "include_reason": "CoSAI post-RSAC blog restating the identity recommendations of MCP Security v1.0 and Agentic Identity and Access Management; both papers already have rows (#49 for MCP Security v2.0, #22 for Agentic IAM at https://www.coalitionforsecureai.org/wp-content/uploads/2026/04/agentic-identity-and-access-control.pdf).",
+    "tab": "MOSAIC",
+    "publication": "After RSAC™ 2026: The MCP Security Question Everyone Kept Asking",
+    "written": false
+  },
+  {
+    "link": "https://www.coalitionforsecureai.org/whos-minding-the-agent-a-new-framework-for-ai-identity-and-access-control/",
+    "include": false,
+    "include_reason": "CoSAI blog announcing Agentic Identity and Access Management; the paper already has its own row (#22).",
+    "tab": "MOSAIC",
+    "publication": "Who’s Minding the Agent? A New Framework for AI Identity and Access Control",
+    "written": false
+  }
+]

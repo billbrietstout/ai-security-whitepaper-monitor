@@ -1,0 +1,100 @@
+42,OWASP GenAI Security Project,OWASP GenAI LLM Top 10 2026,"August 3, 2026",Top 10 Framework,PDF + Markdown,https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/,"- Build systems so that when the model is fooled, nothing important breaks; prompt injection surface cannot be closed
+- Community vote (75% weight) and incident corpus (25% weight) jointly set rankings; 7,714 incidents classified for 2026 edition
+- Model-as-component risks stay on this list; model-as-actor risks pair with OWASP Agentic Top 10
+- Misinformation ranks higher in incident data than in practitioner vote; wrong fluent output drives wrong actions
+- Excessive Agency rose to #3; Hidden Context Exposure replaces System Prompt Leakage as broader trust-boundary failure","- Prompt injection cannot be eliminated wherever untrusted input reaches the model; public CVE counts understate mature-team spend
+- Incident databases do not capture all production failures; defense effect hides exploited injection from public counts
+- A single noisy year of incident data cannot overturn consensus rankings alone
+- Agentic deployments concentrate damage where models plan, decide, and act across systems","- Work all ten entries; start at Prompt Injection and build each for the day the model is turned against you
+- Map mitigations to NIST, MITRE ATLAS, CWE, and OWASP Agentic Top 10 where agents act downstream
+- Fold cross-modal injection, supply-chain artifact trust failures, and fine-tuning subversion into existing entries rather than splintering the list
+- Read model-as-component entries here and pair with Agentic Top 10 when tools, memory, and autonomous action appear","- Threat Modeling
+- Secure Product Design
+- Input Validation
+- Data Protection
+- Supply Chain
+- Vulnerability Management
+- Log Management",https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/
+43,OWASP GenAI Security Project,OWASP Artificial Intelligence Security Verification Standard (AISVS) 1.0,"June 24, 2026",Framework / Controls Matrix,PDF + Markdown,https://github.com/OWASP/AISVS/releases/tag/v1.0,"- AI systems introduce risks traditional appsec standards did not design for: prompt injection, poisoning, extraction, adversarial inputs, agentic action, RAG leakage, and model supply-chain integrity
+- AISVS fills the gap between general ASVS/SCVS and AI-specific verification; it does not replace them
+- Twelve control families with Level 1–3 verification depth aligned to matching ASVS levels
+- Every requirement begins with ""Verify that"" and must be objectively testable through inspection, test, or audit","- General authentication, transport, logging, and SBOM controls stay in ASVS/SCVS; AISVS only restates them when AI-specific evidence differs
+- Governance-only obligations (fairness docs, model cards without security tests) stay out of scope
+- A requirement must address one concern implementable as one mechanism; no duplicate controls across chapters
+- Prompt injection in agents combines C2, C7, C9, C10, C11, and C12 requirements together","- Assign each requirement to Level 1, 2, or 3 and verify AI apps at the same ASVS level in parallel
+- Use Appendix B controls inventory to see which chapters jointly defend a given AI threat
+- Mark out-of-scope requirements when a vendor model card is the only evidence available
+- Integrate AISVS checks into CI/CD, code review, procurement questionnaires, and pen-test scopes","- Input Validation
+- Supply Chain
+- Data Protection
+- Access Control
+- Vulnerability Management
+- Secure Product Design
+- Log Management",https://owasp.org/www-project-artificial-intelligence-security-verification-standard-aisvs-docs/
+44,OWASP GenAI Security Project,OWASP Agentic Skills Top 10 (AST10),2026,Top 10 Framework,Web / PDF,https://owasp.org/www-project-agentic-skills-top-10/,"- Agent skills are the execution layer that gives agents real-world impact across platforms (ClawHub, Claude Code, OpenClaw, and similar)
+- Skills can be attacked at author, publish, distribute, install, load, execute, and govern phases
+- Malicious skills hide credential stealers, reverse shells, and prose instructions that hijack agent behavior
+- Registries without provenance enable mass upload, account takeover, and poisoned distribution","- Skills without sandbox run in the agent's full security context; no isolation means full-system compromise potential
+- Natural-language-plus-code blends defeat signature-only scanners
+- External instruction files can be rug-pulled after install unless pinned and verified
+- Cross-platform skill ports drop source-format security metadata","- Scan registries with provenance checks and Merkle signing before publish
+- Grant least-privilege manifests and schema validation for every skill
+- Inventory approved skills, enforce agentic identity controls, and revoke compromised skills
+- Pin versions and verify updates to block silent drift to malicious releases","- Supply Chain
+- Access Control
+- Input Validation
+- Secure Product Design
+- Log Management
+- Vulnerability Management",https://owasp.org/www-project-agentic-skills-top-10/
+45,Center for Internet Security (CIS),CIS Controls v8.1.2 AI Security Guidance Workbook,"July 27, 2026",Companion Guide,Spreadsheet + PDF,https://www.cisecurity.org/insights/white-papers/controls-v8-1-2-ai-security-guidance-workbook,"- CIS Controls v8.1.2 workbook translates prioritized safeguards into interactive implementation for LLMs, agents, and MCP architectures
+- Three workbook domains: asset visibility and governance, secure software and supply chain, data protection across the AI lifecycle
+- Workbook maps controls directly to operational workflows rather than abstract policy statements
+- Built for teams tracking implementation progress and risk accountability in production AI environments","- AI systems span identity layers, endpoints, knowledge stores, integrations, and monitoring; controls must cover the full agent stack
+- LLM, agent, and MCP risks require interpreting existing CIS Safeguards through autonomous behavior, not only deterministic software patterns
+- Workbook tracking must tie each safeguard to a named accountable party and evidence artifact","- Map CIS Safeguards to each AI workflow row in the workbook before production deployment
+- Track implementation status per safeguard across visibility, supply chain, and data-protection domains
+- Use workbook rows to assign risk accountability for LLM, agent, and MCP components
+- Align workbook completion to CIS Controls v8.1.2 rather than inventing parallel AI-only control sets","- Secure Product Design
+- Supply Chain
+- Data Protection
+- Access Control
+- Log Management
+- Governance-Risk-Compliance",https://www.cisecurity.org/insights/white-papers/controls-v8-1-2-ai-security-guidance-workbook
+46,SANS Institute,SANS AI Security Maturity Model eBook,"May 11, 2026",Framework,PDF,https://www.sans.org/white-papers/sans-ai-security-maturity-model-ebook,"- Maturity spans three pillars: Protect AI, Utilize AI, and Govern AI, each with five stages from ad hoc to optimizing
+- Governance acts as a ceiling: overall maturity cannot exceed the weakest pillar or Govern score
+- Self-reported capabilities without documentary evidence are capped at Stage 2
+- Model maps to NIST AI RMF, EU AI Act, ISO 42001, OWASP AI Exchange, and CSA AI Controls Matrix","- A strong Protect or Utilize score cannot mask absent governance structure
+- Stage claims require named prerequisites, metrics, and audit-defensible artifacts at every level
+- Agentic AI guidance is embedded; agent deployments inherit the same pillar and cap rules","- Score each pillar separately with evidence before assigning a stage
+- Apply cap rules so Protect and Govern imbalances surface in executive reporting
+- Advance stage only when program indicators, people indicators, and metrics meet the workbook definition
+- Use mapped external frameworks to produce regulator- and customer-ready maturity evidence","- Governance-Risk-Compliance
+- Secure Product Design
+- Log Management
+- Training and Awareness
+- Vulnerability Management",https://www.sans.org/press/announcements/ai-security-maturity-model-close-gap-between-enterprise-ai-adoption-governance
+47,OWASP GenAI Security Project,AI Security Solutions Landscape for AI and Agentic Red Teaming Q2 2026,"April 9, 2026",Guide,Web / PDF,https://genai.owasp.org/resource/ai-security-solutions-landscape-for-ai-and-agentic-red-teaming-q2-2026/,"- GenAI and agentic systems need lifecycle-wide adversarial testing beyond classic appsec tooling
+- Landscape covers prompt injection, model misuse, agent privilege escalation, poisoning, hallucination-driven actions, and emergent behaviors
+- Red, blue, and purple teaming capabilities are classified by practitioner lifecycle stage
+- Solutions are compared by capability taxonomy, not vendor marketing categories","- Traditional DAST, IAM-only reviews, and static CI gates miss AI-specific failure modes
+- Agentic workflows evolve after deployment; one-time assessments miss emergent misuse paths
+- Tool labels alone do not prove coverage of a taxonomy capability","- Map each candidate tool to taxonomy capabilities before procurement
+- Run coordinated adversarial tests across model, retrieval, tool, and agent layers
+- Feed red-team findings into continuous defensive validation loops
+- Use taxonomy gap analysis to show uncovered lifecycle stages to leadership","- Threat Modeling
+- Vulnerability Management
+- Input Validation
+- Secure Product Design
+- Log Management",https://genai.owasp.org/resource/ai-security-solutions-landscape-for-ai-and-agentic-red-teaming-q2-2026/
+48,OWASP GenAI Security Project,Solutions Landscape – Red Teaming Taxonomy,"June 28, 2026",Taxonomy,Web / PDF,https://genai.owasp.org/resource/solutions-landscape-red-teaming-taxonomy/,"- Taxonomy is the shared language for AI and agentic red-teaming solution guides and cheat sheets
+- Capabilities are classified across red, blue, and purple teaming by practitioner lifecycle stage
+- Taxonomy separates required capabilities from vendor implementation choices
+- Intended for repeatable comparison as threats and agent platforms evolve","- Without a common taxonomy, vendor demos cannot be compared on equal capability terms
+- Capability requirements must be stated independently of any single tool's feature list
+- Lifecycle-stage coverage gaps persist unless taxonomy rows are explicitly mapped","- Adopt taxonomy categories before evaluating red-teaming vendors or internal tooling
+- Map each solution to taxonomy rows and record gaps explicitly
+- Use taxonomy rows as checklist inputs for purple-team exercises and RFP questionnaires
+- Update taxonomy mappings when new agent modalities or tool protocols appear","- Threat Modeling
+- Vulnerability Management
+- Secure Product Design
+- Training and Awareness",https://genai.owasp.org/resource/solutions-landscape-red-teaming-taxonomy/

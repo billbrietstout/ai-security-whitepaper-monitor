@@ -1,0 +1,12 @@
+MITRE	Peer SDOs	https://atlas.mitre.org/	2026-09-01	Checked 2026-09-01: ATLAS v2026.08 released same day; track monthly GitHub releases
+ETSI	Peer SDOs	https://www.etsi.org/committee/1947	2026-09-01	Checked 2026-09-01: EN 304 223 V2.1.1 (2025-12); TS 104 008; SAI TC deliverables
+ENISA	Peer SDOs	https://www.enisa.europa.eu/topics/artificial-intelligence-and-next-gen-technologies	2026-09-01	Checked 2026-09-01: Frontier AI Era report (2026-07); prior 2023-2024 AI security reports on topic page
+ISO/IEC JTC 1/SC 42	Peer SDOs	https://www.iso.org/committee/6793475.html	2026-09-01	Checked 2026-09-01: fetch blocked (Cloudflare); queue 42001/23894/27090 from public summaries only
+IEEE	Peer SDOs	https://standards.ieee.org/industry-connections/ai-systems/	2026-09-01	Checked 2026-09-01: prior watch URL 404; IEEE IC AI Systems landing
+OASIS Open	Peer SDOs	https://www.oasis-open.org/projects/	2026-09-01	Checked 2026-09-01: CoSAI on MOSAIC tab; no separate OASIS-only AI security paper found
+ITU-T	Peer SDOs	https://www.itu.int/hub/itu-publications/	2026-09-01	Checked 2026-09-01: ITU pub hub; AI for Good has Multimedia Authenticity and AI Ready papers
+OpenSSF	Coalitions	https://github.com/ossf/ai-ml-security	2026-09-01	Checked 2026-09-01: AI Code Assistant Instructions guide (2025-08); Model Signing and SAFE-MCP in progress
+MLCommons	Coalitions	https://mlcommons.org/en/ai-risk-reliability/	2026-09-01	Checked 2026-09-01: AI Risk and Reliability WG; no standalone security whitepaper on catalog page yet
+Frontier Model Forum	Coalitions	https://www.frontiermodelforum.org/publications/	2026-09-01	Checked 2026-09-01: use Publications not Updates; 2026 agent/cyber issue briefs and technical reports
+Partnership on AI	Coalitions	https://partnershiponai.org/program/safety-critical-ai/	2026-09-01	Checked 2026-09-01: Safe FM Deployment, open FM value chain, real-time agent failure detection papers
+AI Verify Foundation	Coalitions	https://aiverifyfoundation.sg/resources/	2026-09-01	Checked 2026-09-01: Agentic AI MGF (2026-05 update); LLM Starter Kit; LLM Evaluations catalogue draft

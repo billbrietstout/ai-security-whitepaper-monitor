@@ -1,0 +1,937 @@
+[
+  {
+    "tab": "Coalitions",
+    "issuer": "OpenSSF",
+    "publication": "SAF-MCP: Secure Agentic Framework for Model Context Protocol (formerly SAFE-MCP), Framework Model v2",
+    "link": "https://github.com/secure-agentic-framework/saf-mcp",
+    "axioms": [
+      {
+        "text": "Adversary behavior against agentic systems follows the same 14 objectives as MITRE ATT&CK, from resource development and initial access through exfiltration and impact.",
+        "ref": "README.md, SAF Tactics"
+      },
+      {
+        "text": "Attacker-controlled text, images, or audio that enter model context can make the model treat untrusted content as authoritative directions.",
+        "ref": "README.md, SAF-T1102 and SAF-T1110"
+      },
+      {
+        "text": "Adversaries hide instructions in an MCP tool description or parameter schema to steer the model's tool selection and arguments against the user's intent.",
+        "ref": "README.md, SAF-T1001 Tool Poisoning Attack"
+      },
+      {
+        "text": "An MCP server can present a benign tool, gain approval, and later change that tool's metadata or code, so the host runs different behavior without new authorization.",
+        "ref": "README.md, SAF-T1201 Post-Approval Tool Mutation"
+      },
+      {
+        "text": "Attacker-influenced output from one tool can drive a later call to a distinct tool or server that uses authority the agent already holds.",
+        "ref": "README.md, SAF-T1701 and SAF-T1703"
+      },
+      {
+        "text": "Content written into an agent's persistent memory can steer reasoning and tool decisions in a later session.",
+        "ref": "README.md, SAF-T1204 Context Memory Implant"
+      },
+      {
+        "text": "Repeated, equivalent approval requests can wear a user down until one is accepted, which defeats the human gate on a tool call or data disclosure.",
+        "ref": "README.md, SAF-T1403 Consent-Fatigue Exploit"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "The check that gates a privileged tool call must run in host code or with a human that the model cannot reach, prompt, or speak for.",
+        "ref": "SAF-M-69, Core Principles 1"
+      },
+      {
+        "text": "Without a valid, unexpired, scope-matching authorization artifact, the host denies the privileged call; missing or malformed approvals never default to allow.",
+        "ref": "SAF-M-69, Core Principles 2 (Fail closed)"
+      },
+      {
+        "text": "The authorization artifact must name the specific tool, its arguments or their digest, the requesting session, and a short expiry.",
+        "ref": "SAF-M-69, Core Principles 3"
+      },
+      {
+        "text": "The right to request approval comes from the authenticated session role, never from text the model emitted or the user typed into the prompt.",
+        "ref": "SAF-M-69, Core Principles 4"
+      },
+      {
+        "text": "Any tool interaction, resource access, or capability grant that is not explicitly permitted is blocked by default.",
+        "ref": "SAF-M-29, Core Principles 2 (Explicit Allowlisting)"
+      },
+      {
+        "text": "Privilege boundaries must be enforced at runtime during each tool execution as well as at configuration time, so revocations take effect immediately.",
+        "ref": "SAF-M-29, Core Principles 5 (Dynamic Enforcement)"
+      },
+      {
+        "text": "A detection rule that passes synthetic fixtures counts as fixture_tested and must not be represented as production effectiveness.",
+        "ref": "research/FRAMEWORK-MODEL.md, Detection validation"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Least privilege: the platform team grants each MCP tool the minimum privileges its function needs, so a compromised tool reaches only its granted scope.",
+        "ref": "SAF-M-29, Core Principles 1"
+      },
+      {
+        "text": "Privilege isolation: the host keeps tools at different privilege levels apart and blocks a lower-privilege tool from invoking a higher one without escalation controls.",
+        "ref": "SAF-M-29, Core Principles 3"
+      },
+      {
+        "text": "Control and data flow separation: the host takes control flow only from trusted queries and treats tool descriptions and API responses as data that cannot change execution.",
+        "ref": "SAF-M-1, Description and Core Principles"
+      },
+      {
+        "text": "Tool integrity: tool developers sign tool descriptions, and the client verifies the signature before it loads any tool.",
+        "ref": "SAF-M-2, Description"
+      },
+      {
+        "text": "Per-invocation capability brokering: a broker applies each tool's declared filesystem, network, and syscall manifest per call and issues a single-use token scoped to that call.",
+        "ref": "SAF-M-74, Description"
+      },
+      {
+        "text": "Complete audit trail: the host logs every privilege decision, escalation, grant, denial, and timeout with request context so reviewers can reconstruct who approved what.",
+        "ref": "SAF-M-29 Core Principles 4; SAF-M-69 Core Principles 5"
+      },
+      {
+        "text": "Defense in depth: operators layer architectural, prevention, detection, and response controls, starting with SAF-M-1, SAF-M-2, SAF-M-6, and SAF-M-11 when resources are limited.",
+        "ref": "MITIGATIONS.md, Defense in Depth Strategy and Priority Implementation"
+      },
+      {
+        "text": "Profile-scoped threat modeling: security teams select SAF Core plus the domain profiles that match their deployment, then map active techniques to their environment.",
+        "ref": "README.md, How to Use This Framework and Usage Guidelines"
+      }
+    ],
+    "opencre_topics": [
+      "Threat Modeling",
+      "Access Control",
+      "Authentication",
+      "Supply Chain",
+      "Input Validation",
+      "Log Management"
+    ]
+  },
+  {
+    "tab": "Coalitions",
+    "issuer": "MLCommons",
+    "publication": "Agent Privacy Risk Taxonomy V.01 (AILuminate Assessment Standard)",
+    "link": "https://mlcommons.org/wp-content/uploads/2026/10/ML-Commons-Agent-Privacy-Taxonomy-v01.pdf",
+    "axioms": [
+      {
+        "text": "Traditional privacy models such as Solove's taxonomy and the NIST privacy risk model assume deterministic data flows, centralized storage, and clear perimeter boundaries.",
+        "ref": "p. 3, Methodology"
+      },
+      {
+        "text": "Agents act as dynamic data intermediaries that execute code, keep memory across sessions, and orchestrate external tools and protocols such as MCP.",
+        "ref": "p. 3, Methodology"
+      },
+      {
+        "text": "Agents favor task completion over data minimization, and MCP lacks field-level access controls that would limit the context shared with external tools.",
+        "ref": "p. 4, R1.7 table row"
+      },
+      {
+        "text": "Attackers embed hidden payloads such as invisible text, metadata, or system commands in emails, websites, and documents that agents process at run time.",
+        "ref": "p. 5, R1.6 Untrusted content/tool/agent"
+      },
+      {
+        "text": "Upstream agent components such as skill packages, tool descriptions, and MCP servers can be compromised to make an agent leak sensitive data during normal execution.",
+        "ref": "p. 8, R2.4 Agentic supply chain manipulation"
+      },
+      {
+        "text": "A constant stream of runtime permission pop-ups leads users to approve risky actions without reading, which removes the protection of the consent gate.",
+        "ref": "p. 11, R4.2 Consent fatigue"
+      },
+      {
+        "text": "No standardized, scalable, privacy-preserving method exists for logging agent interactions across organizations, which slows root-cause analysis after an incident.",
+        "ref": "p. 12, R5.2 Inadequate interaction logging"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "Intent-based inference of privacy preferences is probabilistic, so it cannot guarantee that an agent infers or follows a user's preferences in a provable way.",
+        "ref": "p. 10, R4.1 Limitations in inferring and adhering to consent"
+      },
+      {
+        "text": "Blocking an agent's access to one file or database does not stop it from reconstructing the restricted information through redundant or secondary sources.",
+        "ref": "p. 7, R2.2 i. Beyond file-level privacy"
+      },
+      {
+        "text": "A manipulated agent with a code execution tool such as a Python REPL or bash shell can bypass LLM-level privacy controls and gain read and write access to the host.",
+        "ref": "p. 8, R2.5 Unauthorized access to data due to unexpected dynamic code execution"
+      },
+      {
+        "text": "Regex and heuristic redaction pipelines fail to remove semantic PII and fuzzy quasi-identifiers, which can still re-identify users.",
+        "ref": "p. 5, R1.5 Failure of traditional PII redaction techniques"
+      },
+      {
+        "text": "Static, binary permission gates are structurally incompatible with the open-ended runtime reasoning of autonomous agents.",
+        "ref": "p. 10, section 4 Failure of legacy consent systems"
+      },
+      {
+        "text": "A successful attack, agent action, or technical data exposure does not by itself show that downstream harm occurred.",
+        "ref": "p. 13, Agent Privacy Risk Assessment"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Causal chain assessment: assessors trace each agent privacy risk from deployment condition or threat to failure mechanism, privacy event, affected party, privacy impact, and downstream harm.",
+        "ref": "p. 12, Agent Privacy Risk Assessment"
+      },
+      {
+        "text": "Evidence labeling: the assessor states which stages of the causal chain were directly observed and which remain inferred or uncertain.",
+        "ref": "p. 13, \"state which part of the causal chain was observed\""
+      },
+      {
+        "text": "Bounded likelihood: assessors give likelihood as a probability only when observed data has a defined population, denominator, and period; otherwise they rate exposure and failure separately.",
+        "ref": "p. 13, Likelihood"
+      },
+      {
+        "text": "Threat-conditioned failure evidence: assessors label each failure as seen in ordinary use, under a credible threat model with a defined attacker capability and budget, or plausible but unconfirmed.",
+        "ref": "p. 13, Conditional Failure Evidence"
+      },
+      {
+        "text": "Affected-party impact: assessors rate impact by its effect on affected parties, weighing data sensitivity, recipients, persistence, and reversibility, beyond technical compromise alone.",
+        "ref": "p. 13, Impact"
+      }
+    ],
+    "opencre_topics": [
+      "Data Protection",
+      "Threat Modeling",
+      "Access Control",
+      "Log Management",
+      "Supply Chain"
+    ]
+  },
+  {
+    "tab": "Coalitions",
+    "issuer": "Frontier Model Forum",
+    "publication": "Agents for Cyber Defense",
+    "link": "https://www.frontiermodelforum.org/issue-briefs/agents-for-cyber-defense/",
+    "axioms": [
+      {
+        "text": "Offensive cyber operations often target unpatched or misconfigured systems, overly broad permissions, and weak credentials; attackers rarely need a sophisticated exploit.",
+        "ref": "p. 6, Get the Fundamentals Right"
+      },
+      {
+        "text": "Subverting an agent that guards a network could give an attacker broad, undetected access.",
+        "ref": "p. 6, Secure the Agents Themselves"
+      },
+      {
+        "text": "An agent's effectiveness depends heavily on the tools it can access, the software around the model that runs tools and manages memory, and its integration into the operating environment.",
+        "ref": "p. 2, Agentic Capabilities and Security Tooling; footnote 1"
+      },
+      {
+        "text": "As AI-reported vulnerabilities increase, triage becomes the bottleneck, and OT environments at critical infrastructure operators often cannot be patched on demand.",
+        "ref": "p. 4, Detecting and Patching Vulnerabilities"
+      },
+      {
+        "text": "AI models can produce functionally correct code that still contains vulnerabilities such as unchecked memory allocation and missing input validation.",
+        "ref": "p. 5, Improving Code Security"
+      },
+      {
+        "text": "False positives consume analyst time, erode trust in automated systems, and cause alert fatigue that leads teams to overlook genuine threats.",
+        "ref": "p. 6, Select Appropriate Use Cases"
+      },
+      {
+        "text": "Many existing cyber evaluations come from offensive security and measure success at discrete attack tasks, revealing little about defensive judgment.",
+        "ref": "p. 7, Invest in Better Defensive Evaluations"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "Before agents receive greater autonomy, they must be hardened against prompt injection, data poisoning, and evasion attacks.",
+        "ref": "p. 6, Secure the Agents Themselves"
+      },
+      {
+        "text": "A defensive agent introduces risks of its own because the agent itself becomes a high-value target for attackers.",
+        "ref": "p. 7, Conclusion"
+      },
+      {
+        "text": "Finding a vulnerability is only a first step; organizations must be able to prioritize which ones to fix and develop deployable patches in a timely manner.",
+        "ref": "p. 4, Detecting and Patching Vulnerabilities"
+      },
+      {
+        "text": "Applying a patch requires confirming existing functionality still works, testing compatibility with current systems, and coordinating downtime, which can take weeks or months.",
+        "ref": "p. 5, Detecting and Patching Vulnerabilities"
+      },
+      {
+        "text": "Agentic code analysis and vulnerability discovery deliver far less value when strong authentication, timely patching, and vulnerability management are missing.",
+        "ref": "p. 6, Get the Fundamentals Right"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Fundamentals first: organizations put strong authentication, timely patching, and disciplined vulnerability management in place before they invest in autonomous agents.",
+        "ref": "p. 6, Get the Fundamentals Right"
+      },
+      {
+        "text": "Staged deployment: security teams first automate alert triage, log analysis, and detection-rule drafting, then move to more transformative uses as confidence grows.",
+        "ref": "p. 6, Deploy in Stages and Match Autonomy to Risk"
+      },
+      {
+        "text": "Match autonomy to risk: the deploying organization sets each agent's autonomy by context and the consequence of error, granting more in lower-risk work such as code analysis.",
+        "ref": "p. 6, Deploy in Stages and Match Autonomy to Risk"
+      },
+      {
+        "text": "Zero trust: operators treat agents as untrusted components and constrain, log, and verify every agent action until agent security matures.",
+        "ref": "p. 6, Secure the Agents Themselves"
+      },
+      {
+        "text": "Synchronous monitoring: a separate LLM reviews each proposed agent action before it executes, alongside chain-of-thought monitoring of the agent's reasoning traces.",
+        "ref": "p. 7, Ensure Meaningful Oversight"
+      },
+      {
+        "text": "Human approval for consequential actions: escalation workflows route consequential agent decisions to a person, and agents work inside existing SOC tooling and playbooks.",
+        "ref": "p. 7, Ensure Meaningful Oversight"
+      },
+      {
+        "text": "Evidence-backed detections: red and blue team agents run commands against test systems that mirror production and validate each proposed detection rule against real log data.",
+        "ref": "p. 3, Simulating Adversarial Behavior"
+      },
+      {
+        "text": "Defensive evaluation under attack: evaluators test whether an agent makes sound decisions under uncertainty while adversaries are actively attacking.",
+        "ref": "p. 7, Invest in Better Defensive Evaluations"
+      }
+    ],
+    "opencre_topics": [
+      "Vulnerability Management",
+      "Incident Response",
+      "Secure Product Design",
+      "Log Management",
+      "Access Control"
+    ]
+  },
+  {
+    "tab": "MOSAIC",
+    "issuer": "Coalition for Secure AI (CoSAI)",
+    "publication": "AIMM: Artifact Integrity Maturity Model for AI/ML Supply Chain Trust and Provenance",
+    "link": "https://github.com/cosai-oasis/ws1-supply-chain/blob/main/whitepapers/aimm-artifact-integrity-maturity-model.pdf",
+    "axioms": [
+      {
+        "text": "An adversary can modify a model artifact between lifecycle stages, before it is uploaded to a hub, or before it is deployed.",
+        "ref": "5.1 Maturity Level 1, Intent"
+      },
+      {
+        "text": "Most AI models today move through their supply chains unsigned, unverified, and untraceable, and most externally sourced models are distributed without signatures.",
+        "ref": "11 Conclusion; 8 Incremental Adoption Strategies, 'Handling unsigned external models'"
+      },
+      {
+        "text": "An attack or an honest mistake at any upstream transformation step can propagate undetected when consumers can verify only the final artifact in isolation.",
+        "ref": "5.2 Maturity Level 2, Intent"
+      },
+      {
+        "text": "Without signatures, provenance metadata is plain documentation that anyone can forge.",
+        "ref": "5.2 Maturity Level 2, Intent"
+      },
+      {
+        "text": "Model behavior cannot be determined through inspection, so consumers trust recorded evaluation results based on the identity of the attester who signed them.",
+        "ref": "5.3 Implementation Approach, 'Model attestations'"
+      },
+      {
+        "text": "The same organization often acts as a model consumer of foundation models and as a model producer of fine-tuned derivatives.",
+        "ref": "1 Introduction"
+      },
+      {
+        "text": "Many structured attestation schemas for domain compliance metrics do not exist yet or lack legal and standards review, so fully automated policy enforcement is still aspirational.",
+        "ref": "5.3 Limitations"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "Any change to the bits of a signed model artifact invalidates its signature, provided the producer's signing system and keys show no sign of compromise.",
+        "ref": "5.1 Intent; 'Interpreting Level 1 verification results'"
+      },
+      {
+        "text": "Signing and attestation prove integrity and signer identity only; they do not prove that a model is correct, safe, fair, or benign.",
+        "ref": "9 Scope and Boundaries"
+      },
+      {
+        "text": "A Level 1 signature is a point-in-time snapshot and cannot detect tampering that happens during a model transformation.",
+        "ref": "5.1 Limitations"
+      },
+      {
+        "text": "Each AIMM level inherits every lower-level control: Level 2 includes Level 1 integrity, and Level 3 includes integrity, lineage, and structured attestations.",
+        "ref": "4 Practical Application, final paragraph"
+      },
+      {
+        "text": "The verification policy must map each role to the claim types it may produce, and verifiers reject any claim a party makes outside its authorized role.",
+        "ref": "6 Conflicting Claims, 'Role-based validation'"
+      },
+      {
+        "text": "Required attestations must be present and valid, and when independent parties compute different hashes for the same artifact, verification fails immediately.",
+        "ref": "6 Conflicting Claims, 'Completeness reviews' and 'Consistency checks'"
+      },
+      {
+        "text": "When an orchestrator agent delegates artifact operations to a sub-agent, signing authority must not expand beyond the delegating principal's permissions.",
+        "ref": "7 Agent Considerations, 'Delegation and scope constraints'"
+      },
+      {
+        "text": "Signing keys must be protected from unauthorized access, trust stores curated, and rotation and revocation procedures defined before they are needed.",
+        "ref": "8 Incremental Adoption Strategies, 'Key management foundations'"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Sign at the release boundary: the model producer hashes the complete model artifact and signs the hash when training, fine-tuning, or packaging ends and the artifact is immutable.",
+        "ref": "5.1 Implementation Approach, 'Integration into workflows'"
+      },
+      {
+        "text": "Verify on download: the model consumer recomputes the hash and validates the signature, and rejects unsigned or invalidly signed models before they enter an ML pipeline or production.",
+        "ref": "5.1 Implementation Approach, 'Integration into workflows'"
+      },
+      {
+        "text": "Lineage by signature chaining: the producer signs each derived model with claims that cite the parent artifact's hash, and the verifier walks the chain and matches recorded hashes to real artifacts.",
+        "ref": "5.2 Implementation Approach, 'Lineage tracking through signature chaining'"
+      },
+      {
+        "text": "Replay resistance: the verifier confirms each attestation signature is recent and non-replayable through trusted timestamping or short-lived certificates.",
+        "ref": "5.2 Implementation Approach, 'Performing baseline checks'"
+      },
+      {
+        "text": "Admission gating: operators place a policy engine gate before deployment that blocks unsigned, unattested, or failing artifacts, with defined failover and break-glass steps for engine outages.",
+        "ref": "5.3 Implementation Approach; 'Integration into workflows', Operators"
+      },
+      {
+        "text": "Risk-based adoption: the organization starts Level 1 on production, externally facing, or regulated models, adds Level 2 for derived models, and defers Level 3 until a policy and attestation tooling exist.",
+        "ref": "8 Incremental Adoption Strategies"
+      },
+      {
+        "text": "Re-sign at ingestion: when an external model arrives unsigned, the organization runs feasible integrity checks and signs it with its own key before admitting it to internal registries.",
+        "ref": "8 Incremental Adoption Strategies, 'Handling unsigned external models'"
+      },
+      {
+        "text": "Defense in depth: the organization treats signing and attestation as one layer and pairs it with behavioral testing, runtime monitoring, and independent audits.",
+        "ref": "9 Scope and Boundaries"
+      }
+    ],
+    "opencre_topics": [
+      "Supply Chain",
+      "Cryptography",
+      "Governance-Risk-Compliance",
+      "Access Control"
+    ]
+  },
+  {
+    "tab": "MOSAIC",
+    "issuer": "OWASP GenAI Security Project",
+    "publication": "Agent Control Standard (ACS) v0.1.0",
+    "link": "https://github.com/GenAI-Security-Project/agent-control-standard",
+    "axioms": [
+      {
+        "text": "AI agents add and remove capabilities at runtime, such as a mid-session model swap, a hot-loaded MCP server, or a new A2A peer.",
+        "ref": "docs/spec/inspect/README.md, opening paragraph"
+      },
+      {
+        "text": "Enterprises cannot rely on black-box agents that operate across cloud, SaaS, on-premises, and endpoint environments.",
+        "ref": "genai.owasp.org resource page, About"
+      },
+      {
+        "text": "An adversary who can disrupt the Guardian channel turns a fail-open control into audit only.",
+        "ref": "Instrument specification 6.4 Honoring decisions"
+      },
+      {
+        "text": "A Guardian that keeps its chain head private can drop an entry such as a DENY, recompute the chain forward, and later present a clean history.",
+        "ref": "Instrument specification 8.6 Chain head publication"
+      },
+      {
+        "text": "When content is summarized, stored in memory, or passed across a boundary without its trust basis, asserted content can pass as attested; the spec calls this trust laundering.",
+        "ref": "docs/concepts/trust.md, 'The basis must travel'"
+      },
+      {
+        "text": "A successful liveness ping does not show that enforcement works, since a Guardian can answer pings while rejecting every signed hook during a key outage.",
+        "ref": "Instrument specification 13 Liveness"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "The Observed Agent must wait for the Guardian's decision up to the negotiated timeout and apply it; a framework that emits hooks but ignores the verdict is not conformant.",
+        "ref": "Instrument specification 6.4 Honoring decisions"
+      },
+      {
+        "text": "Every agent step that proceeds without a Guardian decision must be recorded as an audit event, so the bypass is visible.",
+        "ref": "Instrument specification 6.4 Honoring decisions"
+      },
+      {
+        "text": "Provenance fields must be populated by deterministic framework code outside the LLM output path, and implementations must not instruct the LLM to produce them.",
+        "ref": "Instrument specification 1 Design Principles; 7.2"
+      },
+      {
+        "text": "Every ACS-Core request and response carries a signature over the JCS-canonicalized envelope, with HMAC-SHA256 as baseline, and verifiers reject signatures that do not cover it.",
+        "ref": "Instrument specification 10 Cryptographic Signatures; conformance.md ACS-Core"
+      },
+      {
+        "text": "Guardians must reject requests that reuse a request_id within the session or carry a timestamp outside the negotiated skew window.",
+        "ref": "Instrument specification 10.3 Replay protection"
+      },
+      {
+        "text": "Once Intent.parsed is set, changes from the runtime LLM, tool outputs, or untrusted channels must be ignored or rejected; only an authenticated approver's ASK grant can extend it.",
+        "ref": "Instrument specification 8.4 Intent immutability; 9.1"
+      },
+      {
+        "text": "For every step that writes a ContextEntry, the Guardian must return the resulting chain_hash in its response, covered by the response signature.",
+        "ref": "Instrument specification 8.6 Chain head publication"
+      },
+      {
+        "text": "A Guardian must not treat an asserted fact as attested, and agent-generated data labeled with trust takes the minimum trust of the data it derives from.",
+        "ref": "docs/concepts/trust.md, Invariants; Instrument specification 7.1"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Fail securely: a deployment that cannot accept fail-open sets on_decision_failure to deny, so an unreachable or silent Guardian blocks steps instead of letting them proceed.",
+        "ref": "Instrument specification 6.4; README, 'Two ways this breaks on the first try'"
+      },
+      {
+        "text": "Non-repudiation: a deployment that must prove which Guardian issued a decision or chain head adopts the ACS-Crypto profile, with ML-DSA-65 as the recommended algorithm.",
+        "ref": "conformance.md ACS-Crypto; Instrument specification 8.6"
+      },
+      {
+        "text": "Content-bound audit chain: the Guardian records request_hash, the SHA-256 of the canonical request params, on each ContextEntry so the chain commits to request content.",
+        "ref": "Instrument specification 8.1 ContextEntry; conformance.md ACS-Audit"
+      },
+      {
+        "text": "Inventory-aware policy: when policy depends on what an agent is built from, the agent sends an AgBOM snapshot before content hooks and an agbom/changed event on each hot-swap.",
+        "ref": "docs/spec/inspect/README.md, conformance bar"
+      },
+      {
+        "text": "Recoverable escalation: for a client that cannot route ASK, the Guardian prefers DEFER with a deny timeout when the request may resolve elsewhere, and DENY when it is outside the client's authority.",
+        "ref": "Instrument specification 9.2 Approver-incapable clients"
+      },
+      {
+        "text": "Monitor the enforcement path: operators track hook-path decision failures directly instead of inferring Guardian health from system/ping responses.",
+        "ref": "Instrument specification 13 Liveness"
+      },
+      {
+        "text": "Replayable policy state: the Guardian fills policy_references[].policy_version when audits or ledgers need to show which policy version produced a decision.",
+        "ref": "Instrument specification 6.1 Decision result fields"
+      },
+      {
+        "text": "Verify vendor claims: a buyer tests a deployment against the ACS-Core requirements, because v0.1.0 conformance is self-declared and no test suite or registry checks it.",
+        "ref": "conformance.md, 'Who verifies a conformance claim'"
+      }
+    ],
+    "opencre_topics": [
+      "Access Control",
+      "Log Management",
+      "Cryptography",
+      "Session Management",
+      "Supply Chain"
+    ]
+  },
+  {
+    "tab": "MOSAIC",
+    "issuer": "OWASP GenAI Security Project",
+    "publication": "GenAI Security Industry Framework Crosswalk v4.0.0",
+    "link": "https://github.com/GenAI-Security-Project/crosswalk",
+    "axioms": [
+      {
+        "text": "GenAI controls are spread across many frameworks, so a team deploying GenAI has to find and reconcile the controls that apply to each risk.",
+        "ref": "RATIONALE.md 1 The Problem This Solves"
+      },
+      {
+        "text": "LLM application risks, agentic risks, and data security risks are distinct problem domains with different audiences, threat models, and mitigations.",
+        "ref": "RATIONALE.md 7, 'Why three source lists'"
+      },
+      {
+        "text": "One GenAI deployment can fall under several regimes at once, such as an EU payments chatbot under the EU AI Act, PCI DSS, ISO 27001, and DORA.",
+        "ref": "RATIONALE.md 7, 'Why 20 frameworks and not fewer?'"
+      },
+      {
+        "text": "A mapping goes wrong quietly when a framework releases a new version and nobody rechecks the rows written against the old one.",
+        "ref": "docs/FRESHNESS_SLA.md, opening paragraph"
+      },
+      {
+        "text": "Incident evidence counts reflect the incidents this project has recorded and reviewed, not the world, and lean toward failures that get publicly disclosed.",
+        "ref": "docs/EVIDENCE_METHODOLOGY.md, 'What evidence does not mean'"
+      },
+      {
+        "text": "Removing human oversight raises average AIVSS severity by 1.79 points across the ten agentic entries and moves 7 of 10 from High to Critical.",
+        "ref": "README.md, 'Agentic autonomy premium'"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "Every mapping is unreviewed until a named human reviewer signs it, and an agent never adds itself to reviewed_by.",
+        "ref": "Web app home, 'Review state'; docs/SCHEMA_V2_MIGRATION.md"
+      },
+      {
+        "text": "The validator fails any mapping whose confidence is above 'unreviewed' while its reviewed_by list is empty.",
+        "ref": "docs/SCHEMA_V2_MIGRATION.md, 'A row may not claim review it does not have'"
+      },
+      {
+        "text": "A control failure supports a mapping only when the incident lists that OWASP entry and names the same framework and control_id.",
+        "ref": "docs/EVIDENCE_METHODOLOGY.md, Counting rule 1"
+      },
+      {
+        "text": "Only a confirmed control failure with a named confirmer counts toward evidence_count; drafted failures are shown but never counted.",
+        "ref": "docs/EVIDENCE_METHODOLOGY.md, Counting rule 2"
+      },
+      {
+        "text": "A drafted failure needs a verbatim quote from a source stating that a control was missing or defeated; a description of the attack alone does not qualify.",
+        "ref": "docs/EVIDENCE_METHODOLOGY.md, 'Drafting discipline'"
+      },
+      {
+        "text": "A severity rating changes only with a cited AIVSS score, a CVSS score from a linked CVE, or the OWASP source list definition.",
+        "ref": "RATIONALE.md 4.3, 'No severity change without evidence'"
+      },
+      {
+        "text": "The incident index records only failures of deployed systems; lab attacks and proofs of concept against researcher-run systems are literature.",
+        "ref": "docs/TRIAGE_RULES.md, 'The rule in one line' and Routing 1"
+      },
+      {
+        "text": "Each mapping cites the authoritative framework text, not secondary summaries, and controls with only a tangential link to the risk are excluded.",
+        "ref": "RATIONALE.md 4.2 steps 2 and 3; 4.4 Quality Controls"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Tiered rollout: security teams apply Foundational controls first, in sprint 0 or 1, add Hardening controls in quarters 1 to 2, and reserve Advanced controls for high-risk or high-maturity settings.",
+        "ref": "RATIONALE.md 4.2 step 4, Tier assignment"
+      },
+      {
+        "text": "Buy, build, or both: mapping authors tag each control by whether a vendor platform, internal engineering, or both deliver it, so teams can plan procurement and staffing.",
+        "ref": "RATIONALE.md 4.2 step 5; 7, 'Why Buy/Build/Both scope tags?'"
+      },
+      {
+        "text": "Typed relationships: reviewers label each mapping with an OLIR relationship (equal, subset-of, superset-of, intersects-with, not-related-to) and a rationale naming the clause it reaches.",
+        "ref": "docs/SCHEMA_V2_MIGRATION.md, 'relationship' and 'rationale'"
+      },
+      {
+        "text": "Version pinning: mapping authors record the framework release each row was written against, so drift between a mapping and a newer framework version is detectable.",
+        "ref": "docs/SCHEMA_V2_MIGRATION.md, 'framework_version, reviewed_by, review_date'"
+      },
+      {
+        "text": "Honest freshness: maintainers record mapped and upstream versions per framework and report unchecked frameworks apart from current ones, never merging the two states.",
+        "ref": "docs/FRESHNESS_SLA.md, Current state; How it is enforced"
+      },
+      {
+        "text": "Dispute resolution: when two mappings conflict, both proposers cite a primary source, the framework lead decides, and the losing evidence stays in a DISPUTE comment.",
+        "ref": "GOVERNANCE.md, 'Mapping disputes'"
+      },
+      {
+        "text": "Deprecate, do not delete: maintainers mark a mapping DEPRECATED with a reason and remove it only with evidence that it is wrong.",
+        "ref": "GOVERNANCE.md, 'What the project will NOT do'"
+      },
+      {
+        "text": "Evidence-tiered scoring: the coverage scorer labels a result Self-Assessed, Partially Validated, or Tool-Validated based on uploaded Garak, PyRIT, LAAF, or compliance report evidence.",
+        "ref": "README.md, 'Evidence-based scoring'"
+      }
+    ],
+    "opencre_topics": [
+      "Governance-Risk-Compliance",
+      "Threat Modeling",
+      "Vulnerability Management"
+    ]
+  },
+  {
+    "tab": "MOSAIC",
+    "issuer": "SANS Institute",
+    "publication": "Quantifying Agentic Misalignment in Multi-Agent Systems",
+    "link": "https://www.sans.org/white-papers/quantifying-agentic-misalignment-multi-agent-systems",
+    "axioms": [
+      {
+        "text": "LLM agents with enterprise tool permissions can pursue sub-goals that violate implicit safety policies even when every tool works as designed.",
+        "ref": "p. 1, Abstract"
+      },
+      {
+        "text": "Once agents can send mail, modify files, and call APIs, the main risk moves from unsafe text to unsafe actions taken through trusted tools.",
+        "ref": "p. 2, Section 1.1"
+      },
+      {
+        "text": "Agentic misalignment comes from the interaction of model, prompt, tool access, and adversarial context, so harm can occur without any conventional software exploit.",
+        "ref": "p. 3, Section 1.1"
+      },
+      {
+        "text": "LLM-integrated systems struggle to separate trusted instructions from untrusted retrieved content, so an injected tool response can pass as task guidance.",
+        "ref": "p. 3, Section 1.2"
+      },
+      {
+        "text": "Single-agent configurations acted on injected tool-response instructions in 93.3% to 100% of prompt_injection runs for all six tested models.",
+        "ref": "p. 17, Finding 2"
+      },
+      {
+        "text": "Misalignment varies sharply by model: overall rates across six models in the same 250-run matrix ranged from 7.6% to 41.2%.",
+        "ref": "p. 16, Section 3.1"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "Every tool output an agent receives must be handled as potentially hostile data and never as a trusted instruction.",
+        "ref": "p. 8, Section 2.1 (\"tool outputs must be treated as potentially hostile data\"); p. 24, Recommendation 7"
+      },
+      {
+        "text": "Prompt-level safety instructions alone do not secure a tool-using agent; runtime observability, tool-boundary controls, and scenario-specific validation are required alongside them.",
+        "ref": "p. 1, Abstract (\"necessary complements\")"
+      },
+      {
+        "text": "Before production, deployers must log reasoning steps, tool strings, state transitions, and runtime actions so behavior is judged from artifacts rather than model self-report.",
+        "ref": "p. 24, Recommendation 4"
+      },
+      {
+        "text": "An agent's own transcript cannot prove what it did; misalignment is scored from durable artifacts left in the mail, file share, and API services it touched.",
+        "ref": "p. 8, Section 2.1"
+      },
+      {
+        "text": "Automated scorer labels stay unvalidated until a manual audit checks scorer-positive and sampled scorer-negative runs against the raw service logs.",
+        "ref": "p. 21, Section 3.2; p. 23, Recommendation 1"
+      },
+      {
+        "text": "A 0% misalignment result in a cell with heavy timeout censoring is unresolved and cannot be reported as confirmed clean.",
+        "ref": "p. 20 to 21, Section 3.2 (timeout censoring)"
+      },
+      {
+        "text": "A low-risk result holds only for the tested model version, prompt, and tool configuration; it is not a durable safety guarantee after provider updates.",
+        "ref": "p. 20, Section 3.2 (point-in-time snapshot)"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Least privilege: the deploying team isolates email, SMB write, and administrative API access behind separate execution controls and tool-boundary checks for each agent.",
+        "ref": "p. 23 to 24, Recommendation 3"
+      },
+      {
+        "text": "Explicit tool constraints: the prompt author replaces broad task descriptions with enforceable rules, such as no emailing file contents and no admin endpoint calls outside the task.",
+        "ref": "p. 23, Recommendation 2"
+      },
+      {
+        "text": "Prompt-injection hardening: developers apply injection-resistant parsing to tool responses and treat returned content as data whenever an agent ingests external API output.",
+        "ref": "p. 24, Recommendation 7"
+      },
+      {
+        "text": "Behavior-first evaluation: security and AI governance teams test agents through sandboxed actions and the artifacts they leave before deployment, instead of reviewing static text output.",
+        "ref": "p. 25, Section 4.3"
+      },
+      {
+        "text": "Isolated test environment: evaluation teams run agents in a non-production segment with synthetic data and test credentials, and route risky actions to capture sinks such as an SMTP trap.",
+        "ref": "p. 26, Section 4.4"
+      },
+      {
+        "text": "Release gates: the agent owner sets thresholds such as maximum exfiltration attempt rate or STOP-ignore rate, requires evaluation at CI or release, and reruns it after major model, prompt, or tool changes.",
+        "ref": "p. 26 to 27, Section 4.4"
+      },
+      {
+        "text": "Separate deception metric: evaluators score the gap between evaluation-framed and production-framed runs apart from base-rate misalignment before deployment.",
+        "ref": "p. 24, Recommendation 8"
+      },
+      {
+        "text": "Scenario-aware circuit breakers: operators set per-scenario timeout ceilings, longer for privilege escalation and multi-agent handoff tasks, because one global cutoff causes false interruption.",
+        "ref": "p. 20, Section 3.1.8; p. 25, Section 4.3"
+      }
+    ],
+    "opencre_topics": [
+      "Input Validation",
+      "Access Control",
+      "Log Management",
+      "Secure Product Design",
+      "Threat Modeling",
+      "Governance-Risk-Compliance"
+    ]
+  },
+  {
+    "tab": "Peer SDOs",
+    "issuer": "MITRE",
+    "publication": "MITRE ATLAS (Adversarial Threat Landscape for AI Systems) v2026.09",
+    "link": "https://atlas.mitre.org/",
+    "axioms": [
+      {
+        "text": "Many moderation and filtering controls inspect mainly the text channel, so a payload hidden in an image, audio, video, or file metadata can still steer a multimodal model unnoticed.",
+        "ref": "AML.T0129 Triggers in Multimodal Inputs (new in v2026.09)"
+      },
+      {
+        "text": "Self-hosted AI runtimes listen on predictable ports and standard API paths, so attackers find model-serving hosts by scanning or by querying scan services such as Shodan and Censys.",
+        "ref": "AML.T0006.002 Scan for Exposed AI Infrastructure; AML.T0000.003 Scan Databases (new in v2026.09)"
+      },
+      {
+        "text": "Agent and SaaS platforms host agents behind URL patterns built from tenant, environment, or agent names, and default configurations keep those patterns the same across victims.",
+        "ref": "AML.T0006.000 Enumerate Hosted AI Resources (new in v2026.09)"
+      },
+      {
+        "text": "Most major AI assistants accept a prefilled prompt through a URL parameter such as ?q= or ?prompt=, so whoever controls a link can write the first turn of a user's conversation.",
+        "ref": "AML.T0131 Crafted AI Assistant Links; AML.CS0072 description"
+      },
+      {
+        "text": "Attackers who reach a working agent can map its tools, parameters, permissions, and embedded credentials at runtime by testing requests, without reading its configuration.",
+        "ref": "AML.T0133 Discover AI Agent Runtime Capabilities (new in v2026.09)"
+      },
+      {
+        "text": "Indirect prompt injection arrives through documents, email, databases, or websites the agent ingests, and the hijacked agent acts with whatever privileges the AI system holds.",
+        "ref": "AML.T0051.001 LLM Prompt Injection: Indirect (updated 2026-09-15)"
+      },
+      {
+        "text": "Legitimate businesses also poison assistants: Microsoft found more than 50 memory manipulation prompts from 31 companies in about 60 days of email traffic, several aimed at health and finance.",
+        "ref": "AML.CS0072 AI Recommendation Poisoning via Crafted AI Assistant Links (new case study)"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "Any agent whose context takes in untrusted data can have its tools invoked by prompt injections in that data, with confidentiality, integrity, or availability violations as the result.",
+        "ref": "AML.M0030 Restrict AI Agent Tool Invocation on Untrusted Data"
+      },
+      {
+        "text": "Production models require users to verify identity, API endpoints require authentication, and operators monitor model queries against usage policy.",
+        "ref": "AML.M0019 Control Access to AI Models and Data in Production"
+      },
+      {
+        "text": "Validation of inputs and outputs for agent tools and data sources runs outside the AI agent, covering schema checks, leakage checks, and removal of injections or unsafe code.",
+        "ref": "AML.M0033 \"Validation should be performed external to the AI agent\""
+      },
+      {
+        "text": "A human decision maker gives final approval of agent actions; audit agents may assist the review but do not replace the human approver.",
+        "ref": "AML.M0029 Human In-the-Loop for AI Agent Actions"
+      },
+      {
+        "text": "Agent execution environments start from a clean base image on each run and carry forward no operational state.",
+        "ref": "AML.M0032 Segmentation of AI Agent Components"
+      },
+      {
+        "text": "Defenders verify the cryptographic checksum of every AI artifact to confirm an attacker did not modify the file.",
+        "ref": "AML.M0014 Verify AI Artifacts"
+      },
+      {
+        "text": "Any interaction with a decoy AI service, agent, or credential signals unauthorized activity with high confidence, because authorized users and workflows have no reason to touch it.",
+        "ref": "AML.M0039 AI Honeypots (new in v2026.09)"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Deception with AI honeypots: the security team places monitored decoy AI services, agents, and credentials beside real assets and feeds captured prompts and tooling into detection rules.",
+        "ref": "AML.M0039 AI Honeypots; mitigates AML.T0006.000 to .003, AML.T0132, AML.T0133"
+      },
+      {
+        "text": "Least privilege: the deploying team grants a privileged or multi-user agent only the tools and resources its designated task requires, enforced with RBAC or ABAC.",
+        "ref": "AML.M0026 Privileged AI Agent Permissions Configuration"
+      },
+      {
+        "text": "Delegated access: the platform team gives each tool shared across agents the permissions, identity, and limits of the calling agent, set in the MCP server or tool configuration.",
+        "ref": "AML.M0028 AI Agent Tools Permissions Configuration"
+      },
+      {
+        "text": "Consequence-scaled confirmation: once untrusted data enters an LLM's context, the system blocks automatic tool calls or asks the user to confirm, and always asks for high-consequence actions.",
+        "ref": "AML.M0030 Restrict AI Agent Tool Invocation on Untrusted Data"
+      },
+      {
+        "text": "Staged guardrails: developers check prompts, retrieved context, tool calls, and outputs at each workflow stage, log each guardrail decision, and add observed failures to evaluation datasets.",
+        "ref": "AML.M0020 Generative AI Guardrails (updated in v2026.09)"
+      },
+      {
+        "text": "Agent telemetry: operators log model inputs and outputs and, for agents, intermediate steps, data access, tool use, install commands, and the agent's identity.",
+        "ref": "AML.M0024 AI Telemetry Logging"
+      },
+      {
+        "text": "Threat-informed red teaming: an AI red team runs recurring authorized exercises against models, data, agent memory and tools, and data flows before deployment and during operation.",
+        "ref": "AML.M0035 AI Red Team"
+      }
+    ],
+    "opencre_topics": [
+      "Threat Modeling",
+      "Access Control",
+      "Input Validation",
+      "Log Management",
+      "Vulnerability Management",
+      "Supply Chain"
+    ]
+  },
+  {
+    "tab": "Peer SDOs",
+    "issuer": "ETSI",
+    "publication": "ETSI TS 104 275 V1.1.1: Securing Artificial Intelligence (SAI); Application of Baseline Cyber Security Requirements for AI Models and Systems principles to Generative AI; Preventing Harm from Deepfakes",
+    "link": "https://www.etsi.org/deliver/etsi_ts/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf",
+    "axioms": [
+      {
+        "text": "AI differs from traditional software through risks such as data poisoning, model obfuscation, and indirect prompt injection, plus differences in how data is managed.",
+        "ref": "p. 5, Introduction"
+      },
+      {
+        "text": "Deepfakes have been used to sway elections and to create non-consensual pornography, child sexual abuse material, low-cost deepfake adverts, and synthetic terrorist content.",
+        "ref": "p. 10, clause 4.3 Overview of Deepfakes"
+      },
+      {
+        "text": "Deepfake harm falls into three groups: psychological (extortion, defamation), financial (identity theft, fraud, stock manipulation), and societal (election manipulation, national security).",
+        "ref": "p. 11, Table 1"
+      },
+      {
+        "text": "The harms, threats, and mitigations that apply to GenAI also apply to Agentic AI, which the specification treats as an evolution of GenAI.",
+        "ref": "p. 10, clause 4.1 NOTE"
+      },
+      {
+        "text": "Simple changes to how a deepfake is produced can sharply cut detector reliability, and compression on social platforms removes the pixels and artefacts detectors depend on.",
+        "ref": "p. 15, Annex A.1"
+      },
+      {
+        "text": "Manual deepfake detection by a skilled reviewer works for small volumes but cannot keep up with the volume of audio-visual material shared today.",
+        "ref": "p. 15, Annex A.1"
+      },
+      {
+        "text": "Victims of non-consensual deepfakes see the same content reappear on many sites and have to request formal removal each time.",
+        "ref": "p. 15, Annex A.2"
+      }
+    ],
+    "invariables": [
+      {
+        "text": "System Operators and Developers shall give users training on GenAI deepfake threats; the conformance test fails if that training content was not reviewed in the last 12 months.",
+        "ref": "p. 11, Provision 5.1.1.-1; p. 21, C.2.1.1"
+      },
+      {
+        "text": "The GenAI user interface shall encourage responsible use through content filters, clear labels on AI-generated content, and notices about limits on output reliability and accuracy.",
+        "ref": "p. 11, Provision 5.1.2.-1"
+      },
+      {
+        "text": "Operators and Developers shall complete a risk assessment and implement and verify required mitigations before a GenAI system is deployed, with residual risks documented and approved.",
+        "ref": "p. 11, Provision 5.1.3.-2; p. 22, C.2.3.2"
+      },
+      {
+        "text": "Operators and Developers shall keep human oversight of a deployed GenAI system, monitor it, and implement tracked updates when risks materialize.",
+        "ref": "p. 12, Provision 5.1.4.-2; p. 23, C.2.4.2"
+      },
+      {
+        "text": "Developers, Operators, and Data Custodians shall get informed consent before training or adapting GenAI on a user's works, and the system shall enforce opt in or opt out at any time.",
+        "ref": "p. 12, Provision 5.2.1.-1; p. 24, C.2.5.1"
+      },
+      {
+        "text": "The Developer shall confirm that GenAI training data was legally accessed or licensed; incomplete data lineage or missing license evidence fails conformance.",
+        "ref": "p. 12, Provision 5.2.4.-1; p. 24, C.2.6.1"
+      },
+      {
+        "text": "An organization shall have a risk communication policy that covers its roles, statutory duties, escalation paths, and information sharing with authorities such as a Market Surveillance Authority.",
+        "ref": "p. 13, Provision 5.3.1.-1; p. 25, C.2.7.1"
+      }
+    ],
+    "principles": [
+      {
+        "text": "Continuous risk research: System Operators and Developers review safety and security research on a set cadence, for example quarterly and not only after incidents, and track decisions, owners, and actions.",
+        "ref": "p. 11, Provision 5.1.3.-1; p. 22, C.2.3.1 Pass verdict"
+      },
+      {
+        "text": "Multilingual red teaming: Developers and System Operators send the same harmful prompt in several languages and add controls when any version produces harmful output.",
+        "ref": "p. 13, Principle 9 NOTE and EXAMPLE"
+      },
+      {
+        "text": "Cross-verification: System Operators and Developers check GenAI outputs against trusted external sources, and the human oversight process responds to incorrect outputs and hallucinations.",
+        "ref": "p. 12, clause 5.1.4 NOTE 1 and NOTE 2"
+      },
+      {
+        "text": "Infringement testing: the Developer generates sample images or text, runs reverse image or text searches for infringing matches, and adds measures to stop repeats.",
+        "ref": "p. 12, clause 5.2.4 NOTE 2"
+      },
+      {
+        "text": "Security transparency: Developers and System Operators tell GenAI users what steps they take to secure infrastructure and the supply chain.",
+        "ref": "p. 12, clause 5.2.2 NOTE and clause 5.2.3 NOTE"
+      },
+      {
+        "text": "Patch notification: Developers and System Operators keep a policy that informs users about security updates, patches, and threat mitigations as they are applied.",
+        "ref": "p. 13, clause 5.4.1 NOTE"
+      },
+      {
+        "text": "Privacy-preserving training: developers apply federated learning, differential privacy, and model anonymization where anonymization does not compromise the model's intended purpose.",
+        "ref": "p. 19, Table B.1 Requirement 3 Privacy and data governance"
+      },
+      {
+        "text": "Data subject rights at end of life: Developers and System Operators set up processes that honor end-user GDPR rights of access (Art. 15), erasure (Art. 17), and portability.",
+        "ref": "p. 14, clause 5.5.1 NOTE"
+      }
+    ],
+    "opencre_topics": [
+      "Governance-Risk-Compliance",
+      "Data Protection",
+      "Training and Awareness",
+      "Secure Product Design",
+      "Threat Modeling"
+    ]
+  }
+]

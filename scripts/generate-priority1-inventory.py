@@ -1,0 +1,388 @@
+#!/usr/bin/env python3
+"""Generate priority-1 Peer SDO and Coalition inventory paste/import files."""
+
+import csv
+import importlib.util
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+_spec = importlib.util.spec_from_file_location(
+    "build_paste_files", ROOT / "scripts" / "build-paste-files.py"
+)
+_mod = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_mod)
+write_import_csv = _mod.write_import_csv
+write_paste_tsv = _mod.write_paste_tsv
+write_inventory_splits = _mod.write_inventory_splits
+
+DATA = ROOT / "data"
+
+PEER_SDOS = [
+    [
+        "1",
+        "MITRE",
+        "MITRE ATLAS (Adversarial Threat Landscape for AI Systems) v2026.08",
+        "September 1, 2026",
+        "Taxonomy",
+        "Web + YAML",
+        "https://atlas.mitre.org/",
+        "\n".join(
+            [
+                "- ATLAS maps adversary tactics and techniques against AI-enabled systems, AI capability abuse, and harmful autonomous behavior backed by case studies and red-team evidence",
+                "- Content release v2026.08 adds agentic techniques (AML.T0116 through AML.T0128) and renames AI Attack Staging to AI Attack Adaptation",
+                "- Monthly content releases (YYYY.MM) are separate from data format semver (6.0.0); manifest ties versions in GitHub atlas-data",
+                "- Platforms field on techniques tags Predictive AI, Generative AI, Agentic AI, and Enterprise scope",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Living taxonomy: same technique ID may gain sub-techniques or maturity labels without changing the core attack story",
+                "- Navigator layers and STIX exports reflect the selected content version; diff releases rather than a single static PDF",
+                "- Case studies lag real-world agent deployments; technique maturity marks emerging vs validated entries",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Map production AI controls and detections to ATLAS techniques and mitigations during threat modeling",
+                "- Subscribe to mitre-atlas/atlas-data releases and patch local Navigator layers when v2026.08 or later ships",
+                "- Use case studies as test scenarios for red teams; contribute new cases through ATLAS submission workflows",
+                "- Pair ATLAS agentic techniques with OWASP Agentic Top 10 and MCP-specific controls where tools and memory appear",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Threat Modeling",
+                "- Secure Product Design",
+                "- Input Validation",
+                "- Vulnerability Management",
+                "- Log Management",
+            ]
+        ),
+        "https://github.com/mitre-atlas/atlas-data/releases/tag/v2026.08",
+    ],
+    [
+        "2",
+        "ETSI",
+        "ETSI EN 304 223 V2.1.1 — Securing Artificial Intelligence (SAI); Baseline Cyber Security Requirements for AI Models and Systems",
+        "December 2025",
+        "Standard",
+        "PDF",
+        "https://www.etsi.org/deliver/etsi_en/304200_304299/304223/02.01.01_60/en_304223v020101p.pdf",
+        "\n".join(
+            [
+                "- European baseline for deployable AI systems using deep neural networks, including generative AI, across the full lifecycle",
+                "- Thirteen principles in five phases: secure design, development, deployment, maintenance, and end of life",
+                "- Addresses AI-specific risks: data poisoning, model obfuscation, indirect prompt injection, and training-data handling gaps",
+                "- Signposts ISO/IEC 22989 lifecycle stages, ETSI TR 104 128 implementation guide, and TS 104 216 conformance assessment",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Out of scope for research-only AI never intended for deployment",
+                "- Does not replace ISO/IEC 27001; maps to existing cyber programs rather than duplicating generic IT controls",
+                "- Modal verbs follow ETSI drafting rules (shall/should/may); must/must not do not appear in deliverables",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Assign lifecycle owners for each of the thirteen principles from design through model disposal",
+                "- Run asset identification and supply-chain tracking for data, models, prompts, and training infrastructure (Principles 5–8)",
+                "- Test and evaluate before release; monitor behavior in production; patch and mitigate on a cadence (Principles 9–12)",
+                "- Document end-user and affected-entity communications at deployment; dispose data and models at end of life (Principles 10, 13)",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Secure Product Design",
+                "- Supply Chain",
+                "- Data Protection",
+                "- Vulnerability Management",
+                "- Log Management",
+            ]
+        ),
+        "https://www.etsi.org/newsroom/press-releases/2627-etsi-releases-world-leading-standard-for-securing-ai/",
+    ],
+    [
+        "3",
+        "ENISA",
+        "ENISA's view on Cybersecurity in the Frontier AI Era",
+        "July 2026",
+        "Report",
+        "PDF",
+        "https://www.enisa.europa.eu/publications/enisas-view-on-cybersecurity-in-the-frontier-ai-era",
+        "\n".join(
+            [
+                "- Frontier AI compresses discovery-to-exploitation windows; industry data cited puts weaponisation near 15 minutes and median exfiltration near 72 minutes after access",
+                "- Negative time-to-exploit: attackers may hold working exploits before vendor fixes ship, especially when patches reveal flaws in unsupported versions",
+                "- Defenders must treat environments as potentially compromised and extend ML-based prevention to agentic endpoints and enterprise browsers",
+                "- Security fundamentals stay central: asset inventory, patching discipline, segmentation, monitoring, and coordinated disclosure at machine speed",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Position paper, not a binding regulation; recommendations will align to a future European Commission action plan",
+                "- Open-source maintainers and SMEs face report-volume spikes from AI-generated findings; triage capacity becomes the bottleneck",
+                "- Change-advisory workflows cannot approve fixes quickly enough when exploit windows are minutes; governance must allow faster intervention",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Shift effort from discovery volume to risk-based prioritisation with faster triage and remediation",
+                "- Target single-digit-minute MTTD, MTTR, and MTTC where feasible; automate patching and containment paths",
+                "- Embed continuous threat modeling with AI-assisted simulation against live architectures",
+                "- Integrate defensive AI across SDLC and incident response with humans retained in approval loops",
+                "- Prepare CRA Single Reporting Platform workflows assuming active exploitation when awareness begins",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Threat Modeling",
+                "- Vulnerability Management",
+                "- Incident Response",
+                "- Log Management",
+                "- Secure Product Design",
+            ]
+        ),
+        "https://www.enisa.europa.eu/sites/default/files/2026-07/ENISA%20view%20on%20cybersecurity%20in%20the%20frontier%20AI%20era_en_0.pdf",
+    ],
+]
+
+COALITIONS = [
+    [
+        "1",
+        "OpenSSF",
+        "Security-Focused Guide for AI Code Assistant Instructions",
+        "August 1, 2025",
+        "Guide",
+        "Web",
+        "https://best.openssf.org/Security-Focused-Guide-for-AI-Code-Assistant-Instructions",
+        "\n".join(
+            [
+                "- Custom instructions (Cursor rules, Copilot instructions, CLAUDE.md, and similar) steer AI code assistants toward secure output",
+                "- Developers remain accountable for generated code; AI output requires the same review, test, and SAST discipline as human-written code",
+                "- Instructions should stay concise and project-specific; irrelevant security text increases wrong or over-fit code",
+                "- Recursive Criticism and Improvement (RCI) loops ask the assistant to review and fix its own prior output with linters and scanners",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Instructions do not replace ASVS, SCVS, or AISVS verification; they reduce common assistant mistakes only",
+                "- Persona prompts like act as a security expert often degrade results in cited experiments",
+                "- Assistant-suggested dependencies may be hallucinated or outdated; pin versions and verify packages",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Encode input validation, output encoding, secrets handling, and least-privilege defaults in project instruction files",
+                "- Require parameterized queries, constant-time comparisons for secrets, and secure error handling without leaking internals",
+                "- Mandate SBOM generation, dependency scanning, and CI SAST/DAST in generated pipeline snippets",
+                "- Add language-specific rules (bounds-checked C, no shell=True in Python subprocess, pinned container digests with cosign verification)",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Secure Product Design",
+                "- Input Validation",
+                "- Supply Chain",
+                "- Vulnerability Management",
+                "- Cryptography",
+            ]
+        ),
+        "https://github.com/ossf/wg-best-practices-os-developers/blob/main/docs/Security-Focused-Guide-for-AI-Code-Assistant-Instructions.md",
+    ],
+    [
+        "2",
+        "Frontier Model Forum",
+        "Emerging Security Practices for AI Agents",
+        "June 3, 2026",
+        "Issue Brief",
+        "Web + PDF",
+        "https://www.frontiermodelforum.org/issue-briefs/emerging-security-practices-for-ai-agents/",
+        "\n".join(
+            [
+                "- Agent security spans model, system guardrails, harness orchestration, and tool access; each layer needs distinct controls",
+                "- Primary attack vectors: prompt injection, memory poisoning, and tool supply-chain compromise where tool output re-enters reasoning",
+                "- Misaligned benign requests can cause harm without an external attacker when scope and permissions are too broad",
+                "- Shared responsibility across developers, deployers, tool providers, third-party surfaces, and users who grant authority",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Probabilistic model defenses alone cannot guarantee safety; deterministic limits on tools and egress must sit outside the reasoning loop",
+                "- Persistent memory propagates poisoned state across turns and agents; harness logging is the enforcement and audit point",
+                "- MCP and similar protocols do not guarantee secure implementations; discipline at integration time determines exposure",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Apply least privilege on tools, filesystem, network egress, and credentials; sandbox execution environments",
+                "- Block the lethal trifecta: do not combine private-data access, untrusted content, and external communication in one agent without mitigations",
+                "- Require human confirmation before irreversible or high-stakes actions; adapt oversight for multi-agent parallel workflows",
+                "- Vet tools in directories or sandboxes; combine instruction hierarchies, classifiers, and provenance-aware interpreters such as CaMeL where feasible",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Threat Modeling",
+                "- Input Validation",
+                "- Access Control",
+                "- Supply Chain",
+                "- Log Management",
+            ]
+        ),
+        "https://www.frontiermodelforum.org/issue-briefs/emerging-security-practices-for-ai-agents/",
+    ],
+    [
+        "3",
+        "Frontier Model Forum",
+        "Managing Advanced Cyber Risks in Frontier AI Frameworks",
+        "February 13, 2026",
+        "Technical Report",
+        "Web + PDF",
+        "https://www.frontiermodelforum.org/technical-reports/managing-advanced-cyber-risks-in-frontier-ai-frameworks/",
+        "\n".join(
+            [
+                "- Maps how frontier AI safety frameworks set cyber capability thresholds, assess models, and deploy mitigations",
+                "- Dual-use cyber capabilities help defenders patch and detect while lowering barriers for offensive misuse",
+                "- Emerging consensus thresholds: non-expert uplift for sophisticated attacks and end-to-end autonomous cyber operations",
+                "- Zero-day discovery and attacks against hardened targets are explicit escalation markers across member frameworks",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Threshold wording (significant, meaningful, material uplift) remains subjective; cross-vendor comparability is incomplete",
+                "- Benchmarks saturate and suffer contamination; CTF and cyber-range scores may reflect training exposure not operational risk",
+                "- Defender benefit from the same model capabilities must weigh into release decisions, not offense alone",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Threat-model AI-cyber paths with ATT&CK, Cyber Kill Chain, and STRIDE; update models as incidents and assessments arrive",
+                "- Run tiered capability assessments: knowledge benchmarks, agent CTF/cyber-range tasks, safeguard evals, and expert red teams",
+                "- Tie assessment results to output policies, refusals, and monitoring for vulnerability-query and exploit-development patterns",
+                "- Document assumptions on actor skill, target hardening, and autonomy before crossing published capability thresholds",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Threat Modeling",
+                "- Vulnerability Management",
+                "- Secure Product Design",
+                "- Log Management",
+            ]
+        ),
+        "https://www.frontiermodelforum.org/technical-reports/managing-advanced-cyber-risks-in-frontier-ai-frameworks/",
+    ],
+    [
+        "4",
+        "Partnership on AI",
+        "Guidance for Safe Foundation Model Deployment",
+        "October 24, 2023",
+        "Framework",
+        "Web + PDF",
+        "https://partnershiponai.org/modeldeployment/",
+        "\n".join(
+            [
+                "- Tailored checklists for model capability tier (frontier vs general purpose) crossed with release type (restricted API, closed, open)",
+                "- Covers R&D risk scanning, pre-deployment safeguards, post-deployment monitoring, and decommission paths",
+                "- Expanded 2024 guidance assigns obligations across adapters, hosting services, and application developers in open-model chains",
+                "- Significant capability updates after deployment trigger renewed governance, not one-time sign-off",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Voluntary guidance meant to complement regulation such as EU GPAI Code of Practice, not replace legal duties",
+                "- Third-party audit methods and incident-reporting baselines remain immature across the industry",
+                "- Research or limited releases may warrant lighter oversight than wide public deployment of frontier models",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Select the checklist matching model capability and release type on the Model Deployment Guidance site",
+                "- Implement access controls, rate limits, terms of use, and architecture-embedded safety before external release",
+                "- Monitor for misuse, jailbreaks, and downstream impacts; define restrict, suspend, and retire criteria",
+                "- Publish model cards and downstream safety tooling for open releases; distribute responsibility across the value chain",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Secure Product Design",
+                "- Access Control",
+                "- Incident Response",
+                "- Log Management",
+                "- Supply Chain",
+            ]
+        ),
+        "https://partnershiponai.org/pai-model-deployment-guidance-press-release/",
+    ],
+    [
+        "5",
+        "AI Verify Foundation",
+        "Model AI Governance Framework for Agentic AI v1.5",
+        "May 20, 2026",
+        "Framework",
+        "PDF",
+        "https://www.imda.gov.sg/assets/63438074-73f6-4dcc-a281-030f42642cf4.pdf",
+        "\n".join(
+            [
+                "- Voluntary Singapore framework for deploying agents built in-house or via third-party platforms",
+                "- Four dimensions: assess and bound risks upfront, meaningful human accountability, technical lifecycle controls, end-user responsibility",
+                "- Agent components include model, instructions, memory, planning, tools, protocols, access controls, guardrails, approvals, and logging",
+                "- v1.5 adds multi-agent and third-party agent risks, automation bias practices, and operational case studies",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Continuous human approval for every agent step does not scale; define checkpoints for high-stakes and irreversible actions only",
+                "- Multi-agent architectures diffuse accountability unless roles are mapped across the agentic value chain",
+                "- Protocols (MCP, A2A, commerce protocols) evolve quickly; controls must track new tool and agent interaction surfaces",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Bound action-space up front: limit tools, permissions, reversibility, and autonomy per use case",
+                "- Assign responsibilities across platform providers, system integrators, and app developers before deployment",
+                "- Test agents for execution accuracy, policy adherence, and tool use pre-release; monitor continuously post-release",
+                "- Disclose agent scope to users; train operators to resist automation bias and maintain override and audit trails",
+                "- Validate alignment with AI Verify toolkit and ISO/IEC 42001 crosswalk where attestations are required",
+            ]
+        ),
+        "\n".join(
+            [
+                "- Secure Product Design",
+                "- Access Control",
+                "- Threat Modeling",
+                "- Log Management",
+                "- Data Protection",
+            ]
+        ),
+        "https://aiverifyfoundation.sg/resources/",
+    ],
+]
+
+
+def main() -> None:
+    peer = [r[1:] for r in PEER_SDOS]
+    coal = [r[1:] for r in COALITIONS]
+    write_paste_tsv(DATA / "peer-sdos-priority1.tsv", peer)
+    write_paste_tsv(DATA / "coalitions-priority1.tsv", coal)
+    combined = peer + coal
+    write_paste_tsv(DATA / "peer-coalitions-priority1-all.tsv", combined)
+    write_inventory_splits(DATA / "peer-sdos-priority1.tsv", peer)
+    write_inventory_splits(DATA / "coalitions-priority1.tsv", coal)
+
+    for name in [
+        "peer-sdos-priority1.tsv",
+        "peer-sdos-priority1-cols-A-F.tsv",
+        "peer-sdos-priority1-cols-G-K.tsv",
+        "coalitions-priority1.tsv",
+        "coalitions-priority1-cols-A-F.tsv",
+        "coalitions-priority1-cols-G-K.tsv",
+        "peer-coalitions-priority1-all.tsv",
+    ]:
+        lines = (DATA / name).read_text(encoding="utf-8").splitlines()
+        print(f"{name}: {len(lines)} physical line(s)")
+
+
+if __name__ == "__main__":
+    main()

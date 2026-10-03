@@ -1,0 +1,4 @@
+beautifulsoup4
+gspread
+pdfminer.six
+requests
