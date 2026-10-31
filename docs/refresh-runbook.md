@@ -1,6 +1,8 @@
 # Sunday inventory refresh
 
-Source of truth: [MOSAIC_AI_Security_Whitepapers](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit). This file is the runbook for the weekly Sunday job and for a manual "refresh the inventory" chat.
+The Google Sheet was retired on October 31, 2026. GitHub issues are the source of truth. Do not run the sheet steps in this file. The current update process is in [README.md](../README.md). The rest of this file is a record of how the sheet was filled.
+
+Historical sheet: [MOSAIC_AI_Security_Whitepapers](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit).
 
 ## Tabs
 

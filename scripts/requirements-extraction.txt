@@ -1,4 +1,2 @@
-beautifulsoup4
-gspread
-pdfminer.six
-requests
+# The sheet extraction client was retired on 2026-10-31.
+# Inventory scripts install from scripts/requirements.txt.

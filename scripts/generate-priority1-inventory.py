@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Generate priority-1 Peer SDO and Coalition inventory paste/import files."""
+"""Generate old priority-1 paste files. The sheet was retired on 2026-10-31.
+
+This script does not call the sheet. The live inventory is GitHub issues.
+See README.md.
+"""
 
 import csv
 import importlib.util

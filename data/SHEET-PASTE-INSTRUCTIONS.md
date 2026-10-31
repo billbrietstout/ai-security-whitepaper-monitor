@@ -1,6 +1,8 @@
 # Paste into Google Sheet
 
-As of 2026-10-03, changes are written with `scripts/sheet_sync.py` (see "Writing to the sheet" in `docs/refresh-runbook.md`). This file stays as a fallback for manual pastes.
+The Google Sheet was retired on October 31, 2026. GitHub issues are the source of truth. Do not paste these files into the sheet. `scripts/sheet_sync.py` now exits without reading or writing the sheet. The current update process is in [README.md](../README.md). The rest of this file is a record of the old paste steps.
+
+As of 2026-10-03, changes were written with `scripts/sheet_sync.py` (see "Writing to the sheet" in `docs/refresh-runbook.md`).
 
 Spreadsheet: https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit
 
