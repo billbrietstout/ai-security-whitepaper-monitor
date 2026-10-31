@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Build Google Sheets paste/import data files.
+"""Build local paste files from the old sheet workflow.
+
+The Google Sheet was retired on 2026-10-31. This script does not call the
+sheet. The live inventory is GitHub issues. See README.md.
+
+Build Google Sheets paste/import data files.
 
 Paste TSV: one physical line per inventory row (no \\n or \\r inside the row).
 Multiline extraction fields are joined with middle dots so copy-paste stays on

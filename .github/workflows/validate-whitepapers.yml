@@ -1,0 +1,42 @@
+name: validate-whitepapers
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  validate-whitepapers:
+    name: validate-whitepapers
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install the validator
+        run: python -m pip install -r scripts/requirements.txt
+
+      - name: Fetch the base branch
+        env:
+          VALIDATION_BASE_REF: ${{ github.event_name == 'pull_request' && github.base_ref || 'master' }}
+        run: git fetch origin "${VALIDATION_BASE_REF}"
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Validate the whitepaper export
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          VALIDATION_BASE_REF: ${{ github.event_name == 'pull_request' && github.base_ref || 'master' }}
+        run: python scripts/validate_whitepapers.py

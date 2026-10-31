@@ -1,5 +1,7 @@
 # Pending inventory rows (subagent run blocked)
 
+The Google Sheet was retired on October 31, 2026. GitHub issues are the source of truth. Do not paste the rows below into the sheet. See [README.md](../README.md). The rest of this file is a record of a blocked research run.
+
 Four parallel research runs failed on **2026-08-31** before returning paste-ready rows:
 
 | Run | Agent | Error |
