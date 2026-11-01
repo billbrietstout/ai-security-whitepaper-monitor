@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Turn refresh-run extraction results into Google Sheets paste files.
+"""Turn old extraction results into local paste files.
+
+The Google Sheet was retired on 2026-10-31. This script does not call the
+sheet. The live inventory is GitHub issues. See README.md.
+
+Turn refresh-run extraction results into Google Sheets paste files.
 
   python3 scripts/results-to-paste.py work/refresh-2026-10-03 --date 2026-10-03 --mosaic-start 107
 

@@ -1,6 +1,8 @@
 # Extraction pass prompt
 
-Paste this file into a Cursor agent chat, or say "run the extraction pass in docs/extraction-prompt.md". The agent fills `Axioms`, `Invariables`, `Principles`, and `OpenCRE Topics` on inventory rows where all four are empty. It never overwrites a filled cell.
+The Google Sheet was retired on October 31, 2026. GitHub issues are the source of truth. Do not run `scripts/extraction.py` against the sheet. That command now exits without reading or writing the sheet. The current update process is in [README.md](../README.md). The definitions below remain the writing rules for axiom, invariable, and principle bullets.
+
+This file used to be pasted into a Cursor agent chat so the agent could fill `Axioms`, `Invariables`, `Principles`, and `OpenCRE Topics` on sheet rows where all four were empty.
 
 ## Setup (once)
 
