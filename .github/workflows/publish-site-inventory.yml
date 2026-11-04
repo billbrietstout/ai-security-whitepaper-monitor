@@ -32,5 +32,5 @@ jobs:
         env:
           SITE_REPO_TOKEN: ${{ secrets.SITE_REPO_TOKEN }}
           SITE_REPO: billbrietstout/ai-shared-responsibility
-          SITE_PR_BASE: main
+          SITE_PR_BASE: develop
         run: python3 scripts/open_site_pr.py --from /tmp/site-inventory
