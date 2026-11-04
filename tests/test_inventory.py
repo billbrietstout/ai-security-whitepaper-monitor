@@ -77,6 +77,10 @@ DUP_BODY = """Duplicate of #2, created twice by an interrupted sync run.
 
 
 class ParseTests(unittest.TestCase):
+    def test_sheet_row_drops_the_sheet_link(self):
+        record = inventory.parse_issue(issue(1, BODY))
+        self.assertEqual(record["legacy_sheet_row"], "MOSAIC row 2")
+
     def test_sheet_url_is_kept_when_present(self):
         record = inventory.parse_issue(issue(1, BODY, "Security Engineering"))
         self.assertEqual(record["legacy_sheet_url"], "https://example.org/paper.pdf")

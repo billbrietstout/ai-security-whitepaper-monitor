@@ -34,11 +34,10 @@
       "type": "object",
       "additionalProperties": false,
       "description": "The spreadsheet this inventory used to live in. status is retired. Code must not read or write that spreadsheet.",
-      "required": ["status", "retired_on", "id"],
+      "required": ["status", "retired_on"],
       "properties": {
         "status": { "const": "retired" },
-        "retired_on": { "const": "2026-10-31" },
-        "id": { "const": "161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE" }
+        "retired_on": { "const": "2026-10-31" }
       }
     },
     "id_registry": {

@@ -12,8 +12,6 @@ Grok Bot adds and updates papers by filing issues here. A person can do the same
 
 The inventory also holds arXiv papers that the monitored papers cite. These are filed as issues with `(arXiv ID)` at the end of the title.
 
-The Google Sheet `161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE` was retired on October 31, 2026. No script in this repo reads that sheet or writes to it. Leave the sheet as a historical file.
-
 ## What an issue contains
 
 Open issues are papers in the inventory. Closed issues are delete candidates (papers marked for removal) or duplicates.
