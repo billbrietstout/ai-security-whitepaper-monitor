@@ -2,7 +2,7 @@
 
 This note is for the next agent or person who fills the four extraction fields on an inventory paper. The inventory lives in GitHub issues in this repo. `data/whitepapers.json` is rebuilt from those issues. The writing rules below match [extraction-prompt.md](extraction-prompt.md). That file is the check list. It does not tell you to run the retired sheet command.
 
-The second field is **Invariants**. Older issues, and the retired sheet, use **Invariables**. The export reads both headings into `invariants`. It also stores the same list as `invariables`, because the site repository still reads that name. A new issue heading is `### Invariants`. Leave an existing `### Invariables` heading in place, or rename it when you edit that section.
+The second field is **Invariants**. Older issues, and the retired sheet, use **Invariables**. The export reads both headings into `invariants` and does not write a second key. A new issue heading is `### Invariants`. Leave an existing `### Invariables` heading in place, or rename it when you edit that section.
 
 ## Where the fields live
 
@@ -24,7 +24,7 @@ Each paper issue has four markdown sections:
 
 `scripts/file_issues.py` opens a new issue with those four headings set to `_Not filled yet._`. The second heading on a new issue is `### Invariants`. The filing command does not extract text from the paper, and it does not edit an issue that already exists.
 
-`scripts/inventory.py` reads the four headings when it builds the export. `_Not filled yet._`, `Not extracted yet.`, and `Not extracted yet. The next pass will fill this from the paper.` become an empty list. A real bullet is a line that starts with `- `. A wrapped line with no dash continues the bullet above it. A line with no dash and no bullet above it is left out. If an issue has both `### Invariables` and `### Invariants`, both sets of bullets are kept. The export stores `axioms`, `invariants`, `principles`, and `opencre_topics`. `invariables` repeats `invariants`.
+`scripts/inventory.py` reads the four headings when it builds the export. `_Not filled yet._`, `Not extracted yet.`, and `Not extracted yet. The next pass will fill this from the paper.` become an empty list. A real bullet is a line that starts with `- `. A wrapped line with no dash continues the bullet above it. A line with no dash and no bullet above it is left out. If an issue has both `### Invariables` and `### Invariants`, both sets of bullets are kept. The export stores `axioms`, `invariants`, `principles`, and `opencre_topics`.
 
 The Google Sheet and `scripts/extraction.py` are retired. Do not run them.
 
@@ -146,4 +146,4 @@ A new issue may ship with empty extraction sections. That is allowed. Fill them 
 - [AGENTS.md](../AGENTS.md): short command list and traps.
 - `scripts/inventory.py`: parses the four `###` sections into the export.
 - `scripts/filing.py`: writes the `_Not filled yet._` placeholders on new issues.
-- `schemas/whitepapers.schema.json`: each paper must have the four arrays (empty arrays are valid). `invariables` must match `invariants`.
+- `schemas/whitepapers.schema.json`: each paper must have the four arrays (empty arrays are valid). The second array is `invariants`.
