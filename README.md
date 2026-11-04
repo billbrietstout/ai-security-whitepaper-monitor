@@ -1,6 +1,6 @@
 # AI Security Whitepaper Monitor
 
-Last updated: October 31, 2026
+Last updated: November 3, 2026
 
 ## What this repo is
 
@@ -9,6 +9,8 @@ This repo is the source of truth for the AI security whitepaper inventory. Each 
 The papers come from CoSAI and its MOSAIC partners, OWASP, SANS, CSA, CIS, BIML, government agencies such as NIST and CISA, vendor labs, peer standards bodies and coalitions.
 
 Grok Bot adds and updates papers by filing issues here. A person can do the same.
+
+The inventory also holds arXiv papers that the monitored papers cite. These are filed as issues with `(arXiv ID)` at the end of the title.
 
 The Google Sheet `161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE` was retired on October 31, 2026. No script in this repo reads that sheet or writes to it. Leave the sheet as a historical file.
 
@@ -78,6 +80,27 @@ GitHub Actions runs the check named `validate-whitepapers` on every push and eve
 - It checks that every record points at an issue that exists in this repo, and that the export matches those issues.
 
 `scripts/validate_whitepapers.py` is the same check. It needs the token the same way the export does. Set `VALIDATION_BASE_REF` when the last accepted export is on a branch other than `master`.
+
+## Weekly pass
+
+Grok Bot runs a weekly pass. It does these steps:
+
+1. It checks the tracked organizations for new AI security guidance and opens one issue for each paper that meets the include rules. It skips press releases, events, vendor blogs, catalog pages and duplicates.
+2. It collects the arXiv papers that each monitored paper cites. It looks each one up in the arXiv API and goes one level deep only. It does not follow the references of a cited paper.
+3. It screens those arXiv papers with the same include rules and checks them against all open and closed issues by URL and arXiv ID.
+4. It opens one issue for each arXiv paper that passes. The issue has an `arXiv reference` section that lists the arXiv ID, the monitored issues that cite it, and an evidence level.
+5. It fills empty Axioms, Invariables, Principles and OpenCRE Topics fields from the source. It never closes or deletes an issue.
+6. It adds new issues to the project board, rebuilds the export and commits it.
+
+Evidence levels:
+
+- `theoretical` means the work argues, surveys or proposes, with no new experiments.
+- `tested` means the work ran experiments or evaluations.
+- `deployed` means the work tested real deployed systems or reports results from production.
+
+The level is judged from what the work did, not from its abstract. A level marked `provisional` or `needs review` came from an automated read of the paper text and has not been checked by a person yet.
+
+The first arXiv pass ran on November 3, 2026. It found 668 unique arXiv papers cited by the inventory. 400 passed the include rules and were added as issues. 2 were already in the inventory.
 
 ## Files
 
