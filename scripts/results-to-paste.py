@@ -34,6 +34,12 @@ def bullets(items: list) -> str:
     return " · ".join(f"- {(b['text'] if isinstance(b, dict) else b).strip()}" for b in items)
 
 
+def invariants_of(r: dict) -> list:
+    if "invariants" in r:
+        return r["invariants"]
+    return r["invariables"]
+
+
 def to_row(r: dict) -> list[str]:
     return [
         r["issuer"],
@@ -43,7 +49,7 @@ def to_row(r: dict) -> list[str]:
         r["file_type"],
         r["link"],
         bullets(r["axioms"]),
-        bullets(r["invariables"]),
+        bullets(invariants_of(r)),
         bullets(r["principles"]),
         bullets(r["opencre_topics"]),
         r.get("blog", ""),
@@ -82,7 +88,16 @@ def main() -> None:
         print(f"{path.name}: {len(rows)} row(s)")
 
     evidence = [
-        {k: r[k] for k in ("tab", "issuer", "publication", "link", "axioms", "invariables", "principles", "opencre_topics")}
+        {
+            "tab": r["tab"],
+            "issuer": r["issuer"],
+            "publication": r["publication"],
+            "link": r["link"],
+            "axioms": r["axioms"],
+            "invariants": invariants_of(r),
+            "principles": r["principles"],
+            "opencre_topics": r["opencre_topics"],
+        }
         for r in kept
     ]
     (DATA / f"extraction-evidence-{args.date}.json").write_text(

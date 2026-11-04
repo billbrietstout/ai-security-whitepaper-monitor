@@ -1,27 +1,36 @@
 # Extraction pass prompt
 
-The Google Sheet was retired on October 31, 2026. GitHub issues are the source of truth. Do not run `scripts/extraction.py` against the sheet. That command now exits without reading or writing the sheet. The current update process is in [README.md](../README.md). The definitions below remain the writing rules for axiom, invariable, and principle bullets.
+The Google Sheet was retired on October 31, 2026. GitHub issues are the source of truth. Do not run `scripts/extraction.py` against the sheet. That command now exits without reading or writing the sheet. The current update process is in [README.md](../README.md). The definitions below remain the writing rules for axiom, invariant, and principle bullets. The issue heading is `### Invariants`. Older issues and the retired sheet used `Invariables`. The export reads both headings.
 
-This file used to be pasted into a Cursor agent chat so the agent could fill `Axioms`, `Invariables`, `Principles`, and `OpenCRE Topics` on sheet rows where all four were empty.
-
-## Setup (once)
-
-```bash
-python3 -m venv .venv
-.venv/bin/pip install -r scripts/requirements-extraction.txt
-```
-
-The script signs in with a service account key that can edit the sheet. Save the key outside the repo at `~/.config/gspread/service_account.json` (`chmod 600`), or point `GOOGLE_APPLICATION_CREDENTIALS` at it. The monitor's service account works; its GitHub secret cannot be read back, so create a second key for the same account.
+This file used to be pasted into a Cursor agent chat so the agent could fill `Axioms`, `Invariants`, `Principles`, and `OpenCRE Topics` on sheet rows where all four were empty. The retired sheet header for the second column was `Invariables`.
 
 ## Steps
 
-1. Run `.venv/bin/python scripts/extraction.py worklist` (add `--limit N`, `--tab MOSAIC`, or `--link URL` to narrow the batch). It reads the sheet, downloads each row's Link, and writes `work/extraction/worklist.json` plus one text file per row under `work/extraction/texts/`.
-2. For each worklist item that has a `text_file`, read the whole file. PDF text carries `[page N]` markers. Items with a `fetch_error` are skipped; the apply step logs them under Changelog Errors.
-3. Screen the item against the include rules below. Then extract the four columns using the definitions below.
-4. Write every result to `work/extraction/results.json` using the output format below.
-5. Run `.venv/bin/python scripts/extraction.py apply`. This is a dry run. Fix each `FIX` line in `results.json` and rerun until it reports no problems.
-6. Show the user the results for the first two items and wait for approval. Then run `.venv/bin/python scripts/extraction.py apply --write`.
-7. Report how many rows were filled, which rows failed the include rules (the user deletes those), and any fetch errors.
+Do not run `scripts/extraction.py`. It exits without reading a paper.
+
+1. Open the issue. Read the URL on the `**Link:**` line. Read the full text when you can. For a PDF, keep page numbers. For HTML, keep section titles.
+2. Screen the paper with the include rules below. If it fails, do not extract. Close the issue and add these lines:
+
+```
+**Decision:** Delete candidate
+**Reason:** one sentence on why it is out
+```
+
+A closed issue with no Decision line stops the export.
+
+3. Extract when the four sections are missing, empty, or hold only an unfilled marker. The markers are `_Not filled yet._`, `Not extracted yet.`, and `Not extracted yet. The next pass will fill this from the paper.` The November 3, 2026 arXiv issues use the last two, with no leading dash.
+4. Replace each unfilled marker with real bullets. Each bullet is its own line and starts with `- `. A line with no dash is not a bullet. The heading for the second field is `### Invariants`. Leave an existing `### Invariables` heading in place, or rename that heading when you edit the section.
+5. Keep `**Source:**`, `**Link:**`, and any `### arXiv reference` section. Do not put page refs in the issue body. Locators can live in a local file under `work/` (gitignored).
+6. Check the writing rules below yourself. Nothing in the export enforces them.
+7. Rebuild the export on a branch and open a pull request. Do not push to `master`.
+
+```bash
+git checkout -b weekly/2026-11-04
+python3 scripts/export_whitepapers.py
+python3 scripts/open_inventory_pr.py
+```
+
+Wait for the `validate-whitepapers` check, then merge. The filing command does not edit an issue that already exists, and it does not close an issue.
 
 ## Include screen
 
@@ -29,17 +38,17 @@ Include a public, dated artifact whose main job is AI security: controls, threat
 
 Exclude product marketing, model-launch blogs, trust-center copy, conference slides with no paper, news-only posts, and ethics or policy papers that name no security control, threat, or verification method.
 
-A blog post that announces a paper fails the screen. Name the paper and its URL in `include_reason` so the user can add the paper as its own row. A blog post whose body is itself the guidance (for example, a set of controls with rationale) passes.
+A blog post that announces a paper fails the screen. Name the paper and its URL in the Reason line so it can be filed as its own issue. A blog post whose body is itself the guidance (for example, a set of controls with rationale) passes.
 
 ## Definitions
 
 Each bullet names who does what, to which object, under what condition. Use concrete verbs: measure, assign, log, block, revoke, attest, map, require. Take every claim from the document. Do not add claims the document does not make.
 
-**Axioms** are premises the document treats as true about AI systems, attackers, or adoption, which its guidance depends on. They describe the world outside the system being secured. They never describe the document itself ("the guide has three sections" is not an axiom). A statement that uses must, never, or shall is a requirement; put it under Invariables.
+**Axioms** are premises the document treats as true about AI systems, attackers, or adoption, which its guidance depends on. They describe the world outside the system being secured. They never describe the document itself ("the guide has three sections" is not an axiom). A statement that uses must, never, or shall is a requirement; put it under Invariants.
 
 - Example: "Adversaries already use AI to attack faster than humans can respond."
 
-**Invariables** are properties that hold for every system in the document's scope, whatever the deployment. The document states them either as requirements ("must", "never", "always") or as unavoidable facts about the system. Test: if the property fails, the document would call the system insecure or non-compliant regardless of its other controls.
+**Invariants** are properties that hold for every system in the document's scope, whatever the deployment. The document states them either as requirements ("must", "never", "always") or as unavoidable facts about the system. Test: if the property fails, the document would call the system insecure or non-compliant regardless of its other controls.
 
 - Requirement: "Every AI system must be documented and auditable."
 - Unavoidable fact: "Any ML system that is not fully white-box is susceptible to model extraction."
@@ -54,18 +63,20 @@ Access Control, Authentication, Cryptography, Data Protection, Governance-Risk-C
 
 Pick a label only when the document gives a control, threat, or requirement in that area. A passing mention does not count.
 
-## Rules the apply step enforces
+## Writing rules
 
-- 3 to 8 bullets each for Axioms, Invariables, and Principles; 240 characters or fewer per bullet.
-- Every bullet has a `ref`: a page (`p. 12`), section title, or short quote locator.
+Check these by hand before you save the issue. The old sheet apply step enforced them in code. That command is retired.
+
+- 3 to 8 bullets each for Axioms, Invariants, and Principles; 240 characters or fewer per bullet.
+- Keep a locator for each bullet while you draft: a page (`p. 12`), a section title, or a short quote. The locator stays out of the issue.
 - No em dashes or en dashes.
 - None of these words: delve, dive into, unpack, leverage, harness, unlock, foster, empower, elevate, streamline, navigate, landscape, ecosystem, tapestry, realm, multifaceted, robust, seamless, cutting-edge, groundbreaking, holistic, comprehensive, end-to-end, pivotal, crucial, vital, underscore, highlight, showcase, illuminate, best practices, industry standards, ensure. Replace each with the concrete verb or object the sentence needs.
 - Axioms contain no must, never, or shall.
 - Every Principle contains a colon after its name.
 
-## Output format
+## Optional local draft
 
-`work/extraction/results.json` is a JSON array with one object per worklist item that has text:
+You can draft in `work/extraction/results.json` before you edit the issue. That file is gitignored. Nothing in this repo checks it. One object per paper:
 
 ```json
 [
@@ -74,7 +85,7 @@ Pick a label only when the document gives a control, threat, or requirement in t
     "include": true,
     "include_reason": "Framework of AI supply chain controls with rationale.",
     "axioms": [{"text": "...", "ref": "p. 3"}],
-    "invariables": [{"text": "...", "ref": "p. 7"}],
+    "invariants": [{"text": "...", "ref": "p. 7"}],
     "principles": [{"text": "Least privilege: ...", "ref": "section 4.2"}],
     "opencre_topics": ["Supply Chain", "Access Control"]
   },
@@ -86,6 +97,4 @@ Pick a label only when the document gives a control, threat, or requirement in t
 ]
 ```
 
-`link` must match the worklist item's link. Items with `include: false` need only `link`, `include`, and `include_reason`.
-
-The `ref` values stay out of the sheet. The write step saves them with the bullets in `data/extraction-evidence-YYYY-MM-DD.json` so each bullet can be checked against the source.
+Items with `include: false` need only `link`, `include`, and `include_reason`. Copy the bullet text into the issue. Leave the `ref` values in the local file.

@@ -218,7 +218,7 @@ def main() -> None:
         "File Type",
         "Link",
         "Axioms",
-        "Invariables",
+        "Invariants",
         "Principles",
         "OpenCRE Topics",
         "Blog / Announcement",

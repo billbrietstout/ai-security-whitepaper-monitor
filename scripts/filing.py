@@ -446,6 +446,33 @@ def merge_queue(store: RunStore, queue: list[dict], document: dict | None) -> in
     return added
 
 
+def _has_heading(text: str, title: str) -> bool:
+    return re.search(rf"(?m)^### {re.escape(title)}\s*$", text) is not None
+
+
+def ensure_extraction_sections(text: str) -> str:
+    """Add any missing extraction heading. An old Invariables heading counts."""
+    required = (
+        ("Axioms", ()),
+        ("Invariants", ("Invariables",)),
+        ("Principles", ()),
+        ("OpenCRE Topics", ()),
+    )
+    missing = []
+    for title, aliases in required:
+        if _has_heading(text, title) or any(_has_heading(text, alias) for alias in aliases):
+            continue
+        missing.append(title)
+    if not missing:
+        return text if text.endswith("\n") else text + "\n"
+    if not text.endswith("\n"):
+        text += "\n"
+    if not text.endswith("\n\n"):
+        text += "\n"
+    blocks = [f"### {title}\n_Not filled yet._\n" for title in missing]
+    return text + "\n".join(blocks)
+
+
 def render_issue_body(item: dict) -> str:
     wp_id = item["wp_id"]
     marker = inventory.wp_id_marker(wp_id)
@@ -471,7 +498,7 @@ def render_issue_body(item: dict) -> str:
                 "### Axioms",
                 "_Not filled yet._",
                 "",
-                "### Invariables",
+                "### Invariants",
                 "_Not filled yet._",
                 "",
                 "### Principles",
@@ -493,6 +520,7 @@ def render_issue_body(item: dict) -> str:
         text = "\n".join(lines)
         if not text.endswith("\n"):
             text += "\n"
+    text = ensure_extraction_sections(text)
     if len(text) > MAX_BODY:
         raise SystemExit(f"{wp_id} body is longer than {MAX_BODY} characters.")
     return text
