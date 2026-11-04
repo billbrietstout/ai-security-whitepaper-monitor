@@ -86,6 +86,13 @@ class ParseTests(unittest.TestCase):
         self.assertEqual(record["decision"], "include")
         self.assertNotIn("Synced from the whitepaper sheet", " ".join(record["axioms"]))
 
+    def test_closed_duplicate_label_sets_decision_without_a_decision_line(self):
+        closed = issue(527, BODY, "Copy", state="closed")
+        closed["labels"] = [{"name": "duplicate"}]
+        record = inventory.parse_issue(closed)
+        self.assertEqual(record["decision"], "duplicate")
+        self.assertEqual(record["state"], "closed")
+
     def test_sheet_url_is_optional(self):
         record = inventory.parse_issue(issue(172, HAND_BODY, "Agentic AI Top 10"))
         self.assertEqual(record["legacy_sheet_url"], "")
@@ -191,6 +198,55 @@ class IdTests(unittest.TestCase):
         self.assertEqual(canonical["duplicate_issue_numbers"], [40])
         self.assertEqual(validate_whitepapers.check_ids(document), [])
         self.assertTrue(seeded["papers"])
+
+    def test_wp_id_marker_is_not_part_of_the_summary(self):
+        body = "<!-- wp-id: WP-0003 -->\n\n" + HAND_BODY
+        record = inventory.parse_issue(issue(9, body, "Marked"))
+        self.assertEqual(record["body_wp_id"], "WP-0003")
+        self.assertNotIn("wp-id", record["summary"])
+
+    def test_wp_content_in_a_url_is_not_a_marker(self):
+        body = HAND_BODY.replace(
+            "https://github.com/precize/Agentic-AI-Top10-Vulnerability",
+            "https://www.coalitionforsecureai.org/wp-content/uploads/2026/09/paper.pdf",
+        )
+        record = inventory.parse_issue(issue(50, body, "MCP"))
+        self.assertEqual(record["body_wp_id"], "")
+
+    def test_marker_keeps_a_free_id_that_is_not_the_next_number(self):
+        marked = "<!-- wp-id: WP-0003 -->\n" + HAND_BODY
+        plain = BODY.replace("https://example.org/paper.pdf", "https://example.org/plain")
+        document = inventory.build_inventory(
+            [issue(1, marked, "Marked"), issue(2, plain, "Plain")],
+            updated="2026-11-04",
+            repository=REPO,
+        )
+        by_issue = {paper["issue_number"]: paper["wp_id"] for paper in document["papers"]}
+        self.assertEqual(by_issue[1], "WP-0003")
+        self.assertEqual(by_issue[2], "WP-0001")
+        self.assertEqual(validate_whitepapers.check_ids(document), [])
+        self.assertEqual(validate_whitepapers.check_schema(document), [])
+        self.assertNotIn("body_wp_id", document["papers"][0])
+
+    def test_marker_id_that_is_already_reserved_stops_the_export(self):
+        body = "<!-- wp-id: WP-0001 -->\n" + BODY.replace(
+            "https://example.org/paper.pdf",
+            "https://example.org/new",
+        )
+        with self.assertRaises(SystemExit) as caught:
+            inventory.build_inventory(
+                [issue(1, BODY, "Old"), issue(2, body, "New")],
+                registry=[
+                    {
+                        "wp_id": "WP-0001",
+                        "url": "https://example.org/paper.pdf",
+                        "issue_number": 1,
+                    }
+                ],
+                updated="2026-11-04",
+                repository=REPO,
+            )
+        self.assertIn("already reserved", str(caught.exception))
 
     def test_duplicate_wp_id_in_the_file_fails(self):
         document = inventory.build_inventory(

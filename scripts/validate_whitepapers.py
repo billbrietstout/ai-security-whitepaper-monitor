@@ -15,10 +15,18 @@ Set GITHUB_TOKEN or GH_TOKEN. The token is not printed.
 Set VALIDATION_BASE_REF to the branch that holds the last accepted export
 (default: master). If that branch has no data/whitepapers.json yet, the
 history check is skipped and this file becomes the first id registry.
+
+  python3 scripts/validate_whitepapers.py --schema-only
+
+--schema-only checks the schema and the WP- id rules. It does not call
+GitHub. Install the checker with:
+
+  python3 -m pip install -r scripts/requirements.txt
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import subprocess
@@ -31,6 +39,10 @@ import inventory  # noqa: E402
 
 ROOT = inventory.ROOT
 SCHEMA_PATH = ROOT / "schemas" / "whitepapers.schema.json"
+MISSING_JSONSCHEMA = (
+    "jsonschema is not installed. "
+    "Run: python3 -m pip install -r scripts/requirements.txt"
+)
 
 
 def load_schema() -> dict:
@@ -38,7 +50,10 @@ def load_schema() -> dict:
 
 
 def check_schema(document: dict) -> list[str]:
-    from jsonschema import Draft202012Validator
+    try:
+        from jsonschema import Draft202012Validator
+    except ImportError:
+        raise SystemExit(MISSING_JSONSCHEMA) from None
 
     validator = Draft202012Validator(load_schema())
     problems = []
@@ -225,10 +240,23 @@ def check_issue_links(document: dict, issues: list[dict], repository: str) -> li
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument(
+        "--schema-only",
+        action="store_true",
+        help="check the schema and the WP- id rules, and do not call GitHub",
+    )
+    args = parser.parse_args()
     if not inventory.JSON_PATH.exists():
         raise SystemExit(f"Missing {inventory.JSON_PATH}.")
     document = json.loads(inventory.JSON_PATH.read_text(encoding="utf-8"))
     problems = check_schema(document) + check_ids(document)
+    if args.schema_only:
+        if problems:
+            print("\n".join(problems))
+            raise SystemExit(1)
+        print(f"validate-whitepapers: schema ok ({len(document['papers'])} papers)")
+        return
     if problems:
         print("\n".join(problems))
         raise SystemExit(1)
