@@ -38,9 +38,18 @@ SYNC_FOOTER = "_Synced from the whitepaper sheet. Edit the sheet, not this issue
 
 BULLET_SECTIONS = {
     "Axioms": "axioms",
-    "Invariables": "invariables",
+    # Older issues use the heading Invariables. The field name is invariants.
+    "Invariables": "invariants",
+    "Invariants": "invariants",
     "Principles": "principles",
     "OpenCRE Topics": "opencre_topics",
+}
+# Lines that mean the section was left for a later pass. They are not bullets.
+# The filing command writes the first line. The November 3, 2026 pass wrote the other two.
+EMPTY_BULLETS = {
+    "_Not filled yet._",
+    "Not extracted yet.",
+    "Not extracted yet. The next pass will fill this from the paper.",
 }
 CARRIED_SKIP = {"Date published", "Category", "File type", "Sheet tab and row"}
 DECISIONS = {
@@ -190,23 +199,29 @@ def _clean_lines(text: str) -> list[str]:
     return lines
 
 
+def _bullet_text(stripped: str) -> str:
+    if stripped.startswith("- "):
+        return stripped[2:].strip()
+    if stripped.startswith("-"):
+        return stripped[1:].strip()
+    return stripped
+
+
 def _bullets(text: str) -> list[str]:
     items: list[str] = []
     for line in _clean_lines(text):
         stripped = line.strip()
-        if not stripped or stripped == "_Not filled yet._":
+        if not stripped or stripped in EMPTY_BULLETS:
             continue
-        if stripped.startswith("- "):
-            items.append(stripped[2:].strip())
-        elif stripped.startswith("-"):
-            item = stripped[1:].strip()
-            if item:
-                items.append(item)
+        item = _bullet_text(stripped)
+        if not item or item in EMPTY_BULLETS:
+            continue
+        if stripped.startswith("-"):
+            items.append(item)
         elif items:
-            items[-1] = f"{items[-1]} {stripped}"
-        else:
-            items.append(stripped)
-    return [item for item in items if item]
+            # A wrapped line continues the bullet above it.
+            items[-1] = f"{items[-1]} {item}"
+    return [item for item in items if item and item not in EMPTY_BULLETS]
 
 
 def _first_url(text: str) -> str:
@@ -341,7 +356,7 @@ def parse_issue(issue: dict) -> dict:
         "removed_duplicate": removed_duplicate,
         "body_wp_id": body_wp_id,
         "axioms": bullets["axioms"],
-        "invariables": bullets["invariables"],
+        "invariants": bullets["invariants"],
         "principles": bullets["principles"],
         "opencre_topics": bullets["opencre_topics"],
     }
@@ -507,7 +522,7 @@ def paper_record(paper: dict) -> dict:
         "blog_url": paper["blog_url"],
         "duplicate_issue_numbers": list(paper["duplicate_issue_numbers"]),
         "axioms": list(paper["axioms"]),
-        "invariables": list(paper["invariables"]),
+        "invariants": list(paper["invariants"]),
         "principles": list(paper["principles"]),
         "opencre_topics": list(paper["opencre_topics"]),
     }
@@ -571,11 +586,11 @@ def write_csv(document: dict, path: Path = CSV_PATH) -> None:
         "blog_url",
         "duplicate_issue_numbers",
         "axioms",
-        "invariables",
+        "invariants",
         "principles",
         "opencre_topics",
     ]
-    list_columns = {"axioms", "invariables", "principles", "opencre_topics"}
+    list_columns = {"axioms", "invariants", "principles", "opencre_topics"}
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=columns, lineterminator="\n")

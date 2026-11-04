@@ -397,6 +397,27 @@ class ResumeTests(unittest.TestCase):
         filing.file_batch(store, fake, "PRJ", 25, sleep=lambda _seconds: None)
         self.assertEqual(fake.calls, [])
 
+    def test_a_custom_body_gains_missing_extraction_sections(self):
+        item = pending("WP-0112", "https://example.org/custom")
+        item["body"] = "**Source:** Example Lab\n**Link:** https://example.org/custom\n\n### Invariables\n- The model stores its training data.\n"
+        body = filing.render_issue_body(item)
+        self.assertIn("### Invariables", body)
+        self.assertNotIn("### Invariants", body)
+        self.assertIn("### Axioms\n_Not filled yet._", body)
+        self.assertIn("### Principles\n_Not filled yet._", body)
+        self.assertIn("### OpenCRE Topics\n_Not filled yet._", body)
+        record = inventory.parse_issue(
+            {
+                "number": 12,
+                "title": item["title"],
+                "state": "open",
+                "html_url": "https://github.com/example/papers/issues/12",
+                "body": body,
+            }
+        )
+        self.assertEqual(record["invariants"], ["The model stores its training data."])
+        self.assertEqual(record["axioms"], [])
+
     def test_rendered_body_round_trips_through_the_export(self):
         item = pending("WP-0109", "https://example.org/round-trip", title="Round trip paper")
         item["arxiv_id"] = "2305.18447"

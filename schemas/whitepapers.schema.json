@@ -97,7 +97,7 @@
         "blog_url",
         "duplicate_issue_numbers",
         "axioms",
-        "invariables",
+        "invariants",
         "principles",
         "opencre_topics"
       ],
@@ -128,7 +128,7 @@
           "items": { "type": "integer", "minimum": 1 }
         },
         "axioms": { "$ref": "#/$defs/bulletList" },
-        "invariables": { "$ref": "#/$defs/bulletList" },
+        "invariants": { "$ref": "#/$defs/bulletList" },
         "principles": { "$ref": "#/$defs/bulletList" },
         "opencre_topics": { "$ref": "#/$defs/bulletList" }
       }
