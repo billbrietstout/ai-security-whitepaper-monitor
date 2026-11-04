@@ -134,7 +134,16 @@ def main() -> None:
     commit = run(["git", "commit", "-m", message], cwd=work)
     if commit.returncode != 0:
         raise SystemExit("git commit failed on the site clone.\n" + git_error(commit, [auth]))
-    push = run(["git", "push", "-u", "origin", branch], cwd=work, env=env)
+    push = run(
+        [
+            "git",
+            "-c", "credential.helper=",
+            "-c", "credential.helper=!gh auth git-credential",
+            "push", "-u", "origin", branch,
+        ],
+        cwd=work,
+        env=env,
+    )
     if push.returncode != 0:
         raise SystemExit("git push to the site repository failed.\n" + git_error(push, [auth]))
     body = (
