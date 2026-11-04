@@ -209,6 +209,7 @@ The check also reads the issues and compares them with the export. `--schema-onl
 - `scripts/open_inventory_pr.py` commits the export on the current branch and opens a pull request. It does not push `master`.
 - `runs/` holds the checkpoint for each weekly pass. `runs/latest.txt` names the date to resume.
 - `AGENTS.md` lists the commands, the rules, and the known traps.
+- `docs/extraction-handoff.md` explains how to extract Axioms, Invariables, Principles, and OpenCRE Topics from a paper into an issue.
 - `scripts/requirements.txt` lists the packages the check installs.
 - `data/` also holds paste files, watch lists, change logs and extraction notes from before October 31, 2026. Those files record the old sheet work. The live inventory is the issues and `data/whitepapers.json`.
 - `scripts/sheet_sync.py` and `scripts/extraction.py` stop immediately. They used to read and write the sheet.
