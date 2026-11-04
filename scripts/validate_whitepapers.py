@@ -18,8 +18,8 @@ history check is skipped and this file becomes the first id registry.
 
   python3 scripts/validate_whitepapers.py --schema-only
 
---schema-only checks the schema and the WP- id rules. It does not call
-GitHub. Install the checker with:
+--schema-only checks the schema, the WP- id rules, and that invariables
+matches invariants. It does not call GitHub. Install the checker with:
 
   python3 -m pip install -r scripts/requirements.txt
 """
@@ -124,6 +124,25 @@ def check_ids(document: dict) -> list[str]:
         for duplicate in paper.get("duplicate_issue_numbers", []):
             if duplicate in paper_issues or duplicate in seen_issues:
                 problems.append(f"id check: folded issue {duplicate} also has its own WP- id")
+    return problems
+
+
+def check_invariant_alias(document: dict) -> list[str]:
+    """invariables must be the same list as invariants.
+
+    The site repo reads invariables. A file that renames the field and
+    leaves the old key empty still passes the schema.
+    """
+    problems = []
+    papers = document.get("papers")
+    if not isinstance(papers, list):
+        return problems
+    for paper in papers:
+        if not isinstance(paper, dict):
+            continue
+        wp_id = paper.get("wp_id", "?")
+        if paper.get("invariables") != paper.get("invariants"):
+            problems.append(f"alias check: {wp_id} has different invariables and invariants lists")
     return problems
 
 
@@ -250,7 +269,7 @@ def main() -> None:
     if not inventory.JSON_PATH.exists():
         raise SystemExit(f"Missing {inventory.JSON_PATH}.")
     document = json.loads(inventory.JSON_PATH.read_text(encoding="utf-8"))
-    problems = check_schema(document) + check_ids(document)
+    problems = check_schema(document) + check_ids(document) + check_invariant_alias(document)
     if args.schema_only:
         if problems:
             print("\n".join(problems))

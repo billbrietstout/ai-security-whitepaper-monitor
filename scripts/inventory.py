@@ -207,6 +207,19 @@ def _bullet_text(stripped: str) -> str:
     return stripped
 
 
+def _extend_bullets(bullets: dict[str, list[str]], key: str, parsed: list[str]) -> None:
+    """Add bullets from another heading that stores the same field."""
+    existing = bullets[key]
+    if not existing:
+        bullets[key] = list(parsed)
+        return
+    seen = set(existing)
+    for item in parsed:
+        if item not in seen:
+            existing.append(item)
+            seen.add(item)
+
+
 def _bullets(text: str) -> list[str]:
     items: list[str] = []
     for line in _clean_lines(text):
@@ -296,7 +309,8 @@ def parse_issue(issue: dict) -> dict:
     blog_url = ""
     for title, text in sections.items():
         if title in BULLET_SECTIONS:
-            bullets[BULLET_SECTIONS[title]] = _bullets(text)
+            # Invariables and Invariants share one list. Keep both.
+            _extend_bullets(bullets, BULLET_SECTIONS[title], _bullets(text))
         elif title == "Blog / Announcement":
             blog_url = _first_url(text)
         elif title.startswith("Carried over"):
@@ -523,6 +537,8 @@ def paper_record(paper: dict) -> dict:
         "duplicate_issue_numbers": list(paper["duplicate_issue_numbers"]),
         "axioms": list(paper["axioms"]),
         "invariants": list(paper["invariants"]),
+        # The site repo still reads this name. It is the same list.
+        "invariables": list(paper["invariants"]),
         "principles": list(paper["principles"]),
         "opencre_topics": list(paper["opencre_topics"]),
     }
@@ -587,10 +603,11 @@ def write_csv(document: dict, path: Path = CSV_PATH) -> None:
         "duplicate_issue_numbers",
         "axioms",
         "invariants",
+        "invariables",
         "principles",
         "opencre_topics",
     ]
-    list_columns = {"axioms", "invariants", "principles", "opencre_topics"}
+    list_columns = {"axioms", "invariants", "invariables", "principles", "opencre_topics"}
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=columns, lineterminator="\n")

@@ -19,7 +19,7 @@ Do not run `scripts/extraction.py`. It exits without reading a paper.
 A closed issue with no Decision line stops the export.
 
 3. Extract when the four sections are missing, empty, or hold only an unfilled marker. The markers are `_Not filled yet._`, `Not extracted yet.`, and `Not extracted yet. The next pass will fill this from the paper.` The November 3, 2026 arXiv issues use the last two, with no leading dash.
-4. Replace each unfilled marker with real bullets. Each bullet is its own line and starts with `- `. A line with no dash is not a bullet. The heading for the second field is `### Invariants`. Leave an existing `### Invariables` heading in place, or rename that heading when you edit the section.
+4. Replace each unfilled marker with real bullets. Each bullet is its own line and starts with `- `. A wrapped line with no dash continues the bullet above it. A line with no dash and no bullet above it is left out of the export. The heading for the second field is `### Invariants`. Leave an existing `### Invariables` heading in place, or rename that heading when you edit the section.
 5. Keep `**Source:**`, `**Link:**`, and any `### arXiv reference` section. Do not put page refs in the issue body. Locators can live in a local file under `work/` (gitignored).
 6. Check the writing rules below yourself. Nothing in the export enforces them.
 7. Rebuild the export on a branch and open a pull request. Do not push to `master`.

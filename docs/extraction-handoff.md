@@ -1,8 +1,8 @@
-# Handoff: extracting axioms, invariables, principles, and OpenCRE topics
+# Handoff: extracting axioms, invariants, principles, and OpenCRE topics
 
-This note is for the next agent or person who fills the four extraction fields on an inventory paper. The inventory lives in GitHub issues in this repo. `data/whitepapers.json` is rebuilt from those issues. The writing rules below match [extraction-prompt.md](extraction-prompt.md). That file still holds the full check list and the old sheet-era apply steps.
+This note is for the next agent or person who fills the four extraction fields on an inventory paper. The inventory lives in GitHub issues in this repo. `data/whitepapers.json` is rebuilt from those issues. The writing rules below match [extraction-prompt.md](extraction-prompt.md). That file is the check list. It does not tell you to run the retired sheet command.
 
-The project name for the second field is **Invariables**. People sometimes say "invariants." Use **Invariables** in issue headings and in the export.
+The second field is **Invariants**. Older issues, and the retired sheet, use **Invariables**. The export reads both headings into `invariants`. It also stores the same list as `invariables`, because the site repository still reads that name. A new issue heading is `### Invariants`. Leave an existing `### Invariables` heading in place, or rename it when you edit that section.
 
 ## Where the fields live
 
@@ -12,7 +12,7 @@ Each paper issue has four markdown sections:
 ### Axioms
 - ...
 
-### Invariables
+### Invariants
 - ...
 
 ### Principles
@@ -22,9 +22,9 @@ Each paper issue has four markdown sections:
 - Supply Chain
 ```
 
-`scripts/file_issues.py` opens a new issue with those four headings set to `_Not filled yet._`. The filing command does not extract text from the paper, and it does not edit an issue that already exists.
+`scripts/file_issues.py` opens a new issue with those four headings set to `_Not filled yet._`. The second heading on a new issue is `### Invariants`. The filing command does not extract text from the paper, and it does not edit an issue that already exists.
 
-`scripts/inventory.py` reads the four headings when it builds the export. A `_Not filled yet._` line becomes an empty list. A real bullet is a line that starts with `- `. The export stores them as `axioms`, `invariables`, `principles`, and `opencre_topics` string arrays on each paper.
+`scripts/inventory.py` reads the four headings when it builds the export. `_Not filled yet._`, `Not extracted yet.`, and `Not extracted yet. The next pass will fill this from the paper.` become an empty list. A real bullet is a line that starts with `- `. A wrapped line with no dash continues the bullet above it. A line with no dash and no bullet above it is left out. If an issue has both `### Invariables` and `### Invariants`, both sets of bullets are kept. The export stores `axioms`, `invariants`, `principles`, and `opencre_topics`. `invariables` repeats `invariants`.
 
 The Google Sheet and `scripts/extraction.py` are retired. Do not run them.
 
@@ -53,7 +53,7 @@ Premises the document treats as true about AI systems, attackers, or adoption. T
 - They never describe the document itself. "The guide has three sections" is not an axiom.
 - Example: `Adversaries already use AI to attack faster than humans can respond.`
 
-### Invariables
+### Invariants
 
 Properties that hold for every system in the document's scope, whatever the deployment. The document states them as requirements (`must`, `never`, `always`) or as unavoidable facts about the system.
 
@@ -87,7 +87,7 @@ Pick a label only when the document gives a control, threat, or requirement in t
 | Question | Field |
 | --- | --- |
 | Is this a premise about the outside world that the paper assumes? | Axiom |
-| Would a miss make every in-scope system fail, as a hard requirement or unavoidable fact? | Invariable |
+| Would a miss make every in-scope system fail, as a hard requirement or unavoidable fact? | Invariant |
 | Is this advice the reader applies by choice, with an actor and an action? | Principle |
 | Is this only a topic tag for later OpenCRE mapping? | OpenCRE Topics |
 
@@ -95,7 +95,7 @@ Do not invent a principle that the paper never recommends. Do not promote a topi
 
 ## Writing rules every bullet must pass
 
-- Axioms, Invariables, and Principles: 3 to 8 bullets each, 240 characters or fewer per bullet.
+- Axioms, Invariants, and Principles: 3 to 8 bullets each, 240 characters or fewer per bullet.
 - OpenCRE Topics: 1 to 6 labels from the list above.
 - No em dashes or en dashes.
 - Do not use these words: delve, dive into, unpack, leverage, harness, unlock, foster, empower, elevate, streamline, navigate, landscape, ecosystem, tapestry, realm, multifaceted, robust, seamless, cutting-edge, groundbreaking, holistic, comprehensive, end-to-end, pivotal, crucial, vital, underscore, highlight, showcase, illuminate, best practices, industry standards, ensure. Replace each with the concrete verb or object the sentence needs.
@@ -112,7 +112,7 @@ Replace `_Not filled yet._` under each heading with real bullets. Example:
 ### Axioms
 - Adversaries already use AI to attack faster than humans can respond.
 
-### Invariables
+### Invariants
 - Every AI system must be documented and auditable.
 
 ### Principles
@@ -126,10 +126,12 @@ Replace `_Not filled yet._` under each heading with real bullets. Example:
 Do not put page refs in the issue body. Do not change `**Source:**` or `**Link:**` unless the paper URL itself changed. Do not close or delete an issue from a script. After the issue edit, rebuild the export on a branch and open a pull request:
 
 ```bash
-python3 scripts/export_whitepapers.py
 git checkout -b extract/wp-NNNN
+python3 scripts/export_whitepapers.py
 python3 scripts/open_inventory_pr.py
 ```
+
+Check out the branch before the export. The export writes the files in the working tree, and `open_inventory_pr.py` refuses to commit them on `master`.
 
 Wait for the `validate-whitepapers` check, then merge.
 
@@ -144,4 +146,4 @@ A new issue may ship with empty extraction sections. That is allowed. Fill them 
 - [AGENTS.md](../AGENTS.md): short command list and traps.
 - `scripts/inventory.py`: parses the four `###` sections into the export.
 - `scripts/filing.py`: writes the `_Not filled yet._` placeholders on new issues.
-- `schemas/whitepapers.schema.json`: each paper must have the four arrays (empty arrays are valid).
+- `schemas/whitepapers.schema.json`: each paper must have the four arrays (empty arrays are valid). `invariables` must match `invariants`.
