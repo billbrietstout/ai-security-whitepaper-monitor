@@ -83,10 +83,11 @@ python3 scripts/sync_issues.py
 
 5. Commit `data/whitepapers.json` and `data/whitepapers.csv`, and open a pull request.
 
-GitHub Actions runs the check named `validate-whitepapers` on every push and every pull request. The check does three things:
+GitHub Actions runs the check named `validate-whitepapers` on every push and every pull request. The check does four things:
 
 - It validates `data/whitepapers.json` against `schemas/whitepapers.schema.json`.
 - It checks that each `WP-` id is unique, and that an id already tied to a URL stays on that URL.
+- It checks that `invariables` and `invariants` on each paper are the same list.
 - It checks that every record points at an issue that exists in this repo, and that the export matches those issues.
 
 `scripts/validate_whitepapers.py` is the same check. Install its dependency once per environment:
@@ -114,7 +115,7 @@ Screening rules:
 2. Collect the arXiv papers that each monitored paper cites. Look each one up in the arXiv API and go one level deep only. Do not follow the references of a cited paper.
 3. Screen those arXiv papers with the same include rules. Compare them with all open and closed issues by URL and arXiv ID.
 4. For each paper that passes, add an item to a queue file. The issue title for an arXiv paper ends with `(arXiv ID)`. You can set `arxiv_id`, `cited_by`, and `evidence_level` on the queue item. The filed issue then has an `arXiv reference` section with the arXiv ID, the monitored issues that cite it, and an evidence level.
-5. Fill empty Axioms, Invariants, Principles and OpenCRE Topics fields from the source when you edit an issue by hand. The issue heading is `### Invariants`. Older issues may still say `### Invariables`; the export reads that heading too. A section is still empty when its only line is `_Not filled yet._`, `Not extracted yet.`, or `Not extracted yet. The next pass will fill this from the paper.` Each real bullet starts with `- `. The filing command does not close or delete an issue, and it does not edit an issue that already exists.
+5. Fill empty Axioms, Invariants, Principles and OpenCRE Topics fields from the source when you edit an issue by hand. The issue heading is `### Invariants`. Older issues may still say `### Invariables`; the export reads that heading too. A section is still empty when its only line is `_Not filled yet._`, `Not extracted yet.`, or `Not extracted yet. The next pass will fill this from the paper.` Each real bullet starts with `- `. A wrapped line with no dash continues the bullet above it. A line with no dash and no bullet above it is left out. The filing command does not close or delete an issue, and it does not edit an issue that already exists.
 
 Evidence levels:
 
@@ -199,7 +200,7 @@ The check also reads the issues and compares them with the export. `--schema-onl
 
 ## Files
 
-- `data/whitepapers.json` is the versioned inventory. `version` is the file format. `updated` is the date the file was written. `id_registry` lists every `WP-` id, the issue that received it, and the URL it belongs to. The registry keeps an id after a paper drops out of the issue list, so the id is not given to a different URL.
+- `data/whitepapers.json` is the versioned inventory. `version` is the file format. `updated` is the date the file was written. `id_registry` lists every `WP-` id, the issue that received it, and the URL it belongs to. The registry keeps an id after a paper drops out of the issue list, so the id is not given to a different URL. Each paper stores its second extraction list twice: `invariants` is the name in this repo, and `invariables` is the same list because the site repository still reads `invariables`.
 - `data/whitepapers.csv` is the same papers in a spreadsheet, one row per paper, keyed by `WP-` id.
 - `schemas/whitepapers.schema.json` is the contract for the JSON file.
 - `scripts/export_whitepapers.py` writes the JSON and CSV files.
@@ -209,7 +210,7 @@ The check also reads the issues and compares them with the export. `--schema-onl
 - `scripts/open_inventory_pr.py` commits the export on the current branch and opens a pull request. It does not push `master`.
 - `runs/` holds the checkpoint for each weekly pass. `runs/latest.txt` names the date to resume.
 - `AGENTS.md` lists the commands, the rules, and the known traps.
-- `docs/extraction-handoff.md` explains how to extract Axioms, Invariables, Principles, and OpenCRE Topics from a paper into an issue.
+- `docs/extraction-handoff.md` explains how to extract Axioms, Invariants, Principles, and OpenCRE Topics from a paper into an issue.
 - `scripts/requirements.txt` lists the packages the check installs.
 - `data/` also holds paste files, watch lists, change logs and extraction notes from before October 31, 2026. Those files record the old sheet work. The live inventory is the issues and `data/whitepapers.json`.
 - `scripts/sheet_sync.py` and `scripts/extraction.py` stop immediately. They used to read and write the sheet.

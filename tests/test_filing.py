@@ -375,6 +375,115 @@ class ResumeTests(unittest.TestCase):
         self.assertIn("WP-0005", text)
         self.assertEqual(store.data["pending"], ["WP-0005", "WP-0002"])
 
+    def test_a_reused_wp_id_on_a_different_url_is_rejected(self):
+        store = make_store(Path(self.id_dir()), [])
+        self.addCleanup(self._cleanup, store.path.parent)
+        first = filing.normalize_queue_item(
+            {
+                "title": "First paper",
+                "source": "NIST",
+                "url": "https://example.org/first",
+                "wp_id": "WP-0007",
+            },
+            1,
+        )
+        second = filing.normalize_queue_item(
+            {
+                "title": "Second paper",
+                "source": "NIST",
+                "url": "https://example.org/second",
+                "wp_id": "WP-0007",
+            },
+            1,
+        )
+        filing.merge_queue(store, [first], None)
+        with self.assertRaises(SystemExit) as caught:
+            filing.merge_queue(store, [second], None)
+        self.assertIn("different URL", str(caught.exception))
+        self.assertEqual(len(store.data["items"]), 1)
+        self.assertEqual(store.data["items"][0]["url"], "https://example.org/first")
+
+    def test_either_registry_id_for_a_duplicated_url_is_already_filed(self):
+        store = make_store(Path(self.id_dir()), [])
+        self.addCleanup(self._cleanup, store.path.parent)
+        document = {
+            "id_registry": [
+                {"wp_id": "WP-0031", "url": "https://example.org/paper.pdf", "issue_number": 31},
+                {"wp_id": "WP-0032", "url": "https://example.org/paper.pdf", "issue_number": 32},
+            ]
+        }
+        queue = [
+            filing.normalize_queue_item(
+                {
+                    "title": "Known copy",
+                    "source": "NIST",
+                    "url": "https://example.org/paper.pdf",
+                    "wp_id": "WP-0031",
+                },
+                1,
+            )
+        ]
+        filing.merge_queue(store, queue, document)
+        item = store.data["items"][0]
+        self.assertEqual(item["status"], "already_filed")
+        self.assertEqual(item["wp_id"], "WP-0031")
+        self.assertEqual(item["issue_number"], 31)
+
+    def test_marker_match_prefers_the_open_copy(self):
+        item = pending("WP-0113", "https://example.org/mixed-state")
+        body = filing.render_issue_body(item)
+        closed = body.replace(
+            "**Source:**",
+            "**Decision:** Duplicate\n**Reason:** Second copy of the open issue.\n**Source:**",
+            1,
+        )
+        store = make_store(Path(self.id_dir()), [item])
+        self.addCleanup(self._cleanup, store.path.parent)
+        fake = FakeGitHub()
+        fake.issues = [
+            {
+                "number": 18,
+                "node_id": "ISSUE_18",
+                "title": "Closed copy",
+                "body": closed,
+                "state": "closed",
+            },
+            {
+                "number": 20,
+                "node_id": "ISSUE_20",
+                "title": "Open copy",
+                "body": body,
+                "state": "open",
+            },
+        ]
+        fake.next_number = 21
+        filing.file_batch(store, fake, "PRJ", 25, sleep=lambda _seconds: None)
+        self.assertNotIn("create", fake.calls)
+        self.assertEqual(store.data["items"][0]["issue_number"], 20)
+        self.assertEqual(store.data["items"][0]["also_found"], [18])
+        document = inventory.build_inventory(
+            fake.issues,
+            updated="2026-11-04",
+            repository="example/papers",
+        )
+        self.assertEqual(document["papers"][0]["issue_number"], 20)
+        self.assertEqual(document["papers"][0]["duplicate_issue_numbers"], [18])
+
+    def test_empty_invariants_do_not_hide_invariables(self):
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location(
+            "results_to_paste",
+            ROOT / "scripts" / "results-to-paste.py",
+        )
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        row = {
+            "invariants": [],
+            "invariables": ["The model stores its training data."],
+        }
+        self.assertEqual(module.invariants_of(row), ["The model stores its training data."])
+
     def test_registry_url_is_marked_already_filed(self):
         store = make_store(Path(self.id_dir()), [])
         self.addCleanup(self._cleanup, store.path.parent)
@@ -589,6 +698,15 @@ class PullRequestGuardTests(unittest.TestCase):
         self.assertEqual(command[0:4], ["gh", "pr", "create", "--base"])
         self.assertIn("master", command)
         self.assertNotIn("--force", command)
+
+    def test_commit_command_names_only_the_export_paths(self):
+        command = open_inventory_pr.commit_command("Update the whitepaper export (2026-11-04)")
+        self.assertEqual(command[0], "git")
+        self.assertIn("--", command)
+        self.assertEqual(
+            command[command.index("--") + 1 :],
+            ["data/whitepapers.json", "data/whitepapers.csv", "runs"],
+        )
 
 
 class CommandTests(unittest.TestCase):

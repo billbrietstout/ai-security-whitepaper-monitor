@@ -125,6 +125,49 @@ _Not filled yet._
         )
         self.assertEqual(record["opencre_topics"], [])
 
+    def test_both_headings_keep_their_bullets(self):
+        body = """**Source:** Example Lab
+**Link:** https://example.org/both.pdf
+
+### Invariables
+- The model stores its training data.
+
+### Invariants
+_Not filled yet._
+- Every deployment must log tool calls.
+"""
+        record = inventory.parse_issue(issue(184, body, "Both headings"))
+        self.assertEqual(
+            record["invariants"],
+            [
+                "The model stores its training data.",
+                "Every deployment must log tool calls.",
+            ],
+        )
+
+    def test_export_repeats_invariants_as_invariables(self):
+        document = inventory.build_inventory(
+            [issue(1, BODY, "Security Engineering")],
+            updated="2026-11-04",
+            repository=REPO,
+        )
+        paper = document["papers"][0]
+        self.assertEqual(paper["invariants"], ["The model stores its training data."])
+        self.assertEqual(paper["invariables"], paper["invariants"])
+        self.assertEqual(validate_whitepapers.check_schema(document), [])
+        self.assertEqual(validate_whitepapers.check_invariant_alias(document), [])
+
+    def test_different_alias_lists_fail_while_the_schema_passes(self):
+        document = inventory.build_inventory(
+            [issue(1, BODY, "Security Engineering")],
+            updated="2026-11-04",
+            repository=REPO,
+        )
+        document["papers"][0]["invariables"] = ["A different bullet."]
+        self.assertEqual(validate_whitepapers.check_schema(document), [])
+        problems = validate_whitepapers.check_invariant_alias(document)
+        self.assertTrue(any("WP-0001" in problem for problem in problems))
+
     def test_a_line_without_a_dash_is_not_a_bullet(self):
         body = """**Source:** Example Lab
 **Link:** https://example.org/plain.pdf
@@ -310,6 +353,7 @@ class ExportFileTests(unittest.TestCase):
         document = json.loads(inventory.JSON_PATH.read_text(encoding="utf-8"))
         self.assertEqual(validate_whitepapers.check_schema(document), [])
         self.assertEqual(validate_whitepapers.check_ids(document), [])
+        self.assertEqual(validate_whitepapers.check_invariant_alias(document), [])
         numbers = [paper["issue_number"] for paper in document["papers"]]
         self.assertEqual(len(numbers), len(set(numbers)))
         folded = [number for paper in document["papers"] for number in paper["duplicate_issue_numbers"]]

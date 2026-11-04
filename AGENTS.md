@@ -2,7 +2,7 @@
 
 This repo is the AI security whitepaper inventory. GitHub issues are the source of truth. `data/whitepapers.json` and `data/whitepapers.csv` are the export built from those issues.
 
-Read [README.md](README.md) for the issue format, the include rules, and the weekly pass. This file is the short list of commands, rules, and traps. To fill Axioms, Invariables, Principles, and OpenCRE Topics on an issue, follow [docs/extraction-handoff.md](docs/extraction-handoff.md).
+Read [README.md](README.md) for the issue format, the include rules, and the weekly pass. This file is the short list of commands, rules, and traps. To fill Axioms, Invariants, Principles, and OpenCRE Topics on an issue, follow [docs/extraction-handoff.md](docs/extraction-handoff.md).
 
 ## Commands
 

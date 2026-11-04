@@ -23,7 +23,17 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BRANCHES = {"master", "main", "HEAD"}
-STAGE = ["git", "add", "--", "data/whitepapers.json", "data/whitepapers.csv", "runs"]
+EXPORT_PATHS = ["data/whitepapers.json", "data/whitepapers.csv", "runs"]
+STAGE = ["git", "add", "--", *EXPORT_PATHS]
+
+
+def commit_command(message: str) -> list[str]:
+    """Commit the export paths only. Other staged files stay out of the commit."""
+    return ["git", "commit", "-m", message, "--", *EXPORT_PATHS]
+
+
+def export_cached_diff_command() -> list[str]:
+    return ["git", "diff", "--cached", "--quiet", "--", *EXPORT_PATHS]
 
 
 def refuse_default_branch(branch: str) -> None:
@@ -72,14 +82,14 @@ def main() -> None:
         cwd=ROOT,
     )
     subprocess.check_call(STAGE, cwd=ROOT)
-    staged = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=ROOT)
+    staged = subprocess.run(export_cached_diff_command(), cwd=ROOT)
     if staged.returncode == 0:
         raise SystemExit("Nothing staged in the export or the run file. Nothing was pushed.")
     if staged.returncode != 1:
         raise SystemExit("git diff --cached failed.")
     today = datetime.now(timezone.utc).date().isoformat()
     message = f"Update the whitepaper export ({today})"
-    subprocess.check_call(["git", "commit", "-m", message], cwd=ROOT)
+    subprocess.check_call(commit_command(message), cwd=ROOT)
     subprocess.check_call(push_command(branch), cwd=ROOT)
     subprocess.check_call(pr_command(message, pr_body()), cwd=ROOT)
     print(f"Pushed {branch} and opened a pull request into master.")

@@ -362,8 +362,9 @@ def load_queue(path: Path) -> list[dict]:
     return normalized
 
 
-def registry_maps(document: dict | None) -> tuple[dict[str, dict], dict[str, dict]]:
-    by_url: dict[str, dict] = {}
+def registry_maps(document: dict | None) -> tuple[dict[str, list[dict]], dict[str, dict]]:
+    """Map a normalized URL to every registry entry for that URL."""
+    by_url: dict[str, list[dict]] = {}
     by_id: dict[str, dict] = {}
     if not document:
         return by_url, by_id
@@ -374,7 +375,7 @@ def registry_maps(document: dict | None) -> tuple[dict[str, dict], dict[str, dic
         url = entry.get("url")
         if isinstance(wp_id, str) and isinstance(url, str):
             by_id[wp_id] = entry
-            by_url[url] = entry
+            by_url.setdefault(url, []).append(entry)
     return by_url, by_id
 
 
@@ -413,17 +414,30 @@ def merge_queue(store: RunStore, queue: list[dict], document: dict | None) -> in
     run_ids = {item["wp_id"] for item in store.items()}
     added = 0
     for raw in queue:
-        if raw["url_key"] in run_urls or (raw["wp_id"] and raw["wp_id"] in run_ids):
-            continue
-        reserved = by_url.get(raw["url_key"])
-        if reserved:
-            if raw["wp_id"] and raw["wp_id"] != reserved["wp_id"]:
+        if raw["url_key"] in run_urls:
+            existing = run_urls[raw["url_key"]]
+            if raw["wp_id"] and raw["wp_id"] != existing["wp_id"]:
                 raise SystemExit(
-                    f"{raw['url']} already has {reserved['wp_id']} on issue {reserved['issue_number']}."
+                    f"{raw['url']} is already in this run as {existing['wp_id']}."
                 )
-            wp_id = str(reserved["wp_id"])
+            continue
+        if raw["wp_id"] and raw["wp_id"] in run_ids:
+            raise SystemExit(f"{raw['wp_id']} is already in this run for a different URL.")
+        reserved_list = sorted(
+            by_url.get(raw["url_key"]) or [],
+            key=lambda entry: int(entry["issue_number"]),
+        )
+        if reserved_list:
+            chosen = reserved_list[0]
+            if raw["wp_id"]:
+                match = [entry for entry in reserved_list if entry.get("wp_id") == raw["wp_id"]]
+                if not match:
+                    names = ", ".join(str(entry.get("wp_id")) for entry in reserved_list)
+                    raise SystemExit(f"{raw['url']} already has {names}.")
+                chosen = match[0]
+            wp_id = str(chosen["wp_id"])
             store.items().append(
-                new_item(raw, wp_id, status="already_filed", issue_number=int(reserved["issue_number"]))
+                new_item(raw, wp_id, status="already_filed", issue_number=int(chosen["issue_number"]))
             )
         else:
             if raw["wp_id"]:
@@ -555,14 +569,23 @@ def classify(issues: list[dict], wp_id: str, url: str) -> Match | None:
         if issue_url_key(body) == url_key:
             linked.append(issue)
     if marked:
-        marked.sort(key=lambda item: int(item["number"]))
+        marked.sort(key=_issue_rank)
         extras = [int(item["number"]) for item in marked[1:]]
         return Match(marked[0], "marker", extras)
     if linked:
-        linked.sort(key=lambda item: (0 if item.get("state") == "open" else 1, int(item["number"])))
+        linked.sort(key=_issue_rank)
         extras = [int(item["number"]) for item in linked[1:]]
         return Match(linked[0], "url", extras)
     return None
+
+
+def _issue_rank(issue: dict) -> tuple:
+    """Same order build_papers uses to choose the issue that keeps the WP- id."""
+    body = issue.get("body") or ""
+    removed = 1 if inventory.REMOVED_DUP_RE.search(body) else 0
+    state = 0 if str(issue.get("state") or "").lower() == "open" else 1
+    sheet = 0 if inventory.SHEET_URL_RE.search(body) else 1
+    return (removed, state, sheet, int(issue["number"]))
 
 
 def lookup_existing(client, item: dict, sleep) -> Match | None:

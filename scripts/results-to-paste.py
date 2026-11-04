@@ -35,9 +35,16 @@ def bullets(items: list) -> str:
 
 
 def invariants_of(r: dict) -> list:
-    if "invariants" in r:
-        return r["invariants"]
-    return r["invariables"]
+    """Prefer a filled invariants list. An empty one must not hide invariables."""
+    current = r.get("invariants")
+    previous = r.get("invariables")
+    if isinstance(current, list) and current:
+        return current
+    if isinstance(previous, list):
+        return previous
+    if isinstance(current, list):
+        return current
+    return []
 
 
 def to_row(r: dict) -> list[str]:
