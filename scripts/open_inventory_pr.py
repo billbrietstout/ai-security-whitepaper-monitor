@@ -21,6 +21,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+import gh_rate
+
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BRANCHES = {"master", "main", "HEAD"}
 EXPORT_PATHS = ["data/whitepapers.json", "data/whitepapers.csv", "runs"]
@@ -91,7 +93,10 @@ def main() -> None:
     message = f"Update the whitepaper export ({today})"
     subprocess.check_call(commit_command(message), cwd=ROOT)
     subprocess.check_call(push_command(branch), cwd=ROOT)
-    subprocess.check_call(pr_command(message, pr_body()), cwd=ROOT)
+    try:
+        gh_rate.run_github_cli(pr_command(message, pr_body()), write=True, cwd=ROOT)
+    except gh_rate.WriteBudgetExceeded as exc:
+        raise SystemExit(str(exc)) from None
     print(f"Pushed {branch} and opened a pull request into master.")
 
 

@@ -28,6 +28,7 @@ DEFAULT_SITE_REPO = "billbrietstout/ai-shared-responsibility"
 DEFAULT_BASE = "main"
 
 sys.path.insert(0, str(ROOT / "scripts"))
+import gh_rate  # noqa: E402
 import site_inventory  # noqa: E402
 
 
@@ -80,13 +81,21 @@ def main() -> None:
     branch = f"inventory/{today}"
 
     work = Path(tempfile.mkdtemp(prefix="site-repo-"))
-    clone = run(
-        ["gh", "repo", "clone", args.repo, str(work), "--", "--branch", args.base, "--depth", "1"],
-        cwd=ROOT,
-        env=env,
-    )
-    if clone.returncode != 0:
-        raise SystemExit("Could not clone the site repository. Check SITE_REPO_TOKEN and SITE_PR_BASE.")
+    try:
+        gh_rate.run_github_cli(
+            ["gh", "repo", "clone", args.repo, str(work), "--", "--branch", args.base, "--depth", "1"],
+            write=False,
+            cwd=ROOT,
+            env=env,
+            secrets=[auth],
+            echo=False,
+        )
+    except gh_rate.WriteBudgetExceeded as exc:
+        raise SystemExit(str(exc)) from None
+    except SystemExit:
+        raise SystemExit(
+            "Could not clone the site repository. Check SITE_REPO_TOKEN and SITE_PR_BASE."
+        ) from None
 
     dest_full = work / "data" / "whitepapers.json"
     dest_slim = work / "data" / "whitepapers.slim.json"
@@ -121,21 +130,27 @@ def main() -> None:
         f"Count: {full['count']} included papers, {full.get('extracted_count', 0)} with extraction.\n"
         "This is an inventory, not a principle-catalog change.\n"
     )
-    pr = run(
-        [
-            "gh", "pr", "create",
-            "--repo", args.repo,
-            "--base", args.base,
-            "--head", branch,
-            "--title", message,
-            "--body", body,
-        ],
-        cwd=work,
-        env=env,
-    )
-    if pr.returncode != 0:
-        raise SystemExit("Could not open the site pull request.")
-    print(pr.stdout.strip() or f"Opened a pull request into {args.base}.")
+    try:
+        opened = gh_rate.run_github_cli(
+            [
+                "gh", "pr", "create",
+                "--repo", args.repo,
+                "--base", args.base,
+                "--head", branch,
+                "--title", message,
+                "--body", body,
+            ],
+            write=True,
+            cwd=work,
+            env=env,
+            secrets=[auth],
+            echo=False,
+        )
+    except gh_rate.WriteBudgetExceeded as exc:
+        raise SystemExit(str(exc)) from None
+    except SystemExit:
+        raise SystemExit("Could not open the site pull request.") from None
+    print(opened.strip() or f"Opened a pull request into {args.base}.")
 
 
 if __name__ == "__main__":

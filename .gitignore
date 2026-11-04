@@ -2,3 +2,4 @@
 work/
 __pycache__/
 *.json.tmp
+runs/*.lock
