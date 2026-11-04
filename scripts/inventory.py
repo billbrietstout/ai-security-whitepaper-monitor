@@ -219,9 +219,8 @@ def _bullets(text: str) -> list[str]:
         if stripped.startswith("-"):
             items.append(item)
         elif items:
+            # A wrapped line continues the bullet above it.
             items[-1] = f"{items[-1]} {item}"
-        else:
-            items.append(item)
     return [item for item in items if item and item not in EMPTY_BULLETS]
 
 

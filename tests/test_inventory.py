@@ -125,6 +125,20 @@ _Not filled yet._
         )
         self.assertEqual(record["opencre_topics"], [])
 
+    def test_a_line_without_a_dash_is_not_a_bullet(self):
+        body = """**Source:** Example Lab
+**Link:** https://example.org/plain.pdf
+
+### Axioms
+This sentence has no dash and is not a bullet.
+- Adversaries already use AI to attack faster than humans can respond.
+"""
+        record = inventory.parse_issue(issue(183, body, "Plain line"))
+        self.assertEqual(
+            record["axioms"],
+            ["Adversaries already use AI to attack faster than humans can respond."],
+        )
+
     def test_sheet_url_is_optional(self):
         record = inventory.parse_issue(issue(172, HAND_BODY, "Agentic AI Top 10"))
         self.assertEqual(record["legacy_sheet_url"], "")
