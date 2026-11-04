@@ -25,7 +25,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SITE_REPO = "billbrietstout/ai-shared-responsibility"
-DEFAULT_BASE = "develop"
+DEFAULT_BASE = "main"
 
 sys.path.insert(0, str(ROOT / "scripts"))
 import site_inventory  # noqa: E402
