@@ -114,7 +114,7 @@ Screening rules:
 2. Collect the arXiv papers that each monitored paper cites. Look each one up in the arXiv API and go one level deep only. Do not follow the references of a cited paper.
 3. Screen those arXiv papers with the same include rules. Compare them with all open and closed issues by URL and arXiv ID.
 4. For each paper that passes, add an item to a queue file. The issue title for an arXiv paper ends with `(arXiv ID)`. You can set `arxiv_id`, `cited_by`, and `evidence_level` on the queue item. The filed issue then has an `arXiv reference` section with the arXiv ID, the monitored issues that cite it, and an evidence level.
-5. Fill empty Axioms, Invariables, Principles and OpenCRE Topics fields from the source when you edit an issue by hand. The filing command does not close or delete an issue, and it does not edit an issue that already exists.
+5. Fill empty Axioms, Invariables, Principles and OpenCRE Topics fields from the source when you edit an issue by hand. The filing command does not close or delete an issue, and it does not edit an issue that already exists. The steps and field definitions are in [docs/extraction-handoff.md](docs/extraction-handoff.md).
 
 Evidence levels:
 
@@ -209,6 +209,7 @@ The check also reads the issues and compares them with the export. `--schema-onl
 - `scripts/open_inventory_pr.py` commits the export on the current branch and opens a pull request. It does not push `master`.
 - `runs/` holds the checkpoint for each weekly pass. `runs/latest.txt` names the date to resume.
 - `AGENTS.md` lists the commands, the rules, and the known traps.
+- `docs/extraction-handoff.md` explains how to extract Axioms, Invariables, Principles, and OpenCRE Topics from a paper into an issue.
 - `scripts/requirements.txt` lists the packages the check installs.
 - `data/` also holds paste files, watch lists, change logs and extraction notes from before October 31, 2026. Those files record the old sheet work. The live inventory is the issues and `data/whitepapers.json`.
 - `scripts/sheet_sync.py` and `scripts/extraction.py` stop immediately. They used to read and write the sheet.
