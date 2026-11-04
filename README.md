@@ -120,9 +120,14 @@ Evidence levels:
 
 - `theoretical` means the work argues, surveys or proposes, with no new experiments.
 - `tested` means the work ran experiments or evaluations.
+- `tested, possibly deployed (needs review)` means the work ran experiments, and deployment words in the text are not confirmed yet.
 - `deployed` means the work tested real deployed systems or reports results from production.
 
-The level is judged from what the work did, not from its abstract. A level marked `provisional` or `needs review` came from an automated read of the paper text and has not been checked by a person yet.
+The level is judged from what the work did, not from its abstract. An organization guidance document with no experiments is `theoretical`, unless it reports tested or deployed practice. A level marked `provisional` or `needs review` came from an automated read of the paper text and has not been checked by a person yet. Every included paper needs one of these levels. The line is `- Evidence level: ...` under `### arXiv reference` or `### Evidence`. The export copies that section into `legacy_notes`.
+
+```bash
+python3 scripts/missing_evidence.py
+```
 
 The first arXiv pass ran on November 3, 2026. It found 668 unique arXiv papers cited by the inventory. 400 passed the include rules and were added as issues. 2 were already in the inventory. That run also opened duplicate issues after GitHub returned server errors, and it pushed the export straight to `master`. Use the commands below for later passes.
 

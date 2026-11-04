@@ -135,9 +135,39 @@ Check out the branch before the export. The export writes the files in the worki
 
 Wait for the `validate-whitepapers` check, then merge.
 
+## Evidence level
+
+The weekly pass sets an evidence level on every included paper. Delete candidates and duplicates do not need one. Judge the level from what the work did, not from the abstract alone. An organization guidance document that describes controls and reports no experiments is `theoretical`, unless the document reports tested or deployed practice.
+
+On an arXiv issue, the line stays under `### arXiv reference`:
+
+```
+- Evidence level: tested
+```
+
+On any other included issue, add:
+
+```
+### Evidence
+- Evidence level: theoretical
+```
+
+The four levels are `theoretical`, `tested`, `tested, possibly deployed (needs review)`, and `deployed`. `theoretical` means the work argues, surveys, or proposes, with no new experiments and no production results. `tested` means the work ran experiments or evaluations. `tested, possibly deployed (needs review)` means experiments ran, and deployment words in the text are not confirmed yet. `deployed` means the work tested real deployed systems or reports production results.
+
+The export copies that section into `legacy_notes`. It does not store a separate field. A line that already says `provisional` or `needs review` is still a tag.
+
+List included papers that have no tag. The default batch is 25. The command reads the export and does not edit issues.
+
+```bash
+python3 scripts/missing_evidence.py
+python3 scripts/missing_evidence.py --offset 25
+```
+
+Rebuild the export after you add lines, or the list still shows the previous file.
+
 ## What stays empty on purpose
 
-A new issue may ship with empty extraction sections. That is allowed. Fill them on a later pass. Weekly filing of screened papers does not require extraction in the same batch.
+A new issue may ship with empty extraction sections. That is allowed. Fill them on a later pass. Weekly filing of screened papers does not require the four extraction sections in the same batch. An included paper still needs an evidence level.
 
 ## Related files
 

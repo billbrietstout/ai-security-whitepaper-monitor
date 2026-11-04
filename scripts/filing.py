@@ -531,6 +531,14 @@ def render_issue_body(item: dict) -> str:
             if item.get("evidence_level"):
                 lines.append(f"- Evidence level: {item['evidence_level']}")
             lines.append("")
+        elif item.get("evidence_level"):
+            lines.extend(
+                [
+                    "### Evidence",
+                    f"- Evidence level: {item['evidence_level']}",
+                    "",
+                ]
+            )
         text = "\n".join(lines)
         if not text.endswith("\n"):
             text += "\n"

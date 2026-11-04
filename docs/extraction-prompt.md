@@ -21,8 +21,9 @@ A closed issue with no Decision line stops the export.
 3. Extract when the four sections are missing, empty, or hold only an unfilled marker. The markers are `_Not filled yet._`, `Not extracted yet.`, and `Not extracted yet. The next pass will fill this from the paper.` The November 3, 2026 arXiv issues use the last two, with no leading dash.
 4. Replace each unfilled marker with real bullets. Each bullet is its own line and starts with `- `. A wrapped line with no dash continues the bullet above it. A line with no dash and no bullet above it is left out of the export. The heading for the second field is `### Invariants`. Leave an existing `### Invariables` heading in place, or rename that heading when you edit the section.
 5. Keep `**Source:**`, `**Link:**`, and any `### arXiv reference` section. Do not put page refs in the issue body. Locators can live in a local file under `work/` (gitignored).
-6. Check the writing rules below yourself. Nothing in the export enforces them.
-7. Rebuild the export on a branch and open a pull request. Do not push to `master`.
+6. Set an evidence level on every included paper. Delete candidates and duplicates do not need one. Judge the level from what the work did, not from the abstract alone. An organization guidance document that describes controls and reports no experiments is `theoretical`, unless it reports tested or deployed practice.
+7. Check the writing rules below yourself. Nothing in the export enforces them.
+8. Rebuild the export on a branch and open a pull request. Do not push to `master`.
 
 ```bash
 git checkout -b weekly/2026-11-04
@@ -39,6 +40,43 @@ Include a public, dated artifact whose main job is AI security: controls, threat
 Exclude product marketing, model-launch blogs, trust-center copy, conference slides with no paper, news-only posts, and ethics or policy papers that name no security control, threat, or verification method.
 
 A blog post that announces a paper fails the screen. Name the paper and its URL in the Reason line so it can be filed as its own issue. A blog post whose body is itself the guidance (for example, a set of controls with rationale) passes.
+
+## Evidence level
+
+Every included paper needs one level. Write it as a bullet the export already copies into `legacy_notes`.
+
+On an arXiv issue, add the line under `### arXiv reference`:
+
+```
+- Evidence level: tested
+```
+
+On any other included issue, add a section:
+
+```
+### Evidence
+- Evidence level: theoretical
+```
+
+Use one of these four:
+
+- `theoretical` means the work argues, surveys, or proposes. It reports no new experiments and no results from a real deployment.
+- `tested` means the work ran experiments or evaluations.
+- `tested, possibly deployed (needs review)` means the work ran experiments, and the text also uses deployment or production words that a person has not confirmed.
+- `deployed` means the work tested real deployed systems or reports results from production.
+
+Read the paper, not only the abstract. A guidance document from an organization, such as a whitepaper, framework, profile, playbook, or guide, is `theoretical` when it does not report experiments, unless the document itself reports tested or deployed practice.
+
+A line that already says `provisional` or `needs review` is still a tag. It came from an automated read and still needs a person to confirm it.
+
+To list included papers that have no tag, in batches of 25:
+
+```bash
+python3 scripts/missing_evidence.py
+python3 scripts/missing_evidence.py --offset 25
+```
+
+The command reads `data/whitepapers.json`. It does not edit issues. Rebuild the export after you add lines, or the list still shows the old file.
 
 ## Definitions
 

@@ -346,6 +346,92 @@ class IdTests(unittest.TestCase):
         self.assertTrue(any("more than one paper" in problem for problem in problems))
 
 
+class EvidenceTests(unittest.TestCase):
+    def test_known_evidence_prefixes_are_read_from_the_notes(self):
+        samples = {
+            "arXiv reference\n- Evidence level: tested. Basis: automated read.": "tested",
+            "- Evidence level: tested, possibly deployed (needs review). Basis: automated.": "possibly_deployed",
+            "- Evidence level: theoretical (provisional). Basis: automated.": "theoretical",
+            "- Evidence level: deployed": "deployed",
+            "no evidence line": "",
+            "- Evidence level: banana": "",
+        }
+        for notes, code in samples.items():
+            self.assertEqual(
+                inventory.evidence_level_code(inventory.evidence_level_raw(notes)),
+                code,
+                notes,
+            )
+
+    def test_missing_evidence_skips_other_decisions_and_pages_by_25(self):
+        papers = []
+        for number in range(1, 31):
+            papers.append(
+                {
+                    "wp_id": f"WP-{number:04d}",
+                    "issue_number": number,
+                    "title": f"Paper {number}",
+                    "decision": "include",
+                    "legacy_notes": "",
+                }
+            )
+        papers.extend(
+            [
+                {
+                    "wp_id": "WP-0031",
+                    "issue_number": 31,
+                    "title": "Tagged",
+                    "decision": "include",
+                    "legacy_notes": "- Evidence level: theoretical",
+                },
+                {
+                    "wp_id": "WP-0032",
+                    "issue_number": 32,
+                    "title": "Out",
+                    "decision": "delete_candidate",
+                    "legacy_notes": "",
+                },
+                {
+                    "wp_id": "WP-0033",
+                    "issue_number": 33,
+                    "title": "Dup",
+                    "decision": "duplicate",
+                    "legacy_notes": "",
+                },
+                {
+                    "wp_id": "WP-0034",
+                    "issue_number": 34,
+                    "title": "Bad",
+                    "decision": "include",
+                    "legacy_notes": "- Evidence level: banana",
+                },
+            ]
+        )
+        missing = inventory.papers_missing_evidence({"papers": papers})
+        ids = [paper["wp_id"] for paper in missing]
+        self.assertNotIn("WP-0031", ids)
+        self.assertNotIn("WP-0032", ids)
+        self.assertNotIn("WP-0033", ids)
+        self.assertIn("WP-0034", ids)
+        self.assertEqual(len(inventory.evidence_batch(missing)), 25)
+        self.assertEqual(len(inventory.evidence_batch(missing, offset=25)), len(missing) - 25)
+        with self.assertRaises(SystemExit):
+            inventory.evidence_batch(missing, batch_size=0)
+
+    def test_an_organization_evidence_section_is_readable_from_the_export(self):
+        body = """**Source:** Example Lab
+**Link:** https://example.org/guide.pdf
+
+### Evidence
+- Evidence level: theoretical
+"""
+        record = inventory.parse_issue(issue(200, body, "Guide"))
+        self.assertEqual(
+            inventory.evidence_level_code(inventory.evidence_level_raw(record["legacy_notes"])),
+            "theoretical",
+        )
+
+
 class ExportFileTests(unittest.TestCase):
     def test_committed_export_matches_the_schema_and_id_rules(self):
         document = json.loads(inventory.JSON_PATH.read_text(encoding="utf-8"))
