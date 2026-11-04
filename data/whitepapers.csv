@@ -1,5 +1,6 @@
 wp_id,issue_number,issue_url,state,title,source_org,url,date_published,category,file_type,decision,decision_reason,summary,legacy_sheet_url,legacy_sheet_row,legacy_notes,blog_url,duplicate_issue_numbers,axioms,invariants,principles,opencre_topics
-WP-0001,1,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/1,open,Security Engineering for Machine Learning (IEEE Computer),Berryville Institute of Machine Learning (BIML),https://apothecaryshed.files.wordpress.com/2019/08/biml-computer-8.19.pdf,Aug 2019,Article,PDF,include,,,https://apothecaryshed.files.wordpress.com/2019/08/biml-computer-8.19.pdf,[MOSAIC row 2](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A2),,,,"ML is ""sophisticated associative-learning technology,"" not magic; progress owes more to faster CPUs/bigger data than scientific breakthroughs
+WP-0001,1,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/1,open,Security Engineering for Machine Learning (IEEE Computer),Berryville Institute of Machine Learning (BIML),https://apothecaryshed.files.wordpress.com/2019/08/biml-computer-8.19.pdf,Aug 2019,Article,PDF,include,,,https://apothecaryshed.files.wordpress.com/2019/08/biml-computer-8.19.pdf,[MOSAIC row 2](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A2),"Evidence
+- Evidence level: theoretical",,,"ML is ""sophisticated associative-learning technology,"" not magic; progress owes more to faster CPUs/bigger data than scientific breakthroughs
 ML adoption is exploding in a haphazard, often poorly understood fashion, creating systemic risk
 Security must be addressed at the design level, not bolted on operationally after deployment
 ML systems exist on a spectrum from white box (fully open, public training data) to black box (API-only, unknown transformation function)
@@ -18,7 +19,8 @@ Data Protection
 Supply Chain (training data / model provenance)
 Input Validation
 Vulnerability Management"
-WP-0002,2,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/2,open,An Architectural Risk Analysis of Machine Learning Systems (BIML-78),Berryville Institute of Machine Learning (BIML),https://berryvilleiml.com/results/ara.pdf,"Jan 20, 2020",Whitepaper / Framework,PDF,include,,,https://berryvilleiml.com/results/ara.pdf,[MOSAIC row 3](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A3),,,,"Security is an emergent property of a system; no unreliable/fragile system can be secure
+WP-0002,2,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/2,open,An Architectural Risk Analysis of Machine Learning Systems (BIML-78),Berryville Institute of Machine Learning (BIML),https://berryvilleiml.com/results/ara.pdf,"Jan 20, 2020",Whitepaper / Framework,PDF,include,,,https://berryvilleiml.com/results/ara.pdf,[MOSAIC row 3](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A3),"Evidence
+- Evidence level: theoretical",,,"Security is an emergent property of a system; no unreliable/fragile system can be secure
 Data play as important (or more important) a role in ML security as the learning algorithm itself
 100% security is never attainable; risk must be managed, not eliminated
 ML systems are only as secure as their weakest component
@@ -43,7 +45,8 @@ Data Protection (data confidentiality, poisoning, provenance, encoding integrity
 Access Control (least privilege, compartmentalization, trust boundaries)
 Supply Chain (transfer learning, model reuse, pretrained-model backdoors/Trojans)
 Secure Coding / Configuration (hyperparameter management, randomness, KISS)"
-WP-0003,3,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/3,open,An Architectural Risk Analysis of Large Language Models (BIML-LLM24),Berryville Institute of Machine Learning (BIML),https://berryvilleiml.com/results/BIML-LLM24.pdf,"Jan 24, 2024",Whitepaper / Framework,PDF,include,,,https://berryvilleiml.com/results/BIML-LLM24.pdf,[MOSAIC row 4](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A4),,,,"LLMs are auto-associative predictive generators, not reasoning/understanding systems
+WP-0003,3,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/3,open,An Architectural Risk Analysis of Large Language Models (BIML-LLM24),Berryville Institute of Machine Learning (BIML),https://berryvilleiml.com/results/BIML-LLM24.pdf,"Jan 24, 2024",Whitepaper / Framework,PDF,include,,,https://berryvilleiml.com/results/BIML-LLM24.pdf,[MOSAIC row 4](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A4),"Evidence
+- Evidence level: theoretical",,,"LLMs are auto-associative predictive generators, not reasoning/understanding systems
 Security is an emergent property of a system; unreliable/fragile systems cannot be secure
 Data play the most important role in ML/LLM system security
 Insecure systems invite attacks regardless of whether an adversary is present
@@ -66,7 +69,8 @@ Data Protection
 Supply Chain (Data/Model Provenance)
 Input Validation / Injection Prevention (prompt injection)
 Log Management / Error Handling (output trustworthiness, transparency)"
-WP-0004,4,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/4,open,23 Security Risks in Black-Box Large Language Model Foundation Models (IEEE Computer),Berryville Institute of Machine Learning (BIML),https://apothecaryshed.com/wp-content/uploads/2024/05/23_Security_Risks_in_Black-Box_Large_Language_Model_Foundation_Models.pdf,April 2024,Article,PDF,include,,,https://apothecaryshed.com/wp-content/uploads/2024/05/23_Security_Risks_in_Black-Box_Large_Language_Model_Foundation_Models.pdf,[MOSAIC row 5](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A5),,,,"LLMs are stochastic autoassociative predictive generators, not reasoning/understanding systems
+WP-0004,4,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/4,open,23 Security Risks in Black-Box Large Language Model Foundation Models (IEEE Computer),Berryville Institute of Machine Learning (BIML),https://apothecaryshed.com/wp-content/uploads/2024/05/23_Security_Risks_in_Black-Box_Large_Language_Model_Foundation_Models.pdf,April 2024,Article,PDF,include,,,https://apothecaryshed.com/wp-content/uploads/2024/05/23_Security_Risks_in_Black-Box_Large_Language_Model_Foundation_Models.pdf,[MOSAIC row 5](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A5),"Evidence
+- Evidence level: theoretical",,,"LLMs are stochastic autoassociative predictive generators, not reasoning/understanding systems
 Foundation models are an opaque ""black box"" hiding critical ML process steps from users and app builders
 LLM training requires internet-scale, unstructured data at unprecedented computational cost/complexity
 Cognitive dissimilarity: human understanding and LLM token prediction are fundamentally different processes
@@ -86,7 +90,8 @@ Secure Product Design / Secure by Design
 Cryptography (randomness/PRNG integrity)
 Vulnerability Management / Security Testing
 Threat Modeling / Risk Analysis"
-WP-0005,5,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/5,open,No Security Meter for AI,Berryville Institute of Machine Learning (BIML),https://berryvilleiml.com/results/no-security-meter-ai.pdf,"May 13, 2026",Whitepaper,PDF,include,,,https://berryvilleiml.com/results/no-security-meter-ai.pdf,[MOSAIC row 6](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A6),,,,"Security is a system-wide emergent property, not a discrete measurable ""thing""
+WP-0005,5,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/5,open,No Security Meter for AI,Berryville Institute of Machine Learning (BIML),https://berryvilleiml.com/results/no-security-meter-ai.pdf,"May 13, 2026",Whitepaper,PDF,include,,,https://berryvilleiml.com/results/no-security-meter-ai.pdf,[MOSAIC row 6](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A6),"Evidence
+- Evidence level: theoretical",,,"Security is a system-wide emergent property, not a discrete measurable ""thing""
 ML ""WHAT machines"" (learned from data) differ fundamentally from programmed ""HOW machines""
 Models lack human-like minds/intention; anthropomorphizing them misleads evaluation
 Training data (the ""WHAT pile"") is the core substrate determining ML security
@@ -109,7 +114,8 @@ Supply Chain (training data provenance and integrity)
 Data Protection (data quality, contamination, poisoning)
 Vulnerability Management (benchmarking, testing methodology)
 Training and Awareness (AI/security practitioner disconnect)"
-WP-0006,6,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/6,open,Artificial Intelligence and Large Language Models (LLM) Companion Guide (CIS Controls v8.1),Center for Internet Security (CIS),https://www.cisecurity.org/insights/white-papers/controls-v8-1-ai-llm-companion-guide,"April 20, 2026",Companion Guide,PDF,include,,,https://www.cisecurity.org/insights/white-papers/controls-v8-1-ai-llm-companion-guide,[MOSAIC row 7](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A7),,,,"AI/LLM systems are probabilistic and prompt-driven, unlike deterministic traditional software
+WP-0006,6,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/6,open,Artificial Intelligence and Large Language Models (LLM) Companion Guide (CIS Controls v8.1),Center for Internet Security (CIS),https://www.cisecurity.org/insights/white-papers/controls-v8-1-ai-llm-companion-guide,"April 20, 2026",Companion Guide,PDF,include,,,https://www.cisecurity.org/insights/white-papers/controls-v8-1-ai-llm-companion-guide,[MOSAIC row 7](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A7),"Evidence
+- Evidence level: theoretical",,,"AI/LLM systems are probabilistic and prompt-driven, unlike deterministic traditional software
 CIS Controls v8.1 were written before generative AI became an enterprise platform
 LLMs are commonly connected to retrieval systems, memory stores, and external tools that take real actions
 Any user input should be assumed capable of containing a prompt injection attempt
@@ -130,7 +136,8 @@ Log Management / Error Handling (audit logging of prompts, responses, tool calls
 Supply Chain (model/dataset provenance, supplier governance, provider updates)
 Configuration Management (secure configuration, guardrail change control)
 Vulnerability Management / Incident Response (containment levers, anomaly detection)"
-WP-0007,7,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/7,open,Artificial Intelligence (AI) Agents Companion Guide (CIS Controls v8.1),Center for Internet Security (CIS),https://www.cisecurity.org/insights/white-papers/controls-v8-1-ai-agents-companion-guide,"April 20, 2026",Companion Guide,PDF,include,,,https://www.cisecurity.org/insights/white-papers/controls-v8-1-ai-agents-companion-guide,[MOSAIC row 8](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A8),,,,"AI agents blend LLMs with orchestration, tool execution, retrieval, and autonomous decision-making
+WP-0007,7,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/7,open,Artificial Intelligence (AI) Agents Companion Guide (CIS Controls v8.1),Center for Internet Security (CIS),https://www.cisecurity.org/insights/white-papers/controls-v8-1-ai-agents-companion-guide,"April 20, 2026",Companion Guide,PDF,include,,,https://www.cisecurity.org/insights/white-papers/controls-v8-1-ai-agents-companion-guide,[MOSAIC row 8](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A8),"Evidence
+- Evidence level: theoretical",,,"AI agents blend LLMs with orchestration, tool execution, retrieval, and autonomous decision-making
 Agents operate across a broader attack surface than conventional standalone software
 Agents extend across identity layers, endpoint execution, knowledge stores, integration pipelines, monitoring systems
 Existing CIS Controls v8.1 remain valid but require reinterpretation for autonomous/semi-autonomous behavior
@@ -154,7 +161,8 @@ Log Management / Error Handling (auditability)
 Secure Product Design
 Supply Chain (tool/MCP integration risk)
 Threat Modeling (agent-specific risk mapping)"
-WP-0008,8,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/8,open,Model Context Protocol (MCP) Companion Guide (CIS Controls v8.1),Center for Internet Security (CIS),https://www.cisecurity.org/insights/white-papers/controls-v8-1-model-context-protocol-companion-guide,"April 20, 2026",Companion Guide,PDF,include,,,https://www.cisecurity.org/insights/white-papers/controls-v8-1-model-context-protocol-companion-guide,[MOSAIC row 9](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A9),,,,"MCP is an open, interoperable standard replacing proprietary model-specific integrations
+WP-0008,8,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/8,open,Model Context Protocol (MCP) Companion Guide (CIS Controls v8.1),Center for Internet Security (CIS),https://www.cisecurity.org/insights/white-papers/controls-v8-1-model-context-protocol-companion-guide,"April 20, 2026",Companion Guide,PDF,include,,,https://www.cisecurity.org/insights/white-papers/controls-v8-1-model-context-protocol-companion-guide,[MOSAIC row 9](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A9),"Evidence
+- Evidence level: theoretical",,,"MCP is an open, interoperable standard replacing proprietary model-specific integrations
 AI systems (LLMs, agents, MCP) form three distinct layers, each with different risks
 Existing CIS Controls v8.1 remain applicable to AI but must be reinterpreted for AI behavior
 MCP formalizes how AI systems discover and invoke privileged capabilities
@@ -176,7 +184,8 @@ Log Management / Auditability
 API/Web Services Security
 Secure Product Design
 Supply Chain (third-party/unapproved MCP server connections)"
-WP-0009,9,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/9,open,AI Controls Matrix (AICM) v1,Cloud Security Alliance (CSA),https://cloudsecurityalliance.org/artifacts/ai-controls-matrix,"July 10, 2025",Framework / Controls Matrix,Spreadsheet + PDF,include,,,https://cloudsecurityalliance.org/artifacts/ai-controls-matrix,[MOSAIC row 10](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A10),,,,"Trust is the foundation for responsible AI advancement, not an add-on
+WP-0009,9,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/9,open,AI Controls Matrix (AICM) v1,Cloud Security Alliance (CSA),https://cloudsecurityalliance.org/artifacts/ai-controls-matrix,"July 10, 2025",Framework / Controls Matrix,Spreadsheet + PDF,include,,,https://cloudsecurityalliance.org/artifacts/ai-controls-matrix,[MOSAIC row 10](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A10),"Evidence
+- Evidence level: theoretical",,,"Trust is the foundation for responsible AI advancement, not an add-on
 GenAI risk exists atop, not instead of, traditional cloud risk
 Security/compliance responsibility is distributed across a defined AI service stack
 Existing cloud security practice (CCM) is a valid, extensible base for AI controls
@@ -197,7 +206,8 @@ Supply Chain (AI Supply Chain Management, Transparency & Accountability)
 Secure Product Design (Application & Interface Security / Model Security)
 Denial of Service (explicit AICM threat category)
 Vulnerability Management / Threat Modeling"
-WP-0010,10,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/10,open,AI Controls Matrix (AICM) v1.1,Cloud Security Alliance (CSA),https://cloudsecurityalliance.org/artifacts/ai-controls-matrix-v1-1,"June 22, 2026",Framework / Controls Matrix,Spreadsheet + PDF,include,,,https://cloudsecurityalliance.org/artifacts/ai-controls-matrix-v1-1,[MOSAIC row 11](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A11),,,,"AI amplifies existing cloud/security risks (model manipulation, data poisoning, sensitive data disclosure, supply chain disruption)
+WP-0010,10,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/10,open,AI Controls Matrix (AICM) v1.1,Cloud Security Alliance (CSA),https://cloudsecurityalliance.org/artifacts/ai-controls-matrix-v1-1,"June 22, 2026",Framework / Controls Matrix,Spreadsheet + PDF,include,,,https://cloudsecurityalliance.org/artifacts/ai-controls-matrix-v1-1,[MOSAIC row 11](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A11),"Evidence
+- Evidence level: theoretical",,,"AI amplifies existing cloud/security risks (model manipulation, data poisoning, sensitive data disclosure, supply chain disruption)
 A ""governance void"" exists that only a vendor-agnostic control catalog can fill
 Risk/regulatory frameworks (EU AI Act, NIST AI RMF) intentionally omit operational security controls, leaving a gap AICM must fill
 Cloud security is the necessary foundation for AI security (AICM is a superset of CCM v4.1)
@@ -219,7 +229,8 @@ Data Protection (data poisoning, sensitive data disclosure, training data)
 Supply Chain (AI/ML supply chain and third-party vendor assessment)
 Cryptography / Key Management (model weights protection, encryption controls)
 Injection Prevention (prompt injection attack controls)"
-WP-0011,11,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/11,open,The State of Cloud and AI Security 2025,Cloud Security Alliance (CSA),https://cloudsecurityalliance.org/artifacts/the-state-of-cloud-and-ai-security-2025,2025,Survey Report,PDF,include,,,https://cloudsecurityalliance.org/artifacts/the-state-of-cloud-and-ai-security-2025,[MOSAIC row 12](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A12),,,,"Hybrid and multi-cloud infrastructure is now the default enterprise environment
+WP-0011,11,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/11,open,The State of Cloud and AI Security 2025,Cloud Security Alliance (CSA),https://cloudsecurityalliance.org/artifacts/the-state-of-cloud-and-ai-security-2025,2025,Survey Report,PDF,include,,,https://cloudsecurityalliance.org/artifacts/the-state-of-cloud-and-ai-security-2025,[MOSAIC row 12](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A12),"Evidence
+- Evidence level: tested, possibly deployed (needs review)",,,"Hybrid and multi-cloud infrastructure is now the default enterprise environment
 AI workloads are moving quickly into production despite unresolved security gaps
 Identity, not infrastructure, is the primary cloud attack surface
 Current security programs are reactive (incident-focused) rather than preventive
@@ -241,7 +252,8 @@ Configuration
 Vulnerability Management
 Log Management / Error Handling
 Secure Product Design"
-WP-0012,12,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/12,open,Agentic AI Identity & Access Management: A New Approach,Cloud Security Alliance (CSA),https://cloudsecurityalliance.org/artifacts/agentic-ai-identity-and-access-management-a-new-approach,2026,Whitepaper,PDF,include,,,https://cloudsecurityalliance.org/artifacts/agentic-ai-identity-and-access-management-a-new-approach,[MOSAIC row 13](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A13),,,,"Human-centric IAM (standing roles, static credentials) cannot secure autonomous, non-human agentic actors
+WP-0012,12,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/12,open,Agentic AI Identity & Access Management: A New Approach,Cloud Security Alliance (CSA),https://cloudsecurityalliance.org/artifacts/agentic-ai-identity-and-access-management-a-new-approach,2026,Whitepaper,PDF,include,,,https://cloudsecurityalliance.org/artifacts/agentic-ai-identity-and-access-management-a-new-approach,[MOSAIC row 13](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A13),"Evidence
+- Evidence level: theoretical",,,"Human-centric IAM (standing roles, static credentials) cannot secure autonomous, non-human agentic actors
 AI agents are first-class identities, distinct from human users and traditional service accounts
 Agentic AI operates across dynamic, multi-agent, cross-organizational/heterogeneous ecosystems
 Identity must encode an agent's capabilities, provenance, and security posture, not just ""who it is""
@@ -261,7 +273,8 @@ Session Management
 Secrets Management
 Cryptography
 Secure Product Design"
-WP-0013,13,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/13,open,Data Security within AI Environments,Cloud Security Alliance (CSA),https://cloudsecurityalliance.org/artifacts/data-security-within-ai-environments,2025/2026,Whitepaper,PDF,include,,,https://cloudsecurityalliance.org/artifacts/data-security-within-ai-environments,[MOSAIC row 14](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A14),,,,"AI systems are fundamentally data-dependent; data quality/sensitivity drives model reliability and risk
+WP-0013,13,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/13,open,Data Security within AI Environments,Cloud Security Alliance (CSA),https://cloudsecurityalliance.org/artifacts/data-security-within-ai-environments,2025/2026,Whitepaper,PDF,include,,,https://cloudsecurityalliance.org/artifacts/data-security-within-ai-environments,[MOSAIC row 14](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A14),"Evidence
+- Evidence level: theoretical",,,"AI systems are fundamentally data-dependent; data quality/sensitivity drives model reliability and risk
 Traditional data security practices do not automatically transfer to AI systems and must adapt
 CIA triad remains foundational but must be reinterpreted for AI
 Data flows through a lifecycle (collection, annotation, storage, processing, training, deployment, monitoring) each with distinct exposure points
@@ -284,7 +297,8 @@ Secrets Management (key/credential/token management)
 Log Management / Audit and Accountability
 Supply Chain (third-party/dependency risk)
 Secure Product Design (privacy/security by design)"
-WP-0014,14,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/14,open,AI Vulnerability: Security Program Guide for CISOs,Cloud Security Alliance (CSA),https://labs.cloudsecurityalliance.org/mythos-ciso/,Sept/Oct 2025,Guide,PDF,include,,,https://labs.cloudsecurityalliance.org/mythos-ciso/,[MOSAIC row 15](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A15),,,,"AI has materially accelerated vulnerability discovery, exploit generation, and autonomous attack execution
+WP-0014,14,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/14,open,AI Vulnerability: Security Program Guide for CISOs,Cloud Security Alliance (CSA),https://labs.cloudsecurityalliance.org/mythos-ciso/,Sept/Oct 2025,Guide,PDF,include,,,https://labs.cloudsecurityalliance.org/mythos-ciso/,[MOSAIC row 15](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A15),"Evidence
+- Evidence level: theoretical",,,"AI has materially accelerated vulnerability discovery, exploit generation, and autonomous attack execution
 Attackers gain asymmetric benefit even though AI also speeds patch development and reduces defects
 The discovery-to-weaponization window has collapsed from weeks to hours
 Pre-AI assumptions underlying risk metrics, patch windows, exploit scarcity no longer hold
@@ -307,7 +321,8 @@ Access Control (Zero Trust, segmentation)
 Authentication (phishing-resistant MFA)
 Secure Communication (egress filtering)
 Supply Chain (dependency/third-party component management)"
-WP-0015,15,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/15,open,Establish Risks and Controls for the AI Supply Chain,Coalition for Secure AI (CoSAI),https://github.com/cosai-oasis/ws1-supply-chain/blob/main/whitepapers/risks-and-controls-for-the-ai-supply-chain-v1.md,2024 (v1),Whitepaper / Framework,PDF + Markdown,include,,,https://github.com/cosai-oasis/ws1-supply-chain/blob/main/whitepapers/risks-and-controls-for-the-ai-supply-chain-v1.md,[MOSAIC row 16](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A16),,,,"AI systems differ fundamentally from traditional software: intelligence is distributed across weighted connections, not localized in memory
+WP-0015,15,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/15,open,Establish Risks and Controls for the AI Supply Chain,Coalition for Secure AI (CoSAI),https://github.com/cosai-oasis/ws1-supply-chain/blob/main/whitepapers/risks-and-controls-for-the-ai-supply-chain-v1.md,2024 (v1),Whitepaper / Framework,PDF + Markdown,include,,,https://github.com/cosai-oasis/ws1-supply-chain/blob/main/whitepapers/risks-and-controls-for-the-ai-supply-chain-v1.md,[MOSAIC row 16](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A16),"Evidence
+- Evidence level: theoretical",,,"AI systems differ fundamentally from traditional software: intelligence is distributed across weighted connections, not localized in memory
 The AI supply chain has four interdependent dimensions: Data, Model, Application, Infrastructure
 Internally developed/stored models are not inherently secure (a ""dangerous assumption"" to reject)
 Existing AI security frameworks (SAIF, ATLAS, MS Bug Bar) lack comprehensive supply-chain coverage
@@ -330,7 +345,8 @@ Access Control (RBAC, least privilege, IAM, entitlements)
 Cryptography (model signing, hash verification, attestation)
 Secure Product Design / Secure Coding (architecture code protection, serialization safety)
 Log Management / Monitoring (audit logging, anomaly/drift detection, incident response)"
-WP-0016,16,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/16,open,Signing ML Artifacts: Building Towards Tamper-Proof ML Metadata Records,Coalition for Secure AI (CoSAI),https://github.com/cosai-oasis/ws1-supply-chain/blob/main/whitepapers/signing-ml-artifacts.md,"Sept 29, 2025 (blog summary)",Whitepaper,PDF + Markdown,include,,,https://github.com/cosai-oasis/ws1-supply-chain/blob/main/whitepapers/signing-ml-artifacts.md,[MOSAIC row 17](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A17),,https://www.coalitionforsecureai.org/building-trust-in-ai-supply-chains-why-model-signing-is-critical-for-enterprise-security/,,"ML models are inherently opaque; training data/pipelines/dependencies are not easily inspectable by consumers
+WP-0016,16,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/16,open,Signing ML Artifacts: Building Towards Tamper-Proof ML Metadata Records,Coalition for Secure AI (CoSAI),https://github.com/cosai-oasis/ws1-supply-chain/blob/main/whitepapers/signing-ml-artifacts.md,"Sept 29, 2025 (blog summary)",Whitepaper,PDF + Markdown,include,,,https://github.com/cosai-oasis/ws1-supply-chain/blob/main/whitepapers/signing-ml-artifacts.md,[MOSAIC row 17](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A17),"Evidence
+- Evidence level: theoretical",https://www.coalitionforsecureai.org/building-trust-in-ai-supply-chains-why-model-signing-is-critical-for-enterprise-security/,,"ML models are inherently opaque; training data/pipelines/dependencies are not easily inspectable by consumers
 AI supply chains share software supply chain risks but add unique vulnerabilities
 Trust in model integrity cannot be assumed; it must be verified
 Consumers, not a central authority, must decide which identities/claims to trust
@@ -352,7 +368,8 @@ Data Protection / Integrity Protection
 Authentication (identity verification of signers/claimants)
 Configuration and Secure Product Design
 Secure Coding / Secure Design Lifecycle"
-WP-0017,17,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/17,open,Preparing Defenders of AI Systems,Coalition for Secure AI (CoSAI),https://github.com/cosai-oasis/ws2-defenders/blob/main/preparing-defenders-of-ai-systems.md,2024,Whitepaper / Framework,PDF + Markdown,include,,,https://github.com/cosai-oasis/ws2-defenders/blob/main/preparing-defenders-of-ai-systems.md,[MOSAIC row 18](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A18),,,,"Defenses are only as strong as the weakest point; one exposed vulnerability defeats overall protection
+WP-0017,17,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/17,open,Preparing Defenders of AI Systems,Coalition for Secure AI (CoSAI),https://github.com/cosai-oasis/ws2-defenders/blob/main/preparing-defenders-of-ai-systems.md,2024,Whitepaper / Framework,PDF + Markdown,include,,,https://github.com/cosai-oasis/ws2-defenders/blob/main/preparing-defenders-of-ai-systems.md,[MOSAIC row 18](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A18),"Evidence
+- Evidence level: theoretical",,,"Defenses are only as strong as the weakest point; one exposed vulnerability defeats overall protection
 AI systems dramatically expand the attack surface versus traditional software
 AI-enabled threats from malicious actors are expected within 1-2 years
 Existing frameworks (NIST, MITRE ATT&CK/ATLAS, OWASP) offer valuable but incomplete foundations
@@ -376,7 +393,8 @@ Threat Modeling (Enterprise AI Threat Modeling Methodologies)
 Log Management / Incident Response & Monitoring
 Secure Product Design / Secure Architecture
 Training and Awareness"
-WP-0018,18,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/18,open,AI Incident Response Framework,Coalition for Secure AI (CoSAI),https://github.com/cosai-oasis/ws2-defenders/blob/main/incident-response/AI-Incident-Response.md,"Oct 30, 2025",Framework,PDF + Markdown,include,,,https://github.com/cosai-oasis/ws2-defenders/blob/main/incident-response/AI-Incident-Response.md,[MOSAIC row 19](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A19),,https://www.coalitionforsecureai.org/defending-ai-systems-a-new-framework-for-incident-response-in-the-age-of-intelligent-technology/,,"AI systems will eventually be compromised by advanced threat actors; response must be proactive, not reactive
+WP-0018,18,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/18,open,AI Incident Response Framework,Coalition for Secure AI (CoSAI),https://github.com/cosai-oasis/ws2-defenders/blob/main/incident-response/AI-Incident-Response.md,"Oct 30, 2025",Framework,PDF + Markdown,include,,,https://github.com/cosai-oasis/ws2-defenders/blob/main/incident-response/AI-Incident-Response.md,[MOSAIC row 19](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A19),"Evidence
+- Evidence level: theoretical",https://www.coalitionforsecureai.org/defending-ai-systems-a-new-framework-for-incident-response-in-the-age-of-intelligent-technology/,,"AI systems will eventually be compromised by advanced threat actors; response must be proactive, not reactive
 AI model outputs are non-deterministic ,  identical input/system prompt need not reproduce identical output
 General (non-AI) incident response is already well-documented elsewhere (NIST); this framework covers only AI-specific gaps
 AI incidents fall into five domains: data, model, deployment, infrastructure, user-interaction
@@ -398,7 +416,8 @@ Data Protection
 Vulnerability Management / Incident Response
 Secrets Management
 Supply Chain / Threat Modeling (MITRE ATLAS mapping)"
-WP-0019,19,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/19,open,CoSAI Principles for Secure-by-Design Agentic Systems,Coalition for Secure AI (CoSAI),https://github.com/cosai-oasis/cosai-tsc/blob/main/security-principles-for-agentic-systems.md,"July 14, 2025 (TSC approval)",Principles,Markdown only,include,,,https://github.com/cosai-oasis/cosai-tsc/blob/main/security-principles-for-agentic-systems.md,[MOSAIC row 20](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A20),,,,"Trust is a prerequisite for user/organizational adoption of agentic systems
+WP-0019,19,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/19,open,CoSAI Principles for Secure-by-Design Agentic Systems,Coalition for Secure AI (CoSAI),https://github.com/cosai-oasis/cosai-tsc/blob/main/security-principles-for-agentic-systems.md,"July 14, 2025 (TSC approval)",Principles,Markdown only,include,,,https://github.com/cosai-oasis/cosai-tsc/blob/main/security-principles-for-agentic-systems.md,[MOSAIC row 20](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A20),"Evidence
+- Evidence level: theoretical",,,"Trust is a prerequisite for user/organizational adoption of agentic systems
 Enterprises only deploy agents if risk is acceptable
 AI agent capabilities are advancing rapidly and becoming ubiquitous/interconnected
 LLMs exhibit unpredictable behavior and emergent capabilities
@@ -423,7 +442,8 @@ Log Management/Error Handling (telemetry, monitoring, forensic analysis)
 Secure Product Design / Secure Coding
 Threat Modeling (AI-specific defenses, failure modes)
 Vulnerability Management (incident response, continuous validation)"
-WP-0020,20,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/20,open,Model Context Protocol (MCP) Security,Coalition for Secure AI (CoSAI),https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/blob/main/whitepapers/model-context-protocol-security.md,"Jan 27, 2026",Whitepaper,PDF + Markdown,include,,,https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/blob/main/whitepapers/model-context-protocol-security.md,[MOSAIC row 21](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A21),,https://www.coalitionforsecureai.org/coalition-for-secure-ai-releases-extensive-taxonomy-for-model-context-protocol-security/,,"MCP is now the de facto protocol for connecting LLMs/agents to external tools, data, and services
+WP-0020,20,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/20,open,Model Context Protocol (MCP) Security,Coalition for Secure AI (CoSAI),https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/blob/main/whitepapers/model-context-protocol-security.md,"Jan 27, 2026",Whitepaper,PDF + Markdown,include,,,https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/blob/main/whitepapers/model-context-protocol-security.md,[MOSAIC row 21](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A21),"Evidence
+- Evidence level: theoretical",https://www.coalitionforsecureai.org/coalition-for-secure-ai-releases-extensive-taxonomy-for-model-context-protocol-security/,,"MCP is now the de facto protocol for connecting LLMs/agents to external tools, data, and services
 LLM behavior is shaped by natural language input, not predefined logic, unlike traditional system components
 Tool descriptions/metadata must be considered untrusted unless from a trusted server
 Existing risk frameworks (MITRE ATLAS, NIST AI RMF, MAESTRO) assume predictable component behavior and don't fully address MCP
@@ -445,7 +465,8 @@ Input Validation / Injection Prevention (command injection, path traversal, prom
 Secure Communication (TLS, MITM, CORS/CSRF, transport security)
 Supply Chain (SBOM, code signing, dependency vetting, shadow MCP servers)
 Log Management / Auditability"
-WP-0021,21,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/21,open,The Future of Agentic Security: From Chatbots to Autonomous Swarms,Coalition for Secure AI (CoSAI),https://www.coalitionforsecureai.org/wp-content/uploads/2026/03/the-future-of-agentic-security.pdf,"March 16, 2026",Whitepaper,PDF only,include,,,https://www.coalitionforsecureai.org/wp-content/uploads/2026/03/the-future-of-agentic-security.pdf,[MOSAIC row 22](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A22),,,,"Core control objectives (auditability, separation of duties, least privilege, data protection) do not change with agentic AI; only the enforcement assumptions do
+WP-0021,21,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/21,open,The Future of Agentic Security: From Chatbots to Autonomous Swarms,Coalition for Secure AI (CoSAI),https://www.coalitionforsecureai.org/wp-content/uploads/2026/03/the-future-of-agentic-security.pdf,"March 16, 2026",Whitepaper,PDF only,include,,,https://www.coalitionforsecureai.org/wp-content/uploads/2026/03/the-future-of-agentic-security.pdf,[MOSAIC row 22](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A22),"Evidence
+- Evidence level: theoretical",,,"Core control objectives (auditability, separation of duties, least privilege, data protection) do not change with agentic AI; only the enforcement assumptions do
 The enterprise chat channel is becoming a de facto orchestration bus for agent swarms, turning natural language into an API
 Legacy enforcement (static RBAC, long-lived service tokens, regex DLP, OS-level EDR) is anchored to human-workflow assumptions and cannot see agent cognitive activity
 Proving an LLM will never execute an injected instruction from untrusted content is currently considered theoretically impossible
@@ -467,7 +488,8 @@ Supply Chain
 Data Protection / Leakage Prevention
 Threat Modeling
 Secure Product Design"
-WP-0022,22,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/22,open,Agentic Identity and Access Management,Coalition for Secure AI (CoSAI),https://www.coalitionforsecureai.org/wp-content/uploads/2026/04/agentic-identity-and-access-control.pdf,"April 17, 2026",Whitepaper / Framework,PDF only,include,,,https://www.coalitionforsecureai.org/wp-content/uploads/2026/04/agentic-identity-and-access-control.pdf,[MOSAIC row 23](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A23),,https://www.coalitionforsecureai.org/whos-minding-the-agent-a-new-framework-for-ai-identity-and-access-control/,,"Traditional IAM was designed for human users and its assumptions break under agents that run continuously, spawn/dissolve dynamically, and chain unpredictably
+WP-0022,22,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/22,open,Agentic Identity and Access Management,Coalition for Secure AI (CoSAI),https://www.coalitionforsecureai.org/wp-content/uploads/2026/04/agentic-identity-and-access-control.pdf,"April 17, 2026",Whitepaper / Framework,PDF only,include,,,https://www.coalitionforsecureai.org/wp-content/uploads/2026/04/agentic-identity-and-access-control.pdf,[MOSAIC row 23](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A23),"Evidence
+- Evidence level: theoretical",https://www.coalitionforsecureai.org/whos-minding-the-agent-a-new-framework-for-ai-identity-and-access-control/,,"Traditional IAM was designed for human users and its assumptions break under agents that run continuously, spawn/dissolve dynamically, and chain unpredictably
 Treating agents as shared service accounts obscures accountability
 Agentic IAM is an extension of existing IAM infrastructure, not a rip-and-replace effort
 Risk and control should scale with an agent's capability and the sensitivity of data it touches, not be uniform
@@ -488,7 +510,8 @@ Session Management
 Secrets Management
 Log Management / Error Handling
 Cryptography"
-WP-0023,23,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/23,open,AI Risk Management Framework (AI RMF 1.0),National Institute of Standards and Technology (NIST),https://www.nist.gov/itl/ai-risk-management-framework,"Jan 26, 2023",Framework,PDF,include,,,https://www.nist.gov/itl/ai-risk-management-framework,[MOSAIC row 24](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A24),,,,"Risk = function of likelihood x magnitude of impact (adapted from ISO 31000/OMB A-130)
+WP-0023,23,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/23,open,AI Risk Management Framework (AI RMF 1.0),National Institute of Standards and Technology (NIST),https://www.nist.gov/itl/ai-risk-management-framework,"Jan 26, 2023",Framework,PDF,include,,,https://www.nist.gov/itl/ai-risk-management-framework,[MOSAIC row 24](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A24),"Evidence
+- Evidence level: theoretical",,,"Risk = function of likelihood x magnitude of impact (adapted from ISO 31000/OMB A-130)
 AI risks are meaningfully distinct from traditional software risks (data drift, socio-technical complexity)
 Trustworthiness is a socio-technical, contextual concept, not a purely technical property
 Not all negative risk can or should be eliminated; residual risk always remains
@@ -510,7 +533,8 @@ Data Protection / Privacy
 Supply Chain (third-party/AI supply chain risk)
 Vulnerability Management (incident identification, decommissioning)
 Training and Awareness"
-WP-0024,24,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/24,open,AI RMF Playbook,National Institute of Standards and Technology (NIST),https://airc.nist.gov/airmf-resources/playbook/,"March 30, 2023",Playbook,Web,include,,,https://airc.nist.gov/airmf-resources/playbook/,[MOSAIC row 25](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A25),,,,"AI systems can cause harm even when highly accurate/optimized
+WP-0024,24,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/24,open,AI RMF Playbook,National Institute of Standards and Technology (NIST),https://airc.nist.gov/airmf-resources/playbook/,"March 30, 2023",Playbook,Web,include,,,https://airc.nist.gov/airmf-resources/playbook/,[MOSAIC row 25](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A25),"Evidence
+- Evidence level: theoretical",,,"AI systems can cause harm even when highly accurate/optimized
 Deployed AI tools will be reused, repurposed, and potentially misused regardless of original intent
 Risk management resources are finite; organizations must prioritize
 Trustworthy AI requires policies that prevent harm ""by design and default""
@@ -533,7 +557,8 @@ Log Management / Audit and Accountability
 Secure Product Design (Lifecycle)
 Training and Awareness
 Data Protection / Privacy"
-WP-0025,25,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/25,open,AI RMF: Generative Artificial Intelligence Profile (NIST AI 600-1),National Institute of Standards and Technology (NIST),https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf,"July 26, 2024",Profile,PDF,include,,,https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf,[MOSAIC row 26](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A26),,,,"Risk = probability of an event times magnitude of its consequences
+WP-0025,25,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/25,open,AI RMF: Generative Artificial Intelligence Profile (NIST AI 600-1),National Institute of Standards and Technology (NIST),https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf,"July 26, 2024",Profile,PDF,include,,,https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf,[MOSAIC row 26](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A26),"Evidence
+- Evidence level: theoretical",,,"Risk = probability of an event times magnitude of its consequences
 GAI intensifies traditional AI/software risks and creates novel ones
 Risk sources include model design/training/output AND human behavior (misuse, abuse, over-reliance)
 Risks vary by lifecycle stage, scope (model/application/ecosystem), source, and time scale
