@@ -4253,7 +4253,7 @@
       "summary": "",
       "legacy_sheet_url": "https://csrc.nist.gov/pubs/ai/100/2/e2025/final",
       "legacy_sheet_row": "[MOSAIC row 27](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A27)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -4304,7 +4304,7 @@
       "summary": "",
       "legacy_sheet_url": "https://owaspai.org/",
       "legacy_sheet_row": "[MOSAIC row 28](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A28)",
-      "legacy_notes": "Sheet wording of one invariable: AI models can always be wrong or manipulated; treat this as constant, not edge case",
+      "legacy_notes": "Sheet wording of one invariable: AI models can always be wrong or manipulated; treat this as constant, not edge case\nEvidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -4361,7 +4361,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/llm-top-10/",
       "legacy_sheet_row": "[MOSAIC row 29](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A29)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -4415,7 +4415,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/resource/genai-incident-response-guide-1-0/",
       "legacy_sheet_row": "[MOSAIC row 30](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A30)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -4468,7 +4468,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/resource/owasp-genai-security-project-solutions-reference-guide-q2_q325/",
       "legacy_sheet_row": "[MOSAIC row 31](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A31)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -4577,7 +4577,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/resource/cheatsheet-a-practical-guide-for-securely-using-third-party-mcp-servers-1-0/",
       "legacy_sheet_row": "[MOSAIC row 32](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A32)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -4631,7 +4631,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
       "legacy_sheet_row": "[MOSAIC row 33](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A33)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -4687,7 +4687,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/resource/owasp-vendor-evaluation-criteria-for-ai-red-teaming-providers-tooling-v1-0/",
       "legacy_sheet_row": "[MOSAIC row 34](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A34)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -4743,7 +4743,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/resource/a-practical-guide-for-secure-mcp-server-development/",
       "legacy_sheet_row": "[MOSAIC row 35](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A35)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -4802,7 +4802,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/resource/owasp-genai-data-security-risks-mitigations-2026/",
       "legacy_sheet_row": "[MOSAIC row 36](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A36)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -4857,7 +4857,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/resource/state-of-agentic-ai-security-and-governance/",
       "legacy_sheet_row": "[MOSAIC row 37](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A37)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: tested, possibly deployed (needs review)",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -4911,7 +4911,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.sans.org/mlp/critical-ai-security-guidelines",
       "legacy_sheet_row": "[MOSAIC row 38](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A38)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -4965,7 +4965,7 @@
       "summary": "",
       "legacy_sheet_url": "https://github.com/sans-community/ai-guidelines",
       "legacy_sheet_row": "[MOSAIC row 39](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A39)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5019,7 +5019,7 @@
       "summary": "",
       "legacy_sheet_url": "https://assets.contentstack.io/v3/assets/bltabe50a4554f8e97f/blte964a6eef293d57e/whitepaper-critical-ai-security-guidelines",
       "legacy_sheet_row": "[MOSAIC row 40](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A40)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://www.aigl.blog/critical-ai-security-guidelines-v1-4/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5066,7 +5066,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.sans.org/white-papers/own-ai-securely-sans-secure-ai-blueprint",
       "legacy_sheet_row": "[MOSAIC row 41](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A41)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5120,7 +5120,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.coalitionforsecureai.org/wp-content/uploads/2026/05/CoSAI-Shared-Responsibility-Framework.pdf",
       "legacy_sheet_row": "[MOSAIC row 42](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A42)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://www.coalitionforsecureai.org/whos-responsible-when-ai-goes-wrong-a-new-framework-aims-to-answer-that-question/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5173,7 +5173,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/",
       "legacy_sheet_row": "[MOSAIC row 43](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A43)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5221,7 +5221,7 @@
       "summary": "",
       "legacy_sheet_url": "https://github.com/OWASP/AISVS/raw/main/1.0/dist/AISVS-1.0.pdf",
       "legacy_sheet_row": "[MOSAIC row 44](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A44)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://owasp.org/www-project-artificial-intelligence-security-verification-standard-aisvs-docs/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5253,7 +5253,7 @@
       "summary": "",
       "legacy_sheet_url": "https://owasp.org/www-project-agentic-skills-top-10/",
       "legacy_sheet_row": "[MOSAIC row 45](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A45)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://owasp.org/www-project-agentic-skills-top-10/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5285,7 +5285,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.cisecurity.org/insights/white-papers/controls-v8-1-2-ai-security-guidance-workbook",
       "legacy_sheet_row": "[MOSAIC row 46](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A46)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://www.cisecurity.org/insights/white-papers/controls-v8-1-2-ai-security-guidance-workbook",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5317,7 +5317,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.sans.org/white-papers/sans-ai-security-maturity-model-ebook",
       "legacy_sheet_row": "[MOSAIC row 47](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A47)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://www.sans.org/press/announcements/ai-security-maturity-model-close-gap-between-enterprise-ai-adoption-governance",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5349,7 +5349,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/resource/ai-security-solutions-landscape-for-ai-and-agentic-red-teaming-q2-2026/",
       "legacy_sheet_row": "[MOSAIC row 48](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A48)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://genai.owasp.org/resource/ai-security-solutions-landscape-for-ai-and-agentic-red-teaming-q2-2026/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5381,7 +5381,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/resource/solutions-landscape-red-teaming-taxonomy/",
       "legacy_sheet_row": "[MOSAIC row 49](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A49)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://genai.owasp.org/resource/solutions-landscape-red-teaming-taxonomy/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5413,7 +5413,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.coalitionforsecureai.org/wp-content/uploads/2026/09/model-context-protocol-security-v2.0.pdf",
       "legacy_sheet_row": "[MOSAIC row 50](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A50)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5470,7 +5470,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.coalitionforsecureai.org/wp-content/uploads/2026/09/Addendum-MCP-and-PQC.pdf",
       "legacy_sheet_row": "[MOSAIC row 51](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A51)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5518,7 +5518,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.coalitionforsecureai.org/wp-content/uploads/2026/09/Zero-Trust-for-AI-Systems.pdf",
       "legacy_sheet_row": "[MOSAIC row 52](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A52)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5621,7 +5621,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/2026/04/14/owasp-genai-exploit-round-up-report-q1-2026/",
       "legacy_sheet_row": "[MOSAIC row 55](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A55)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: tested, possibly deployed (needs review)",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -5791,7 +5791,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/2025/07/14/owasp-gen-ai-incident-exploit-round-up-q225/",
       "legacy_sheet_row": "[MOSAIC row 61](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A61)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: tested, possibly deployed (needs review)",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -6441,7 +6441,7 @@
       "summary": "",
       "legacy_sheet_url": "https://cloudsecurityalliance.org/articles/shadow-ai-does-not-read-your-org-chart-rethinking-identity-governance-for-autonomous-agents",
       "legacy_sheet_row": "[MOSAIC row 86](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A86)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -6510,7 +6510,7 @@
       "summary": "",
       "legacy_sheet_url": "https://cloudsecurityalliance.org/articles/a-framework-for-ai-threat-readiness",
       "legacy_sheet_row": "[MOSAIC row 88](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A88)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -6605,7 +6605,7 @@
       "summary": "",
       "legacy_sheet_url": "https://cloudsecurityalliance.org/articles/lessons-learned-on-securing-multi-agent-systems-nist-agent-security-rfi",
       "legacy_sheet_row": "[MOSAIC row 91](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A91)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -6650,7 +6650,7 @@
       "summary": "",
       "legacy_sheet_url": "https://cloudsecurityalliance.org/articles/cloud-security-2026-when-ai-is-the-weapon-and-the-target",
       "legacy_sheet_row": "[MOSAIC row 92](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A92)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical (needs review)",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -6917,7 +6917,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.coalitionforsecureai.org/treat-your-agent-like-an-insider-threat-why-ai-sandboxing-cant-wait/",
       "legacy_sheet_row": "[MOSAIC row 102](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A102)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -7089,7 +7089,7 @@
       "summary": "",
       "legacy_sheet_url": "https://github.com/cosai-oasis/ws1-supply-chain/blob/main/whitepapers/aimm-artifact-integrity-maturity-model.pdf",
       "legacy_sheet_row": "[MOSAIC row 108](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A108)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -7121,7 +7121,7 @@
       "summary": "",
       "legacy_sheet_url": "https://github.com/GenAI-Security-Project/agent-control-standard",
       "legacy_sheet_row": "[MOSAIC row 109](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A109)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://genai.owasp.org/2026/09/01/owasp-genai-security-project-unveils-2026-top-10-for-llm-applications-new-agent-control-standard-and-sponsors-as-community-tops-30000-members/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -7153,7 +7153,7 @@
       "summary": "",
       "legacy_sheet_url": "https://github.com/GenAI-Security-Project/crosswalk",
       "legacy_sheet_row": "[MOSAIC row 110](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A110)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -7185,7 +7185,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.sans.org/white-papers/quantifying-agentic-misalignment-multi-agent-systems",
       "legacy_sheet_row": "[MOSAIC row 111](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A111)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: tested (needs review)",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -7361,7 +7361,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/2026/10/08/genai-and-agentic-ai-exploit-roundup-q3-2026/",
       "legacy_sheet_row": "[MOSAIC row 118](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A118)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: tested, possibly deployed (needs review)",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -7484,7 +7484,7 @@
       "summary": "",
       "legacy_sheet_url": "https://cloudsecurityalliance.org/articles/securing-agentic-ai-with-zero-trust-microsegmentation",
       "legacy_sheet_row": "[MOSAIC row 122](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A122)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -7630,7 +7630,7 @@
       "summary": "",
       "legacy_sheet_url": "https://cloudsecurityalliance.org/articles/i-love-google-s-agentic-ai-security-roadmap-adding-maestro-will-make-it-more-powerful-an-open-letter-to-google",
       "legacy_sheet_row": "[MOSAIC row 127](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A127)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -7774,7 +7774,7 @@
       "summary": "",
       "legacy_sheet_url": "https://cloudsecurityalliance.org/articles/industrial-scale-ai-distillation-is-a-cloud-security-failure",
       "legacy_sheet_row": "[MOSAIC row 132](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A132)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -7823,7 +7823,7 @@
       "summary": "",
       "legacy_sheet_url": "https://genai.owasp.org/2026/07/08/genai-and-agentic-ai-exploit-roundup-q2-2026/",
       "legacy_sheet_row": "[MOSAIC row 134](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A134)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: tested, possibly deployed (needs review)",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -7873,7 +7873,7 @@
       "summary": "",
       "legacy_sheet_url": "https://cloudsecurityalliance.org/articles/mcp-tool-exposure-is-a-privilege-grant-a-two-gate-authorization-model-for-agentic-ai",
       "legacy_sheet_row": "[MOSAIC row 135](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A135)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -7968,7 +7968,7 @@
       "summary": "",
       "legacy_sheet_url": "https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/securing-the-future-of-ai-agents/gdm-ai-control-roadmap.pdf",
       "legacy_sheet_row": "[MOSAIC row 138](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A138)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://deepmind.google/blog/securing-the-future-of-ai-agents/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8018,7 +8018,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.cisa.gov/news-events/cybersecurity-advisories/aa26-251a",
       "legacy_sheet_row": "[MOSAIC row 139](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A139)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: tested, possibly deployed (needs review)",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8065,7 +8065,7 @@
       "summary": "",
       "legacy_sheet_url": "https://cloudsecurityalliance.org/artifacts/zero-trust-microsegmentation-guidance",
       "legacy_sheet_row": "[MOSAIC row 140](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A140)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://cloudsecurityalliance.org/articles/securing-agentic-ai-with-zero-trust-microsegmentation",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8115,7 +8115,7 @@
       "summary": "",
       "legacy_sheet_url": "https://assets.contentstack.io/v3/assets/bltabe50a4554f8e97f/blt310ceb203d90eccf/frameworks-digital-forensics",
       "legacy_sheet_row": "[MOSAIC row 141](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A141)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://www.sans.org/go/ai-assisted-human-led-trusted-investigations",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8162,7 +8162,7 @@
       "summary": "",
       "legacy_sheet_url": "https://assets.contentstack.io/v3/assets/bltabe50a4554f8e97f/blt629b7cccb1305f62/framework-incident-response",
       "legacy_sheet_row": "[MOSAIC row 142](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=632807048&range=A142)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://www.sans.org/go/ai-assisted-human-led-trusted-investigations",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8210,7 +8210,7 @@
       "summary": "",
       "legacy_sheet_url": "https://atlas.mitre.org/",
       "legacy_sheet_row": "[Peer SDOs row 2](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=755721946&range=A2)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: tested, possibly deployed (needs review)",
       "blog_url": "https://github.com/mitre-atlas/atlas-data/releases/tag/v2026.09",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8265,7 +8265,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.etsi.org/deliver/etsi_en/304200_304299/304223/02.01.01_60/en_304223v020101p.pdf",
       "legacy_sheet_row": "[Peer SDOs row 3](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=755721946&range=A3)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://www.etsi.org/newsroom/press-releases/2627-etsi-releases-world-leading-standard-for-securing-ai/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8297,7 +8297,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.enisa.europa.eu/publications/enisas-view-on-cybersecurity-in-the-frontier-ai-era",
       "legacy_sheet_row": "[Peer SDOs row 4](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=755721946&range=A4)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://www.enisa.europa.eu/sites/default/files/2026-07/ENISA%20view%20on%20cybersecurity%20in%20the%20frontier%20AI%20era_en_0.pdf",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8329,7 +8329,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.etsi.org/deliver/etsi_ts/104200_104299/104275/01.01.01_60/ts_104275v010101p.pdf",
       "legacy_sheet_row": "[Peer SDOs row 5](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=755721946&range=A5)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8384,7 +8384,7 @@
       "summary": "",
       "legacy_sheet_url": "https://best.openssf.org/Security-Focused-Guide-for-AI-Code-Assistant-Instructions",
       "legacy_sheet_row": "[Coalitions row 2](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=1727226856&range=A2)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://github.com/ossf/wg-best-practices-os-developers/blob/main/docs/Security-Focused-Guide-for-AI-Code-Assistant-Instructions.md",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8416,7 +8416,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.frontiermodelforum.org/issue-briefs/emerging-security-practices-for-ai-agents/",
       "legacy_sheet_row": "[Coalitions row 3](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=1727226856&range=A3)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: tested, possibly deployed (needs review)",
       "blog_url": "https://www.frontiermodelforum.org/issue-briefs/emerging-security-practices-for-ai-agents/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8448,7 +8448,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.frontiermodelforum.org/technical-reports/managing-advanced-cyber-risks-in-frontier-ai-frameworks/",
       "legacy_sheet_row": "[Coalitions row 4](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=1727226856&range=A4)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://www.frontiermodelforum.org/technical-reports/managing-advanced-cyber-risks-in-frontier-ai-frameworks/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8480,7 +8480,7 @@
       "summary": "",
       "legacy_sheet_url": "https://partnershiponai.org/modeldeployment/",
       "legacy_sheet_row": "[Coalitions row 5](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=1727226856&range=A5)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://partnershiponai.org/pai-model-deployment-guidance-press-release/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8544,7 +8544,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.imda.gov.sg/assets/63438074-73f6-4dcc-a281-030f42642cf4.pdf",
       "legacy_sheet_row": "[Coalitions row 6](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=1727226856&range=A6)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://aiverifyfoundation.sg/resources/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8632,7 +8632,7 @@
       "summary": "",
       "legacy_sheet_url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218A.pdf",
       "legacy_sheet_row": "[Government row 2](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=267020072&range=A2)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8788,7 +8788,7 @@
       "summary": "",
       "legacy_sheet_url": "https://github.com/secure-agentic-framework/saf-mcp",
       "legacy_sheet_row": "[Coalitions row 7](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=1727226856&range=A7)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8844,7 +8844,7 @@
       "summary": "",
       "legacy_sheet_url": "https://mlcommons.org/wp-content/uploads/2026/10/ML-Commons-Agent-Privacy-Taxonomy-v01.pdf",
       "legacy_sheet_row": "[Coalitions row 8](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=1727226856&range=A8)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://mlcommons.org/2026/10/agent-privacy-risk-taxonomy-v0-1/",
       "duplicate_issue_numbers": [
         154
@@ -8897,7 +8897,7 @@
       "summary": "",
       "legacy_sheet_url": "https://www.frontiermodelforum.org/issue-briefs/agents-for-cyber-defense/",
       "legacy_sheet_row": "[Coalitions row 9](https://docs.google.com/spreadsheets/d/161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE/edit#gid=1727226856&range=A9)",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "https://www.frontiermodelforum.org/issue-briefs/agents-for-cyber-defense/",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8950,7 +8950,7 @@
       "summary": "A living database of AI risks drawn from many published frameworks, sorted by cause and by domain. It covers risks, not security principles.",
       "legacy_sheet_url": "https://airisk.mit.edu/",
       "legacy_sheet_row": "Not in the sheet yet. Added by hand on Oct 31, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -8993,7 +8993,7 @@
       "summary": "A layered method for threat modeling agentic AI systems. It is a method, not a catalog of controls. Related: #128.",
       "legacy_sheet_url": "https://cloudsecurityalliance.org/blog/2025/02/06/agentic-ai-threat-modeling-framework-maestro",
       "legacy_sheet_row": "Not in the sheet yet. Added by hand on Oct 31, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -9039,7 +9039,7 @@
       "summary": "A NIST project to build SP 800-53 control overlays for AI systems, including agent use cases. Check the project page for which drafts are out.\nNote: on October 20, 2026, NIST renamed this project to SP 800-53 Control Overlays for Super Intelligence Systems (COSIS). The NIST page says this follows a September 29, 2026 Executive Order. (From the NIST project page.)",
       "legacy_sheet_url": "https://csrc.nist.gov/projects/cosais",
       "legacy_sheet_row": "Not in the sheet yet. Added by hand on Oct 31, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -9084,7 +9084,7 @@
       "summary": "Google's framework of risks and controls for building and running AI systems.\nThe extraction below comes from the SAIF Map and Risks pages on saif.google, read on November 3, 2026.",
       "legacy_sheet_url": "https://saif.google/",
       "legacy_sheet_row": "Not in the sheet yet. Added by hand on Oct 31, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -9129,7 +9129,7 @@
       "summary": "Google's paper on securing AI agents, with core principles for agent security.",
       "legacy_sheet_url": "https://research.google/pubs/an-introduction-to-googles-approach-for-secure-ai-agents/",
       "legacy_sheet_row": "Not in the sheet yet. Added by hand on Oct 31, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -9178,7 +9178,7 @@
       "summary": "A matrix that sorts agentic systems by how much autonomy they have and maps security needs to each level.",
       "legacy_sheet_url": "https://aws.amazon.com/blogs/security/the-agentic-ai-security-scoping-matrix-a-framework-for-securing-autonomous-ai-systems/",
       "legacy_sheet_row": "Not in the sheet yet. Added by hand on Oct 31, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -9224,7 +9224,7 @@
       "summary": "Microsoft's whitepaper listing security and safety failure modes in agentic AI systems.",
       "legacy_sheet_url": "https://www.microsoft.com/en-us/security/blog/2025/04/24/new-whitepaper-outlines-the-taxonomy-of-failure-modes-in-ai-agents/",
       "legacy_sheet_row": "Not in the sheet yet. Added by hand on Oct 31, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -9359,7 +9359,7 @@
       "summary": "A benchmark that tests AI systems for safety and security risks. Related to, but separate from, the Agent Privacy Risk Taxonomy in #159.\nThe extraction below comes from the AILuminate benchmark page, read on November 3, 2026.",
       "legacy_sheet_url": "https://mlcommons.org/benchmarks/ailuminate/",
       "legacy_sheet_row": "Not in the sheet yet. Added by hand on Oct 31, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: tested",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -9401,7 +9401,7 @@
       "summary": "A community list of top 10 vulnerabilities in agentic AI, published as a GitHub repo.",
       "legacy_sheet_url": "https://github.com/precize/Agentic-AI-Top10-Vulnerability",
       "legacy_sheet_row": "Not in the sheet yet. Added by hand on Oct 31, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical (needs review)",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -9447,7 +9447,7 @@
       "summary": "A practical guide for adversarial testing of generative AI models and systems. It sets out an eight-phase method that starts with planning, reconnaissance, and attack surface mapping and moves through exploitation, persistence, and impact assessment. Extraction is from the PDF.",
       "legacy_sheet_url": "",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -9498,7 +9498,7 @@
       "summary": "A report that compares human-guided and autonomous AI approaches to exploit generation against live targets. It looks at success, human effort, cost, guardrails, and limits. It compares hosted and local models and uses Cybench tasks. Extraction is from the PDF.",
       "legacy_sheet_url": "",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: tested (needs review)",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -9542,7 +9542,7 @@
       "summary": "Part 1 of a twelve-part playbook that goes with the OWASP Risks and Mitigations 2026 document. It sets scope, conventions, and GenAI data security basics, including six principles, AI data security posture management, and Tier 1 baselines. The document says version 1 should no longer be used as a current reference. Extraction is from the PDF.",
       "legacy_sheet_url": "",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -9592,7 +9592,7 @@
       "summary": "Blog post 2 in a NIST series on agent identity, by Harold Booth, Bill Fisher, Ryan Galluzzo, and Tom Clancy (authors as listed on the page). It sets out ten design tenets for agent identity systems, drawn from public comments on an NCCoE project. Post 1 in the series is not in this repo yet.",
       "legacy_sheet_url": "",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: tested, possibly deployed (needs review)",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -9642,7 +9642,7 @@
       "summary": "Joint guidance on getting ready for and responding to incidents during the training and evaluation of very capable AI models, which the document calls super intelligence. It sets out ten practices grouped as Prepare, Detect, Respond, Recover, and Report. Extraction is from the PDF.",
       "legacy_sheet_url": "",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: tested, possibly deployed (needs review)",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
@@ -9691,7 +9691,7 @@
       "summary": "A framework to help organizations prepare for attackers who use frontier AI, whether or not the organization uses AI itself. Per the landing page, it groups 12 categories into three domains (Foundational, Structural, Operational) and five maturity levels (Initial, Repeatable, Defined, Capable, Efficient), and ships as a spreadsheet. The download needs a CSA login, so extraction is pending.",
       "legacy_sheet_url": "",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
@@ -9715,7 +9715,7 @@
       "summary": "Transition guidance for cloud and AI service providers that already use the CSA STAR program and want to cover AI risks under STAR for AI. Per the landing page, it covers the move between control matrices, Level 1 self-assessments, and Level 2 third-party audits. The download needs a CSA login, so extraction is pending.",
       "legacy_sheet_url": "",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
@@ -9739,7 +9739,7 @@
       "summary": "A SANS report by Chris Cochran on a September 16, 2026 forum where nine experts and three executive panelists tested the SANS AI Security Maturity Model. Per the landing page, 60% of attendees in a poll placed their organization at Stage 2, and 55% could not say how their agents are identified. The PDF needs a SANS login, so extraction is pending. Related: #47 (the maturity model itself).",
       "legacy_sheet_url": "",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026.",
-      "legacy_notes": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
