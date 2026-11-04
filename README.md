@@ -200,6 +200,19 @@ python3 scripts/open_inventory_pr.py
 
 `scripts/open_inventory_pr.py` runs the schema check, commits `data/whitepapers.json`, `data/whitepapers.csv`, and `runs/`, pushes the current branch, and opens a pull request into `master`. It refuses `master` and `main`. It does not force-push. Wait until the GitHub check `validate-whitepapers` passes, then merge the pull request.
 
+## Site publish
+
+Included papers also land on aisharedresponsibility.com as `/data/whitepapers.json` and `/data/whitepapers.slim.json`. After the export is on `master`, GitHub Actions opens a pull request on `billbrietstout/ai-shared-responsibility`. The workflow needs a repository secret named `SITE_REPO_TOKEN` that can push a branch and open a pull request on that repo.
+
+To publish by hand:
+
+```bash
+python3 scripts/site_inventory.py --out /tmp/site-inventory
+python3 scripts/open_site_pr.py --from /tmp/site-inventory
+```
+
+The site files are an inventory. They do not rewrite the principle catalogs.
+
 The check also reads the issues and compares them with the export. `--schema-only` does not do that read. CI does.
 
 ## Files
@@ -212,6 +225,8 @@ The check also reads the issues and compares them with the export. `--schema-onl
 - `scripts/validate_whitepapers.py` is the check that CI runs. `--schema-only` is the local schema and WP- id check.
 - `scripts/file_issues.py` opens one batch of issues and adds them to GitHub Project 2. It resumes from `runs/<date>.json`.
 - `scripts/open_inventory_pr.py` commits the export on the current branch and opens a pull request. It does not push `master`.
+- `scripts/site_inventory.py` writes the included-paper JSON files that the site serves.
+- `scripts/open_site_pr.py` copies those files into `billbrietstout/ai-shared-responsibility` and opens a pull request. It needs `SITE_REPO_TOKEN`.
 - `runs/` holds the checkpoint for each weekly pass. `runs/latest.txt` names the date to resume.
 - `AGENTS.md` lists the commands, the rules, and the known traps.
 - `docs/extraction-handoff.md` explains how to extract Axioms, Invariants, Principles, and OpenCRE Topics from a paper into an issue.
