@@ -113,6 +113,16 @@ def main() -> None:
     dest_slim = work / "data" / "whitepapers.slim.json"
     dest_full.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(full_path, dest_full)
+    # The site CI check (whitepapers-fixture) compares this copy with the monitor export.
+    dest_fixture = work / "build" / "fixtures" / "whitepapers.json"
+    dest_fixture.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ROOT / "data" / "whitepapers.json", dest_fixture)
+    # The site builds its slim inventory from the fixture. CI fails if it is stale.
+    generator = work / "build" / "generate_whitepaper_inventory.py"
+    if generator.exists():
+        built_slim = run([sys.executable, str(generator)], cwd=work)
+        if built_slim.returncode != 0:
+            raise SystemExit("The site inventory build failed.\n" + git_error(built_slim, [auth]))
     shutil.copyfile(slim_path, dest_slim)
     site_inventory.patch_index(
         work / "data" / "index.json",
@@ -121,13 +131,13 @@ def main() -> None:
         full["updated"],
     )
 
-    status = run(["git", "status", "--porcelain", "--", "data/whitepapers.json", "data/whitepapers.slim.json", "data/index.json"], cwd=work)
+    status = run(["git", "status", "--porcelain", "--", "data/whitepapers.json", "data/whitepapers.slim.json", "data/index.json", "build/fixtures/whitepapers.json", "data/whitepaper-inventory.slim.json"], cwd=work)
     if not status.stdout.strip():
         print("Site inventory is already current. No pull request.")
         return
 
     run(["git", "checkout", "-b", branch], cwd=work)
-    run(["git", "add", "--", "data/whitepapers.json", "data/whitepapers.slim.json", "data/index.json"], cwd=work)
+    run(["git", "add", "--", "data/whitepapers.json", "data/whitepapers.slim.json", "data/index.json", "build/fixtures/whitepapers.json", "data/whitepaper-inventory.slim.json"], cwd=work)
     message = f"Update the whitepaper inventory from the monitor ({today})"
     run(["git", "config", "user.name", BOT_NAME], cwd=work)
     run(["git", "config", "user.email", BOT_EMAIL], cwd=work)
