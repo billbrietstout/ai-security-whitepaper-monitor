@@ -25,8 +25,8 @@ A closed issue with no Decision line stops the export.
 7. Rebuild the export on a branch and open a pull request. Do not push to `master`.
 
 ```bash
-python3 scripts/export_whitepapers.py
 git checkout -b weekly/2026-11-04
+python3 scripts/export_whitepapers.py
 python3 scripts/open_inventory_pr.py
 ```
 
