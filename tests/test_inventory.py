@@ -145,7 +145,7 @@ _Not filled yet._
             ],
         )
 
-    def test_export_repeats_invariants_as_invariables(self):
+    def test_export_stores_invariants_and_not_invariables(self):
         document = inventory.build_inventory(
             [issue(1, BODY, "Security Engineering")],
             updated="2026-11-04",
@@ -153,20 +153,18 @@ _Not filled yet._
         )
         paper = document["papers"][0]
         self.assertEqual(paper["invariants"], ["The model stores its training data."])
-        self.assertEqual(paper["invariables"], paper["invariants"])
+        self.assertNotIn("invariables", paper)
         self.assertEqual(validate_whitepapers.check_schema(document), [])
-        self.assertEqual(validate_whitepapers.check_invariant_alias(document), [])
 
-    def test_different_alias_lists_fail_while_the_schema_passes(self):
+    def test_an_invariables_key_fails_the_schema(self):
         document = inventory.build_inventory(
             [issue(1, BODY, "Security Engineering")],
             updated="2026-11-04",
             repository=REPO,
         )
-        document["papers"][0]["invariables"] = ["A different bullet."]
-        self.assertEqual(validate_whitepapers.check_schema(document), [])
-        problems = validate_whitepapers.check_invariant_alias(document)
-        self.assertTrue(any("WP-0001" in problem for problem in problems))
+        document["papers"][0]["invariables"] = list(document["papers"][0]["invariants"])
+        problems = validate_whitepapers.check_schema(document)
+        self.assertTrue(any("invariables" in problem for problem in problems))
 
     def test_a_line_without_a_dash_is_not_a_bullet(self):
         body = """**Source:** Example Lab
@@ -353,7 +351,6 @@ class ExportFileTests(unittest.TestCase):
         document = json.loads(inventory.JSON_PATH.read_text(encoding="utf-8"))
         self.assertEqual(validate_whitepapers.check_schema(document), [])
         self.assertEqual(validate_whitepapers.check_ids(document), [])
-        self.assertEqual(validate_whitepapers.check_invariant_alias(document), [])
         numbers = [paper["issue_number"] for paper in document["papers"]]
         self.assertEqual(len(numbers), len(set(numbers)))
         folded = [number for paper in document["papers"] for number in paper["duplicate_issue_numbers"]]

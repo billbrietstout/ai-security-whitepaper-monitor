@@ -98,7 +98,6 @@
         "duplicate_issue_numbers",
         "axioms",
         "invariants",
-        "invariables",
         "principles",
         "opencre_topics"
       ],
@@ -132,10 +131,6 @@
         "invariants": {
           "$ref": "#/$defs/bulletList",
           "description": "Bullets from the Invariants heading, or from an older Invariables heading."
-        },
-        "invariables": {
-          "$ref": "#/$defs/bulletList",
-          "description": "The same list as invariants. The site repository ai-shared-responsibility still reads this name."
         },
         "principles": { "$ref": "#/$defs/bulletList" },
         "opencre_topics": { "$ref": "#/$defs/bulletList" }

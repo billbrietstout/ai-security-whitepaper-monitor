@@ -537,8 +537,6 @@ def paper_record(paper: dict) -> dict:
         "duplicate_issue_numbers": list(paper["duplicate_issue_numbers"]),
         "axioms": list(paper["axioms"]),
         "invariants": list(paper["invariants"]),
-        # The site repo still reads this name. It is the same list.
-        "invariables": list(paper["invariants"]),
         "principles": list(paper["principles"]),
         "opencre_topics": list(paper["opencre_topics"]),
     }
@@ -603,11 +601,10 @@ def write_csv(document: dict, path: Path = CSV_PATH) -> None:
         "duplicate_issue_numbers",
         "axioms",
         "invariants",
-        "invariables",
         "principles",
         "opencre_topics",
     ]
-    list_columns = {"axioms", "invariants", "invariables", "principles", "opencre_topics"}
+    list_columns = {"axioms", "invariants", "principles", "opencre_topics"}
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=columns, lineterminator="\n")

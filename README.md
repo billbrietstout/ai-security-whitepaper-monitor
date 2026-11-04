@@ -83,11 +83,10 @@ python3 scripts/sync_issues.py
 
 5. Commit `data/whitepapers.json` and `data/whitepapers.csv`, and open a pull request.
 
-GitHub Actions runs the check named `validate-whitepapers` on every push and every pull request. The check does four things:
+GitHub Actions runs the check named `validate-whitepapers` on every push and every pull request. The check does three things:
 
 - It validates `data/whitepapers.json` against `schemas/whitepapers.schema.json`.
 - It checks that each `WP-` id is unique, and that an id already tied to a URL stays on that URL.
-- It checks that `invariables` and `invariants` on each paper are the same list.
 - It checks that every record points at an issue that exists in this repo, and that the export matches those issues.
 
 `scripts/validate_whitepapers.py` is the same check. Install its dependency once per environment:
@@ -200,7 +199,7 @@ The check also reads the issues and compares them with the export. `--schema-onl
 
 ## Files
 
-- `data/whitepapers.json` is the versioned inventory. `version` is the file format. `updated` is the date the file was written. `id_registry` lists every `WP-` id, the issue that received it, and the URL it belongs to. The registry keeps an id after a paper drops out of the issue list, so the id is not given to a different URL. Each paper stores its second extraction list twice: `invariants` is the name in this repo, and `invariables` is the same list because the site repository still reads `invariables`.
+- `data/whitepapers.json` is the versioned inventory. `version` is the file format. `updated` is the date the file was written. `id_registry` lists every `WP-` id, the issue that received it, and the URL it belongs to. The registry keeps an id after a paper drops out of the issue list, so the id is not given to a different URL. The second extraction list is `invariants`. Older issue headings may say `### Invariables`; the export reads that heading into the same list.
 - `data/whitepapers.csv` is the same papers in a spreadsheet, one row per paper, keyed by `WP-` id.
 - `schemas/whitepapers.schema.json` is the contract for the JSON file.
 - `scripts/export_whitepapers.py` writes the JSON and CSV files.
