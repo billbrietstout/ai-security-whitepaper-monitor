@@ -1,0 +1,36 @@
+name: publish-site-inventory
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - data/whitepapers.json
+      - scripts/site_inventory.py
+      - scripts/open_site_pr.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: publish-site-inventory
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the monitor
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build the site inventory files
+        run: python3 scripts/site_inventory.py --out /tmp/site-inventory
+
+      - name: Open a pull request on the site repo
+        env:
+          SITE_REPO_TOKEN: ${{ secrets.SITE_REPO_TOKEN }}
+          SITE_REPO: billbrietstout/ai-shared-responsibility
+          SITE_PR_BASE: develop
+        run: python3 scripts/open_site_pr.py --from /tmp/site-inventory

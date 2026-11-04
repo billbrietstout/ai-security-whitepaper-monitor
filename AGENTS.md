@@ -46,6 +46,13 @@ python3 scripts/open_inventory_pr.py
 
 The full GitHub check is `python3 scripts/validate_whitepapers.py`. CI runs that check under the name `validate-whitepapers`. Wait for it to pass before merging.
 
+Publish included papers to the site repo. `SITE_REPO_TOKEN` must be able to open a pull request on `billbrietstout/ai-shared-responsibility`. The command does not print the token:
+
+```bash
+python3 scripts/site_inventory.py --out /tmp/site-inventory
+python3 scripts/open_site_pr.py --from /tmp/site-inventory
+```
+
 ## Rules
 
 - `raw/` is read-only. Do not add, edit, or delete files under `raw/`.
@@ -53,6 +60,7 @@ The full GitHub check is `python3 scripts/validate_whitepapers.py`. CI runs that
 - Do not print `GITHUB_PROJECTS_TOKEN`, `GITHUB_TOKEN`, or `GH_TOKEN`. Do not write them into the run file, the log, or a pull request body.
 - Do not read or write the retired Google Sheet `161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE`. `scripts/sheet_sync.py` and `scripts/extraction.py` exit on purpose.
 - Data changes go through a pull request into `master`. Do not push to `master` or `main`. Do not force-push.
+- Do not print `SITE_REPO_TOKEN`. Site inventory pull requests go to `billbrietstout/ai-shared-responsibility`. They do not rewrite the principle catalogs.
 
 ## Known traps
 
