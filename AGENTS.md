@@ -67,7 +67,7 @@ python3 scripts/open_site_pr.py --from /tmp/site-inventory
 - `raw/` is read-only. Do not add, edit, or delete files under `raw/`.
 - Do not close or delete GitHub issues. File a new issue only through `scripts/file_issues.py`. That command searches for the `<!-- wp-id: WP-0000 -->` marker first. It does not edit an issue that already exists.
 - Do not print `GITHUB_PROJECTS_TOKEN`, `GITHUB_TOKEN`, or `GH_TOKEN`. Do not write them into the run file, the log, or a pull request body.
-- Do not read or write the retired Google Sheet `161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE`. `scripts/sheet_sync.py` and `scripts/extraction.py` exit on purpose.
+- Do not read or write the retired Google Sheet. `scripts/sheet_sync.py` and `scripts/extraction.py` exit on purpose.
 - Data changes go through a pull request into `master`. Do not push to `master` or `main`. Do not force-push.
 - Do not print `SITE_REPO_TOKEN`. Site inventory pull requests go to `billbrietstout/ai-shared-responsibility`. They do not rewrite the principle catalogs.
 
