@@ -30,6 +30,13 @@ Rebuild the export from issues:
 python3 scripts/export_whitepapers.py
 ```
 
+List included papers that have no evidence level. The default batch is 25. This reads the export and does not edit issues:
+
+```bash
+python3 scripts/missing_evidence.py
+python3 scripts/missing_evidence.py --offset 25
+```
+
 File one batch from a screened queue. The default batch size is 25. Use a batch size from 25 to 50. The run file is `runs/<date>.json`. A second invocation resumes that file.
 
 ```bash

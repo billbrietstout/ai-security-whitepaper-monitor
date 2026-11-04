@@ -552,6 +552,31 @@ class ResumeTests(unittest.TestCase):
         self.assertEqual(paper["url"], "https://example.org/round-trip")
         self.assertEqual(paper["axioms"], [])
         self.assertIn("2305.18447", paper["legacy_notes"])
+        self.assertEqual(
+            inventory.evidence_level_code(inventory.evidence_level_raw(paper["legacy_notes"])),
+            "tested",
+        )
+        self.assertNotIn("### Evidence\n", body)
+
+    def test_an_organization_paper_gets_an_evidence_section(self):
+        item = pending("WP-0114", "https://example.org/org-guide")
+        item["evidence_level"] = "theoretical"
+        body = filing.render_issue_body(item)
+        self.assertIn("### Evidence\n- Evidence level: theoretical", body)
+        self.assertNotIn("### arXiv reference", body)
+        record = inventory.parse_issue(
+            {
+                "number": 14,
+                "title": item["title"],
+                "state": "open",
+                "html_url": "https://github.com/example/papers/issues/14",
+                "body": body,
+            }
+        )
+        self.assertEqual(
+            inventory.evidence_level_code(inventory.evidence_level_raw(record["legacy_notes"])),
+            "theoretical",
+        )
 
     def test_run_file_cannot_be_written_under_raw(self):
         path = ROOT / "raw" / "2026-11-04.json"

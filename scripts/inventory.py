@@ -642,6 +642,66 @@ def counts(document: dict) -> dict[str, int]:
     }
 
 
+EVIDENCE_LEVEL_RE = re.compile(r"Evidence level:\s*([^\n]+)", re.IGNORECASE)
+DEFAULT_EVIDENCE_BATCH = 25
+
+
+def evidence_level_raw(notes: str) -> str:
+    """Return the text after ``Evidence level:``, without a trailing Basis clause.
+
+    The line is stored in the issue, under ``### arXiv reference`` or ``### Evidence``.
+    The export copies that section into ``legacy_notes``. There is no separate field.
+    """
+    match = EVIDENCE_LEVEL_RE.search(notes or "")
+    if not match:
+        return ""
+    raw = re.split(r"\s+Basis:", match.group(1).strip(), maxsplit=1)[0]
+    return raw.strip().rstrip(".")
+
+
+def evidence_level_code(raw: str) -> str:
+    """Map a level line to theoretical, tested, possibly_deployed, or deployed.
+
+    ``tested, possibly deployed`` is checked before ``tested``. An empty string
+    means the line is missing or the text is not one of those four levels.
+    """
+    low = (raw or "").lower()
+    if not low:
+        return ""
+    if low.startswith("tested, possibly deployed"):
+        return "possibly_deployed"
+    if low.startswith("tested"):
+        return "tested"
+    if low.startswith("theoretical"):
+        return "theoretical"
+    if low.startswith("deployed"):
+        return "deployed"
+    return ""
+
+
+def papers_missing_evidence(document: dict) -> list[dict]:
+    """Included papers whose notes have no recognized evidence level."""
+    missing = []
+    for paper in document.get("papers") or []:
+        if not isinstance(paper, dict) or paper.get("decision") != "include":
+            continue
+        raw = evidence_level_raw(str(paper.get("legacy_notes") or ""))
+        if evidence_level_code(raw):
+            continue
+        missing.append(paper)
+    missing.sort(key=lambda paper: str(paper.get("wp_id") or ""))
+    return missing
+
+
+def evidence_batch(papers: list[dict], *, batch_size: int = DEFAULT_EVIDENCE_BATCH, offset: int = 0) -> list[dict]:
+    """One slice of a missing-evidence list. The weekly pass uses 25."""
+    if batch_size < 1:
+        raise SystemExit("Batch size must be at least 1. Use 25 for a weekly pass.")
+    if offset < 0:
+        raise SystemExit("Offset must be 0 or greater.")
+    return papers[offset : offset + batch_size]
+
+
 def format_counts(document: dict) -> str:
     tally = counts(document)
     folded = tally["folded_duplicate_issues"]
