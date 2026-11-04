@@ -24,7 +24,7 @@ If MOSAIC later onboard a body that already has rows on another tab, move those 
 
 ## Inventory columns
 
-`#`, issuer (`MOSAIC Member` or `Organization`), `Publication`, `Date Published`, `Category`, `File Type`, `Link`, `Axioms`, `Invariables`, `Principles`, `OpenCRE Topics`, `Blog / Announcement`.
+`#`, issuer (`MOSAIC Member` or `Organization`), `Publication`, `Date Published`, `Category`, `File Type`, `Link`, `Axioms`, `Invariants`, `Principles`, `OpenCRE Topics`, `Blog / Announcement`. The retired sheet header for the second extraction column was `Invariables`. The issue heading is `### Invariants`.
 
 Watch list: Organization, Tab, Catalog URL, Last checked, Notes.
 
@@ -44,15 +44,15 @@ Treat a revision as an update to the existing row when it is the same named work
 
 ## Extraction style
 
-Read the paper or official public summary. Fill `Axioms`, `Invariables`, and `Principles` as short bullets that name who does what, to which object, under what condition. Use concrete verbs: measure, assign, log, block, revoke, attest, map, require.
+Read the paper or official public summary. Fill `Axioms`, `Invariants`, and `Principles` as short bullets that name who does what, to which object, under what condition. Use concrete verbs: measure, assign, log, block, revoke, attest, map, require.
 
-[extraction-prompt.md](extraction-prompt.md) holds the definitions that separate the three columns, the allowed `OpenCRE Topics` labels, and the checks each bullet must pass. In short: Axioms are premises about the world outside the system; Invariables are properties that hold for every in-scope system, stated as requirements or as unavoidable facts; Principles are recommended guidance written as `Name: actor, action, object, condition`. `OpenCRE Topics` use the 15 base labels the sheet already uses most, starting with Access Control, Secure Product Design, Threat Modeling, Data Protection, and Supply Chain.
+[extraction-prompt.md](extraction-prompt.md) holds the definitions that separate the three columns, the allowed `OpenCRE Topics` labels, and the checks each bullet must pass. In short: Axioms are premises about the world outside the system; Invariants are properties that hold for every in-scope system, stated as requirements or as unavoidable facts; Principles are recommended guidance written as `Name: actor, action, object, condition`. `OpenCRE Topics` use the 15 base labels the sheet already uses most, starting with Access Control, Secure Product Design, Threat Modeling, Data Protection, and Supply Chain.
 
 To fill rows with empty extraction columns, run the Cursor extraction pass in that file.
 
 Keep `Category` and `File Type` in the vocabularies already used (`Framework`, `Whitepaper`, `Guide`, `PDF`, `Web`, and so on). Do not invent a new category unless none of the existing ones fit.
 
-A row may go on an inventory tab with Axioms, Invariables, Principles, or OpenCRE Topics empty. Fill those columns on a later pass. If extraction fails, write the row with the extraction columns empty and name the paper under Changelog Errors so the next run retries it.
+A row may go on an inventory tab with Axioms, Invariants, Principles, or OpenCRE Topics empty. Fill those columns on a later pass. If extraction fails, write the row with the extraction columns empty and name the paper under Changelog Errors so the next run retries it.
 
 ## Sunday job steps
 

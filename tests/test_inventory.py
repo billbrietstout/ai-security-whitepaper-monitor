@@ -83,6 +83,7 @@ class ParseTests(unittest.TestCase):
         self.assertEqual(record["date_published"], "Aug 2019")
         self.assertEqual(record["category"], "Article")
         self.assertEqual(record["axioms"], ["Adoption is uneven."])
+        self.assertEqual(record["invariants"], ["The model stores its training data."])
         self.assertEqual(record["decision"], "include")
         self.assertNotIn("Synced from the whitepaper sheet", " ".join(record["axioms"]))
 
@@ -101,7 +102,7 @@ class ParseTests(unittest.TestCase):
 Not extracted yet. The next pass will fill this from the paper.
 - Any ML system that is not fully white-box is susceptible to extraction attacks.
 
-### Invariables
+### Invariants
 Not extracted yet.
 
 ### Principles
@@ -117,12 +118,26 @@ _Not filled yet._
             record["axioms"],
             ["Any ML system that is not fully white-box is susceptible to extraction attacks."],
         )
-        self.assertEqual(record["invariables"], [])
+        self.assertEqual(record["invariants"], [])
         self.assertEqual(
             record["principles"],
             ["Least privilege: the operator grants each agent only the tools the task needs."],
         )
         self.assertEqual(record["opencre_topics"], [])
+
+    def test_a_line_without_a_dash_is_not_a_bullet(self):
+        body = """**Source:** Example Lab
+**Link:** https://example.org/plain.pdf
+
+### Axioms
+This sentence has no dash and is not a bullet.
+- Adversaries already use AI to attack faster than humans can respond.
+"""
+        record = inventory.parse_issue(issue(183, body, "Plain line"))
+        self.assertEqual(
+            record["axioms"],
+            ["Adversaries already use AI to attack faster than humans can respond."],
+        )
 
     def test_sheet_url_is_optional(self):
         record = inventory.parse_issue(issue(172, HAND_BODY, "Agentic AI Top 10"))
