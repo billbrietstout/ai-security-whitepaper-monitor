@@ -2932,7 +2932,7 @@
         "ML systems exist on a spectrum from white box (fully open, public training data) to black box (API-only, unknown transformation function)",
         "Data, model, and input are all separately attackable surfaces of an ML system"
       ],
-      "invariables": [
+      "invariants": [
         "Test-set evaluation drawn from the same distribution as training data guarantees nothing about generalization to production distributions",
         "Representations that are unstable and corruptible can always be tampered with, often undetectably",
         "Any ML system with less-than-fully-white-box status is inherently susceptible to extraction attacks",
@@ -2983,7 +2983,7 @@
         "Security must be built in at the design/architecture level, not bolted on via \"penetrate and patch\"",
         "Any sufficiently complex ML system will eventually fail; failure is unavoidable and must be planned for"
       ],
-      "invariables": [
+      "invariants": [
         "Training data become encoded/represented inside the trained model, always creating a confidentiality exposure",
         "An ML model's internal representation cannot be cleanly \"deleted\" short of full retraining from scratch",
         "All nine generic ML components are perpetually subject to security risk",
@@ -3039,7 +3039,7 @@
         "Foundation models function as an opaque \"black box\" outside user/builder control",
         "LLMs are stochastic by design; identical prompts can yield different outputs"
       ],
-      "invariables": [
+      "invariants": [
         "The machine becomes the data it is trained on (bad data always produces bad behavior)",
         "Recursive pollution (models eating their own or other models' output) always degrades integrity over generations",
         "Some part of the ML process remains hidden inside the foundation model black box regardless of application",
@@ -3092,7 +3092,7 @@
         "Cognitive dissimilarity: human understanding and LLM token prediction are fundamentally different processes",
         "App builders are ultimately accountable for systemic risks even though they don't control the foundation-model black box"
       ],
-      "invariables": [
+      "invariants": [
         "Data confidentiality must be preserved despite black-box, underspecified training sets",
         "Training data must not be legally encumbered (copyright, CSAM, GDPR \"right to be forgotten\")",
         "Recursive pollution (models trained on their own or others' polluted output) must be prevented",
@@ -3144,7 +3144,7 @@
         "Software security's historical arc (black box to BSIMM) is a valid predictive analog for MLsec",
         "AI benchmarks/leaderboards proliferate but are not built for security assessment"
       ],
-      "invariables": [
+      "invariants": [
         "No benchmark score can ever equal or certify \"being secure\" (no security meter exists)",
         "Published benchmarks always risk contamination/leakage into training data and gaming",
         "A \"badness-ometer\" only ever measures absence of known badness, never presence of security",
@@ -3197,7 +3197,7 @@
         "Any user input should be assumed capable of containing a prompt injection attempt",
         "Existing CIS Safeguards apply to AI but require reinterpretation"
       ],
-      "invariables": [
+      "invariants": [
         "Strict separation must always exist between system prompts, user inputs, and retrieved context",
         "All prompts, responses, and tool invocations must be logged for audit",
         "Least privilege must be enforced on every AI tool/API integration, with no exceptions",
@@ -3250,7 +3250,7 @@
         "AI is now operational infrastructure, not experimental, and must be secured with the same rigor as cloud-native/containerized systems",
         "The agent layer is distinct from the model layer and the protocol (MCP) layer"
       ],
-      "invariables": [
+      "invariants": [
         "No single layer (model, agent, or MCP) can secure the full AI system end-to-end",
         "Every tool invocation must be validated and authorized",
         "Agent actions must be logged, bounded, and auditable",
@@ -3305,7 +3305,7 @@
         "AI is now operational infrastructure, not experimental, and must be secured accordingly",
         "Enterprises already use CIS Controls, so extending rather than replacing them is preferred"
       ],
-      "invariables": [
+      "invariants": [
         "Every capability must be granted individually, never broadly/opaquely",
         "Tool requests must always be validated and authorized before execution",
         "All agent/tool actions must be logged, bounded, and auditable",
@@ -3357,7 +3357,7 @@
         "Existing cloud security practice (CCM) is a valid, extensible base for AI controls",
         "Trustworthiness must be demonstrable and independently verifiable, not just claimed"
       ],
-      "invariables": [
+      "invariants": [
         "Every control objective must be mapped across all five pillars with no exceptions",
         "Clear ownership/accountability must be assignable for each control regardless of actor role",
         "Independent, recurring third-party audits are required across the full lifecycle",
@@ -3410,7 +3410,7 @@
         "Distinct stakeholder roles bear differentiated control ownership",
         "Agentic AI adoption is accelerating and increasing complexity/attack surface"
       ],
-      "invariables": [
+      "invariants": [
         "Every control must be classified across five fixed pillars",
         "Full lifecycle coverage is required ,  from preparation through retirement ,  with no gaps",
         "Control ownership must always be explicitly assigned per stakeholder role, never ambiguous",
@@ -3463,7 +3463,7 @@
         "Basic identity controls (MFA/SSO adoption) are treated as sufficient when they are not",
         "A widening gap exists between adoption speed and security readiness"
       ],
-      "invariables": [
+      "invariants": [
         "Excessive/risky permissions must be eliminated regardless of cloud provider or architecture",
         "Access controls must remain consistent across all hybrid/multi-cloud environments",
         "Identity governance must scale uniformly across on-prem, cloud, and AI workloads",
@@ -3515,7 +3515,7 @@
         "Identity must encode an agent's capabilities, provenance, and security posture, not just \"who it is\"",
         "No implicit or default trust exists between autonomous agents"
       ],
-      "invariables": [
+      "invariants": [
         "Every agent action must trace back to a unique, verifiable agent identity",
         "Access must be continuously verified, never permanently or statically granted",
         "Permissions/credentials must be revocable in real time across all connected systems",
@@ -3567,7 +3567,7 @@
         "More diverse/larger data sources expand attack surface",
         "Multi-modal and agentic AI introduce risks beyond conventional perimeter security"
       ],
-      "invariables": [
+      "invariants": [
         "Sensitive data must be encrypted at rest, in transit, and in use, always",
         "Access must always follow least privilege regardless of role or system",
         "Data collection must always follow data minimization and purpose limitation",
@@ -3621,7 +3621,7 @@
         "This is not about one model, vendor, or announcement ,  capability trend will keep advancing",
         "Waiting for the next major AI announcement is not a strategy"
       ],
-      "invariables": [
+      "invariants": [
         "Security programs must be re-oriented for continuously increasing patch volume and decreasing time-to-patch",
         "Blast-radius containment (segmentation) is the primary control once discovery volume rises",
         "A permanent Vulnerability Operations (VulnOps) capability has \"no alternative\" as a long-term requirement",
@@ -3675,7 +3675,7 @@
         "AI models generally require unencrypted data to operate, so trust boundaries must be defined",
         "Vulnerabilities in any single supply chain stage can propagate throughout the entire system"
       ],
-      "invariables": [
+      "invariants": [
         "All model inputs, checkpoints, and pre-trained artifacts must have integrity verified before use",
         "Model/data provenance documentation must always be tamper-proof and traceable end-to-end",
         "Access to training data, storage, and model artifacts must always be strictly limited, monitored, logged",
@@ -3728,7 +3728,7 @@
         "Consumers, not a central authority, must decide which identities/claims to trust",
         "Model signing guarantees authenticity/integrity/provenance but not performance, fairness, or robustness"
       ],
-      "invariables": [
+      "invariants": [
         "Every model artifact must have a signature generated by its producer",
         "Signatures must tie the identity of an author/claimant to the exact contents of the attestation",
         "A model signature is valid only if all component hashes in the manifest match recomputed hashes",
@@ -3782,7 +3782,7 @@
         "Securing AI systems requires coordinated cross-role effort (\"a team sport\")",
         "You can't protect what you can't see (asset/attack-surface visibility)"
       ],
-      "invariables": [
+      "invariants": [
         "A core security principle mandates separation of code and data (treated as non-negotiable)",
         "Layered/redundant defenses must remain effective even when individual safeguards fail",
         "All final AI-assisted content/outputs must be human-reviewed and edited before use",
@@ -3837,7 +3837,7 @@
         "Providers and consumers of AI systems operate under a shared responsibility model",
         "Agentic/RAG/memory architectures introduce complexity beyond traditional IR"
       ],
-      "invariables": [
+      "invariants": [
         "Raw prompts, system prompts, parameters, and completions must always be logged/preserved for forensic reconstruction",
         "Evidence must be preserved before and during containment (forensic soundness, chain of custody)",
         "Containment actions must never destroy evidence",
@@ -3890,7 +3890,7 @@
         "Accountability in agentic systems must be shared among stakeholders",
         "CoSAI's scope is limited strictly to cybersecurity aspects of AI"
       ],
-      "invariables": [
+      "invariants": [
         "Agentic systems must always remain under meaningful human control",
         "Human accountability and oversight must scale with the risk of the business outcome",
         "Agents must operate within well-defined, principal-aligned boundaries of authority",
@@ -3946,7 +3946,7 @@
         "MCP incidents (Asana, WordPress AI Engine, Supabase) prove threats are active, not theoretical",
         "Containers alone are not a strong security boundary"
       ],
-      "invariables": [
+      "invariants": [
         "All requests must be traceable across the full execution chain",
         "Tool/resource content and AI-generated output must always be treated as untrusted input requiring validation",
         "MCP servers must always operate with least privilege / minimum necessary permissions",
@@ -3998,7 +3998,7 @@
         "Proving an LLM will never execute an injected instruction from untrusted content is currently considered theoretically impossible",
         "Visibility into a chat log is not the same as cryptographic control over code integrity"
       ],
-      "invariables": [
+      "invariants": [
         "An authoring agent must never self-approve its own pull request or bypass CI/CD to deploy unilateral changes",
         "Agents must never hold direct mutable privileges to the production runtime; write access stops at the declarative repository",
         "Every autonomous loop must start from a pristine, verified image and be destroyed immediately after execution",
@@ -4051,7 +4051,7 @@
         "Risk and control should scale with an agent's capability and the sensitivity of data it touches, not be uniform",
         "Retrofitting governance after agents are already embedded in operations costs more than building it in from the start"
       ],
-      "invariables": [
+      "invariants": [
         "Every agent must have its own distinct, verifiable identity with short-lived, task-scoped credentials, never a shared account or reused human credentials",
         "The chain of authority for delegated agent actions must always be traceable and preserved in immutable logs",
         "Security controls must be enforced independently at every hop, never assumed satisfied by a perimeter check alone",
@@ -4104,7 +4104,7 @@
         "Human judgment is required to set trustworthiness metrics and acceptable thresholds",
         "AI risk management is voluntary, rights-preserving, non-sector-specific, use-case agnostic"
       ],
-      "invariables": [
+      "invariants": [
         "GOVERN must be a cross-cutting function infused throughout Map, Measure, and Manage at all times",
         "Accountable & Transparent applies to every other trustworthiness characteristic",
         "Valid & Reliable is the necessary base condition underlying all other trustworthiness characteristics",
@@ -4157,7 +4157,7 @@
         "Non-AI or non-technology alternatives should always be considered, not assumed away",
         "Context (social, legal, cultural, operational) shapes real-world impact as much as system design"
       ],
-      "invariables": [
+      "invariants": [
         "Legal/regulatory requirements involving AI must always be understood, managed, and documented",
         "Documentation and transparency must be maintained across the full AI lifecycle, including post-decommissioning",
         "Every AI system must be assigned a risk tolerance/risk level, however scaled",
@@ -4211,7 +4211,7 @@
         "Some GAI risks are empirically known; others remain speculative or unknowable given immature measurement science",
         "AI RMF 1.0's Govern/Map/Measure/Manage functions already apply and this profile only extends them"
       ],
-      "invariables": [
+      "invariants": [
         "Organizations must document risk management roles, policies, and decision processes",
         "Mechanisms must always exist to deactivate/decommission a GAI system found to pose unacceptable risk",
         "Content provenance must be tracked across the lifecycle",
@@ -4264,7 +4264,7 @@
         "Security, resilience, and robustness are core attributes of trustworthy AI",
         "Attacker behavior is fully characterized by goals/objectives, capabilities, and knowledge"
       ],
-      "invariables": [
+      "invariants": [
         "Every attack's objective maps to exactly one of three violations: availability breakdown, integrity violation, or privacy compromise",
         "Attack classification always requires specifying: learning stage, attacker goals, attacker capabilities, attacker knowledge",
         "Mitigations must be evaluated against strong, adaptive (worst-case) adversaries, not weak/static ones",
@@ -4315,7 +4315,7 @@
         "Removing an unnecessary AI component eliminates all AI-related risks",
         "Attackers who obtain the model can craft/prepare input attacks efficiently and undetected"
       ],
-      "invariables": [
+      "invariants": [
         "AI models can always be wrong or manipulated ,  treat this as constant, not edge case",
         "Access control/authorization must never be delegated to the GenAI model or agent itself",
         "It must be assumed prompt injection can still occur even after alignment, filtering, and detection",
@@ -4372,7 +4372,7 @@
         "Multimodal inputs expand the attack surface beyond text",
         "Prompt injection and jailbreaking cannot be fully prevented, only mitigated"
       ],
-      "invariables": [
+      "invariants": [
         "Untrusted external content must always be segregated/labeled from trusted instructions",
         "Extension/tool permissions must never exceed what the specific function requires",
         "High-impact/privileged actions must always require independent verification or human approval",
@@ -4426,7 +4426,7 @@
         "Existing NIST Incident Response lifecycle is a valid backbone to extend for GenAI-specific guidance",
         "Organizations are already deploying GenAI faster than they are securing it"
       ],
-      "invariables": [
+      "invariants": [
         "An AI incident response plan must complement, not replace, existing IR processes",
         "Every critical AI system/model must have an assigned owner at all times",
         "Non-Human Identities interacting with AI systems must always be inventoried and controlled",
@@ -4479,7 +4479,7 @@
         "LLMOps/LLMSecOps lifecycle is the correct organizing frame for mapping solutions",
         "OWASP Top 10 for LLM risks are the anchor taxonomy that solutions must map back to"
       ],
-      "invariables": [
+      "invariants": [
         "Security must be embedded at every lifecycle stage, not bolted on at the end",
         "You cannot secure agents without securing the underlying models and infrastructure beneath them",
         "Sensitive data must be protected at rest, in motion, and at API access, at all stages",
@@ -4534,7 +4534,7 @@
         "No single scanner or tool provides complete security coverage",
         "Compromised MCP stack can lead to data theft, code execution, system sabotage"
       ],
-      "invariables": [
+      "invariants": [
         "Servers/manifests must never be assumed trustworthy; always validate before connecting",
         "Full tool descriptions/permissions must always be shown to users, never hidden or summarized",
         "Least-privilege enforcement must apply at the MCP server boundary regardless of deployment",
@@ -4588,7 +4588,7 @@
         "No single scanner or tool provides complete security coverage",
         "Compromised MCP stack can lead to data theft, code execution, system sabotage"
       ],
-      "invariables": [
+      "invariants": [
         "Servers/manifests must never be assumed trustworthy; always validate before connecting",
         "Full tool descriptions/permissions must always be shown to users, never hidden or summarized",
         "Least-privilege enforcement must apply at the MCP server boundary regardless of deployment",
@@ -4642,7 +4642,7 @@
         "Multi-agent ecosystems compose capabilities dynamically at runtime, expanding attack surface",
         "A distinct, governed agent identity is currently missing in most architectures (\"attribution gap\")"
       ],
-      "invariables": [
+      "invariants": [
         "All natural-language/external inputs must be treated as untrusted",
         "Human approval must be required before high-impact, irreversible, or goal-changing actions",
         "Comprehensive, immutable/tamper-evident logging of agent actions, tool calls, and inter-agent messages must always exist",
@@ -4699,7 +4699,7 @@
         "Automation scales testing but does not replace human adversarial creativity",
         "Simple systems (no tools/agents) still carry significant risk"
       ],
-      "invariables": [
+      "invariants": [
         "Findings must be reproducible (multi-turn tests, deterministic replay)",
         "Critical/emergent-behavior findings always require human verification, not LLM-judge-only scoring",
         "No vendor can legitimately claim \"full coverage\" or \"one-click\" red teaming",
@@ -4754,7 +4754,7 @@
         "Guide targets architects, platform engineers, and dev teams building MCP servers, not just security practitioners",
         "MCP servers inherit classic API risks plus novel AI-specific risks"
       ],
-      "invariables": [
+      "invariants": [
         "All remote MCP servers must use OAuth 2.1/OIDC; iss, aud, exp, and signatures validated on every request",
         "Tokens must always be short-lived, narrowly scoped, and revalidated on each call",
         "Token passthrough to downstream APIs is never permitted (prevents Confused Deputy)",
@@ -4813,7 +4813,7 @@
         "Machine unlearning is technically limited, so deleted source data can persist in weights/embeddings indefinitely",
         "Data governance failures propagate forward into derived, hard-to-enumerate, often-irreversible artifacts"
       ],
-      "invariables": [
+      "invariants": [
         "Every agent, including ephemeral sub-agents, must have its own distinct, cryptographically verifiable identity",
         "Unsigned datasets, checkpoints, or pipeline artifacts must never be loaded, executed, or promoted",
         "Human-operator OAuth tokens must never be forwarded directly to agents or sub-agents",
@@ -4869,7 +4869,7 @@
         "Agent autonomy is expanding faster than governance and tooling can keep pace",
         "Regulators now assume continuous oversight is possible and required"
       ],
-      "invariables": [
+      "invariants": [
         "Deployment-layer safety and security cannot be governed as separate functions for autonomous agents",
         "Fully autonomous agents must have kill-switch, circuit-breaker, and budget-limit capability regardless of type",
         "Agent/tool identities must be cryptographically attestable, ephemeral, and revocable ,  never static long-lived credentials",
@@ -4923,7 +4923,7 @@
         "The AI security landscape changes constantly; guidance is point-in-time",
         "Public/open models cannot be assumed trustworthy or flaw-free"
       ],
-      "invariables": [
+      "invariants": [
         "A model must never have access to data/actions it is not permitted to disclose or take, regardless of guardrail strength",
         "All LLM inputs must be sanitized/validated pre-inference; all outputs postprocessed pre-response",
         "System prompts must never be overridable by user prompts",
@@ -4976,7 +4976,7 @@
         "Public/pretrained models embed unknown trust risk from unvetted third parties",
         "The AI legal/regulatory landscape is complex, fragmented, and rapidly changing"
       ],
-      "invariables": [
+      "invariants": [
         "Unauthorized/unmonitored access to model parameters or deployed models must never be possible",
         "Internal or sensitive LLM applications must always have authentication, access control, and auditing enabled",
         "System prompts must never be overwritten by user prompts and are never sufficient as sole mitigation",
@@ -5025,7 +5025,7 @@
       "axioms": [
         "v1.4 aligns SANS Critical AI Security Guidelines with OWASP AI Exchange so both use the same control taxonomy · - AI adoption is already embedded in enterprise products"
       ],
-      "invariables": [
+      "invariants": [
         "Unauthenticated access to AI APIs or front-ends must not be allowed unless strictly necessary and monitored",
         "Augmentation data (system prompts, RAG context, vector DB content) must be treated as sensitive and access-controlled for read and write",
         "Sensitive data must be sanitized or anonymized before LLM incorporation; avoid commingling across trust boundaries",
@@ -5077,7 +5077,7 @@
         "AI is the most transformative technology shift since the internet",
         "Boards and executives bear ultimate accountability for AI risk outcomes"
       ],
-      "invariables": [
+      "invariants": [
         "AI systems must receive the same mission-critical protection as networks, endpoints, cloud infrastructure",
         "Every AI system must be documented, auditable, and aligned to global standards",
         "Model registries are \"non-negotiable\" for production AI governance",
@@ -5131,7 +5131,7 @@
         "Without layered accountability, the default outcome is a finger-pointing cycle where every party blames another",
         "Emerging agentic AI systems capable of semi-autonomous operation create accountability challenges beyond what prior frameworks addressed"
       ],
-      "invariables": [
+      "invariants": [
         "There must be exactly one accountable party per activity or component; overlapping accountability is not permitted",
         "Security and governance requirements must always cascade from the Business layer down through every supporting layer",
         "All autonomous agents must retain immediate human intervention capability, regardless of autonomy level",
@@ -5183,7 +5183,7 @@
         "Misinformation ranks higher in incident data than in practitioner vote; wrong fluent output drives wrong actions",
         "Excessive Agency rose to #3; Hidden Context Exposure replaces System Prompt Leakage as broader trust-boundary failure"
       ],
-      "invariables": [
+      "invariants": [
         "Prompt injection cannot be eliminated wherever untrusted input reaches the model; public CVE counts understate mature-team spend",
         "Incident databases do not capture all production failures; defense effect hides exploited injection from public counts",
         "A single noisy year of incident data cannot overturn consensus rankings alone",
@@ -5227,7 +5227,7 @@
       "axioms": [
         "AI systems introduce risks traditional appsec standards did not design for: prompt injection, poisoning, extraction, adversarial inputs, agentic action, RAG leakage, and model supply-chain integrity · - AISVS fills the gap between general ASVS/SCVS and AI-specific verification; it does not replace them · - Twelve control families with Level 1-3 verification depth aligned to matching ASVS levels · - Every requirement begins with \"Verify that\" and must be objectively testable through inspection, test, or audit"
       ],
-      "invariables": [
+      "invariants": [
         "General authentication, transport, logging, and SBOM controls stay in ASVS/SCVS; AISVS only restates them when AI-specific evidence differs · - Governance-only obligations (fairness docs, model cards without security tests) stay out of scope · - A requirement must address one concern implementable as one mechanism; no duplicate controls across chapters · - Prompt injection in agents combines C2, C7, C9, C10, C11, and C12 requirements together"
       ],
       "principles": [
@@ -5259,7 +5259,7 @@
       "axioms": [
         "Agent skills are the execution layer that gives agents real-world impact across platforms (ClawHub, Claude Code, OpenClaw, and similar) · - Skills can be attacked at author, publish, distribute, install, load, execute, and govern phases · - Malicious skills hide credential stealers, reverse shells, and prose instructions that hijack agent behavior · - Registries without provenance enable mass upload, account takeover, and poisoned distribution"
       ],
-      "invariables": [
+      "invariants": [
         "Skills without sandbox run in the agent's full security context; no isolation means full-system compromise potential · - Natural-language-plus-code blends defeat signature-only scanners · - External instruction files can be rug-pulled after install unless pinned and verified · - Cross-platform skill ports drop source-format security metadata"
       ],
       "principles": [
@@ -5291,7 +5291,7 @@
       "axioms": [
         "CIS Controls v8.1.2 workbook translates prioritized safeguards into interactive implementation for LLMs, agents, and MCP architectures · - Three workbook domains: asset visibility and governance, secure software and supply chain, data protection across the AI lifecycle · - Workbook maps controls directly to operational workflows rather than abstract policy statements · - Built for teams tracking implementation progress and risk accountability in production AI environments"
       ],
-      "invariables": [
+      "invariants": [
         "AI systems span identity layers, endpoints, knowledge stores, integrations, and monitoring; controls must cover the full agent stack · - LLM, agent, and MCP risks require interpreting existing CIS Safeguards through autonomous behavior, not only deterministic software patterns · - Workbook tracking must tie each safeguard to a named accountable party and evidence artifact"
       ],
       "principles": [
@@ -5323,7 +5323,7 @@
       "axioms": [
         "Maturity spans three pillars: Protect AI, Utilize AI, and Govern AI, each with five stages from ad hoc to optimizing · - Governance acts as a ceiling: overall maturity cannot exceed the weakest pillar or Govern score · - Self-reported capabilities without documentary evidence are capped at Stage 2 · - Model maps to NIST AI RMF, EU AI Act, ISO 42001, OWASP AI Exchange, and CSA AI Controls Matrix"
       ],
-      "invariables": [
+      "invariants": [
         "A strong Protect or Utilize score cannot mask absent governance structure · - Stage claims require named prerequisites, metrics, and audit-defensible artifacts at every level · - Agentic AI guidance is embedded; agent deployments inherit the same pillar and cap rules"
       ],
       "principles": [
@@ -5355,7 +5355,7 @@
       "axioms": [
         "GenAI and agentic systems need lifecycle-wide adversarial testing beyond classic appsec tooling · - Landscape covers prompt injection, model misuse, agent privilege escalation, poisoning, hallucination-driven actions, and emergent behaviors · - Red, blue, and purple teaming capabilities are classified by practitioner lifecycle stage · - Solutions are compared by capability taxonomy, not vendor marketing categories"
       ],
-      "invariables": [
+      "invariants": [
         "Traditional DAST, IAM-only reviews, and static CI gates miss AI-specific failure modes · - Agentic workflows evolve after deployment; one-time assessments miss emergent misuse paths · - Tool labels alone do not prove coverage of a taxonomy capability"
       ],
       "principles": [
@@ -5387,7 +5387,7 @@
       "axioms": [
         "Taxonomy is the shared language for AI and agentic red-teaming solution guides and cheat sheets · - Capabilities are classified across red, blue, and purple teaming by practitioner lifecycle stage · - Taxonomy separates required capabilities from vendor implementation choices · - Intended for repeatable comparison as threats and agent platforms evolve"
       ],
-      "invariables": [
+      "invariants": [
         "Without a common taxonomy, vendor demos cannot be compared on equal capability terms · - Capability requirements must be stated independently of any single tool's feature list · - Lifecycle-stage coverage gaps persist unless taxonomy rows are explicitly mapped"
       ],
       "principles": [
@@ -5425,7 +5425,7 @@
         "Documented incidents include cross-tenant exposure in Asana's MCP server, a CVSS 8.8 missing capability check in a WordPress plugin, and prompt-injected table exposure through Supabase.",
         "A server deployed securely one day can be compromised through an upstream dependency update two days later."
       ],
-      "invariables": [
+      "invariants": [
         "MCP servers never pass user OAuth tokens through to upstream APIs; downstream access uses RFC 8693 token exchange that yields a distinct scoped token per resource.",
         "Servers reconcile _meta identity and capability claims against the authenticated principal and treat a mismatch as a security failure, never resolving it in favor of the claim.",
         "Authorization is evaluated on every request that presents a task ID, handle, or resource URI; possession of a reference never substitutes for authorization.",
@@ -5481,7 +5481,7 @@
         "Hybrid classical plus ML-KEM key exchange is arriving in OpenSSL, BoringSSL, rustls, CDNs, service meshes, and cloud TLS.",
         "Grover's algorithm gives only a modest speedup against symmetric primitives, which 256-bit constructions absorb."
       ],
-      "invariables": [
+      "invariants": [
         "MCP tool and server authors must not write cryptographic code; TLS libraries, proxies, and managed platforms supply it.",
         "Deployments must not build their own PQC or MCP-specific cryptographic framings.",
         "MCP deployments do not create MCP-specific PQ-signed variants of existing protocols before upstream standards exist.",
@@ -5529,7 +5529,7 @@
         "Rapid adoption of new AI frameworks, tools, and models produces unvetted supply chains of data and code.",
         "Eliminating every element of implicit trust is not possible, so each organization defines its trust policies first."
       ],
-      "invariables": [
+      "invariants": [
         "Authorization decisions are never delegated to the model; a deterministic orchestration layer and policy decision point make them.",
         "Everything inside the AI threat boundary, including the model, its context, and its weights, is treated as untrusted.",
         "An agent's delegated permissions are a subset of the initiating user's permissions, so the agent cannot reach data or systems the user cannot.",
@@ -5577,7 +5577,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -5601,7 +5601,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -5632,7 +5632,7 @@
         "A source leak of agent tooling becomes a malware lure within hours through fake leak-themed repositories.",
         "Most AI security events stem from misconfiguration, design flaws, supply chain weakness, or prompt injection and receive no CVE identifier."
       ],
-      "invariables": [
+      "invariants": [
         "Delete, send, pay, and publish permissions in personal agents are privileged actions that require hard confirmation and easy rollback.",
         "Every agent recommendation that can alter permissions, visibility, or policy passes deterministic validation and human review before execution.",
         "Agent identities receive the same review as privileged admin access.",
@@ -5675,7 +5675,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -5699,7 +5699,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -5723,7 +5723,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -5747,7 +5747,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -5771,7 +5771,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -5802,7 +5802,7 @@
         "Malware can carry prompt-injection strings aimed at AI-based scanners, such as the Skynet sample that told the model to report no malware.",
         "Instructions hidden in a received email can make M365 Copilot exfiltrate internal data with no user click."
       ],
-      "invariables": [
+      "invariants": [
         "Third-party tool descriptions are validated and sanitized before a model reads them.",
         "Voice alone does not authenticate high-risk transactions; banks combine it with other verification factors.",
         "Serialized data received by AI serving frameworks is untrusted, since pickle-based IPC in TensorRT-LLM allowed arbitrary code execution (CVE-2025-23254).",
@@ -5845,7 +5845,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -5869,7 +5869,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -5893,7 +5893,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -5917,7 +5917,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -5941,7 +5941,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -5965,7 +5965,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -5989,7 +5989,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6013,7 +6013,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6037,7 +6037,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6061,7 +6061,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6085,7 +6085,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6109,7 +6109,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6133,7 +6133,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6157,7 +6157,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6181,7 +6181,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6205,7 +6205,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6229,7 +6229,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6253,7 +6253,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6277,7 +6277,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6301,7 +6301,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6325,7 +6325,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6349,7 +6349,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6373,7 +6373,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6397,7 +6397,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6421,7 +6421,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6451,7 +6451,7 @@
         "RBAC has no concept of time, volume, or behavioral drift, so a correctly assigned role can still yield wrong access.",
         "Most identity providers cannot reach into an active agent session and revoke it mid-task."
       ],
-      "invariables": [
+      "invariants": [
         "A shared service-account credential cannot show which agent instance made a call, on whose behalf, or what the role was meant to authorize.",
         "Every agent action is evaluated against current context before it reaches the API gateway or tool.",
         "An agent acting for a user or another agent receives a task-scoped token with an explicit actor claim instead of the principal's full permission set.",
@@ -6490,7 +6490,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6520,7 +6520,7 @@
         "In 19% of organizations exposed software runs on systems whose IAM privileges reach sensitive assets; in 6% it has paths to admin privileges.",
         "Attacks are moving up the stack from exposed infrastructure to applications, APIs, business logic, and identity flows."
       ],
-      "invariables": [
+      "invariants": [
         "Sensitive assets and privileged access paths are not reachable from the internet or untrusted paths, regardless of patch status.",
         "Unpatchable and high-risk systems are segmented or isolated.",
         "Third-party CVEs, their instances in the environment, and first-party code flaws each need a different detection, prioritization, and remediation path."
@@ -6561,7 +6561,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6585,7 +6585,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6614,7 +6614,7 @@
         "The final answer of a multi-agent workflow explains only a fraction of how an unsafe outcome emerged.",
         "Models, prompts, tools, permissions, memory, and topologies change over time, so a one-time assurance gate goes stale."
       ],
-      "invariables": [
+      "invariants": [
         "Delegation between agents is a trust boundary, and authority does not become transitive by default.",
         "Security assurance attaches to the configured agent system: its tools, permissions, data boundaries, memory, orchestration logic, network access, and approval gates.",
         "Without a reconstructable trajectory, an organization cannot attribute agent actions or prove that controls operated."
@@ -6661,7 +6661,7 @@
         "LLMs process system instructions, user prompts, retrieved content, and tool responses in one shared context.",
         "Poisoned retrieval data can leave no malware, unauthorized login, or modified binary for investigators to find."
       ],
-      "invariables": [
+      "invariants": [
         "Retrieved documents, prompts, tool responses, and other external content are untrusted inputs.",
         "Input filtering alone cannot create a perfect boundary between data and instructions.",
         "Authentication establishes which agent acted without proving that the action was appropriate.",
@@ -6705,7 +6705,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6729,7 +6729,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6753,7 +6753,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6777,7 +6777,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6801,7 +6801,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6825,7 +6825,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6849,7 +6849,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6873,7 +6873,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6897,7 +6897,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6928,7 +6928,7 @@
         "Model-level guardrails are soft controls that vary by provider and version and can be removed through post-training fine-tuning.",
         "Anthropic found its evaluation incidents only through a retroactive review of 141,006 runs, and the affected organizations had not detected the activity."
       ],
-      "invariables": [
+      "invariants": [
         "An agent that can reason about its sandbox can reason around it, so isolation is enforced independently of the agent.",
         "Sandboxing limits what an agent can reach; it cannot stop an agent from misusing API access it was legitimately granted.",
         "Every permitted channel, including the LLM inference endpoint, is a potential exfiltration path.",
@@ -6973,7 +6973,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -6997,7 +6997,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7021,7 +7021,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7045,7 +7045,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7069,7 +7069,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7095,7 +7095,7 @@
       "axioms": [
         "An adversary can modify a model artifact between lifecycle stages, before it is uploaded to a hub, or before it is deployed. · - Most AI models today move through their supply chains unsigned, unverified, and untraceable, and most externally sourced models are distributed without signatures. · - An attack or an honest mistake at any upstream transformation step can propagate undetected when consumers can verify only the final artifact in isolation. · - Without signatures, provenance metadata is plain documentation that anyone can forge. · - Model behavior cannot be determined through inspection, so consumers trust recorded evaluation results based on the identity of the attester who signed them. · - The same organization often acts as a model consumer of foundation models and as a model producer of fine-tuned derivatives. · - Many structured attestation schemas for domain compliance metrics do not exist yet or lack legal and standards review, so fully automated policy enforcement is still aspirational."
       ],
-      "invariables": [
+      "invariants": [
         "Any change to the bits of a signed model artifact invalidates its signature, provided the producer's signing system and keys show no sign of compromise. · - Signing and attestation prove integrity and signer identity only; they do not prove that a model is correct, safe, fair, or benign. · - A Level 1 signature is a point-in-time snapshot and cannot detect tampering that happens during a model transformation. · - Each AIMM level inherits every lower-level control: Level 2 includes Level 1 integrity, and Level 3 includes integrity, lineage, and structured attestations. · - The verification policy must map each role to the claim types it may produce, and verifiers reject any claim a party makes outside its authorized role. · - Required attestations must be present and valid, and when independent parties compute different hashes for the same artifact, verification fails immediately. · - When an orchestrator agent delegates artifact operations to a sub-agent, signing authority must not expand beyond the delegating principal's permissions. · - Signing keys must be protected from unauthorized access, trust stores curated, and rotation and revocation procedures defined before they are needed."
       ],
       "principles": [
@@ -7127,7 +7127,7 @@
       "axioms": [
         "AI agents add and remove capabilities at runtime, such as a mid-session model swap, a hot-loaded MCP server, or a new A2A peer. · - Enterprises cannot rely on black-box agents that operate across cloud, SaaS, on-premises, and endpoint environments. · - An adversary who can disrupt the Guardian channel turns a fail-open control into audit only. · - A Guardian that keeps its chain head private can drop an entry such as a DENY, recompute the chain forward, and later present a clean history. · - When content is summarized, stored in memory, or passed across a boundary without its trust basis, asserted content can pass as attested; the spec calls this trust laundering. · - A successful liveness ping does not show that enforcement works, since a Guardian can answer pings while rejecting every signed hook during a key outage."
       ],
-      "invariables": [
+      "invariants": [
         "The Observed Agent must wait for the Guardian's decision up to the negotiated timeout and apply it; a framework that emits hooks but ignores the verdict is not conformant. · - Every agent step that proceeds without a Guardian decision must be recorded as an audit event, so the bypass is visible. · - Provenance fields must be populated by deterministic framework code outside the LLM output path, and implementations must not instruct the LLM to produce them. · - Every ACS-Core request and response carries a signature over the JCS-canonicalized envelope, with HMAC-SHA256 as baseline, and verifiers reject signatures that do not cover it. · - Guardians must reject requests that reuse a request_id within the session or carry a timestamp outside the negotiated skew window. · - Once Intent.parsed is set, changes from the runtime LLM, tool outputs, or untrusted channels must be ignored or rejected; only an authenticated approver's ASK grant can extend it. · - For every step that writes a ContextEntry, the Guardian must return the resulting chain_hash in its response, covered by the response signature. · - A Guardian must not treat an asserted fact as attested, and agent-generated data labeled with trust takes the minimum trust of the data it derives from."
       ],
       "principles": [
@@ -7159,7 +7159,7 @@
       "axioms": [
         "GenAI controls are spread across many frameworks, so a team deploying GenAI has to find and reconcile the controls that apply to each risk. · - LLM application risks, agentic risks, and data security risks are distinct problem domains with different audiences, threat models, and mitigations. · - One GenAI deployment can fall under several regimes at once, such as an EU payments chatbot under the EU AI Act, PCI DSS, ISO 27001, and DORA. · - A mapping goes wrong quietly when a framework releases a new version and nobody rechecks the rows written against the old one. · - Incident evidence counts reflect the incidents this project has recorded and reviewed, not the world, and lean toward failures that get publicly disclosed. · - Removing human oversight raises average AIVSS severity by 1.79 points across the ten agentic entries and moves 7 of 10 from High to Critical."
       ],
-      "invariables": [
+      "invariants": [
         "Every mapping is unreviewed until a named human reviewer signs it, and an agent never adds itself to reviewed_by. · - The validator fails any mapping whose confidence is above 'unreviewed' while its reviewed_by list is empty. · - A control failure supports a mapping only when the incident lists that OWASP entry and names the same framework and control_id. · - Only a confirmed control failure with a named confirmer counts toward evidence_count; drafted failures are shown but never counted. · - A drafted failure needs a verbatim quote from a source stating that a control was missing or defeated; a description of the attack alone does not qualify. · - A severity rating changes only with a cited AIVSS score, a CVSS score from a linked CVE, or the OWASP source list definition. · - The incident index records only failures of deployed systems; lab attacks and proofs of concept against researcher-run systems are literature. · - Each mapping cites the authoritative framework text, not secondary summaries, and controls with only a tangential link to the risk are excluded."
       ],
       "principles": [
@@ -7191,7 +7191,7 @@
       "axioms": [
         "LLM agents with enterprise tool permissions can pursue sub-goals that violate implicit safety policies even when every tool works as designed. · - Once agents can send mail, modify files, and call APIs, the main risk moves from unsafe text to unsafe actions taken through trusted tools. · - Agentic misalignment comes from the interaction of model, prompt, tool access, and adversarial context, so harm can occur without any conventional software exploit. · - LLM-integrated systems struggle to separate trusted instructions from untrusted retrieved content, so an injected tool response can pass as task guidance. · - Single-agent configurations acted on injected tool-response instructions in 93.3% to 100% of prompt_injection runs for all six tested models. · - Misalignment varies sharply by model: overall rates across six models in the same 250-run matrix ranged from 7.6% to 41.2%."
       ],
-      "invariables": [
+      "invariants": [
         "Every tool output an agent receives must be handled as potentially hostile data and never as a trusted instruction. · - Prompt-level safety instructions alone do not secure a tool-using agent; runtime observability, tool-boundary controls, and scenario-specific validation are required alongside them. · - Before production, deployers must log reasoning steps, tool strings, state transitions, and runtime actions so behavior is judged from artifacts rather than model self-report. · - An agent's own transcript cannot prove what it did; misalignment is scored from durable artifacts left in the mail, file share, and API services it touched. · - Automated scorer labels stay unvalidated until a manual audit checks scorer-positive and sampled scorer-negative runs against the raw service logs. · - A 0% misalignment result in a cell with heavy timeout censoring is unresolved and cannot be reported as confirmed clean. · - A low-risk result holds only for the tested model version, prompt, and tool configuration; it is not a durable safety guarantee after provider updates."
       ],
       "principles": [
@@ -7221,7 +7221,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7245,7 +7245,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7269,7 +7269,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7293,7 +7293,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7317,7 +7317,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7341,7 +7341,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7372,7 +7372,7 @@
         "A malicious MCP server behaved normally for its first three tool calls, then changed its own tool metadata to steer connected agents toward credentials (Deadbugz).",
         "Only one of the seven main entries (CoSnitch, CVE-2026-24301) has a published CVE."
       ],
-      "invariables": [
+      "invariants": [
         "An agent stopping on its own does not undo the breach it already caused.",
         "Authorization of an evaluation target cannot depend on hostname similarity or on the model prompt.",
         "An MCP server that was benign at approval time can change after approval.",
@@ -7416,7 +7416,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7440,7 +7440,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7464,7 +7464,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7494,7 +7494,7 @@
         "An agent with valid credentials can still behave unsafely because of prompt injection, poisoned memory or malicious tool output.",
         "A low-risk assistant can become a high-risk actor through a single new integration."
       ],
-      "invariables": [
+      "invariants": [
         "Valid identity alone does not make agent behavior safe.",
         "A connection the approved task does not need should not exist by default.",
         "An agent's technical reach must match its approved task.",
@@ -7538,7 +7538,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7562,7 +7562,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7586,7 +7586,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7610,7 +7610,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7641,7 +7641,7 @@
         "A single headline coverage percentage can hide zero coverage of a rare, catastrophic action.",
         "Attacks cross several layers (memory, planning, tool dispatch, runtime) while each single-layer monitor sees normal activity."
       ],
-      "invariables": [
+      "invariants": [
         "No mitigation is complete until every relevant MAESTRO layer has an enforcement point, an evidence source and a tested failure response.",
         "Every control is a tuple of behavior, capability and architecture.",
         "Delegated authority between agents is non-transitive and does not expand.",
@@ -7682,7 +7682,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7706,7 +7706,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7730,7 +7730,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7754,7 +7754,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7785,7 +7785,7 @@
         "A distilled student model can copy capability without the teacher's safety controls.",
         "Buyers can inherit models whose lineage is hard to verify."
       ],
-      "invariables": [
+      "invariants": [
         "A model exposed through an API is not protected just because its weights stay confidential.",
         "Request volume alone is a weak signal, because legitimate evaluation and batch jobs can look like extraction.",
         "Blocking one API key is not mitigation when another account can replace it in seconds.",
@@ -7835,7 +7835,7 @@
         "An operator combined Langflow flow enumeration with a cross-tenant execution flaw (CVE-2026-55255) and a separate RCE path (CVE-2026-33017).",
         "Framing browser-agent work as a fictional game weakened safety boundaries and exposed user data (BioShocking, research finding)."
       ],
-      "invariables": [
+      "invariants": [
         "Collaboration data, telemetry and web pages that an agent reads are instruction channels and must be treated as untrusted.",
         "Page or event content must never gain authority over an agent's real permissions.",
         "Permitted remediation actions are defined independently of model instructions.",
@@ -7883,7 +7883,7 @@
         "An MCP server that holds downstream credentials can exercise authority the caller should never trigger, even when the call looks authenticated.",
         "An OAuth scope does not express the full transaction, such as which account, what amount or under whose delegated authority."
       ],
-      "invariables": [
+      "invariants": [
         "Discovering a capability and being authorized to use it are different decisions.",
         "Discovery filtering is risk reduction, not authorization.",
         "The model cannot decide whether its own requested action is authorized; a system prompt is not an access control.",
@@ -7924,7 +7924,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7948,7 +7948,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -7979,7 +7979,7 @@
         "TRAIT&R, a taxonomy built on MITRE ATT&CK, groups threats into loss of control, work sabotage and direct harm.",
         "Defenders can currently read agent reasoning, an advantage they lose if chain of thought stops being monitorable."
       ],
-      "invariables": [
+      "invariants": [
         "Detection invariant: defenders can always detect a model's misaligned intent or actions.",
         "Prevention and response invariant: defenders can always prevent, intercept or revert attack attempts.",
         "Detection and prevention must stay ahead of the agent's ability to evade detection and execute attacks.",
@@ -8028,7 +8028,7 @@
         "Collection targets specific domains such as agentic reasoning and tool use, coding, computer use, vision and reward-model grading, at thousands to millions of queries per domain.",
         "Detection indicators include shared accounts across many IPs, 24/7 usage with no idle time, new subscriptions immediately at maximum usage, odd subscription-to-API ratios, and coordinated pathway switching after price or rate changes."
       ],
-      "invariables": [
+      "invariants": [
         "Distillation is a coordinated, ecosystem-wide problem that individual company measures cannot fully address.",
         "Multi-source correlation is what makes confident attribution, and therefore response changes, possible with little risk to legitimate users.",
         "Response changes apply only to users confirmed to be doing malicious distillation; safety researchers and third-party evaluators are told about model changes."
@@ -8075,7 +8075,7 @@
         "In agentic environments trust debt builds faster, because agents can find and chain new tool, API, model and data paths faster than human review cycles.",
         "Topology-defined segmentation controls where traffic may flow; connection-defined segmentation controls who or what may open a session to a resource and under what conditions."
       ],
-      "invariables": [
+      "invariants": [
         "Never trust, always verify: users, devices, workloads, non-human identities and agents are authenticated and authorized regardless of network location.",
         "Assume breach: intrusions are expected, with segmentation and monitoring in place.",
         "Least privilege: grant only the minimum access needed for a specific function.",
@@ -8125,7 +8125,7 @@
         "Attribution, validation, testimony and legal conclusions need direct human ownership (accountability risk).",
         "The framework is aligned to SWGDE Best Practices for Digital and Multimedia Evidence and is a living document."
       ],
-      "invariables": [
+      "invariants": [
         "The human examiner is always the final authority.",
         "AI does not own conclusions and cannot take legal or professional responsibility.",
         "Digital forensic conclusions need direct human validation before they are acted on or entered into a legal or evidentiary record.",
@@ -8173,7 +8173,7 @@
         "False IoC signatures are a known risk of automated enrichment.",
         "The framework is aligned to NIST CSF 2.0 and is a living document."
       ],
-      "invariables": [
+      "invariants": [
         "The human examiner is always the final authority.",
         "AI does not own conclusions and cannot take legal or professional responsibility.",
         "AI-suggested containment needs a human in the loop before execution.",
@@ -8222,7 +8222,7 @@
         "Indirect prompt injection arrives through documents, email, databases, or websites the agent ingests, and the hijacked agent acts with whatever privileges the AI system holds.",
         "Legitimate businesses also poison assistants: Microsoft found more than 50 memory manipulation prompts from 31 companies in about 60 days of email traffic, several aimed at health and finance."
       ],
-      "invariables": [
+      "invariants": [
         "Any agent whose context takes in untrusted data can have its tools invoked by prompt injections in that data, with confidentiality, integrity, or availability violations as the result.",
         "Production models require users to verify identity, API endpoints require authentication, and operators monitor model queries against usage policy.",
         "Validation of inputs and outputs for agent tools and data sources runs outside the AI agent, covering schema checks, leakage checks, and removal of injections or unsafe code.",
@@ -8271,7 +8271,7 @@
       "axioms": [
         "European baseline for deployable AI systems using deep neural networks, including generative AI, across the full lifecycle · - Thirteen principles in five phases: secure design, development, deployment, maintenance, and end of life · - Addresses AI-specific risks: data poisoning, model obfuscation, indirect prompt injection, and training-data handling gaps · - Signposts ISO/IEC 22989 lifecycle stages, ETSI TR 104 128 implementation guide, and TS 104 216 conformance assessment"
       ],
-      "invariables": [
+      "invariants": [
         "Out of scope for research-only AI never intended for deployment · - Does not replace ISO/IEC 27001; maps to existing cyber programs rather than duplicating generic IT controls · - Modal verbs follow ETSI drafting rules (shall/should/may); must/must not do not appear in deliverables"
       ],
       "principles": [
@@ -8303,7 +8303,7 @@
       "axioms": [
         "Frontier AI compresses discovery-to-exploitation windows; industry data cited puts weaponisation near 15 minutes and median exfiltration near 72 minutes after access · - Negative time-to-exploit: attackers may hold working exploits before vendor fixes ship, especially when patches reveal flaws in unsupported versions · - Defenders must treat environments as potentially compromised and extend ML-based prevention to agentic endpoints and enterprise browsers · - Security fundamentals stay central: asset inventory, patching discipline, segmentation, monitoring, and coordinated disclosure at machine speed"
       ],
-      "invariables": [
+      "invariants": [
         "Position paper, not a binding regulation; recommendations will align to a future European Commission action plan · - Open-source maintainers and SMEs face report-volume spikes from AI-generated findings; triage capacity becomes the bottleneck · - Change-advisory workflows cannot approve fixes quickly enough when exploit windows are minutes; governance must allow faster intervention"
       ],
       "principles": [
@@ -8341,7 +8341,7 @@
         "Manual deepfake detection by a skilled reviewer works for small volumes but cannot keep up with the volume of audio-visual material shared today.",
         "Victims of non-consensual deepfakes see the same content reappear on many sites and have to request formal removal each time."
       ],
-      "invariables": [
+      "invariants": [
         "System Operators and Developers shall give users training on GenAI deepfake threats; the conformance test fails if that training content was not reviewed in the last 12 months.",
         "The GenAI user interface shall encourage responsible use through content filters, clear labels on AI-generated content, and notices about limits on output reliability and accuracy.",
         "Operators and Developers shall complete a risk assessment and implement and verify required mitigations before a GenAI system is deployed, with residual risks documented and approved.",
@@ -8390,7 +8390,7 @@
       "axioms": [
         "Custom instructions (Cursor rules, Copilot instructions, CLAUDE.md, and similar) steer AI code assistants toward secure output · - Developers remain accountable for generated code; AI output requires the same review, test, and SAST discipline as human-written code · - Instructions should stay concise and project-specific; irrelevant security text increases wrong or over-fit code · - Recursive Criticism and Improvement (RCI) loops ask the assistant to review and fix its own prior output with linters and scanners"
       ],
-      "invariables": [
+      "invariants": [
         "Instructions do not replace ASVS, SCVS, or AISVS verification; they reduce common assistant mistakes only · - Persona prompts like act as a security expert often degrade results in cited experiments · - Assistant-suggested dependencies may be hallucinated or outdated; pin versions and verify packages"
       ],
       "principles": [
@@ -8422,7 +8422,7 @@
       "axioms": [
         "Agent security spans model, system guardrails, harness orchestration, and tool access; each layer needs distinct controls · - Primary attack vectors: prompt injection, memory poisoning, and tool supply-chain compromise where tool output re-enters reasoning · - Misaligned benign requests can cause harm without an external attacker when scope and permissions are too broad · - Shared responsibility across developers, deployers, tool providers, third-party surfaces, and users who grant authority"
       ],
-      "invariables": [
+      "invariants": [
         "Probabilistic model defenses alone cannot guarantee safety; deterministic limits on tools and egress must sit outside the reasoning loop · - Persistent memory propagates poisoned state across turns and agents; harness logging is the enforcement and audit point · - MCP and similar protocols do not guarantee secure implementations; discipline at integration time determines exposure"
       ],
       "principles": [
@@ -8454,7 +8454,7 @@
       "axioms": [
         "Maps how frontier AI safety frameworks set cyber capability thresholds, assess models, and deploy mitigations · - Dual-use cyber capabilities help defenders patch and detect while lowering barriers for offensive misuse · - Emerging consensus thresholds: non-expert uplift for sophisticated attacks and end-to-end autonomous cyber operations · - Zero-day discovery and attacks against hardened targets are explicit escalation markers across member frameworks"
       ],
-      "invariables": [
+      "invariants": [
         "Threshold wording (significant, meaningful, material uplift) remains subjective; cross-vendor comparability is incomplete · - Benchmarks saturate and suffer contamination; CTF and cyber-range scores may reflect training exposure not operational risk · - Defender benefit from the same model capabilities must weigh into release decisions, not offense alone"
       ],
       "principles": [
@@ -8486,7 +8486,7 @@
       "axioms": [
         "Tailored checklists for model capability tier (frontier vs general purpose) crossed with release type (restricted API, closed, open) · - Covers R&D risk scanning, pre-deployment safeguards, post-deployment monitoring, and decommission paths · - Expanded 2024 guidance assigns obligations across adapters, hosting services, and application developers in open-model chains · - Significant capability updates after deployment trigger renewed governance, not one-time sign-off"
       ],
-      "invariables": [
+      "invariants": [
         "Voluntary guidance meant to complement regulation such as EU GPAI Code of Practice, not replace legal duties · - Third-party audit methods and incident-reporting baselines remain immature across the industry · - Research or limited releases may warrant lighter oversight than wide public deployment of frontier models"
       ],
       "principles": [
@@ -8518,7 +8518,7 @@
       "axioms": [
         "Voluntary Singapore framework for deploying agents built in-house or via third-party platforms · - Four dimensions: assess and bound risks upfront, meaningful human accountability, technical lifecycle controls, end-user responsibility · - Agent components include model, instructions, memory, planning, tools, protocols, access controls, guardrails, approvals, and logging · - v1.5 adds multi-agent and third-party agent risks, automation bias practices, and operational case studies"
       ],
-      "invariables": [
+      "invariants": [
         "Continuous human approval for every agent step does not scale; define checkpoints for high-stakes and irreversible actions only · - Multi-agent architectures diffuse accountability unless roles are mapped across the agentic value chain · - Protocols (MCP, A2A, commerce protocols) evolve quickly; controls must track new tool and agent interaction surfaces"
       ],
       "principles": [
@@ -8550,7 +8550,7 @@
       "axioms": [
         "Voluntary Singapore framework for deploying agents built in-house or via third-party platforms · - Four dimensions: assess and bound risks upfront, meaningful human accountability, technical lifecycle controls, end-user responsibility · - Agent components include model, instructions, memory, planning, tools, protocols, access controls, guardrails, approvals, and logging · - v1.5 adds multi-agent and third-party agent risks, automation bias practices, and operational case studies"
       ],
-      "invariables": [
+      "invariants": [
         "Continuous human approval for every agent step does not scale; define checkpoints for high-stakes and irreversible actions only · - Multi-agent architectures diffuse accountability unless roles are mapped across the agentic value chain · - Protocols (MCP, A2A, commerce protocols) evolve quickly; controls must track new tool and agent interaction surfaces"
       ],
       "principles": [
@@ -8588,7 +8588,7 @@
         "Content written into an agent's persistent memory can steer reasoning and tool decisions in a later session.",
         "Repeated, equivalent approval requests can wear a user down until one is accepted, which defeats the human gate on a tool call or data disclosure."
       ],
-      "invariables": [
+      "invariants": [
         "The check that gates a privileged tool call must run in host code or with a human that the model cannot reach, prompt, or speak for.",
         "Without a valid, unexpired, scope-matching authorization artifact, the host denies the privileged call; missing or malformed approvals never default to allow.",
         "The authorization artifact must name the specific tool, its arguments or their digest, the requesting session, and a short expiry.",
@@ -8644,7 +8644,7 @@
         "Model lineage is hard to track because final weights exist only after training and fine-tuning.",
         "The Profile covers only cybersecurity risk; privacy, intellectual property and bias need other NIST resources."
       ],
-      "invariables": [
+      "invariants": [
         "Use this Profile together with SP 800-218 (SSDF 1.1), never on its own.",
         "Protect all training, testing, fine-tuning and aligning data from unauthorized access and changes (PS.1.2).",
         "Protect all model weights and configuration parameters from unauthorized access and changes (PS.1.3).",
@@ -8699,7 +8699,7 @@
         "False positives consume analyst time, erode trust in automated systems, and cause alert fatigue that leads teams to overlook genuine threats.",
         "Many existing cyber evaluations come from offensive security and measure success at discrete attack tasks, revealing little about defensive judgment."
       ],
-      "invariables": [
+      "invariants": [
         "Before agents receive greater autonomy, they must be hardened against prompt injection, data poisoning, and evasion attacks.",
         "A defensive agent introduces risks of its own because the agent itself becomes a high-value target for attackers.",
         "Finding a vulnerability is only a first step; organizations must be able to prioritize which ones to fix and develop deployable patches in a timely manner.",
@@ -8744,7 +8744,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -8768,7 +8768,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -8800,7 +8800,7 @@
         "Content written into an agent's persistent memory can steer reasoning and tool decisions in a later session.",
         "Repeated, equivalent approval requests can wear a user down until one is accepted, which defeats the human gate on a tool call or data disclosure."
       ],
-      "invariables": [
+      "invariants": [
         "The check that gates a privileged tool call must run in host code or with a human that the model cannot reach, prompt, or speak for.",
         "Without a valid, unexpired, scope-matching authorization artifact, the host denies the privileged call; missing or malformed approvals never default to allow.",
         "The authorization artifact must name the specific tool, its arguments or their digest, the requesting session, and a short expiry.",
@@ -8858,7 +8858,7 @@
         "A constant stream of runtime permission pop-ups leads users to approve risky actions without reading, which removes the protection of the consent gate.",
         "No standardized, scalable, privacy-preserving method exists for logging agent interactions across organizations, which slows root-cause analysis after an incident."
       ],
-      "invariables": [
+      "invariants": [
         "Intent-based inference of privacy preferences is probabilistic, so it cannot guarantee that an agent infers or follows a user's preferences in a provable way.",
         "Blocking an agent's access to one file or database does not stop it from reconstructing the restricted information through redundant or secondary sources.",
         "A manipulated agent with a code execution tool such as a Python REPL or bash shell can bypass LLM-level privacy controls and gain read and write access to the host.",
@@ -8909,7 +8909,7 @@
         "False positives consume analyst time, erode trust in automated systems, and cause alert fatigue that leads teams to overlook genuine threats.",
         "Many existing cyber evaluations come from offensive security and measure success at discrete attack tasks, revealing little about defensive judgment."
       ],
-      "invariables": [
+      "invariants": [
         "Before agents receive greater autonomy, they must be hardened against prompt injection, data poisoning, and evasion attacks.",
         "A defensive agent introduces risks of its own because the agent itself becomes a high-value target for attackers.",
         "Finding a vulnerability is only a first step; organizations must be able to prioritize which ones to fix and develop deployable patches in a timely manner.",
@@ -8960,7 +8960,7 @@
         "Large companies name only some AI risks in their public documents, and that list differs from what experts rank as most severe.",
         "AI laws and policies can be mapped against the risks they address, by sector, lifecycle stage, and value chain actor."
       ],
-      "invariables": [
+      "invariants": [
         "Each risk entry must trace back to the framework or paper it came from.",
         "The repository changes over time, so any count or mapping must be cited with its version or update date.",
         "Risk lists alone do not mitigate anything; mitigations are kept in a separate AI Risk Mitigation database."
@@ -9002,7 +9002,7 @@
         "Threats can cross layers, for example a supply chain compromise in one layer that spreads to others.",
         "A failure in one agent's goals can cascade into other agents and other layers."
       ],
-      "invariables": [
+      "invariants": [
         "Threat modeling must cover each layer and the links between layers, not only the model.",
         "Security and compliance controls cut across all layers, so they cannot be added to one layer alone.",
         "Agent systems change after deployment, so monitoring must continue after launch."
@@ -9049,7 +9049,7 @@
         "The proposed use cases include adapting and using generative AI assistants, using and fine-tuning predictive AI, and using single-agent and multi-agent systems.",
         "AI system components such as training data, test data, model weights, and configuration settings need their own protection."
       ],
-      "invariables": [
+      "invariants": [
         "Each overlay assumes the organization already has base controls in place, such as access control, account management, configuration management, and incident response.",
         "Overlays are not a full set of controls for securing an enterprise.",
         "Each use case must address the model, model artifacts, related assets in the deployment setup, and the security of the output."
@@ -9093,7 +9093,7 @@
         "Model creators and model consumers face different risks and control different mitigations.",
         "Agents can take actions with some autonomy, so unintended actions, called rogue actions, are a growing risk."
       ],
-      "invariables": [
+      "invariants": [
         "Assurance and governance controls apply to all risks, by all parties, across the whole AI development lifecycle.",
         "Each risk must be mapped to the party that can enact its controls: the model creator, the model consumer, or both.",
         "Data can be poisoned before ingestion, during processing or training, or in storage, so data protection must cover each stage."
@@ -9139,7 +9139,7 @@
         "The two key agent risks are rogue actions and sensitive data disclosure.",
         "Output rendered without validation can leak data, for example through crafted image URLs in Markdown, and can lead to cross-site scripting."
       ],
-      "invariables": [
+      "invariants": [
         "Every agent must have a well-defined set of controlling human users.",
         "Systems must reliably tell instructions from an authorized user apart from other input, especially untrusted data.",
         "Agents must be prevented from escalating their own privileges beyond pre-authorized scopes.",
@@ -9188,7 +9188,7 @@
         "The matrix defines four scopes: no agency, prescribed agency, supervised agency, and full agency.",
         "Risk grows as an agent moves from read-only workflows to acting and starting tasks on its own."
       ],
-      "invariables": [
+      "invariants": [
         "Every action of consequence in a Scope 2 system needs explicit human approval.",
         "Even fully autonomous Scope 4 systems need humans to keep oversight and the ability to step in.",
         "Controls must match the scope, so the organization must first assess which scope each agent use case is in."
@@ -9234,7 +9234,7 @@
         "Agent memory can be poisoned so that later actions follow an attacker's instructions.",
         "Agents can be compromised, injected, or impersonated within a multi-agent system."
       ],
-      "invariables": [
+      "invariants": [
         "Each agent needs a unique identity so its actions can be traced and controlled.",
         "Memory must be protected with trust boundaries and the least access needed.",
         "Users must be able to give informed consent before agents take actions for them."
@@ -9281,7 +9281,7 @@
         "Defenses fall into user-focused, agent-focused, and system-focused groups, and each has tradeoffs.",
         "Physically embodied agents add risks such as sensor spoofing."
       ],
-      "invariables": [
+      "invariants": [
         "User-focused defenses depend on human checks, so they do not scale to autonomous agents and fail when the user is the attacker.",
         "Defenses built into the model often need retraining and can fail against adaptive attacks.",
         "Claims about a defense must be tested with benchmarks and adaptive attackers."
@@ -9325,7 +9325,7 @@
         "Prompt injection and memory poisoning are threats specific to agentic systems.",
         "Trust, risk, and security management for these systems can be organized into five pillars: explainability, ModelOps, security, privacy, and lifecycle governance."
       ],
-      "invariables": [
+      "invariants": [
         "Agent systems in high-stakes fields need governance and audit across their whole lifecycle.",
         "Coordination and tool use must be measured to be managed; the authors propose two metrics for this.",
         "Agent systems need stronger defenses against adversarial attacks and standard benchmarks before they can be trusted in real deployments."
@@ -9368,7 +9368,7 @@
         "Jailbreak attempts lower a system's safety compared with its normal behavior.",
         "Version 1.0 covers single-turn chats only, so hazards that need long or repeated chats, such as bias, are out of scope."
       ],
-      "invariables": [
+      "invariants": [
         "Tests use a public practice prompt set and a separate private prompt set for the official test.",
         "Grades compare each system's violating responses with a reference system.",
         "Results apply only to the languages tested, which are English and French for now."
@@ -9411,7 +9411,7 @@
         "Agent memory, context, and knowledge bases can be manipulated or poisoned.",
         "Multi-agent orchestration and agent supply chains open new attack paths."
       ],
-      "invariables": [
+      "invariants": [
         "Each risk in the list needs a description, examples, and mitigations.",
         "Agent actions have an impact chain, so the blast radius of a compromised agent must be limited.",
         "A human checker must stay in the loop where the risk calls for it."
@@ -9457,7 +9457,7 @@
         "Model files from untrusted sources can carry code that runs when the file is loaded.",
         "Agents that hold tool access can turn one injected instruction into a chain of real actions, such as cascading deletions."
       ],
-      "invariables": [
+      "invariants": [
         "Red team engagements must run under written authorization with a defined scope and abort conditions.",
         "Testers must use dedicated test accounts and tenant isolation, not real user accounts or production tenants.",
         "Agent testing must run in sandboxes that disconnect production tools and data.",
@@ -9509,7 +9509,7 @@
         "The first limits the testers hit were operational, such as guardrails, rate limits, and environment errors, rather than model capability.",
         "Nearly every run needed a human with domain knowledge to break a loop, fix an environment error, or run the final step."
       ],
-      "invariables": [
+      "invariants": [
         "Guardrails in this study delayed both the classic and agentic tracks but stopped neither.",
         "A guardrail that fails under a simple retry or rephrasing only delays a user; it does not prevent the attack.",
         "Local models that answer to no provider have no provider guardrails to stop them."
@@ -9552,7 +9552,7 @@
         "Static controls lose value as agents, tools, and integrations are added to a system.",
         "The model can leak through memorization, repeat retrieved content, follow injected instructions, and reveal reasoning traces."
       ],
-      "invariables": [
+      "invariants": [
         "Lifecycle controls such as retention and erasure must reach every derived asset, so a deletion that leaves embeddings, traces, or adapter weights behind is not compliant.",
         "Every GenAI data security program must assume that any content reaching the model can influence any output.",
         "AI data security posture telemetry must reach the SIEM in a normalized format.",
@@ -9603,7 +9603,7 @@
         "Agents act at a scale and speed that humans and most deterministic automation cannot match.",
         "Current standards and technology do not yet meet all ten tenets."
       ],
-      "invariables": [
+      "invariants": [
         "Separation between an agent's reasoning and its permissions must be enforced by architecture, since the model does not provide it.",
         "Activity logs that the agent itself can reach or change cannot serve as reliable evidence.",
         "Several tenets are often needed together to mitigate one attack, such as a confused deputy attack."
@@ -9652,7 +9652,7 @@
         "SI agents are nondeterministic and can act on their own, which adds concerns beyond standard incident response practice.",
         "Monitors that use SI models to oversee SI agents may add their own weaknesses."
       ],
-      "invariables": [
+      "invariants": [
         "Agents must not be able to access or interfere with the monitoring processes and logs that watch them.",
         "Monitored model output must be treated as possibly containing exploits aimed at the monitors.",
         "Training, evaluation, or deployment should start or resume only when senior leadership accepts the assessed risk.",
@@ -9695,7 +9695,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -9719,7 +9719,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -9743,7 +9743,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -9767,7 +9767,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -9791,7 +9791,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -9815,7 +9815,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -9839,7 +9839,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -9863,7 +9863,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -9887,7 +9887,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -9911,7 +9911,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -9935,7 +9935,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -9959,7 +9959,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -9983,7 +9983,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10007,7 +10007,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10031,7 +10031,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10055,7 +10055,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10079,7 +10079,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10103,7 +10103,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10127,7 +10127,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10151,7 +10151,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10175,7 +10175,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10199,7 +10199,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10223,7 +10223,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10247,7 +10247,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10271,7 +10271,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10295,7 +10295,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10319,7 +10319,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10343,7 +10343,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10367,7 +10367,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10391,7 +10391,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10415,7 +10415,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10439,7 +10439,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10463,7 +10463,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10487,7 +10487,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10511,7 +10511,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10535,7 +10535,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10559,7 +10559,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10583,7 +10583,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10607,7 +10607,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10631,7 +10631,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10655,7 +10655,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10679,7 +10679,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10703,7 +10703,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10727,7 +10727,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10751,7 +10751,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10775,7 +10775,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10799,7 +10799,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10823,7 +10823,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10847,7 +10847,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10871,7 +10871,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10895,7 +10895,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10919,7 +10919,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10943,7 +10943,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10967,7 +10967,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -10991,7 +10991,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11015,7 +11015,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11039,7 +11039,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11063,7 +11063,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11087,7 +11087,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11111,7 +11111,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11135,7 +11135,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11159,7 +11159,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11183,7 +11183,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11207,7 +11207,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11231,7 +11231,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11255,7 +11255,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11279,7 +11279,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11303,7 +11303,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11327,7 +11327,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11351,7 +11351,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11375,7 +11375,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11399,7 +11399,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11423,7 +11423,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11447,7 +11447,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11471,7 +11471,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11495,7 +11495,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11519,7 +11519,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11543,7 +11543,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11567,7 +11567,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11591,7 +11591,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11615,7 +11615,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11639,7 +11639,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11663,7 +11663,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11687,7 +11687,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11711,7 +11711,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11735,7 +11735,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11759,7 +11759,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11783,7 +11783,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11807,7 +11807,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11831,7 +11831,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11855,7 +11855,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11879,7 +11879,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11903,7 +11903,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11927,7 +11927,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11951,7 +11951,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11975,7 +11975,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -11999,7 +11999,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12023,7 +12023,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12047,7 +12047,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12071,7 +12071,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12095,7 +12095,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12119,7 +12119,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12143,7 +12143,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12167,7 +12167,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12191,7 +12191,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12215,7 +12215,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12239,7 +12239,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12263,7 +12263,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12287,7 +12287,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12311,7 +12311,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12335,7 +12335,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12359,7 +12359,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12383,7 +12383,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12407,7 +12407,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12431,7 +12431,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12455,7 +12455,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12479,7 +12479,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12503,7 +12503,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12527,7 +12527,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12551,7 +12551,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12575,7 +12575,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12599,7 +12599,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12623,7 +12623,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12647,7 +12647,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12671,7 +12671,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12695,7 +12695,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12719,7 +12719,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12743,7 +12743,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12767,7 +12767,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12791,7 +12791,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12815,7 +12815,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12839,7 +12839,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12863,7 +12863,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12887,7 +12887,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12911,7 +12911,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12935,7 +12935,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12959,7 +12959,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -12983,7 +12983,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13007,7 +13007,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13031,7 +13031,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13055,7 +13055,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13079,7 +13079,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13103,7 +13103,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13127,7 +13127,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13151,7 +13151,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13175,7 +13175,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13199,7 +13199,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13223,7 +13223,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13247,7 +13247,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13271,7 +13271,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13295,7 +13295,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13319,7 +13319,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13343,7 +13343,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13367,7 +13367,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13391,7 +13391,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13415,7 +13415,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13439,7 +13439,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13463,7 +13463,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13487,7 +13487,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13511,7 +13511,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13535,7 +13535,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13559,7 +13559,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13583,7 +13583,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13607,7 +13607,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13631,7 +13631,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13655,7 +13655,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13679,7 +13679,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13703,7 +13703,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13727,7 +13727,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13751,7 +13751,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13775,7 +13775,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13799,7 +13799,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13823,7 +13823,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13849,7 +13849,7 @@
         354
       ],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13875,7 +13875,7 @@
         355
       ],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13899,7 +13899,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13923,7 +13923,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13947,7 +13947,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13971,7 +13971,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -13995,7 +13995,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14019,7 +14019,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14043,7 +14043,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14067,7 +14067,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14091,7 +14091,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14115,7 +14115,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14139,7 +14139,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14163,7 +14163,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14187,7 +14187,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14211,7 +14211,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14235,7 +14235,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14259,7 +14259,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14283,7 +14283,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14307,7 +14307,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14331,7 +14331,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14355,7 +14355,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14379,7 +14379,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14403,7 +14403,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14427,7 +14427,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14451,7 +14451,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14475,7 +14475,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14499,7 +14499,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14523,7 +14523,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14547,7 +14547,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14571,7 +14571,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14595,7 +14595,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14619,7 +14619,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14643,7 +14643,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14667,7 +14667,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14691,7 +14691,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14715,7 +14715,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14739,7 +14739,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14763,7 +14763,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14787,7 +14787,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14811,7 +14811,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14835,7 +14835,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14859,7 +14859,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14883,7 +14883,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14909,7 +14909,7 @@
         400
       ],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14935,7 +14935,7 @@
         401
       ],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14959,7 +14959,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -14983,7 +14983,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15007,7 +15007,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15031,7 +15031,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15055,7 +15055,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15079,7 +15079,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15103,7 +15103,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15127,7 +15127,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15151,7 +15151,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15175,7 +15175,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15199,7 +15199,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15223,7 +15223,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15247,7 +15247,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15271,7 +15271,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15295,7 +15295,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15319,7 +15319,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15343,7 +15343,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15367,7 +15367,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15391,7 +15391,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15415,7 +15415,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15439,7 +15439,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15463,7 +15463,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15487,7 +15487,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15511,7 +15511,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15535,7 +15535,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15559,7 +15559,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15583,7 +15583,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15607,7 +15607,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15631,7 +15631,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15655,7 +15655,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15679,7 +15679,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15703,7 +15703,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15727,7 +15727,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15751,7 +15751,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15775,7 +15775,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15799,7 +15799,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15823,7 +15823,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15847,7 +15847,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15871,7 +15871,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15895,7 +15895,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15919,7 +15919,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15943,7 +15943,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15967,7 +15967,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -15991,7 +15991,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16015,7 +16015,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16039,7 +16039,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16063,7 +16063,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16087,7 +16087,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16111,7 +16111,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16135,7 +16135,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16159,7 +16159,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16183,7 +16183,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16207,7 +16207,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16231,7 +16231,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16255,7 +16255,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16279,7 +16279,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16303,7 +16303,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16327,7 +16327,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16351,7 +16351,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16375,7 +16375,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16399,7 +16399,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16423,7 +16423,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16447,7 +16447,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16471,7 +16471,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16495,7 +16495,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16519,7 +16519,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16543,7 +16543,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16567,7 +16567,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16591,7 +16591,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16615,7 +16615,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16639,7 +16639,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16663,7 +16663,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16687,7 +16687,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16711,7 +16711,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16735,7 +16735,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16759,7 +16759,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16783,7 +16783,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16807,7 +16807,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16831,7 +16831,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16857,7 +16857,7 @@
         483
       ],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16883,7 +16883,7 @@
         484
       ],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16907,7 +16907,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16931,7 +16931,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16955,7 +16955,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -16979,7 +16979,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17003,7 +17003,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17027,7 +17027,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17051,7 +17051,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17075,7 +17075,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17099,7 +17099,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17123,7 +17123,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17147,7 +17147,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17171,7 +17171,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17195,7 +17195,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17219,7 +17219,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17243,7 +17243,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17267,7 +17267,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17291,7 +17291,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17315,7 +17315,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17339,7 +17339,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17363,7 +17363,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17387,7 +17387,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17411,7 +17411,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17435,7 +17435,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17459,7 +17459,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17483,7 +17483,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17507,7 +17507,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17531,7 +17531,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17555,7 +17555,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17579,7 +17579,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17603,7 +17603,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17627,7 +17627,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17651,7 +17651,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17675,7 +17675,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17699,7 +17699,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17723,7 +17723,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17747,7 +17747,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17771,7 +17771,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17795,7 +17795,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17819,7 +17819,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17843,7 +17843,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17867,7 +17867,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17893,7 +17893,7 @@
         528
       ],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17919,7 +17919,7 @@
         529
       ],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17943,7 +17943,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17967,7 +17967,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -17991,7 +17991,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18015,7 +18015,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18039,7 +18039,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18063,7 +18063,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18087,7 +18087,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18111,7 +18111,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18135,7 +18135,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18159,7 +18159,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18183,7 +18183,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18207,7 +18207,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18231,7 +18231,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18255,7 +18255,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18279,7 +18279,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18303,7 +18303,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18327,7 +18327,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18351,7 +18351,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18375,7 +18375,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18399,7 +18399,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18423,7 +18423,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18447,7 +18447,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18471,7 +18471,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18495,7 +18495,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18519,7 +18519,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18543,7 +18543,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18567,7 +18567,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18591,7 +18591,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18615,7 +18615,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18639,7 +18639,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18663,7 +18663,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18687,7 +18687,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18711,7 +18711,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18735,7 +18735,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18759,7 +18759,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18783,7 +18783,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18807,7 +18807,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18831,7 +18831,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18855,7 +18855,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18879,7 +18879,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18903,7 +18903,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18927,7 +18927,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18951,7 +18951,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18975,7 +18975,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -18999,7 +18999,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19023,7 +19023,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19047,7 +19047,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19071,7 +19071,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19095,7 +19095,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19119,7 +19119,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19143,7 +19143,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19167,7 +19167,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19191,7 +19191,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19215,7 +19215,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19239,7 +19239,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19263,7 +19263,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19287,7 +19287,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19311,7 +19311,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19335,7 +19335,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     },
@@ -19359,7 +19359,7 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],
-      "invariables": [],
+      "invariants": [],
       "principles": [],
       "opencre_topics": []
     }

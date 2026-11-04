@@ -1,8 +1,8 @@
 # Extraction pass prompt
 
-The Google Sheet was retired on October 31, 2026. GitHub issues are the source of truth. Do not run `scripts/extraction.py` against the sheet. That command now exits without reading or writing the sheet. The current update process is in [README.md](../README.md). The definitions below remain the writing rules for axiom, invariable, and principle bullets.
+The Google Sheet was retired on October 31, 2026. GitHub issues are the source of truth. Do not run `scripts/extraction.py` against the sheet. That command now exits without reading or writing the sheet. The current update process is in [README.md](../README.md). The definitions below remain the writing rules for axiom, invariant, and principle bullets. The issue heading is `### Invariants`. Older issues and the retired sheet used `Invariables`. The export reads both headings.
 
-This file used to be pasted into a Cursor agent chat so the agent could fill `Axioms`, `Invariables`, `Principles`, and `OpenCRE Topics` on sheet rows where all four were empty.
+This file used to be pasted into a Cursor agent chat so the agent could fill `Axioms`, `Invariants`, `Principles`, and `OpenCRE Topics` on sheet rows where all four were empty. The retired sheet header for the second column was `Invariables`.
 
 ## Setup (once)
 
@@ -35,11 +35,11 @@ A blog post that announces a paper fails the screen. Name the paper and its URL 
 
 Each bullet names who does what, to which object, under what condition. Use concrete verbs: measure, assign, log, block, revoke, attest, map, require. Take every claim from the document. Do not add claims the document does not make.
 
-**Axioms** are premises the document treats as true about AI systems, attackers, or adoption, which its guidance depends on. They describe the world outside the system being secured. They never describe the document itself ("the guide has three sections" is not an axiom). A statement that uses must, never, or shall is a requirement; put it under Invariables.
+**Axioms** are premises the document treats as true about AI systems, attackers, or adoption, which its guidance depends on. They describe the world outside the system being secured. They never describe the document itself ("the guide has three sections" is not an axiom). A statement that uses must, never, or shall is a requirement; put it under Invariants.
 
 - Example: "Adversaries already use AI to attack faster than humans can respond."
 
-**Invariables** are properties that hold for every system in the document's scope, whatever the deployment. The document states them either as requirements ("must", "never", "always") or as unavoidable facts about the system. Test: if the property fails, the document would call the system insecure or non-compliant regardless of its other controls.
+**Invariants** are properties that hold for every system in the document's scope, whatever the deployment. The document states them either as requirements ("must", "never", "always") or as unavoidable facts about the system. Test: if the property fails, the document would call the system insecure or non-compliant regardless of its other controls.
 
 - Requirement: "Every AI system must be documented and auditable."
 - Unavoidable fact: "Any ML system that is not fully white-box is susceptible to model extraction."
@@ -56,7 +56,7 @@ Pick a label only when the document gives a control, threat, or requirement in t
 
 ## Rules the apply step enforces
 
-- 3 to 8 bullets each for Axioms, Invariables, and Principles; 240 characters or fewer per bullet.
+- 3 to 8 bullets each for Axioms, Invariants, and Principles; 240 characters or fewer per bullet.
 - Every bullet has a `ref`: a page (`p. 12`), section title, or short quote locator.
 - No em dashes or en dashes.
 - None of these words: delve, dive into, unpack, leverage, harness, unlock, foster, empower, elevate, streamline, navigate, landscape, ecosystem, tapestry, realm, multifaceted, robust, seamless, cutting-edge, groundbreaking, holistic, comprehensive, end-to-end, pivotal, crucial, vital, underscore, highlight, showcase, illuminate, best practices, industry standards, ensure. Replace each with the concrete verb or object the sentence needs.
@@ -74,7 +74,7 @@ Pick a label only when the document gives a control, threat, or requirement in t
     "include": true,
     "include_reason": "Framework of AI supply chain controls with rationale.",
     "axioms": [{"text": "...", "ref": "p. 3"}],
-    "invariables": [{"text": "...", "ref": "p. 7"}],
+    "invariants": [{"text": "...", "ref": "p. 7"}],
     "principles": [{"text": "Least privilege: ...", "ref": "section 4.2"}],
     "opencre_topics": ["Supply Chain", "Access Control"]
   },

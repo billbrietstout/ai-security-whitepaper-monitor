@@ -38,7 +38,9 @@ SYNC_FOOTER = "_Synced from the whitepaper sheet. Edit the sheet, not this issue
 
 BULLET_SECTIONS = {
     "Axioms": "axioms",
-    "Invariables": "invariables",
+    # Older issues use the heading Invariables. The field name is invariants.
+    "Invariables": "invariants",
+    "Invariants": "invariants",
     "Principles": "principles",
     "OpenCRE Topics": "opencre_topics",
 }
@@ -355,7 +357,7 @@ def parse_issue(issue: dict) -> dict:
         "removed_duplicate": removed_duplicate,
         "body_wp_id": body_wp_id,
         "axioms": bullets["axioms"],
-        "invariables": bullets["invariables"],
+        "invariants": bullets["invariants"],
         "principles": bullets["principles"],
         "opencre_topics": bullets["opencre_topics"],
     }
@@ -521,7 +523,7 @@ def paper_record(paper: dict) -> dict:
         "blog_url": paper["blog_url"],
         "duplicate_issue_numbers": list(paper["duplicate_issue_numbers"]),
         "axioms": list(paper["axioms"]),
-        "invariables": list(paper["invariables"]),
+        "invariants": list(paper["invariants"]),
         "principles": list(paper["principles"]),
         "opencre_topics": list(paper["opencre_topics"]),
     }
@@ -585,11 +587,11 @@ def write_csv(document: dict, path: Path = CSV_PATH) -> None:
         "blog_url",
         "duplicate_issue_numbers",
         "axioms",
-        "invariables",
+        "invariants",
         "principles",
         "opencre_topics",
     ]
-    list_columns = {"axioms", "invariables", "principles", "opencre_topics"}
+    list_columns = {"axioms", "invariants", "principles", "opencre_topics"}
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=columns, lineterminator="\n")

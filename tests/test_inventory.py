@@ -83,6 +83,7 @@ class ParseTests(unittest.TestCase):
         self.assertEqual(record["date_published"], "Aug 2019")
         self.assertEqual(record["category"], "Article")
         self.assertEqual(record["axioms"], ["Adoption is uneven."])
+        self.assertEqual(record["invariants"], ["The model stores its training data."])
         self.assertEqual(record["decision"], "include")
         self.assertNotIn("Synced from the whitepaper sheet", " ".join(record["axioms"]))
 
@@ -101,7 +102,7 @@ class ParseTests(unittest.TestCase):
 Not extracted yet. The next pass will fill this from the paper.
 - Any ML system that is not fully white-box is susceptible to extraction attacks.
 
-### Invariables
+### Invariants
 Not extracted yet.
 
 ### Principles
@@ -117,7 +118,7 @@ _Not filled yet._
             record["axioms"],
             ["Any ML system that is not fully white-box is susceptible to extraction attacks."],
         )
-        self.assertEqual(record["invariables"], [])
+        self.assertEqual(record["invariants"], [])
         self.assertEqual(
             record["principles"],
             ["Least privilege: the operator grants each agent only the tools the task needs."],

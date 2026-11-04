@@ -471,7 +471,7 @@ def render_issue_body(item: dict) -> str:
                 "### Axioms",
                 "_Not filled yet._",
                 "",
-                "### Invariables",
+                "### Invariants",
                 "_Not filled yet._",
                 "",
                 "### Principles",
