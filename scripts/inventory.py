@@ -8,10 +8,11 @@ need that line.
 
 Each paper keeps the WP- id already stored in ``data/whitepapers.json``.
 The id stays on that issue and that normalized URL. A new URL receives the
-next free id. An issue whose URL already has an id does not receive a second
-one, unless that issue already has its own id in the registry. Six URLs were
-filed twice before the sheet was retired, and both copies kept the ids they
-already had.
+next free id, unless the issue body has ``<!-- wp-id: WP-0000 -->`` and that
+id is still free. The filing command writes that marker. An issue whose URL
+already has an id does not receive a second one, unless that issue already
+has its own id in the registry. Six URLs were filed twice before the sheet
+was retired, and both copies kept the ids they already had.
 """
 
 from __future__ import annotations
@@ -50,6 +51,7 @@ DECISIONS = {
 
 SHEET_URL_RE = re.compile(r"<!--\s*sheet-url:\s*(.*?)\s*-->", re.DOTALL)
 REMOVED_DUP_RE = re.compile(r"<!--\s*removed-duplicate-marker\s*-->")
+WP_ID_MARKER_RE = re.compile(r"<!--\s*wp-id:\s*(WP-[0-9]{4})\s*-->")
 FIELD_RE = re.compile(r"^\*\*([^*]+):\*\*\s*(.*)$")
 CARRIED_RE = re.compile(r"^-\s+\*\*([^*]+):\*\*\s*(.*)$")
 URL_RE = re.compile(r"https?://[^\s)>]+")
@@ -68,6 +70,17 @@ def normalize_url(url: str) -> str:
     )
     scheme = "https" if parts.scheme in ("http", "https") else parts.scheme
     return urlunsplit((scheme, parts.netloc.lower(), parts.path.rstrip("/"), query, ""))
+
+
+def wp_id_marker(wp_id: str) -> str:
+    """Hidden issue line the filing command searches for before it creates an issue."""
+    if not isinstance(wp_id, str) or not WP_ID_RE.fullmatch(wp_id):
+        raise SystemExit(f"WP- id {wp_id!r} is not WP- and four digits.")
+    return f"<!-- wp-id: {wp_id} -->"
+
+
+def marker_wp_ids(body: str) -> list[str]:
+    return WP_ID_MARKER_RE.findall(body or "")
 
 
 def repository_slug() -> str:
@@ -208,12 +221,28 @@ def _first_url(text: str) -> str:
     return ""
 
 
+def _label_names(issue: dict) -> set[str]:
+    names = set()
+    for item in issue.get("labels") or []:
+        if isinstance(item, dict):
+            name = item.get("name")
+        else:
+            name = item
+        if isinstance(name, str) and name.strip():
+            names.add(name.strip().lower())
+    return names
+
+
 def parse_issue(issue: dict) -> dict:
     """Turn one GitHub issue into fields. Does not assign a WP- id."""
     number = int(issue["number"])
     body = issue.get("body") or ""
     if not body.strip():
         raise SystemExit(f"Issue {number} has an empty body.")
+    markers = marker_wp_ids(body)
+    if len(set(markers)) > 1:
+        raise SystemExit(f"Issue {number} has more than one wp-id marker.")
+    body_wp_id = markers[0] if markers else ""
     sheet_match = SHEET_URL_RE.search(body)
     legacy_sheet_url = ""
     if sheet_match:
@@ -274,12 +303,14 @@ def parse_issue(issue: dict) -> dict:
     if state not in ("open", "closed"):
         raise SystemExit(f"Issue {number} has an unexpected state.")
     removed_duplicate = bool(REMOVED_DUP_RE.search(body))
+    duplicate_label = "duplicate" in _label_names(issue)
     label = fields.get("Decision", "").strip().lower()
     raw_decision = fields.get("Decision", "").strip()
     if label == "" and state == "open":
         decision = "include"
-    elif label == "" and removed_duplicate:
-        # Interrupted sync runs closed a second copy and did not set Decision.
+    elif label == "" and (removed_duplicate or duplicate_label):
+        # An interrupted run closed a second copy and did not set Decision.
+        # The duplicate label is enough for that closed issue.
         decision = "duplicate"
     elif label not in DECISIONS:
         raise SystemExit(f"Issue {number} has Decision {raw_decision!r}.")
@@ -308,6 +339,7 @@ def parse_issue(issue: dict) -> dict:
         "legacy_notes": legacy_notes,
         "blog_url": blog_url,
         "removed_duplicate": removed_duplicate,
+        "body_wp_id": body_wp_id,
         "axioms": bullets["axioms"],
         "invariables": bullets["invariables"],
         "principles": bullets["principles"],
@@ -416,7 +448,17 @@ def build_papers(records: list[dict], registry: list[dict]) -> tuple[list[dict],
     for url_key in new_urls:
         members = grouped[url_key]
         canonical = sorted(members, key=_canonical_key)[0]
-        canonical["wp_id"] = _allocate(used)
+        preferred = canonical.get("body_wp_id") or ""
+        if preferred:
+            if preferred in used:
+                raise SystemExit(
+                    f"Issue {canonical['issue_number']} is marked {preferred}, "
+                    f"and that id is already reserved."
+                )
+            canonical["wp_id"] = preferred
+            used.add(preferred)
+        else:
+            canonical["wp_id"] = _allocate(used)
         canonical["duplicate_issue_numbers"] = []
         new_entries.append(
             {

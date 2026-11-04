@@ -1,1 +1,4 @@
+# Local schema check:
+#   python3 -m pip install -r scripts/requirements.txt
+#   python3 scripts/validate_whitepapers.py --schema-only
 jsonschema==4.23.0
