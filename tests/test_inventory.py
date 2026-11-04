@@ -93,6 +93,37 @@ class ParseTests(unittest.TestCase):
         self.assertEqual(record["decision"], "duplicate")
         self.assertEqual(record["state"], "closed")
 
+    def test_unfilled_markers_are_not_stored_as_bullets(self):
+        body = """**Source:** Example Lab
+**Link:** https://example.org/pending.pdf
+
+### Axioms
+Not extracted yet. The next pass will fill this from the paper.
+- Any ML system that is not fully white-box is susceptible to extraction attacks.
+
+### Invariables
+Not extracted yet.
+
+### Principles
+- Not extracted yet.
+- Least privilege: the operator grants each agent
+  only the tools the task needs.
+
+### OpenCRE Topics
+_Not filled yet._
+"""
+        record = inventory.parse_issue(issue(182, body, "Pending paper"))
+        self.assertEqual(
+            record["axioms"],
+            ["Any ML system that is not fully white-box is susceptible to extraction attacks."],
+        )
+        self.assertEqual(record["invariables"], [])
+        self.assertEqual(
+            record["principles"],
+            ["Least privilege: the operator grants each agent only the tools the task needs."],
+        )
+        self.assertEqual(record["opencre_topics"], [])
+
     def test_sheet_url_is_optional(self):
         record = inventory.parse_issue(issue(172, HAND_BODY, "Agentic AI Top 10"))
         self.assertEqual(record["legacy_sheet_url"], "")

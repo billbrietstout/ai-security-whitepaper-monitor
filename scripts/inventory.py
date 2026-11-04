@@ -42,6 +42,13 @@ BULLET_SECTIONS = {
     "Principles": "principles",
     "OpenCRE Topics": "opencre_topics",
 }
+# Lines that mean the section was left for a later pass. They are not bullets.
+# The filing command writes the first line. The November 3, 2026 pass wrote the other two.
+EMPTY_BULLETS = {
+    "_Not filled yet._",
+    "Not extracted yet.",
+    "Not extracted yet. The next pass will fill this from the paper.",
+}
 CARRIED_SKIP = {"Date published", "Category", "File type", "Sheet tab and row"}
 DECISIONS = {
     "include": "include",
@@ -190,23 +197,30 @@ def _clean_lines(text: str) -> list[str]:
     return lines
 
 
+def _bullet_text(stripped: str) -> str:
+    if stripped.startswith("- "):
+        return stripped[2:].strip()
+    if stripped.startswith("-"):
+        return stripped[1:].strip()
+    return stripped
+
+
 def _bullets(text: str) -> list[str]:
     items: list[str] = []
     for line in _clean_lines(text):
         stripped = line.strip()
-        if not stripped or stripped == "_Not filled yet._":
+        if not stripped or stripped in EMPTY_BULLETS:
             continue
-        if stripped.startswith("- "):
-            items.append(stripped[2:].strip())
-        elif stripped.startswith("-"):
-            item = stripped[1:].strip()
-            if item:
-                items.append(item)
+        item = _bullet_text(stripped)
+        if not item or item in EMPTY_BULLETS:
+            continue
+        if stripped.startswith("-"):
+            items.append(item)
         elif items:
-            items[-1] = f"{items[-1]} {stripped}"
+            items[-1] = f"{items[-1]} {item}"
         else:
-            items.append(stripped)
-    return [item for item in items if item]
+            items.append(item)
+    return [item for item in items if item and item not in EMPTY_BULLETS]
 
 
 def _first_url(text: str) -> str:
