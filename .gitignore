@@ -3,3 +3,4 @@ work/
 __pycache__/
 *.json.tmp
 runs/*.lock
+runs/gh-write-log.json

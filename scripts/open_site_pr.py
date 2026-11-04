@@ -17,6 +17,7 @@ import argparse
 import json
 import os
 import shutil
+import re
 import subprocess
 import sys
 import tempfile
@@ -25,7 +26,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SITE_REPO = "billbrietstout/ai-shared-responsibility"
-DEFAULT_BASE = "main"
+DEFAULT_BASE = "develop"
+BOT_NAME = "github-actions[bot]"
+BOT_EMAIL = "41898283+github-actions[bot]@users.noreply.github.com"
+URL_CREDENTIALS = re.compile(r"(https?://)[^/@\s]+@")
 
 sys.path.insert(0, str(ROOT / "scripts"))
 import gh_rate  # noqa: E402
@@ -45,6 +49,14 @@ def token() -> str:
             "to open a pull request on the site repository."
         )
     return value
+
+
+def git_error(result: subprocess.CompletedProcess[str], secrets: list[str]) -> str:
+    """Return git's stderr with tokens and URL credentials removed."""
+    text = (result.stderr or result.stdout or "").strip()
+    text = gh_rate.redact(text, [value for value in secrets if value])
+    text = URL_CREDENTIALS.sub(r"\1***@", text)
+    return text[-800:]
 
 
 def run(cmd: list[str], cwd: Path, env: dict[str, str] | None = None) -> subprocess.CompletedProcess[str]:
@@ -117,12 +129,14 @@ def main() -> None:
     run(["git", "checkout", "-b", branch], cwd=work)
     run(["git", "add", "--", "data/whitepapers.json", "data/whitepapers.slim.json", "data/index.json"], cwd=work)
     message = f"Update the whitepaper inventory from the monitor ({today})"
+    run(["git", "config", "user.name", BOT_NAME], cwd=work)
+    run(["git", "config", "user.email", BOT_EMAIL], cwd=work)
     commit = run(["git", "commit", "-m", message], cwd=work)
     if commit.returncode != 0:
-        raise SystemExit("git commit failed on the site clone.")
+        raise SystemExit("git commit failed on the site clone.\n" + git_error(commit, [auth]))
     push = run(["git", "push", "-u", "origin", branch], cwd=work, env=env)
     if push.returncode != 0:
-        raise SystemExit("git push to the site repository failed.")
+        raise SystemExit("git push to the site repository failed.\n" + git_error(push, [auth]))
     body = (
         "Copies included papers from `billbrietstout/ai-security-whitepaper-monitor` "
         "into `/data/whitepapers.json` and `/data/whitepapers.slim.json`.\n"
