@@ -19,6 +19,14 @@ uses the issue token. The tokens are not printed.
 --dry-run writes the run file and does not call GitHub.
 --skip-project leaves new issues at issue_open so a later run can add them.
 
+Content-creating calls (issue creates and project adds) go through
+scripts/gh_rate.py. The default pace is 1 second apart. The default
+hourly budget is 400 writes, under GitHub's 500 writes an hour. At the
+budget the command saves the run file and exits 2. Run it again after
+the time it prints. --write-delay and --write-budget override the
+defaults. GITHUB_WRITE_DELAY and GITHUB_HOURLY_WRITE_BUDGET do the same.
+The delay cannot be under 1 second. The budget cannot be over 450.
+
 The command does not close, delete, or edit an issue.
 """
 
@@ -31,6 +39,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import filing  # noqa: E402
+import gh_rate  # noqa: E402
 import inventory  # noqa: E402
 
 
@@ -76,10 +85,18 @@ def _run(args: argparse.Namespace) -> None:
         print(filing.format_run(store))
         print(f"Wrote {path}. GitHub was not contacted.")
         return
+    limiter = gh_rate.Limiter.from_env(
+        write_delay=args.write_delay,
+        hourly_budget=args.write_budget,
+    )
+    gh_rate.set_shared_limiter(limiter)
+    gap = f"{limiter.write_delay:g} second" if limiter.write_delay == 1 else f"{limiter.write_delay:g} seconds"
+    print(f"GitHub writes: {gap} apart, {limiter.hourly_budget} per hour, one request at a time.")
     client = filing.GithubRestClient(
         repository,
         issue_token=filing.issue_token(),
         project_token=filing.project_token(),
+        limiter=limiter,
     )
     project_id = ""
     if not args.skip_project:
@@ -97,6 +114,11 @@ def _run(args: argparse.Namespace) -> None:
             skip_project=args.skip_project,
             on_item=_print_item,
         )
+    except gh_rate.WriteBudgetExceeded as exc:
+        print(str(exc))
+        print(filing.format_run(store))
+        print(f"Checkpoint saved at {path}. Run the same command again after the budget resets.")
+        raise SystemExit(2) from None
     except filing.GithubError as exc:
         print(filing.redact(str(exc), filing.secrets_from_env()))
         raise SystemExit(1) from None
@@ -129,6 +151,18 @@ def main() -> None:
     run.add_argument("--project-owner", default="", help="user or organization that owns the project")
     run.add_argument("--dry-run", action="store_true", help="write the run file and do not call GitHub")
     run.add_argument("--skip-project", action="store_true", help="open issues and leave project adds for a later run")
+    run.add_argument(
+        "--write-delay",
+        type=float,
+        default=None,
+        help="seconds between content-creating calls (default 1, minimum 1)",
+    )
+    run.add_argument(
+        "--write-budget",
+        type=int,
+        default=None,
+        help="content-creating calls allowed per hour (default 400, maximum 450)",
+    )
     run.set_defaults(func=_run)
 
     show = sub.add_parser("show", help="print done and pending WP- ids")

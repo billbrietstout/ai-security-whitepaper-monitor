@@ -169,7 +169,29 @@ Run the same command again, with or without `--queue`, to resume. When you omit 
 
 `GITHUB_TOKEN` or `GH_TOKEN` must be able to open issues. `GITHUB_PROJECTS_TOKEN` must be able to add items to GitHub Project 2. The script reads those variables and does not print them. If you omit `GITHUB_PROJECTS_TOKEN`, the project step uses the issue token.
 
-The script lists issue bodies and searches for `<!-- wp-id: WP-0000 -->` before it opens an issue. It does not use the Search API for that check, because search lags behind the issue list. After a 5xx response or a timeout, it lists again. It opens another issue only after that list finishes and the marker is still absent. Project adds use the same check.
+The script lists issue bodies and searches for `<!-- wp-id: WP-0000 -->` before it opens an issue. It does not use the Search API for that check, because search lags behind the issue list. After a 403, 429, 5xx, timeout, or dropped connection, it lists again before it creates. It opens another issue only after that list finishes and the marker is still absent. Project adds use the same check.
+
+### Rate limits
+
+GitHub allows 5,000 authenticated requests an hour. Content-creating requests are tighter: 80 a minute and 500 an hour. That includes issue creates, comments, edits, and project changes. A write costs 5 points. Each REST endpoint allows 900 points a minute, and GraphQL allows 2,000 points a minute. Concurrency is capped at 100.
+
+`scripts/file_issues.py`, the project add, the inventory pull request, and the site pull request send their GitHub writes through `scripts/gh_rate.py`. Reads from the export and the validator use the same helper for retries. Reads do not spend the write budget.
+
+The helper sends one request at a time. It waits 1 second between content-creating calls. It stops at 400 writes in an hour, which stays under the 500 write cap. It logs `X-RateLimit-Remaining` on stderr. When GitHub returns 403 or 429, it follows `Retry-After` when that header is present. When `X-RateLimit-Remaining` is 0, it waits until `X-RateLimit-Reset`. Otherwise it waits 60 seconds and doubles that wait, and it gives up after 5 retries. A dropped connection uses that same wait. Before a create is sent again, the helper lists issues and looks for the wp-id marker.
+
+A weekly batch of 25 papers is 25 issue creates and 25 project adds: 50 writes. That finishes inside the hourly budget.
+
+```bash
+python3 scripts/file_issues.py run --queue work/queue.json --batch-size 25 --write-delay 1 --write-budget 400
+```
+
+`GITHUB_WRITE_DELAY` is the gap in seconds. The minimum is 1, so the run stays at or under 60 creates a minute. `GITHUB_HOURLY_WRITE_BUDGET` defaults to 400 and cannot be set above 450. `GITHUB_RATE_MAX_RETRIES` defaults to 5.
+
+A long backfill is several runs. Each paper costs two writes, so one hour at the default budget files about 200 papers. Use a batch size of 50, and when the command says the budget is spent, wait until the time it prints, then run the same command again. Exit code 2 means the budget stop. The printed time is when the oldest write in that hour ages out. The run file still lists the pending WP- ids. Keep one filing command at a time on one checkout. `runs/gh-write-log.json` stores the write times for that hour and contains no token.
+
+```bash
+python3 scripts/file_issues.py run --queue work/queue.json --batch-size 50
+```
 
 See what is left:
 
@@ -224,6 +246,7 @@ The check also reads the issues and compares them with the export. `--schema-onl
 - `scripts/sync_issues.py` reads the issues and prints counts. It does not write files and it does not edit issues.
 - `scripts/validate_whitepapers.py` is the check that CI runs. `--schema-only` is the local schema and WP- id check.
 - `scripts/file_issues.py` opens one batch of issues and adds them to GitHub Project 2. It resumes from `runs/<date>.json`.
+- `scripts/gh_rate.py` paces GitHub writes, keeps the hourly budget, and retries rate limits. `runs/gh-write-log.json` stores the write times.
 - `scripts/open_inventory_pr.py` commits the export on the current branch and opens a pull request. It does not push `master`.
 - `scripts/site_inventory.py` writes the included-paper JSON files that the site serves.
 - `scripts/open_site_pr.py` copies those files into `billbrietstout/ai-shared-responsibility` and opens a pull request. It needs `SITE_REPO_TOKEN`.

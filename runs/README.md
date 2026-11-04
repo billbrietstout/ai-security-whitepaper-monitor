@@ -17,3 +17,5 @@ Item status:
 - `already_filed` means an issue for that URL already existed. The command did not open another one.
 
 A later run reads this file and continues `pending` and `issue_open` items. Pass `--date` when you need a specific file, including a file that was still pending after UTC midnight. The command does not open a second issue for a WP- id that already has a `<!-- wp-id: WP-0000 -->` marker.
+
+`runs/gh-write-log.json` is the hourly write log for `scripts/gh_rate.py`. It holds timestamps only. When the log already has 400 writes in the last hour, the next filing command stops before it creates another issue. Delete it only when no filing command is running and you intend to reset that local count. The GitHub token is not in this file.

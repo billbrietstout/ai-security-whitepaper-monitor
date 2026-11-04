@@ -18,8 +18,22 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import filing  # noqa: E402
+import gh_rate  # noqa: E402
 import inventory  # noqa: E402
 import open_inventory_pr  # noqa: E402
+
+
+def quiet_limiter(**overrides) -> gh_rate.Limiter:
+    settings = {
+        "write_delay": 0,
+        "hourly_budget": 400,
+        "max_retries": 0,
+        "sleep": lambda _seconds: None,
+        "log": lambda _message: None,
+        "state_path": None,
+    }
+    settings.update(overrides)
+    return gh_rate.Limiter(**settings)
 
 
 def pending(wp_id: str, url: str, title: str = "Paper") -> dict:
@@ -643,7 +657,13 @@ class ClientTests(unittest.TestCase):
                 io.BytesIO(f"upstream failed {token}".encode()),
             )
 
-        client = filing.GithubRestClient("example/papers", issue_token=token, project_token=token, opener=opener)
+        client = filing.GithubRestClient(
+            "example/papers",
+            issue_token=token,
+            project_token=token,
+            opener=opener,
+            limiter=quiet_limiter(),
+        )
         with self.assertRaises(filing.GithubError) as caught:
             client.list_issues()
         self.assertNotIn(token, str(caught.exception))
@@ -653,7 +673,12 @@ class ClientTests(unittest.TestCase):
         def opener(request, timeout=60):
             raise urllib.error.URLError(TimeoutError("timed out"))
 
-        client = filing.GithubRestClient("example/papers", issue_token="ghp_supersecretvalue", opener=opener)
+        client = filing.GithubRestClient(
+            "example/papers",
+            issue_token="ghp_supersecretvalue",
+            opener=opener,
+            limiter=quiet_limiter(),
+        )
         with self.assertRaises(filing.GithubError) as caught:
             client.list_issues()
         self.assertEqual(caught.exception.status, 504)
@@ -669,7 +694,12 @@ class ClientTests(unittest.TestCase):
             body = seen["payload"]["body"]
             return FakeResponse({"number": 4, "node_id": "ISSUE_4", "title": seen["payload"]["title"], "body": body})
 
-        client = filing.GithubRestClient("example/papers", issue_token=token, opener=opener)
+        client = filing.GithubRestClient(
+            "example/papers",
+            issue_token=token,
+            opener=opener,
+            limiter=quiet_limiter(),
+        )
         issue = client.create_issue("Title", "<!-- wp-id: WP-0008 -->\n\n**Source:** NIST\n")
         self.assertEqual(seen["method"], "POST")
         self.assertEqual(set(seen["payload"]), {"title", "body"})
@@ -693,6 +723,7 @@ class ClientTests(unittest.TestCase):
     def test_filing_source_does_not_close_or_print_tokens(self):
         text = (ROOT / "scripts" / "filing.py").read_text(encoding="utf-8")
         text += (ROOT / "scripts" / "file_issues.py").read_text(encoding="utf-8")
+        text += (ROOT / "scripts" / "gh_rate.py").read_text(encoding="utf-8")
         pr = (ROOT / "scripts" / "open_inventory_pr.py").read_text(encoding="utf-8")
         for banned in ("DELETE", "--force", "push origin master", "state=closed"):
             self.assertNotIn(banned, text)

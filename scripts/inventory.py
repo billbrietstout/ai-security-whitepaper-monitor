@@ -21,8 +21,9 @@ import json
 import os
 import re
 import subprocess
-import urllib.error
 import urllib.request
+
+import gh_rate
 from pathlib import Path
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
@@ -123,12 +124,34 @@ def _next_url(link_header: str) -> str:
     return ""
 
 
+def _read_page(repo: str, send) -> tuple[list[dict], str]:
+    try:
+        result = gh_rate.shared_limiter().execute(send, write=False)
+    except gh_rate.RetryGaveUp as exc:
+        raise SystemExit(f"GitHub API returned {exc.status} while listing issues in {repo}.") from None
+    except gh_rate.CommandFailed as exc:
+        tail = str(exc).strip().splitlines()
+        detail = tail[-1] if tail else "gh api failed"
+        raise SystemExit(f"Could not list issues in {repo}: {detail}") from None
+    if result.status >= 400:
+        raise SystemExit(f"GitHub API returned {result.status} while listing issues in {repo}.")
+    try:
+        batch = json.loads(result.body or "null")
+    except json.JSONDecodeError:
+        raise SystemExit(f"GitHub API returned data that is not JSON for {repo}.") from None
+    if not isinstance(batch, list):
+        raise SystemExit(f"GitHub API returned an unexpected issues payload for {repo}.")
+    issues = [item for item in batch if "pull_request" not in item]
+    return issues, _next_url(gh_rate.header_value(result.headers, "link"))
+
+
 def _fetch_with_token(repo: str, token: str) -> list[dict]:
     url = f"https://api.github.com/repos/{repo}/issues?state=all&per_page=100"
     found: list[dict] = []
     while url:
+        current = url
         request = urllib.request.Request(
-            url,
+            current,
             headers={
                 "Accept": "application/vnd.github+json",
                 "Authorization": f"Bearer {token}",
@@ -136,39 +159,40 @@ def _fetch_with_token(repo: str, token: str) -> list[dict]:
                 "X-GitHub-Api-Version": "2022-11-28",
             },
         )
-        try:
-            with urllib.request.urlopen(request, timeout=60) as response:
-                batch = json.loads(response.read().decode())
-                link_header = response.headers.get("Link", "")
-        except urllib.error.HTTPError as exc:
-            raise SystemExit(f"GitHub API returned {exc.code} while listing issues in {repo}.") from None
-        if not isinstance(batch, list):
-            raise SystemExit(f"GitHub API returned an unexpected issues payload for {repo}.")
-        found.extend(item for item in batch if "pull_request" not in item)
-        url = _next_url(link_header)
+
+        def send(request=request):
+            return gh_rate.perform_urllib(urllib.request.urlopen, request, timeout=60)
+
+        page, url = _read_page(repo, send)
+        found.extend(page)
     return found
 
 
 def _fetch_with_gh(repo: str) -> list[dict]:
-    try:
-        raw = subprocess.check_output(
-            ["gh", "api", "--paginate", f"repos/{repo}/issues?state=all&per_page=100"],
-            text=True,
-            stderr=subprocess.PIPE,
-        )
-    except FileNotFoundError:
-        raise SystemExit("Set GITHUB_TOKEN or GH_TOKEN, or install the gh CLI.") from None
-    except subprocess.CalledProcessError as exc:
-        detail = (exc.stderr or "").strip().splitlines()
-        tail = detail[-1] if detail else "gh api failed"
-        raise SystemExit(f"Could not list issues in {repo}: {tail}") from None
-    try:
-        data = json.loads(raw)
-    except json.JSONDecodeError:
-        raise SystemExit(f"GitHub API returned data that is not JSON for {repo}.") from None
-    if not isinstance(data, list):
-        raise SystemExit(f"GitHub API returned an unexpected issues payload for {repo}.")
-    return [item for item in data if "pull_request" not in item]
+    path = f"repos/{repo}/issues?state=all&per_page=100"
+    found: list[dict] = []
+    while path:
+        current = path
+
+        def send(current=current):
+            try:
+                completed = subprocess.run(
+                    ["gh", "api", "--include", "--method", "GET", current],
+                    text=True,
+                    capture_output=True,
+                    check=False,
+                )
+            except FileNotFoundError:
+                raise SystemExit("Set GITHUB_TOKEN or GH_TOKEN, or install the gh CLI.") from None
+            return gh_rate.result_from_process(
+                completed.returncode,
+                completed.stdout or "",
+                completed.stderr or "",
+            )
+
+        page, path = _read_page(repo, send)
+        found.extend(page)
+    return found
 
 
 def fetch_issues(repo: str | None = None) -> list[dict]:

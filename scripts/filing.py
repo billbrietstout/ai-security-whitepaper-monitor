@@ -6,9 +6,14 @@ project add. A later invocation reads that file and continues the pending
 WP- ids. It does not start the queue over.
 
 Before creating an issue, the command lists issue bodies and looks for
-``<!-- wp-id: WP-0000 -->``. A 5xx or a timeout from the create call is
-followed by the same lookup. A second create happens only after that lookup
-finishes and the marker is still absent. Project adds follow the same rule.
+``<!-- wp-id: WP-0000 -->``. A 403, 429, 5xx, timeout, or dropped connection
+is retried by ``gh_rate``. Before that retry sends another create, the same
+marker lookup has to finish. A second create happens only when the marker
+is still absent. Project adds follow the same rule.
+
+Content-creating calls go through ``gh_rate.Limiter``: one at a time, at
+least one second apart, and at most the hourly write budget (default 400).
+When the budget is spent the run file is already saved and the command stops.
 
 This module does not close, delete, or edit issues. It does not read or
 write the retired spreadsheet. It does not print tokens.
@@ -21,11 +26,11 @@ import os
 import re
 import subprocess
 import time
-import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
+import gh_rate
 import inventory
 
 DEFAULT_BATCH_SIZE = 25
@@ -782,11 +787,17 @@ def file_batch(
     on_item=None,
 ) -> int:
     chosen = next_batch(store.items(), batch_size)
-    for item in chosen:
-        file_item(store, client, project_id, item, sleep=sleep, skip_project=skip_project)
-        if on_item:
-            on_item(item)
-    return len(chosen)
+    filed = 0
+    try:
+        for item in chosen:
+            file_item(store, client, project_id, item, sleep=sleep, skip_project=skip_project)
+            filed += 1
+            if on_item:
+                on_item(item)
+    except gh_rate.WriteBudgetExceeded:
+        store.save()
+        raise
+    return filed
 
 
 def format_run(store: RunStore) -> str:
@@ -807,26 +818,30 @@ def format_run(store: RunStore) -> str:
     return "\n".join(lines)
 
 
-def _status_from_gh(stderr: str) -> int:
-    match = re.search(r"\bHTTP\s+(\d{3})\b", stderr or "")
-    if match:
-        return int(match.group(1))
-    lowered = (stderr or "").lower()
-    if "timeout" in lowered or "timed out" in lowered:
-        return 504
-    return 0
-
-
 class GithubRestClient:
     """Issue and project calls. Tokens stay in headers or in the gh login."""
 
-    def __init__(self, repo: str, issue_token: str = "", project_token: str = "", opener=None, runner=None):
+    def __init__(
+        self,
+        repo: str,
+        issue_token: str = "",
+        project_token: str = "",
+        opener=None,
+        runner=None,
+        limiter: gh_rate.Limiter | None = None,
+    ):
         self.repo = repo
         self.issue_token = issue_token or ""
         self.project_token = project_token or issue_token or ""
         self.opener = opener or urllib.request.urlopen
         self.runner = runner or subprocess.run
+        self.limiter = limiter
         self.secrets = [value for value in (self.issue_token, self.project_token) if value]
+
+    def _limiter(self) -> gh_rate.Limiter:
+        if self.limiter is None:
+            self.limiter = gh_rate.shared_limiter()
+        return self.limiter
 
     def redact(self, text: str) -> str:
         return redact(text, self.secrets)
@@ -848,38 +863,9 @@ class GithubRestClient:
         message = self.redact(raw).replace("\n", " ")[:500]
         if status == 404:
             raise GithubError(404, "GitHub API returned 404.")
-        if 500 <= status <= 599:
+        if status in (403, 429) or 500 <= status <= 599:
             raise GithubError(status, f"GitHub API returned {status}. {message}")
         raise SystemExit(f"GitHub API returned {status}. {message}")
-
-    def _open(self, request: urllib.request.Request):
-        try:
-            response = self.opener(request, timeout=60)
-        except urllib.error.HTTPError as exc:
-            detail = exc.read().decode("utf-8", errors="replace")
-            self._raise_http(exc.code, detail)
-        except TimeoutError:
-            raise GithubError(504, "GitHub API timed out.") from None
-        except urllib.error.URLError as exc:
-            if isinstance(exc.reason, TimeoutError):
-                raise GithubError(504, "GitHub API timed out.") from None
-            raise SystemExit(self.redact(f"GitHub API request failed: {exc.reason}")) from None
-        try:
-            raw = response.read().decode("utf-8", errors="replace")
-            status = getattr(response, "status", 200) or 200
-            headers = getattr(response, "headers", {})
-        finally:
-            close = getattr(response, "close", None)
-            if close:
-                close()
-        if status >= 400:
-            self._raise_http(status, raw)
-        return headers, raw
-
-    def _request_raw(self, method: str, url: str, payload: dict | None, token: str):
-        data = None if payload is None else json.dumps(payload).encode("utf-8")
-        request = urllib.request.Request(url, data=data, headers=self._headers(token), method=method)
-        return self._open(request)
 
     def _json(self, raw: str):
         try:
@@ -887,92 +873,188 @@ class GithubRestClient:
         except json.JSONDecodeError:
             raise SystemExit("GitHub API returned data that is not JSON.") from None
 
-    def _gh_json(self, method: str, path: str, payload: dict | None, paginate: bool = False):
-        command = ["gh", "api"]
-        if paginate:
-            command.append("--paginate")
-        command.extend(["--method", method, path])
+    def _call(self, send, *, write: bool, before_retry=None) -> gh_rate.HttpResult:
+        try:
+            result = self._limiter().execute(send, write=write, before_retry=before_retry)
+        except gh_rate.WriteBudgetExceeded:
+            raise
+        except gh_rate.RetryGaveUp as exc:
+            self._raise_http(exc.status or 504, exc.message)
+        if result.recovered is not None:
+            return result
+        if result.status >= 400:
+            self._raise_http(result.status, result.body)
+        return result
+
+    def _urllib_send(self, method: str, url: str, payload: dict | None, token: str, retry_on_body=None):
+        data = None if payload is None else json.dumps(payload).encode("utf-8")
+        request = urllib.request.Request(url, data=data, headers=self._headers(token), method=method)
+
+        def send():
+            result = gh_rate.perform_urllib(self.opener, request, timeout=60)
+            if retry_on_body is not None and result.status < 400 and retry_on_body(result.body):
+                return gh_rate.HttpResult(429, result.headers, result.body)
+            return result
+
+        return send
+
+    def _gh_send(self, method: str, path: str, payload: dict | None, retry_on_body=None):
+        command = ["gh", "api", "--include", "--method", method, path]
         stdin = None
         if payload is not None:
             command.extend(["--input", "-"])
             stdin = json.dumps(payload)
-        completed = self.runner(command, input=stdin, text=True, capture_output=True, check=False)
-        stdout = completed.stdout or ""
-        stderr = self.redact(completed.stderr or "")
-        if completed.returncode != 0:
-            status = _status_from_gh(stderr)
-            if status == 404:
-                raise GithubError(404, "GitHub API returned 404.")
-            if status >= 500 or status == 504:
-                raise GithubError(status or 504, f"GitHub API returned {status or 504}. {stderr[-300:]}")
-            if "timeout" in stderr.lower():
-                raise GithubError(504, "GitHub API timed out.")
-            raise SystemExit(f"GitHub API request failed. {stderr[-300:]}")
-        return self._json(stdout)
+
+        def send():
+            try:
+                completed = self.runner(
+                    command,
+                    input=stdin,
+                    text=True,
+                    capture_output=True,
+                    check=False,
+                )
+            except FileNotFoundError:
+                raise SystemExit("Install the gh CLI, or set GITHUB_TOKEN.") from None
+            stdout = self.redact(completed.stdout or "")
+            stderr = self.redact(completed.stderr or "")
+            try:
+                result = gh_rate.result_from_process(completed.returncode, stdout, stderr)
+            except gh_rate.CommandFailed as exc:
+                raise SystemExit(f"GitHub API request failed. {self.redact(str(exc))[-300:]}") from None
+            if retry_on_body is not None and result.status < 400 and retry_on_body(result.body):
+                return gh_rate.HttpResult(429, result.headers, result.body)
+            return result
+
+        return send
+
+    def _extend_issues(self, found: list[dict], result: gh_rate.HttpResult) -> str:
+        batch = self._json(result.body)
+        if not isinstance(batch, list):
+            raise SystemExit(f"GitHub API returned an unexpected issues payload for {self.repo}.")
+        found.extend(item for item in batch if "pull_request" not in item)
+        return inventory._next_url(gh_rate.header_value(result.headers, "link"))
 
     def list_issues(self) -> list[dict]:
         self._guard()
-        if not self.issue_token:
-            data = self._gh_json("GET", f"repos/{self.repo}/issues?state=all&per_page=100", None, paginate=True)
-            if not isinstance(data, list):
-                raise SystemExit(f"GitHub API returned an unexpected issues payload for {self.repo}.")
-            return [item for item in data if "pull_request" not in item]
-        url = f"https://api.github.com/repos/{self.repo}/issues?state=all&per_page=100"
         found: list[dict] = []
+        if not self.issue_token:
+            path = f"repos/{self.repo}/issues?state=all&per_page=100"
+            while path:
+                current = path
+                result = self._call(self._gh_send("GET", current, None), write=False)
+                path = self._extend_issues(found, result)
+            return found
+        url = f"https://api.github.com/repos/{self.repo}/issues?state=all&per_page=100"
         while url:
-            headers, raw = self._request_raw("GET", url, None, self.issue_token)
-            batch = self._json(raw)
-            if not isinstance(batch, list):
-                raise SystemExit(f"GitHub API returned an unexpected issues payload for {self.repo}.")
-            found.extend(item for item in batch if "pull_request" not in item)
-            link = ""
-            if headers is not None:
-                link = headers.get("Link", "") if hasattr(headers, "get") else ""
-            url = inventory._next_url(link)
+            current = url
+            result = self._call(self._urllib_send("GET", current, None, self.issue_token), write=False)
+            url = self._extend_issues(found, result)
         return found
 
     def get_issue(self, number: int) -> dict:
         self._guard()
         if not self.issue_token:
-            issue = self._gh_json("GET", f"repos/{self.repo}/issues/{int(number)}", None)
+            result = self._call(self._gh_send("GET", f"repos/{self.repo}/issues/{int(number)}", None), write=False)
         else:
-            _, raw = self._request_raw(
-                "GET",
-                f"https://api.github.com/repos/{self.repo}/issues/{int(number)}",
-                None,
-                self.issue_token,
+            result = self._call(
+                self._urllib_send(
+                    "GET",
+                    f"https://api.github.com/repos/{self.repo}/issues/{int(number)}",
+                    None,
+                    self.issue_token,
+                ),
+                write=False,
             )
-            issue = self._json(raw)
+        issue = self._json(result.body)
         if not isinstance(issue, dict):
             raise SystemExit(f"GitHub API returned an unexpected payload for issue {number}.")
         return issue
 
+    def _issue_exists(self, body: str):
+        """Look up the wp-id marker before a create is sent again."""
+
+        def before_retry():
+            wp_ids = inventory.marker_wp_ids(body)
+            if not wp_ids:
+                raise gh_rate.DoNotRetry()
+            url = issue_url_key(body)
+            try:
+                issues = self.list_issues()
+            except GithubError:
+                raise gh_rate.DoNotRetry()
+            for wp_id in wp_ids:
+                match = classify(issues, wp_id, url)
+                if match is not None:
+                    return match.issue
+            return None
+
+        return before_retry
+
     def create_issue(self, title: str, body: str) -> dict:
         self._guard()
         payload = {"title": title, "body": body}
+        before_retry = self._issue_exists(body)
         if not self.issue_token:
-            issue = self._gh_json("POST", f"repos/{self.repo}/issues", payload)
-        else:
-            _, raw = self._request_raw(
-                "POST",
-                f"https://api.github.com/repos/{self.repo}/issues",
-                payload,
-                self.issue_token,
+            result = self._call(
+                self._gh_send("POST", f"repos/{self.repo}/issues", payload),
+                write=True,
+                before_retry=before_retry,
             )
-            issue = self._json(raw)
+        else:
+            result = self._call(
+                self._urllib_send(
+                    "POST",
+                    f"https://api.github.com/repos/{self.repo}/issues",
+                    payload,
+                    self.issue_token,
+                ),
+                write=True,
+                before_retry=before_retry,
+            )
+        if result.recovered is not None:
+            issue = result.recovered
+        else:
+            issue = self._json(result.body)
         if not isinstance(issue, dict) or "number" not in issue:
             raise SystemExit("GitHub API did not return an issue number.")
         return issue
 
-    def graphql(self, query: str, variables: dict) -> dict:
+    def _graphql_limited(self, body: str) -> bool:
+        try:
+            parsed = json.loads(body) if body else {}
+        except json.JSONDecodeError:
+            return False
+        if not isinstance(parsed, dict):
+            return False
+        for error in parsed.get("errors") or []:
+            if not isinstance(error, dict):
+                continue
+            if str(error.get("type") or "").upper() == "RATE_LIMITED":
+                return True
+            if "rate limit" in str(error.get("message") or "").lower():
+                return True
+        return False
+
+    def _graphql_result(self, query: str, variables: dict, before_retry=None) -> gh_rate.HttpResult:
         self._guard()
         payload = {"query": query, "variables": variables}
         token = self.project_token or self.issue_token
+        write = query.lstrip().lower().startswith("mutation")
         if not token:
-            parsed = self._gh_json("POST", "graphql", payload)
+            send = self._gh_send("POST", "graphql", payload, retry_on_body=self._graphql_limited)
         else:
-            _, raw = self._request_raw("POST", "https://api.github.com/graphql", payload, token)
-            parsed = self._json(raw)
+            send = self._urllib_send(
+                "POST",
+                "https://api.github.com/graphql",
+                payload,
+                token,
+                retry_on_body=self._graphql_limited,
+            )
+        return self._call(send, write=write, before_retry=before_retry)
+
+    def _graphql_data(self, result: gh_rate.HttpResult) -> dict:
+        parsed = self._json(result.body)
         if not isinstance(parsed, dict):
             raise SystemExit("GitHub project API returned an unexpected payload.")
         errors = parsed.get("errors") or []
@@ -988,6 +1070,10 @@ class GithubRestClient:
             raise SystemExit("GitHub project API returned no data.")
         return data
 
+    def graphql(self, query: str, variables: dict) -> dict:
+        result = self._graphql_result(query, variables)
+        return self._graphql_data(result)
+
     def project_item_id(self, node_id: str, project_id: str) -> str:
         data = self.graphql(PROJECT_ITEMS_QUERY, {"id": node_id})
         node = data.get("node") or {}
@@ -1001,7 +1087,21 @@ class GithubRestClient:
         return ""
 
     def add_project_item(self, project_id: str, node_id: str) -> str:
-        data = self.graphql(ADD_PROJECT_ITEM, {"project": project_id, "content": node_id})
+        def before_retry():
+            try:
+                found = self.project_item_id(node_id, project_id)
+            except GithubError:
+                raise gh_rate.DoNotRetry()
+            return found or None
+
+        result = self._graphql_result(
+            ADD_PROJECT_ITEM,
+            {"project": project_id, "content": node_id},
+            before_retry=before_retry,
+        )
+        if result.recovered:
+            return str(result.recovered)
+        data = self._graphql_data(result)
         item = (data.get("addProjectV2ItemById") or {}).get("item") or {}
         item_id = item.get("id") or ""
         if not item_id:
