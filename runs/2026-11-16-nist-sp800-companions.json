@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "date": "2026-11-16",
+  "repository": "billbrietstout/ai-security-whitepaper-monitor",
+  "project_owner": "billbrietstout",
+  "project_number": 2,
+  "project_id": "",
+  "batch_size": 25,
+  "updated": "2026-11-16T02:55:10.233746+00:00",
+  "done": [],
+  "pending": [
+    "WP-0584",
+    "WP-0585",
+    "WP-0586"
+  ],
+  "issues": {
+    "WP-0584": 614,
+    "WP-0585": 615,
+    "WP-0586": 616
+  },
+  "created_issues": {
+    "WP-0584": 614,
+    "WP-0585": 615,
+    "WP-0586": 616
+  },
+  "items": [
+    {
+      "wp_id": "WP-0584",
+      "title": "A Zero Trust Architecture Model for Access Control in Cloud-Native Applications in Multi-Cloud Environments (NIST SP 800-207A)",
+      "source": "National Institute of Standards and Technology (NIST)",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207A.pdf",
+      "url_key": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207A.pdf",
+      "date_published": "September 13, 2023",
+      "summary": "NIST companion to SP 800-207 that applies zero trust architecture to access control for cloud-native applications across multi-cloud environments.",
+      "body": "",
+      "arxiv_id": "",
+      "cited_by": "",
+      "evidence_level": "theoretical",
+      "status": "issue_open",
+      "issue_number": 614,
+      "issue_node_id": "I_kwDOU6p2aM8AAAABfkEcgg",
+      "project_item_id": "",
+      "created": true,
+      "also_found": [],
+      "history": [
+        {
+          "at": "2026-11-16T02:54:55.344149+00:00",
+          "step": "pending",
+          "issue_number": null
+        },
+        {
+          "at": "2026-11-16T02:55:00.093143+00:00",
+          "step": "issue_open",
+          "issue_number": 614
+        }
+      ]
+    },
+    {
+      "wp_id": "WP-0585",
+      "title": "High-Performance Computing Security: Architecture, Threat Analysis, and Security Posture (NIST SP 800-223)",
+      "source": "National Institute of Standards and Technology (NIST)",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-223.pdf",
+      "url_key": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-223.pdf",
+      "date_published": "February 9, 2024",
+      "summary": "NIST guidance on HPC security architecture, threat analysis, and security posture; foundational context for AI data center security work that builds on HPC designs.",
+      "body": "",
+      "arxiv_id": "",
+      "cited_by": "",
+      "evidence_level": "theoretical",
+      "status": "issue_open",
+      "issue_number": 615,
+      "issue_node_id": "I_kwDOU6p2aM8AAAABfkEgew",
+      "project_item_id": "",
+      "created": true,
+      "also_found": [],
+      "history": [
+        {
+          "at": "2026-11-16T02:54:55.344167+00:00",
+          "step": "pending",
+          "issue_number": null
+        },
+        {
+          "at": "2026-11-16T02:55:05.180914+00:00",
+          "step": "issue_open",
+          "issue_number": 615
+        }
+      ]
+    },
+    {
+      "wp_id": "WP-0586",
+      "title": "High-Performance Computing (HPC) Security Overlay (NIST SP 800-234)",
+      "source": "National Institute of Standards and Technology (NIST)",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-234.pdf",
+      "url_key": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-234.pdf",
+      "date_published": "May 4, 2026",
+      "summary": "NIST SP 800-53 overlay that tailors controls for HPC environments used for large-scale simulation, data analysis, and AI/ML model training.",
+      "body": "",
+      "arxiv_id": "",
+      "cited_by": "",
+      "evidence_level": "theoretical",
+      "status": "issue_open",
+      "issue_number": 616,
+      "issue_node_id": "I_kwDOU6p2aM8AAAABfkEklw",
+      "project_item_id": "",
+      "created": true,
+      "also_found": [],
+      "history": [
+        {
+          "at": "2026-11-16T02:54:55.344174+00:00",
+          "step": "pending",
+          "issue_number": null
+        },
+        {
+          "at": "2026-11-16T02:55:10.233614+00:00",
+          "step": "issue_open",
+          "issue_number": 616
+        }
+      ]
+    }
+  ]
+}
