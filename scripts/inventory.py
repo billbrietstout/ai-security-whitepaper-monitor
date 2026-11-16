@@ -33,9 +33,16 @@ CSV_PATH = ROOT / "data" / "whitepapers.csv"
 
 SCHEMA_VERSION = 1
 SOURCE = "github-issues"
-RETIRED_SHEET_ID = "161FFOVjQUNxiaOzMryT6sbEuYjq-uLf-vcDEHfvlFbE"
 RETIRED_ON = "2026-10-31"
 SYNC_FOOTER = "_Synced from the whitepaper sheet. Edit the sheet, not this issue._"
+
+SHEET_LINK = re.compile(r"\[([^\]]*)\]\(https://docs\.google\.com/spreadsheets/[^)]*\)")
+
+
+def sheet_row_label(value: str) -> str:
+    """Keep the tab and row text from an issue's Sheet row line, without the retired sheet link."""
+    return SHEET_LINK.sub(lambda match: match.group(1), value).strip()
+
 
 BULLET_SECTIONS = {
     "Axioms": "axioms",
@@ -388,7 +395,7 @@ def parse_issue(issue: dict) -> dict:
         "decision_reason": fields.get("Reason", "").strip(),
         "summary": "\n".join(summary_lines).strip(),
         "legacy_sheet_url": legacy_sheet_url,
-        "legacy_sheet_row": fields.get("Sheet row", "").strip(),
+        "legacy_sheet_row": sheet_row_label(fields.get("Sheet row", "")),
         "legacy_notes": legacy_notes,
         "blog_url": blog_url,
         "removed_duplicate": removed_duplicate,
@@ -584,7 +591,6 @@ def build_inventory(
         "sheet": {
             "status": "retired",
             "retired_on": RETIRED_ON,
-            "id": RETIRED_SHEET_ID,
         },
         "id_registry": id_registry,
         "papers": public,
