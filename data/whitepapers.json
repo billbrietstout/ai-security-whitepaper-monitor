@@ -2918,6 +2918,11 @@
       "wp_id": "WP-0582",
       "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf",
       "issue_number": 609
+    },
+    {
+      "wp_id": "WP-0583",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-239.ipd.pdf",
+      "issue_number": 612
     }
   ],
   "papers": [
@@ -19828,6 +19833,30 @@
       "decision": "include",
       "decision_reason": "",
       "summary": "NIST Special Publication defining zero trust and zero trust architecture: core principles, logical components, deployment models, use cases, threats, and a high-level migration roadmap for enterprises.",
+      "legacy_sheet_url": "",
+      "legacy_sheet_row": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
+      "blog_url": "",
+      "duplicate_issue_numbers": [],
+      "axioms": [],
+      "invariants": [],
+      "principles": [],
+      "opencre_topics": []
+    },
+    {
+      "wp_id": "WP-0583",
+      "issue_number": 612,
+      "issue_url": "https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/612",
+      "state": "open",
+      "title": "AI Data Center Security Analysis: A High-Performance Computing (HPC) Driven Approach (NIST SP 800-239 IPD)",
+      "source_org": "National Institute of Standards and Technology (NIST)",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-239.ipd.pdf",
+      "date_published": "July 27, 2026",
+      "category": "",
+      "file_type": "",
+      "decision": "include",
+      "decision_reason": "",
+      "summary": "NIST initial public draft analyzing threats and security gaps in purpose-built AI data centers for model training, inference, and applications, contrasting them with HPC systems and outlining possible safeguards.",
       "legacy_sheet_url": "",
       "legacy_sheet_row": "",
       "legacy_notes": "Evidence\n- Evidence level: theoretical",

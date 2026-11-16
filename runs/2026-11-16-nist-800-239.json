@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "date": "2026-11-16",
+  "repository": "billbrietstout/ai-security-whitepaper-monitor",
+  "project_owner": "billbrietstout",
+  "project_number": 2,
+  "project_id": "",
+  "batch_size": 25,
+  "updated": "2026-11-16T02:53:40.699693+00:00",
+  "done": [],
+  "pending": [
+    "WP-0583"
+  ],
+  "issues": {
+    "WP-0583": 612
+  },
+  "created_issues": {
+    "WP-0583": 612
+  },
+  "items": [
+    {
+      "wp_id": "WP-0583",
+      "title": "AI Data Center Security Analysis: A High-Performance Computing (HPC) Driven Approach (NIST SP 800-239 IPD)",
+      "source": "National Institute of Standards and Technology (NIST)",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-239.ipd.pdf",
+      "url_key": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-239.ipd.pdf",
+      "date_published": "July 27, 2026",
+      "summary": "NIST initial public draft analyzing threats and security gaps in purpose-built AI data centers for model training, inference, and applications, contrasting them with HPC systems and outlining possible safeguards.",
+      "body": "",
+      "arxiv_id": "",
+      "cited_by": "",
+      "evidence_level": "theoretical",
+      "status": "issue_open",
+      "issue_number": 612,
+      "issue_node_id": "I_kwDOU6p2aM8AAAABfkDkbg",
+      "project_item_id": "",
+      "created": true,
+      "also_found": [],
+      "history": [
+        {
+          "at": "2026-11-16T02:53:35.725530+00:00",
+          "step": "pending",
+          "issue_number": null
+        },
+        {
+          "at": "2026-11-16T02:53:40.699558+00:00",
+          "step": "issue_open",
+          "issue_number": 612
+        }
+      ]
+    }
+  ]
+}
