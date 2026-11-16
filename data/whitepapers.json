@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-04",
+  "updated": "2026-11-16",
   "source": "github-issues",
   "repository": "billbrietstout/ai-security-whitepaper-monitor",
   "sheet": {
@@ -2903,6 +2903,16 @@
       "wp_id": "WP-0579",
       "url": "https://arxiv.org/abs/2501.17070",
       "issue_number": 589
+    },
+    {
+      "wp_id": "WP-0580",
+      "url": "https://assets.claude.com/4e89a59711a145138bd8edbe7539331abc14ac0b.pdf",
+      "issue_number": 606
+    },
+    {
+      "wp_id": "WP-0581",
+      "url": "https://cdn.openai.com/pdf/6546a5a6-170a-41e8-bf2f-979ff3484db1/agent-security-enterprise.pdf",
+      "issue_number": 607
     }
   ],
   "papers": [
@@ -9766,10 +9776,25 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1206.6389\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Learning algorithms usually assume training data comes from a natural or well-behaved distribution, and that assumption fails in security-sensitive settings.",
+        "An intelligent adversary can predict how an SVM's decision function changes when malicious points enter the training set.",
+        "Training data attacks are a largely unexamined threat to SVMs, and this paper treats its attack as a first step."
+      ],
+      "invariants": [
+        "Any classifier retrained on data an attacker can influence is exposed to poisoning that raises its test error.",
+        "A poisoning point found by gradient ascent on the validation error can be built in input space even for non-linear kernels.",
+        "A small number of crafted points is enough to cause a large increase in SVM classification error on the digit task tested."
+      ],
+      "principles": [
+        "Poisoning aware design: the model owner treats training data as attacker influenced and tests how much damage crafted points do before retraining on it.",
+        "Attack based evaluation: the defender runs a gradient ascent poisoning attack against its own SVM to measure the worst case error increase.",
+        "Data provenance: the model owner limits who can add points to the training set when the learner retrains."
+      ],
+      "opencre_topics": [
+        "Threat Modeling",
+        "Data Protection"
+      ]
     },
     {
       "wp_id": "WP-0181",
@@ -9790,10 +9815,25 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1306.4447\n- Cited by monitored papers: #2 An Architectural Risk Analysis of Machine Learning Systems (BIML-78)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Machine learning algorithms are widely published, but the training sets behind a trained classifier are often kept as trade secrets.",
+        "Statistical information about a training set leaks from a trained classifier even when no single record is exposed.",
+        "Privacy models built around single records, such as differential privacy, do not cover this kind of leakage of training set statistics."
+      ],
+      "invariants": [
+        "A meta-classifier trained on many classifiers can infer properties of another classifier's training set, such as the accent mix of speakers.",
+        "The same approach can infer whether a given traffic pattern was in an Internet traffic classifier's training data.",
+        "Any classifier whose internals are shared with a party can reveal training set properties that the owner treats as a trade secret."
+      ],
+      "principles": [
+        "Training set protection: the model owner treats training data composition as a protected asset and limits who can inspect trained classifiers.",
+        "Leakage testing: the model owner trains its own meta-classifier against its models to check what the models reveal about their training sets.",
+        "Scope of privacy controls: the privacy team checks whether single record privacy methods cover set level statistics before relying on them."
+      ],
+      "opencre_topics": [
+        "Data Protection",
+        "Threat Modeling"
+      ]
     },
     {
       "wp_id": "WP-0182",
@@ -9811,13 +9851,28 @@
       "summary": "From the arXiv abstract (the authors' own claims, not checked): Deep neural networks are highly expressive models that have recently achieved state of the art performance on speech and visual recognition tasks. While their expressiveness is the reason they succeed, it also causes them to learn uninterpretable solutions that could have counter-intuitive properties. In this paper we report two such properties.",
       "legacy_sheet_url": "https://arxiv.org/abs/1312.6199",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.",
-      "legacy_notes": "arXiv reference\n- arXiv ID: 1312.6199\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: theoretical (provisional). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
+      "legacy_notes": "arXiv reference\n- arXiv ID: 1312.6199\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: the paper reports experiments; abstract and conclusion read by hand on Nov 10, 2026.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Deep neural networks are expressive, and that expressiveness produces solutions that are hard to interpret and can behave in counter-intuitive ways.",
+        "Semantic information in the high layers of a network sits in the space of activations, not in individual units.",
+        "Adversarial perturbations are not a random artifact of one training run, because the same perturbation can fool networks trained on different data subsets."
+      ],
+      "invariants": [
+        "Networks learn input to output mappings that are discontinuous enough that an imperceptible perturbation can change the predicted class.",
+        "An adversarial example found against one model often fools a different model trained on a disjoint training set, though less often.",
+        "A network's sensitivity to small input changes can be measured through the upper Lipschitz constant of each layer."
+      ],
+      "principles": [
+        "Stability measurement: the model developer computes per layer Lipschitz bounds and uses them to judge and limit sensitivity to small input changes.",
+        "Adversarial training: the model developer adds adversarial examples to training data to improve resistance, as the paper suggests.",
+        "Cross model testing: the tester checks adversarial examples against separately trained models to estimate transfer."
+      ],
+      "opencre_topics": [
+        "Threat Modeling",
+        "Secure Product Design"
+      ]
     },
     {
       "wp_id": "WP-0183",
@@ -9835,13 +9890,28 @@
       "summary": "From the arXiv abstract (the authors' own claims, not checked): Several machine learning models, including neural networks, consistently misclassify adversarial examples---inputs formed by applying small but intentionally worst-case perturbations to examples from the dataset, such that the perturbed input results in the model outputting an incorrect answer with high confidence. Early attempts at explaining this phenomenon focused on nonlinearity and overfitting. We argue instead that the primary cause of neural networks' vulnerability to adversarial perturbation is their linear nature.",
       "legacy_sheet_url": "https://arxiv.org/abs/1412.6572",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.",
-      "legacy_notes": "arXiv reference\n- arXiv ID: 1412.6572\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2); #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: theoretical (provisional). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
+      "legacy_notes": "arXiv reference\n- arXiv ID: 1412.6572\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2); #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: tested. Basis: the paper reports experiments; abstract and conclusion read by hand on Nov 10, 2026.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "The main cause of adversarial vulnerability in neural networks is their linear behavior in high dimensions, not nonlinearity or overfitting.",
+        "Adversarial examples generalize across architectures and training sets because different models learn similar linear functions.",
+        "Models built from linear parts only behave sensibly on a thin region around the training data."
+      ],
+      "invariants": [
+        "A cheap single gradient step, the fast gradient sign method, can generate adversarial examples against many models.",
+        "Adversarial examples are produced by small worst case perturbations that cause a wrong answer with high confidence.",
+        "Training on adversarial examples reduced test error for a maxout network on MNIST in the reported experiments."
+      ],
+      "principles": [
+        "Adversarial training: the model developer generates examples with a fast method during training and adds them as a regularizer.",
+        "Linearity awareness: the model developer treats activations that grow linearly with input dimension as a source of attack surface.",
+        "Cheap attack baselines: the evaluator uses the fast gradient sign method as a routine test for new models."
+      ],
+      "opencre_topics": [
+        "Threat Modeling",
+        "Secure Product Design"
+      ]
     },
     {
       "wp_id": "WP-0184",
@@ -9862,10 +9932,25 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1511.04599\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "State of the art deep classifiers are unstable to small, deliberately chosen perturbations of their input images.",
+        "Before DeepFool there was no efficient method to measure the resistance of large deep classifiers to such perturbations on large datasets.",
+        "A reliable resistance metric needs accurate estimates of the minimal perturbation that changes a label."
+      ],
+      "invariants": [
+        "DeepFool iteratively linearizes a classifier to find a small perturbation that flips its label.",
+        "On three datasets and eight classifiers, DeepFool found smaller perturbations than the earlier attacks the paper compared against.",
+        "Fine tuning a network on DeepFool examples increased its measured resistance in the reported tests."
+      ],
+      "principles": [
+        "Resistance measurement: the evaluator computes the minimal perturbation norm needed to change a label and reports it for each classifier.",
+        "Fine tuning on minimal perturbations: the model developer retrains on DeepFool examples to improve measured resistance.",
+        "Metric comparison: the evaluator compares models using one agreed perturbation based metric across datasets."
+      ],
+      "opencre_topics": [
+        "Threat Modeling",
+        "Vulnerability Management"
+      ]
     },
     {
       "wp_id": "WP-0185",
@@ -9883,13 +9968,29 @@
       "summary": "From the arXiv abstract (the authors' own claims, not checked): Many machine learning models are vulnerable to adversarial examples: inputs that are specially crafted to cause a machine learning model to produce an incorrect output. Adversarial examples that affect one model often affect another model, even if the two models have different architectures or were trained on different training sets, so long as both models were trained to perform the same task. An attacker may therefore train their own substitute model, craft adversarial examples against the substitute, and transfer them to a victim model, with very little information about the victim.",
       "legacy_sheet_url": "https://arxiv.org/abs/1605.07277",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.",
-      "legacy_notes": "arXiv reference\n- arXiv ID: 1605.07277\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2); #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: tested, possibly deployed (needs review). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand. Deployment terms found: disclosed the, production systems.",
+      "legacy_notes": "arXiv reference\n- arXiv ID: 1605.07277\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2); #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: deployed. Basis: the attacks ran against live commercial Amazon and Google classifiers; abstract and conclusion read by hand on Nov 10, 2026.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Adversarial examples that fool one model often fool another model trained for the same task, even with a different architecture or training set.",
+        "An attacker with only query access can train a substitute model and craft examples against it, with little knowledge of the victim.",
+        "Machine learning approaches are in general vulnerable to systematic black box attacks regardless of their structure."
+      ],
+      "invariants": [
+        "Transfer attacks work between unexplored model pairs, most notably SVMs and decision trees, as shown in the experiments.",
+        "Reservoir sampling made substitute model training more efficient than the earlier synthetic data technique.",
+        "Using 800 queries, the attack reached a 96.19% misclassification rate on an Amazon classifier and 88.94% on a Google classifier.",
+        "A victim model used as an oracle to label synthetic data is enough for the attacker; no training set collection is needed."
+      ],
+      "principles": [
+        "Query monitoring: the service operator limits and watches query volume from one client, because attacks needed only hundreds of queries.",
+        "Transfer testing: the model owner tests its own model against examples crafted on substitute models of other types.",
+        "Defense scope: the model owner does not assume that hiding architecture or training data prevents attacks."
+      ],
+      "opencre_topics": [
+        "Threat Modeling",
+        "Access Control"
+      ]
     },
     {
       "wp_id": "WP-0186",
@@ -9910,10 +10011,25 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1606.01584\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Machine learning is widely used in security applications such as biometric authentication and speaker identification.",
+        "Causative poisoning attacks inject crafted points to raise a classifier's false positive rate, so more intruders pass as valid users.",
+        "Poisoned points look like normal points in feature space but carry flipped labels."
+      ],
+      "invariants": [
+        "SVM classifiers are susceptible to poisoning attacks, as earlier work and this paper report.",
+        "Curie clusters buffered data and removes points whose label weighted distance gives under 95% confidence before retraining.",
+        "In the MNIST tests, filtering with Curie before retraining restored accuracy that poisoning had lowered."
+      ],
+      "principles": [
+        "Pre-retraining filtering: the system owner runs an outlier and label consistency filter on buffered data before each SVM retrain.",
+        "Lightweight integration: the system owner places the filter in front of the existing training pipeline instead of changing the classifier.",
+        "Threshold tuning: the defender sets the confidence cutoff from validation tests, as the paper does at 95%."
+      ],
+      "opencre_topics": [
+        "Input Validation",
+        "Data Protection"
+      ]
     },
     {
       "wp_id": "WP-0187",
@@ -9934,10 +10050,26 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1607.00133\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Training sets for neural networks are often large, crowdsourced, and contain sensitive information.",
+        "Trained models should not expose private information about the individual records they were trained on.",
+        "Differential privacy gives a formal budget for the privacy cost of training."
+      ],
+      "invariants": [
+        "Training deep networks with non-convex objectives under differential privacy is possible at a modest privacy budget.",
+        "The method clips per example gradients and adds noise in stochastic gradient descent, with a refined accounting of privacy cost.",
+        "With (8, 10^-5) differential privacy, the paper reports 97% accuracy on MNIST and 73% on CIFAR-10.",
+        "The approach applies to gradient computations, so it extends to other first order optimizers."
+      ],
+      "principles": [
+        "Differentially private training: the model developer clips per example gradients, adds noise, and tracks a total privacy budget for the whole model.",
+        "Budget selection: the data owner sets the privacy budget by trading it against model accuracy and training cost.",
+        "Privacy accounting: the developer records the cumulative privacy loss of each training run."
+      ],
+      "opencre_topics": [
+        "Data Protection",
+        "Cryptography"
+      ]
     },
     {
       "wp_id": "WP-0188",
@@ -9958,10 +10090,25 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1607.02533\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Machine learning systems that read cameras and other sensors cannot assume the attacker feeds inputs straight into the model.",
+        "Adversarial examples threaten systems even when the adversary has no access to the underlying model.",
+        "Earlier work assumed direct digital input, which does not describe physical world deployments."
+      ],
+      "invariants": [
+        "Adversarial images printed or shown and then photographed with a cell phone camera still misled an ImageNet Inception classifier.",
+        "A large fraction of adversarial examples were misclassified after passing through the camera.",
+        "Brightness, contrast, blur, noise and JPEG changes destroyed some adversarial examples more than others, depending on the method."
+      ],
+      "principles": [
+        "Physical world testing: the system owner tests classifiers with adversarial inputs captured by the real sensor, not only digital copies.",
+        "Transformation analysis: the evaluator measures how adversarial examples survive blur, noise and compression before trusting a defense.",
+        "Sensor level threat model: the designer adds the physical channel to the threat model for camera based systems."
+      ],
+      "opencre_topics": [
+        "Threat Modeling",
+        "Secure Product Design"
+      ]
     },
     {
       "wp_id": "WP-0189",
@@ -9982,10 +10129,25 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1607.04311\n- Cited by monitored papers: #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Defensive distillation was proposed as a way to protect neural networks from adversarial examples.",
+        "A defense should be judged by how it holds against targeted misclassification attacks that are tailored to it.",
+        "Targeted attacks pick the wrong class the attacker wants, which makes them a stricter test than untargeted ones."
+      ],
+      "invariants": [
+        "Defensive distillation is no more resistant to targeted misclassification attacks than an unprotected neural network, according to this short note.",
+        "A defense claim is only as strong as the strongest attack it has been tested against.",
+        "Gradient based attacks adapted to the distilled network, as described in the note, break the defense."
+      ],
+      "principles": [
+        "Adaptive attack testing: the defense author tests a proposed defense with attacks written for that specific defense.",
+        "Claim retraction: the community drops defense claims when a stronger attack shows no gain over an unprotected model.",
+        "Baseline comparison: the evaluator compares a defended model with an unprotected one under the same targeted attack."
+      ],
+      "opencre_topics": [
+        "Vulnerability Management",
+        "Threat Modeling"
+      ]
     },
     {
       "wp_id": "WP-0190",
@@ -10003,13 +10165,28 @@
       "summary": "From the arXiv abstract (the authors' own claims, not checked): Many machine learning classifiers are vulnerable to adversarial perturbations. An adversarial perturbation modifies an input to change a classifier's prediction without causing the input to seem substantially different to human perception. We deploy three methods to detect adversarial images.",
       "legacy_sheet_url": "https://arxiv.org/abs/1608.00530",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.",
-      "legacy_notes": "arXiv reference\n- arXiv ID: 1608.00530\n- Cited by monitored papers: #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: theoretical (provisional). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
+      "legacy_notes": "arXiv reference\n- arXiv ID: 1608.00530\n- Cited by monitored papers: #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: tested. Basis: the paper reports experiments; abstract and conclusion read by hand on Nov 10, 2026.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Many classifiers are vulnerable to adversarial perturbations that leave an image looking unchanged to people.",
+        "Adversarial images carry statistical differences from natural images that a detector can learn.",
+        "Defenses based on detection are orthogonal to making the classifier itself more resistant."
+      ],
+      "invariants": [
+        "Adversarial images place abnormal emphasis on the lower ranked principal components from PCA, which gives the best of the three detectors.",
+        "An adversary who wants to bypass the PCA detector must make the adversarial image less pathological or fail.",
+        "A square, blur, square root preprocessing step often removed the adversarial effect on CIFAR-10 images in a preliminary test."
+      ],
+      "principles": [
+        "Statistical detection: the defender inspects principal component statistics of input images to flag likely adversarial inputs.",
+        "Layered defenses: the system owner combines detectors and preprocessing as an ensemble, as the paper suggests.",
+        "Out of distribution checks: the defender reuses error and out of distribution detection methods against adversarial inputs."
+      ],
+      "opencre_topics": [
+        "Input Validation",
+        "Threat Modeling"
+      ]
     },
     {
       "wp_id": "WP-0191",
@@ -10030,10 +10207,26 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1608.04644\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Neural networks are used in security critical areas, where adversarial examples make their use difficult.",
+        "Defensive distillation was reported to lower attack success from 95% to 0.5%, and that claim needed an independent test.",
+        "Future defenses need a strong shared attack benchmark to be judged fairly."
+      ],
+      "invariants": [
+        "Three new attacks, one for each of the L0, L2 and L-infinity distance metrics, succeed with 100% probability on distilled and undistilled networks.",
+        "Defensive distillation does not significantly increase the resistance of neural networks to these attacks.",
+        "High confidence adversarial examples in a transferability test can also break defensive distillation.",
+        "The new attacks are often much more effective than earlier algorithms and never worse."
+      ],
+      "principles": [
+        "Benchmark attacks: the evaluator uses strong optimization attacks as the standard test for any new adversarial defense.",
+        "Metric coverage: the evaluator tests a defense under several distance metrics, not only one.",
+        "Transfer test: the evaluator checks high confidence adversarial examples for transfer to the defended model."
+      ],
+      "opencre_topics": [
+        "Vulnerability Management",
+        "Threat Modeling"
+      ]
     },
     {
       "wp_id": "WP-0192",
@@ -10054,10 +10247,26 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1609.02943\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Machine learning models can be confidential because of sensitive training data, commercial value, or use in security applications.",
+        "Machine learning as a service systems put confidential models behind public query interfaces, which creates a tension between access and confidentiality.",
+        "Features such as confidence values and partial feature vectors give an attacker more information per query."
+      ],
+      "invariants": [
+        "An attacker with black box access can duplicate a model's function with near perfect fidelity for logistic regression, neural networks and decision trees.",
+        "The paper demonstrates attacks on the BigML and Amazon Machine Learning online services.",
+        "Omitting confidence values from outputs still permits harmful model extraction.",
+        "Model extraction can undermine monetization, expose training data privacy, and make evasion attacks easier."
+      ],
+      "principles": [
+        "Output minimization: the service provider limits what each prediction returns, while accepting that this does not remove extraction risk.",
+        "Query controls: the provider limits and monitors query patterns, including partial input queries.",
+        "Extraction testing: the model owner runs the equation solving and path finding attacks against its own API."
+      ],
+      "opencre_topics": [
+        "Access Control",
+        "Data Protection"
+      ]
     },
     {
       "wp_id": "WP-0193",
@@ -10078,10 +10287,26 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1610.05820\n- Cited by monitored papers: #24 AI RMF Playbook; #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Machine learning models leak information about the individual records they were trained on.",
+        "Machine learning as a service providers such as Google and Amazon host models that can be probed with black box queries.",
+        "Training data can be sensitive, for example a hospital discharge dataset whose membership is private."
+      ],
+      "invariants": [
+        "Given a record and black box access, an attacker can train an inference model to tell whether the record was in the target's training set.",
+        "Models trained on commercial services were vulnerable to membership inference in the reported experiments.",
+        "Factors such as overfitting and training set properties influence how much a model leaks.",
+        "The paper evaluates mitigation strategies and reports their effect on leakage."
+      ],
+      "principles": [
+        "Membership inference testing: the model owner runs the attack against its own models before release.",
+        "Overfitting control: the model developer reduces overfitting, which the paper links to higher leakage.",
+        "Output restriction: the provider limits prediction detail returned to callers as one of the evaluated mitigations."
+      ],
+      "opencre_topics": [
+        "Data Protection",
+        "Threat Modeling"
+      ]
     },
     {
       "wp_id": "WP-0194",
@@ -10102,10 +10327,25 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1610.08401\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Image classifiers have decision boundaries with geometric correlations across regions that an attacker can exploit.",
+        "A single direction in input space can be a weakness for most natural images.",
+        "Universal perturbations are nearly invisible to human eyes."
+      ],
+      "invariants": [
+        "A single small perturbation, independent of the image, makes a state of the art classifier misclassify natural images with high probability.",
+        "Universal perturbations generalize across different networks, so they are both image agnostic and network agnostic.",
+        "The paper explains their existence through correlation between different regions of the decision boundary."
+      ],
+      "principles": [
+        "Universal perturbation testing: the evaluator computes an image agnostic perturbation with the paper's iterative algorithm and measures the fooling rate.",
+        "Cross network checks: the evaluator tests a perturbation found on one network against other architectures.",
+        "Boundary analysis: researchers study decision boundary geometry to design defenses."
+      ],
+      "opencre_topics": [
+        "Threat Modeling",
+        "Vulnerability Management"
+      ]
     },
     {
       "wp_id": "WP-0195",
@@ -10126,10 +10366,26 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1611.02770\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Adversarial examples transfer across architectures, which makes black box attacks practical.",
+        "Earlier transferability studies used small datasets and did not study targeted examples with their target labels.",
+        "Models tend to make the same mistake on the same adversarial example, even when many labels are possible."
+      ],
+      "invariants": [
+        "Non-targeted adversarial examples transfer easily, but targeted ones generated with existing methods almost never keep their target label.",
+        "Ensemble based generation makes a large share of targeted adversarial examples transfer with their target labels.",
+        "Examples generated with the ensemble approach attacked the Clarifai.com black box image service.",
+        "Among examples that two models both get wrong, 12% to 40% get the same wrong label."
+      ],
+      "principles": [
+        "Ensemble attack testing: the evaluator builds examples on several models at once to test transfer to a hidden model.",
+        "Black box service testing: the model owner tests its public API with transferred examples.",
+        "Large scale evaluation: researchers run transferability studies on large models and datasets, not toy ones."
+      ],
+      "opencre_topics": [
+        "Threat Modeling",
+        "Vulnerability Management"
+      ]
     },
     {
       "wp_id": "WP-0196",
@@ -10150,10 +10406,26 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1702.01135\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Safety critical systems need formal guarantees about the behavior of deep neural networks.",
+        "Providing those guarantees for neural networks is difficult.",
+        "The ReLU activation is non-convex, which makes verification hard."
+      ],
+      "invariants": [
+        "Reluplex extends the simplex method to handle ReLU activations by letting inputs and outputs be temporarily inconsistent and fixing them as it proceeds.",
+        "Some ReLU connections may need case splitting to guarantee termination, but many queries do not need it.",
+        "On a prototype ACAS Xu collision avoidance network, it proved properties of networks an order of magnitude larger than earlier methods handled.",
+        "The solver returns either a proof of a property or a counter-example."
+      ],
+      "principles": [
+        "Formal verification: the developer of a safety critical network checks stated input and output properties with an SMT solver such as Reluplex.",
+        "Counter-example use: the developer uses returned counter-examples to repair or retrain the network.",
+        "Property specification: the safety team writes the properties to check before verification starts."
+      ],
+      "opencre_topics": [
+        "Secure Product Design",
+        "Vulnerability Management"
+      ]
     },
     {
       "wp_id": "WP-0197",
@@ -10174,10 +10446,26 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1702.04267\n- Cited by monitored papers: #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Deep learning remains vulnerable to adversarial perturbations that people cannot see.",
+        "Defense by detection is orthogonal to making the classifier itself more resistant.",
+        "Adaptive attackers will try to fool both a classifier and its detector."
+      ],
+      "invariants": [
+        "A small detector subnetwork, trained to separate genuine inputs from perturbed ones, detects adversarial perturbations well in the paper's experiments.",
+        "Detectors trained against one adversary generalize to similar and weaker adversaries.",
+        "An attack exists that fools both the classifier and the detector.",
+        "A new training procedure for the detector counteracts that attack."
+      ],
+      "principles": [
+        "Detector subnetwork: the model developer adds a small binary classifier that flags perturbed inputs.",
+        "Adaptive training: the developer trains the detector against attacks that target it, as the paper proposes.",
+        "Layered defense: the system owner uses detection together with classifier hardening."
+      ],
+      "opencre_topics": [
+        "Input Validation",
+        "Threat Modeling"
+      ]
     },
     {
       "wp_id": "WP-0198",
@@ -10195,13 +10483,29 @@
       "summary": "From the arXiv abstract (the authors' own claims, not checked): Deep neural networks (DNNs) are powerful nonlinear architectures that are known to be robust to random perturbations of the input. However, these models are vulnerable to adversarial perturbations--small input changes crafted explicitly to fool the model. In this paper, we ask whether a DNN can distinguish adversarial samples from their normal and noisy counterparts.",
       "legacy_sheet_url": "https://arxiv.org/abs/1703.00410",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.",
-      "legacy_notes": "arXiv reference\n- arXiv ID: 1703.00410\n- Cited by monitored papers: #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: tested, possibly deployed (needs review). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand. Deployment terms found: in the wild.",
+      "legacy_notes": "arXiv reference\n- arXiv ID: 1703.00410\n- Cited by monitored papers: #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: tested. Basis: experiments on MNIST and CIFAR-10 with no deployment claim; abstract and conclusion read by hand on Nov 10, 2026.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Deep networks are resistant to random perturbation of inputs but vulnerable to crafted adversarial ones.",
+        "A model's confidence and feature density differ for adversarial samples compared with normal and noisy samples.",
+        "An adversarial detector that does not depend on the attack algorithm is more useful than one tied to a single attack."
+      ],
+      "invariants": [
+        "Kernel density estimates in the subspace of the last hidden layer help detect adversarial samples.",
+        "Bayesian uncertainty estimates from dropout networks give a second, complementary detection feature.",
+        "The two features combined reach 85% to 93% ROC-AUC on standard tasks in the reported tests, against a negative class of normal and noisy samples.",
+        "The method generalizes across architectures and attacks on MNIST and CIFAR-10."
+      ],
+      "principles": [
+        "Uncertainty based detection: the model developer measures dropout uncertainty on each input and flags high values.",
+        "Density based detection: the developer estimates density in last hidden layer features and flags low density inputs.",
+        "Combined features: the defender uses both features together because they cover different cases."
+      ],
+      "opencre_topics": [
+        "Input Validation",
+        "Threat Modeling"
+      ]
     },
     {
       "wp_id": "WP-0199",
@@ -10222,10 +10526,26 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1704.03453\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Adversarial examples often transfer, so the same example can fool more than one model.",
+        "Adversarial examples occupy a contiguous subspace, not isolated points.",
+        "Understanding the limits of transfer can guide defenses even for models vulnerable to direct attack."
+      ],
+      "invariants": [
+        "The adversarial subspace has a large dimensionality of about 25, according to the paper's estimation methods.",
+        "Adversarial subspaces of higher dimension are more likely to intersect, and models share a large fraction of them.",
+        "The decision boundaries of different models are close in arbitrary directions, whether adversarial or benign.",
+        "The paper derives sufficient conditions on the data distribution that imply transferability and gives cases where transfer does not occur."
+      ],
+      "principles": [
+        "Subspace estimation: the evaluator estimates the dimension of the adversarial subspace for a model to judge its exposure to transfer.",
+        "Transfer limits: researchers use the conditions where transfer fails to design defenses against transfer based attacks.",
+        "Boundary comparison: the evaluator compares decision boundaries of a candidate and a reference model."
+      ],
+      "opencre_topics": [
+        "Threat Modeling",
+        "Vulnerability Management"
+      ]
     },
     {
       "wp_id": "WP-0200",
@@ -10243,13 +10563,29 @@
       "summary": "From the arXiv abstract (the authors' own claims, not checked): Deep neural networks (DNNs) have achieved great success in solving a variety of machine learning (ML) problems, especially in the domain of image recognition. However, recent research showed that DNNs can be highly vulnerable to adversarially generated instances, which look seemingly normal to human observers, but completely confuse DNNs. These adversarial samples are crafted by adding small perturbations to normal, benign images.",
       "legacy_sheet_url": "https://arxiv.org/abs/1705.02900",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.",
-      "legacy_notes": "arXiv reference\n- arXiv ID: 1705.02900\n- Cited by monitored papers: #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: theoretical (provisional). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
+      "legacy_notes": "arXiv reference\n- arXiv ID: 1705.02900\n- Cited by monitored papers: #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: tested. Basis: the paper reports experiments; abstract and conclusion read by hand on Nov 10, 2026.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Deep networks are vulnerable to adversarial images that look normal to people but confuse the network with high confidence.",
+        "Adversarial perturbations often live in high frequency signal components.",
+        "Defenses that need no knowledge of the model are easy to deploy."
+      ],
+      "invariants": [
+        "Systematic JPEG compression as a preprocessing step reduces the effect of attacks such as the fast gradient sign method and DeepFool.",
+        "JPEG removes high frequency components in square blocks, which acts as selective blurring of additive perturbations.",
+        "An ensemble built quickly from a well performing network and using JPEG compression protects against several attack types without model knowledge.",
+        "The paper calls its analysis preliminary and says more attacks and datasets are being evaluated."
+      ],
+      "principles": [
+        "Compression preprocessing: the pipeline owner applies JPEG compression to inputs before classification.",
+        "Ensemble use: the model developer builds an ensemble of compression variants from an existing classifier.",
+        "Continued evaluation: the evaluator tests the defense against additional attacks and datasets."
+      ],
+      "opencre_topics": [
+        "Input Validation",
+        "Secure Product Design"
+      ]
     },
     {
       "wp_id": "WP-0201",
@@ -10270,10 +10606,25 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1705.05264\n- Cited by monitored papers: #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Adversarial examples are inputs modified to force misclassification, and defending against them remains largely an open problem.",
+        "Defensive distillation has known limitations after recent attacks.",
+        "Improved training techniques matter for resistance to adversarial examples."
+      ],
+      "invariants": [
+        "The paper revisits defensive distillation to address limits found by recently discovered attacks.",
+        "The extended method is presented as an effective answer to some of those attacks.",
+        "The results reinforce the value of better training techniques for model resistance."
+      ],
+      "principles": [
+        "Revisiting defenses: the defense author updates a published defense after new attacks expose its limits.",
+        "Training focus: the model developer treats improved training procedures as a main route to resistance.",
+        "Attack informed design: the defense author tests the new version against the attacks that broke the old one."
+      ],
+      "opencre_topics": [
+        "Secure Product Design",
+        "Vulnerability Management"
+      ]
     },
     {
       "wp_id": "WP-0202",
@@ -10294,10 +10645,26 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1706.03691\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Learning systems trained on user provided data are open to data poisoning, where malicious users inject false training points.",
+        "Little was known about the worst case loss of a defense against a determined poisoning attacker.",
+        "The bound relies on two assumptions: the dataset is large enough for train and test error to match, and clean outliers have little effect on the model."
+      ],
+      "invariants": [
+        "The paper builds approximate upper bounds on loss across a broad family of attacks for defenders that remove outliers and then minimize empirical risk.",
+        "A candidate attack paired with the bound often nearly matches it, which makes the bound a quick tool to assess defenses on a dataset.",
+        "MNIST-1-7 and Dogfish resisted attack under a simple defense in the experiments.",
+        "The IMDB sentiment dataset went from 12% to 23% test error after adding only 3% poisoned data."
+      ],
+      "principles": [
+        "Certified bound: the defender computes an upper bound on worst case loss for a given outlier removal defense and dataset.",
+        "Outlier removal: the defender filters outliers before training, which the bound models.",
+        "Dataset specific assessment: the evaluator runs the paired attack on each dataset because resistance varies a lot between datasets."
+      ],
+      "opencre_topics": [
+        "Data Protection",
+        "Threat Modeling"
+      ]
     },
     {
       "wp_id": "WP-0203",
@@ -10315,13 +10682,29 @@
       "summary": "From the arXiv abstract (the authors' own claims, not checked): Recent work has demonstrated that deep neural networks are vulnerable to adversarial examples---inputs that are almost indistinguishable from natural data and yet classified incorrectly by the network. In fact, some of the latest findings suggest that the existence of adversarial attacks may be an inherent weakness of deep learning models. To address this problem, we study the adversarial robustness of neural networks through the lens of robust optimization.",
       "legacy_sheet_url": "https://arxiv.org/abs/1706.06083",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.",
-      "legacy_notes": "arXiv reference\n- arXiv ID: 1706.06083\n- Cited by monitored papers: #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: theoretical (provisional). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
+      "legacy_notes": "arXiv reference\n- arXiv ID: 1706.06083\n- Cited by monitored papers: #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide\n- Evidence level: tested. Basis: the paper reports experiments; abstract and conclusion read by hand on Nov 10, 2026.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Adversarial examples may be an inherent weakness of deep learning models, according to some recent findings.",
+        "A min max optimization view gives a unifying account of earlier work on adversarial examples.",
+        "Security against a first order adversary is a natural and broad guarantee to aim for."
+      ],
+      "invariants": [
+        "The paper frames adversarial resistance as a saddle point problem that combines an inner attack with an outer training minimization.",
+        "Projected gradient descent attacks and adversarial training against them give networks improved resistance to a wide range of attacks.",
+        "The paper releases code and pretrained models on MNIST and CIFAR-10 as public challenges.",
+        "Adversarial examples transfer between independently trained networks, so direct access to the target is not required."
+      ],
+      "principles": [
+        "Min max training: the model developer trains on the worst case perturbation found by projected gradient descent.",
+        "Defined adversary class: the defender states the class of adversaries, such as first order, that the guarantee covers.",
+        "Public challenges: the researcher publishes models for outside attackers to test."
+      ],
+      "opencre_topics": [
+        "Secure Product Design",
+        "Threat Modeling"
+      ]
     },
     {
       "wp_id": "WP-0204",
@@ -10342,10 +10725,25 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1707.03501\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Most machine learning algorithms are susceptible to adversarial perturbation.",
+        "Physical adversarial examples ignore that a camera views objects from different distances and angles.",
+        "The adversarial property of a perturbation is sensitive to the scale at which a picture is viewed."
+      ],
+      "invariants": [
+        "Adversarial perturbations on stop sign images did not reliably fool object detectors across different distances and angles in the paper's experiments.",
+        "Most pictures taken from varied distances and angles of a perturbed image were classified correctly.",
+        "A car might misclassify a stop sign only from a small range of distances, according to the paper."
+      ],
+      "principles": [
+        "Realistic viewing conditions: the evaluator tests physical adversarial examples across distance and angle before judging risk.",
+        "Moving platform testing: the evaluator uses images from a moving camera for vehicle detectors.",
+        "Open question tracking: researchers check whether examples exist that fool detectors across most viewing conditions."
+      ],
+      "opencre_topics": [
+        "Threat Modeling",
+        "Secure Product Design"
+      ]
     },
     {
       "wp_id": "WP-0205",
@@ -19356,6 +19754,54 @@
       "legacy_sheet_url": "https://arxiv.org/abs/2501.17070",
       "legacy_sheet_row": "Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.",
       "legacy_notes": "arXiv reference\n- arXiv ID: 2501.17070\n- Cited by monitored papers: #168 Taxonomy of Failure Modes in AI Agents\n- Evidence level: theoretical (provisional). Basis: automated read of the arXiv abstract only, because the PDF text was not available; not yet checked by hand.",
+      "blog_url": "",
+      "duplicate_issue_numbers": [],
+      "axioms": [],
+      "invariants": [],
+      "principles": [],
+      "opencre_topics": []
+    },
+    {
+      "wp_id": "WP-0580",
+      "issue_number": 606,
+      "issue_url": "https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/606",
+      "state": "open",
+      "title": "Zero Trust for AI Agents",
+      "source_org": "Anthropic",
+      "url": "https://assets.claude.com/4e89a59711a145138bd8edbe7539331abc14ac0b.pdf",
+      "date_published": "May 18, 2026",
+      "category": "",
+      "file_type": "",
+      "decision": "include",
+      "decision_reason": "",
+      "summary": "Anthropic security framework for deploying autonomous AI agents under Zero Trust: tiered foundational controls, current agentic threats, an implementation workflow, and defensive operations for AI-accelerated attacks.",
+      "legacy_sheet_url": "",
+      "legacy_sheet_row": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
+      "blog_url": "",
+      "duplicate_issue_numbers": [],
+      "axioms": [],
+      "invariants": [],
+      "principles": [],
+      "opencre_topics": []
+    },
+    {
+      "wp_id": "WP-0581",
+      "issue_number": 607,
+      "issue_url": "https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/607",
+      "state": "open",
+      "title": "Agent security in the enterprise",
+      "source_org": "OpenAI",
+      "url": "https://cdn.openai.com/pdf/6546a5a6-170a-41e8-bf2f-979ff3484db1/agent-security-enterprise.pdf",
+      "date_published": "August 2026",
+      "category": "",
+      "file_type": "",
+      "decision": "include",
+      "decision_reason": "",
+      "summary": "OpenAI guide for CISOs and security teams on agentic risk, limits on agent access and actions, monitoring and response, and a first-actions checklist for production or broader deployment.",
+      "legacy_sheet_url": "",
+      "legacy_sheet_row": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [],

@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "date": "2026-11-16",
+  "repository": "billbrietstout/ai-security-whitepaper-monitor",
+  "project_owner": "billbrietstout",
+  "project_number": 2,
+  "project_id": "",
+  "batch_size": 25,
+  "updated": "2026-11-16T02:42:38.725501+00:00",
+  "done": [],
+  "pending": [
+    "WP-0580",
+    "WP-0581"
+  ],
+  "issues": {
+    "WP-0580": 606,
+    "WP-0581": 607
+  },
+  "created_issues": {
+    "WP-0580": 606,
+    "WP-0581": 607
+  },
+  "items": [
+    {
+      "wp_id": "WP-0580",
+      "title": "Zero Trust for AI Agents",
+      "source": "Anthropic",
+      "url": "https://assets.claude.com/4e89a59711a145138bd8edbe7539331abc14ac0b.pdf",
+      "url_key": "https://assets.claude.com/4e89a59711a145138bd8edbe7539331abc14ac0b.pdf",
+      "date_published": "May 18, 2026",
+      "summary": "Anthropic security framework for deploying autonomous AI agents under Zero Trust: tiered foundational controls, current agentic threats, an implementation workflow, and defensive operations for AI-accelerated attacks.",
+      "body": "",
+      "arxiv_id": "",
+      "cited_by": "",
+      "evidence_level": "theoretical",
+      "status": "issue_open",
+      "issue_number": 606,
+      "issue_node_id": "I_kwDOU6p2aM8AAAABfj8e9w",
+      "project_item_id": "",
+      "created": true,
+      "also_found": [],
+      "history": [
+        {
+          "at": "2026-11-16T02:42:17.907402+00:00",
+          "step": "pending",
+          "issue_number": null
+        },
+        {
+          "at": "2026-11-16T02:42:32.479004+00:00",
+          "step": "issue_open",
+          "issue_number": 606
+        }
+      ]
+    },
+    {
+      "wp_id": "WP-0581",
+      "title": "Agent security in the enterprise",
+      "source": "OpenAI",
+      "url": "https://cdn.openai.com/pdf/6546a5a6-170a-41e8-bf2f-979ff3484db1/agent-security-enterprise.pdf",
+      "url_key": "https://cdn.openai.com/pdf/6546a5a6-170a-41e8-bf2f-979ff3484db1/agent-security-enterprise.pdf",
+      "date_published": "August 2026",
+      "summary": "OpenAI guide for CISOs and security teams on agentic risk, limits on agent access and actions, monitoring and response, and a first-actions checklist for production or broader deployment.",
+      "body": "",
+      "arxiv_id": "",
+      "cited_by": "",
+      "evidence_level": "theoretical",
+      "status": "issue_open",
+      "issue_number": 607,
+      "issue_node_id": "I_kwDOU6p2aM8AAAABfj8jtw",
+      "project_item_id": "",
+      "created": true,
+      "also_found": [],
+      "history": [
+        {
+          "at": "2026-11-16T02:42:17.907534+00:00",
+          "step": "pending",
+          "issue_number": null
+        },
+        {
+          "at": "2026-11-16T02:42:38.725328+00:00",
+          "step": "issue_open",
+          "issue_number": 607
+        }
+      ]
+    }
+  ]
+}
