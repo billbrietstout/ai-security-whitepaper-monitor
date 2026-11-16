@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "date": "2026-11-16",
+  "repository": "billbrietstout/ai-security-whitepaper-monitor",
+  "project_owner": "billbrietstout",
+  "project_number": 2,
+  "project_id": "",
+  "batch_size": 25,
+  "updated": "2026-11-16T02:49:32.857311+00:00",
+  "done": [],
+  "pending": [
+    "WP-0582"
+  ],
+  "issues": {
+    "WP-0582": 609
+  },
+  "created_issues": {
+    "WP-0582": 609
+  },
+  "items": [
+    {
+      "wp_id": "WP-0582",
+      "title": "Zero Trust Architecture (NIST SP 800-207)",
+      "source": "National Institute of Standards and Technology (NIST)",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf",
+      "url_key": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf",
+      "date_published": "August 2020",
+      "summary": "NIST Special Publication defining zero trust and zero trust architecture: core principles, logical components, deployment models, use cases, threats, and a high-level migration roadmap for enterprises.",
+      "body": "",
+      "arxiv_id": "",
+      "cited_by": "",
+      "evidence_level": "theoretical",
+      "status": "issue_open",
+      "issue_number": 609,
+      "issue_node_id": "I_kwDOU6p2aM8AAAABfkA-Eg",
+      "project_item_id": "",
+      "created": true,
+      "also_found": [],
+      "history": [
+        {
+          "at": "2026-11-16T02:49:27.880115+00:00",
+          "step": "pending",
+          "issue_number": null
+        },
+        {
+          "at": "2026-11-16T02:49:32.857128+00:00",
+          "step": "issue_open",
+          "issue_number": 609
+        }
+      ]
+    }
+  ]
+}

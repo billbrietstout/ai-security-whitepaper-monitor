@@ -3778,3 +3778,5 @@ WP-0580,606,https://github.com/billbrietstout/ai-security-whitepaper-monitor/iss
 - Evidence level: theoretical",,,,,,
 WP-0581,607,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/607,open,Agent security in the enterprise,OpenAI,https://cdn.openai.com/pdf/6546a5a6-170a-41e8-bf2f-979ff3484db1/agent-security-enterprise.pdf,August 2026,,,include,,"OpenAI guide for CISOs and security teams on agentic risk, limits on agent access and actions, monitoring and response, and a first-actions checklist for production or broader deployment.",,,"Evidence
 - Evidence level: theoretical",,,,,,
+WP-0582,609,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/609,open,Zero Trust Architecture (NIST SP 800-207),National Institute of Standards and Technology (NIST),https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf,August 2020,,,include,,"NIST Special Publication defining zero trust and zero trust architecture: core principles, logical components, deployment models, use cases, threats, and a high-level migration roadmap for enterprises.",,,"Evidence
+- Evidence level: theoretical",,,,,,

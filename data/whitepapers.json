@@ -2913,6 +2913,11 @@
       "wp_id": "WP-0581",
       "url": "https://cdn.openai.com/pdf/6546a5a6-170a-41e8-bf2f-979ff3484db1/agent-security-enterprise.pdf",
       "issue_number": 607
+    },
+    {
+      "wp_id": "WP-0582",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf",
+      "issue_number": 609
     }
   ],
   "papers": [
@@ -19799,6 +19804,30 @@
       "decision": "include",
       "decision_reason": "",
       "summary": "OpenAI guide for CISOs and security teams on agentic risk, limits on agent access and actions, monitoring and response, and a first-actions checklist for production or broader deployment.",
+      "legacy_sheet_url": "",
+      "legacy_sheet_row": "",
+      "legacy_notes": "Evidence\n- Evidence level: theoretical",
+      "blog_url": "",
+      "duplicate_issue_numbers": [],
+      "axioms": [],
+      "invariants": [],
+      "principles": [],
+      "opencre_topics": []
+    },
+    {
+      "wp_id": "WP-0582",
+      "issue_number": 609,
+      "issue_url": "https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/609",
+      "state": "open",
+      "title": "Zero Trust Architecture (NIST SP 800-207)",
+      "source_org": "National Institute of Standards and Technology (NIST)",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf",
+      "date_published": "August 2020",
+      "category": "",
+      "file_type": "",
+      "decision": "include",
+      "decision_reason": "",
+      "summary": "NIST Special Publication defining zero trust and zero trust architecture: core principles, logical components, deployment models, use cases, threats, and a high-level migration roadmap for enterprises.",
       "legacy_sheet_url": "",
       "legacy_sheet_row": "",
       "legacy_notes": "Evidence\n- Evidence level: theoretical",
