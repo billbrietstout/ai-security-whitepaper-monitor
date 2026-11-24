@@ -11072,22 +11072,20 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
-        "Deep learning systems are used in security-critical scenarios, such as face recognition that authenticates users to payment apps.",
-        "Such uses give adversaries an incentive to create a backdoor into a learning-based authentication system.",
-        "The adversary may have no knowledge of the model or the training set and may inject only a small number of samples."
+        "Convolutional neural networks are extremely vulnerable to adversarial examples: imperceptible perturbations to clean images can make them fail.",
+        "Defenses that need no extra training or fine-tuning and add little computation are easier for operators to adopt."
       ],
       "invariants": [
-        "About 50 poisoning samples are enough to reach an attack success rate above 90% under the weak threat model.",
-        "A data poisoning attack can create a physically implementable backdoor without touching the training process.",
-        "The backdoor key can be hard for humans to notice."
+        "Random resizing and random padding of input images at inference time defend against both single-step and iterative attacks in the authors' experiments.",
+        "Combined with an adversarially trained model, the method scored 0.924 and ranked second among 107 teams in the NIPS 2017 adversarial examples defense challenge, against 0.773 for adversarial training alone."
       ],
       "principles": [
-        "Defend against weak adversaries: defenders do not assume an attacker needs model or dataset knowledge.",
-        "Research defenses: researchers develop defenses against backdoor poisoning, as the authors call for."
+        "Inference-time randomization: model operators randomly resize and pad input images before classification to reduce adversarial effects.",
+        "Layered defense: model builders combine randomization with adversarial training, because the methods are compatible.",
+        "Low-cost defense: operators prefer a defense that needs no extra training or fine-tuning and adds very few computations."
       ],
       "opencre_topics": [
-        "Authentication",
-        "Supply Chain",
+        "Input Validation",
         "Threat Modeling"
       ]
     },
@@ -11111,17 +11109,17 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
-        "Character-level neural text classifiers can be attacked with small changes to the input text.",
-        "White-box access to gradients lets an attacker pick the most damaging character changes efficiently."
+        "Neural image captioning systems use a CNN for image features and an RNN for caption generation, so adversarial perturbations to the image can reach the language output.",
+        "Visual language grounding is widely studied in modern captioning systems, and how it behaves under adversarial perturbation was not well understood."
       ],
       "invariants": [
-        "Only a few character or token manipulations greatly reduce the accuracy of a character-level classifier.",
-        "The atomic flip operation, which swaps one token for another using gradients of the one-hot input vectors, can be adapted to attack a word-level classifier with semantics-preserving constraints."
+        "Visually similar adversarial images can be crafted so a captioning system outputs randomly chosen captions or keywords.",
+        "The adversarial examples are highly transferable to other image captioning systems."
       ],
       "principles": [
-        "Adversarial training: model builders use the efficient HotFlip attack to train models that resist it at test time.",
-        "Constrain edits: evaluators keep semantics-preserving constraints when they test word-level classifiers.",
-        "Test text models: security teams include gradient-based text attacks in classifier evaluation."
+        "Test grounding: evaluators check whether captioning systems can be misled to output chosen captions or keywords, using the two evaluation approaches in the paper.",
+        "Assume transfer: defenders of captioning systems do not rely on keeping the model private, because examples transfer to other systems.",
+        "Study grounding: researchers use the Show-and-Fool results to study language grounding under adversarial perturbation."
       ],
       "opencre_topics": [
         "Input Validation",
@@ -11148,19 +11146,22 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
-        "Automatic speech recognition systems transcribe audio into text that other systems act on.",
-        "An attacker with white-box access can optimize audio against the model end to end."
+        "Deep learning systems are used in security-critical scenarios, such as face recognition that authenticates users to payment apps.",
+        "Such uses give adversaries an incentive to create a backdoor into a learning-based authentication system.",
+        "The adversary may have no knowledge of the model or the training set and may inject only a small number of samples."
       ],
       "invariants": [
-        "Given any audio waveform, the attack produces another waveform over 99.9% similar that transcribes as any chosen phrase of up to 50 characters per second.",
-        "The white-box iterative attack on Mozilla's DeepSpeech implementation has a 100% success rate."
+        "About 50 poisoning samples are enough to reach an attack success rate above 90% under the weak threat model.",
+        "A data poisoning attack can create a physically implementable backdoor without touching the training process.",
+        "The backdoor key can be hard for humans to notice."
       ],
       "principles": [
-        "Test speech systems: evaluators treat targeted audio adversarial examples as a threat to speech-to-text.",
-        "Study a new domain: researchers extend adversarial example work to audio, as the authors propose."
+        "Defend against weak adversaries: defenders do not assume an attacker needs model or dataset knowledge.",
+        "Research defenses: researchers develop defenses against backdoor poisoning, as the authors call for."
       ],
       "opencre_topics": [
-        "Input Validation",
+        "Authentication",
+        "Supply Chain",
         "Threat Modeling"
       ]
     },
@@ -11184,22 +11185,21 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
-        "Defenses that mask gradients appear to defeat iterative optimization-based attacks.",
-        "Obfuscated gradients are a kind of gradient masking that gives a false sense of security."
+        "Character-level neural text classifiers can be attacked with small changes to the input text.",
+        "White-box access to gradients lets an attacker pick the most damaging character changes efficiently."
       ],
       "invariants": [
-        "Defenses that rely on obfuscated gradients can be circumvented.",
-        "Seven of the nine non-certified white-box defenses studied at ICLR 2018 relied on obfuscated gradients.",
-        "The authors' new attacks circumvent 6 of those defenses completely and 1 partially."
+        "Only a few character or token manipulations greatly reduce the accuracy of a character-level classifier.",
+        "The atomic flip operation, which swaps one token for another using gradients of the one-hot input vectors, can be adapted to attack a word-level classifier with semantics-preserving constraints."
       ],
       "principles": [
-        "Check for obfuscated gradients: evaluators look for the characteristic behaviors the paper lists before they accept a defense result.",
-        "Adaptive attacks: evaluators build attacks designed for the specific defense, for each of the three types of obfuscated gradients.",
-        "Do not rely on gradient masking: defense designers do not count a failed iterative attack as proof of resistance to attack."
+        "Adversarial training: model builders use the efficient HotFlip attack to train models that resist it at test time.",
+        "Constrain edits: evaluators keep semantics-preserving constraints when they test word-level classifiers.",
+        "Test text models: security teams include gradient-based text attacks in classifier evaluation."
       ],
       "opencre_topics": [
-        "Threat Modeling",
-        "Input Validation"
+        "Input Validation",
+        "Threat Modeling"
       ]
     },
     {
@@ -11222,22 +11222,20 @@
       "blog_url": "",
       "duplicate_issue_numbers": [],
       "axioms": [
-        "Distributed stochastic gradient descent can include adversarial (Byzantine) workers that send poisoned gradients.",
-        "In high dimension, an adversary can use the non-convexity of the loss function to steer training toward ineffective models."
+        "Automatic speech recognition systems transcribe audio into text that other systems act on.",
+        "An attacker with white-box access can optimize audio against the model end to end."
       ],
       "invariants": [
-        "Convergence of SGD under a minority of Byzantine workers is not enough to prevent poisoning.",
-        "Existing Byzantine-resilient schemes leave a poisoning margin that grows at least like the square root of the dimension.",
-        "The simple attack the authors build is highly effective on CIFAR-10 and MNIST."
+        "Given any audio waveform, the attack produces another waveform over 99.9% similar that transcribes as any chosen phrase of up to 50 characters per second.",
+        "The white-box iterative attack on Mozilla's DeepSpeech implementation has a 100% success rate."
       ],
       "principles": [
-        "Bulyan aggregation: distributed learning operators use Bulyan to cut the attacker's margin to a narrow bound.",
-        "Test beyond convergence: evaluators check the quality of the converged model, not only whether training converges.",
-        "Batch size cost: operators accept a larger required batch size as the price of Bulyan."
+        "Test speech systems: evaluators treat targeted audio adversarial examples as a threat to speech-to-text.",
+        "Study a new domain: researchers extend adversarial example work to audio, as the authors propose."
       ],
       "opencre_topics": [
-        "Threat Modeling",
-        "Data Protection"
+        "Input Validation",
+        "Threat Modeling"
       ]
     },
     {
@@ -11259,10 +11257,24 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1802.00420\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2); #174 OWASP GenAI Red Teaming Manual Version 1.0\n- Evidence level: theoretical (provisional). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Defenses that mask gradients appear to defeat iterative optimization-based attacks.",
+        "Obfuscated gradients are a kind of gradient masking that gives a false sense of security."
+      ],
+      "invariants": [
+        "Defenses that rely on obfuscated gradients can be circumvented.",
+        "Seven of the nine non-certified white-box defenses studied at ICLR 2018 relied on obfuscated gradients.",
+        "The authors' new attacks circumvent 6 of those defenses completely and 1 partially."
+      ],
+      "principles": [
+        "Check for obfuscated gradients: evaluators look for the characteristic behaviors the paper lists before they accept a defense result.",
+        "Adaptive attacks: evaluators build attacks designed for the specific defense, for each of the three types of obfuscated gradients.",
+        "Do not rely on gradient masking: defense designers do not count a failed iterative attack as proof of resistance to attack."
+      ],
+      "opencre_topics": [
+        "Threat Modeling",
+        "Input Validation"
+      ]
     },
     {
       "wp_id": "WP-0217",
@@ -11283,10 +11295,24 @@
       "legacy_notes": "arXiv reference\n- arXiv ID: 1802.07927\n- Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)\n- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",
       "blog_url": "",
       "duplicate_issue_numbers": [],
-      "axioms": [],
-      "invariants": [],
-      "principles": [],
-      "opencre_topics": []
+      "axioms": [
+        "Distributed stochastic gradient descent can include adversarial (Byzantine) workers that send poisoned gradients.",
+        "In high dimension, an adversary can use the non-convexity of the loss function to steer training toward ineffective models."
+      ],
+      "invariants": [
+        "Convergence of SGD under a minority of Byzantine workers is not enough to prevent poisoning.",
+        "Existing Byzantine-resilient schemes leave a poisoning margin that grows at least like the square root of the dimension.",
+        "The simple attack the authors build is highly effective on CIFAR-10 and MNIST."
+      ],
+      "principles": [
+        "Bulyan aggregation: distributed learning operators use Bulyan to cut the attacker's margin to a narrow bound.",
+        "Test beyond convergence: evaluators check the quality of the converged model, not only whether training converges.",
+        "Batch size cost: operators accept a larger required batch size as the price of Bulyan."
+      ],
+      "opencre_topics": [
+        "Threat Modeling",
+        "Data Protection"
+      ]
     },
     {
       "wp_id": "WP-0218",
