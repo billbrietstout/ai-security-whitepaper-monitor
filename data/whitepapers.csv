@@ -1981,11 +1981,36 @@ Access Control
 Governance-Risk-Compliance
 Threat Modeling"
 WP-0177,179,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/179,open,Frontier Ready Assessment Framework,Cloud Security Alliance (CSA),https://cloudsecurityalliance.org/artifacts/frontier-ready-assessment-framework,"October 8, 2026 (CSA artifact page)",,,include,,"A framework to help organizations prepare for attackers who use frontier AI, whether or not the organization uses AI itself. Per the landing page, it groups 12 categories into three domains (Foundational, Structural, Operational) and five maturity levels (Initial, Repeatable, Defined, Capable, Efficient), and ships as a spreadsheet. The download needs a CSA login, so extraction is pending.",,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026.","Evidence
-- Evidence level: theoretical",,,,,,
+- Evidence level: theoretical",,,"The vulnerability and exploit clock is collapsing: disclosure arrives at machine rate and weaponization takes hours.
+Attackers have multiplied: agent swarms let one operator run many attacks, and attacker skill has risen.
+Frontier AI did not create new attack surfaces; it shortened the time to exploit the ones that already exist.
+Defenses run on a calendar inherited from pre-AI assumptions unless the organization changes its tempo.","No control objective depends on an external catalog, feed, score or taxonomy such as KEV, EPSS, CVSS or ATT&CK to produce a score.
+Every count comes from records the organization already produces by operating the control.
+At Level 3 and above an objective scores Met only when the organization can produce a document, export, configuration, test record or drill record.
+Every control objective scores one of five states, and Met includes a compensating control.","Tempo as the differentiator: the organization moves a category up a level by raising operating tempo, not by adding process alone.
+Bias toward action: the organization implements improvements rather than waiting to complete documentation.
+Zero Trust: the organization adopts Zero Trust, governed automation and tested recovery to defend at machine speed.
+Humans on gates: at Level 4 the organization runs machine-speed operations with humans on defined gates, not approving each action.
+Resource-constrained profile: smaller organizations below the security poverty line use the resource-constrained profile of the model.","Governance-Risk-Compliance
+Vulnerability Management
+Incident Response
+Access Control"
 WP-0178,180,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/180,open,Transitioning from STAR to STAR for AI,Cloud Security Alliance (CSA),https://cloudsecurityalliance.org/artifacts/transitioning-from-star-to-star-for-ai,"October 26, 2026 (CSA artifact page)",,,include,,"Transition guidance for cloud and AI service providers that already use the CSA STAR program and want to cover AI risks under STAR for AI. Per the landing page, it covers the move between control matrices, Level 1 self-assessments, and Level 2 third-party audits. The download needs a CSA login, so extraction is pending.",,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026.","Evidence
-- Evidence level: theoretical",,,,,,
+- Evidence level: theoretical",,,"Providers that already hold STAR Level 1 or Level 2 can extend their assurance to AI-specific risks without starting over.
+STAR for AI adds 8 cloud-related and 32 AI-specific controls on top of the CCM, giving the AICM 247 control objectives in 18 domains.
+AI-specific risks include adversarial inputs, data poisoning, model integrity, explainability, human oversight and AI supply chain transparency.","The AICM is fully aligned with the CCM, so existing CCM controls stay in scope for STAR for AI.
+A STAR for AI Level 2 badge requires the AICM to be included in the scope of the audit or examination.
+A provider that performs several AICM stakeholder roles in one legal entity evidences role-specific controls for each function it performs.","Confirm roles: the provider confirms its applicable AICM stakeholder roles first.
+Gap assessment: the provider assesses its gaps against the 40 additional controls.
+Extend scope: the provider extends its self-assessment, certification or attestation to cover the AICM and submits evidence to the STAR Registry.
+Engage the auditor early: the provider confirms the extended scope with its certification body or service auditor and aligns timing with surveillance cycles.
+Update evidence: the provider adds AI Bills of Material, AI impact assessments, model cards, adversarial testing records and guardrail effectiveness metrics to its evidence repositories.","Governance-Risk-Compliance
+Supply Chain
+Secure Product Design"
 WP-0179,181,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/181,open,From Framework to Action: Applying the SANS AI Security Maturity Model,SANS Institute,https://www.sans.org/white-papers/from-framework-action-applying-sans-ai-security-maturity-model,"October 14, 2026 (SANS page)",,,include,,"A SANS report by Chris Cochran on a September 16, 2026 forum where nine experts and three executive panelists tested the SANS AI Security Maturity Model. Per the landing page, 60% of attendees in a poll placed their organization at Stage 2, and 55% could not say how their agents are identified. The PDF needs a SANS login, so extraction is pending. Related: #47 (the maturity model itself).",,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026.","Evidence
-- Evidence level: theoretical",,,,,,
+- Evidence level: theoretical",,,"Most security teams are working through the same early questions about AI at the same time.
+In a poll at the SANS Expert Thought Leadership Forum, 60% of attendees placed their organizations at Stage 2 of the SANS AI Security Maturity Model.
+In the same poll 55% of attendees could not say how their agents are identified.",,,Governance-Risk-Compliance
 WP-0180,182,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/182,open,Poisoning Attacks against Support Vector Machines (arXiv 1206.6389),"Academic paper by Battista Biggio, Blaine Nelson, Pavel Laskov (from the arXiv API)",https://arxiv.org/abs/1206.6389,"2012-06-27 (arXiv v1, from the arXiv API)",,,include,,"From the arXiv abstract (the authors' own claims, not checked): We investigate a family of poisoning attacks against Support Vector Machines (SVM). Such attacks inject specially crafted training data that increases the SVM's test error. Central to the motivation for these attacks is the fact that most learning algorithms assume that their training data comes from a natural or well-behaved distribution.",https://arxiv.org/abs/1206.6389,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.","arXiv reference
 - arXiv ID: 1206.6389
 - Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)
@@ -2277,47 +2302,111 @@ Secure Product Design"
 WP-0205,207,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/207,open,Synthesizing Robust Adversarial Examples (arXiv 1707.07397),"Academic paper by Anish Athalye, Logan Engstrom, Andrew Ilyas, Kevin Kwok (from the arXiv API)",https://arxiv.org/abs/1707.07397,"2017-07-24 (arXiv v1, from the arXiv API)",,,include,,"From the arXiv abstract (the authors' own claims, not checked): Standard methods for generating adversarial examples for neural networks do not consistently fool neural network classifiers in the physical world due to a combination of viewpoint shifts, camera noise, and other natural transformations, limiting their relevance to real-world systems. We demonstrate the existence of robust 3D adversarial objects, and we present the first algorithm for synthesizing examples that are adversarial over a chosen distribution of transformations. We synthesize two-dimensional adversarial images that are robust to noise, distortion, and affine transformation.",https://arxiv.org/abs/1707.07397,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.","arXiv reference
 - arXiv ID: 1707.07397
 - Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)
-- Evidence level: tested, possibly deployed (needs review). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand. Deployment terms found: real world systems, real-world systems.",,,,,,
+- Evidence level: tested, possibly deployed (needs review). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand. Deployment terms found: real world systems, real-world systems.",,,"Standard adversarial example methods do not consistently fool classifiers in the physical world because of viewpoint shifts, camera noise and other natural transformations.
+An attacker can make an adversarial example that holds over a chosen distribution of transformations.
+Physical objects can be manufactured with 3D printing to carry such adversarial examples.","Adversarial 3D objects that hold up under viewpoint and noise changes exist in the physical world, as the authors show by 3D-printing them.
+An adversarial image can stay adversarial under noise, distortion and affine transformation.","Test under transformations: defenders evaluate classifiers against adversarial examples built over viewpoint, noise and distortion, not only a single fixed input.
+Account for physical attacks: designers of safety-relevant vision systems treat physical adversarial objects as a threat.","Threat Modeling
+Input Validation"
 WP-0206,208,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/208,open,Robust Physical-World Attacks on Deep Learning Models (arXiv 1707.08945),"Academic paper by Kevin Eykholt, Ivan Evtimov, Earlence Fernandes, Bo Li, Amir Rahmati, Chaowei Xiao, and 3 others (from the arXiv API)",https://arxiv.org/abs/1707.08945,"2017-07-27 (arXiv v1, from the arXiv API)",,,include,,"From the arXiv abstract (the authors' own claims, not checked): Recent studies show that the state-of-the-art deep neural networks (DNNs) are vulnerable to adversarial examples, resulting from small-magnitude perturbations added to the input. Given that that emerging physical systems are using DNNs in safety-critical situations, adversarial examples could mislead these systems and cause dangerous situations.Therefore, understanding adversarial examples in the physical world is an important step towards developing resilient learning algorithms. We propose a general attack algorithm,Robust Physical Perturbations (RP2), to generate robust visual adversarial perturbations under different physical conditions.",https://arxiv.org/abs/1707.08945,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.","arXiv reference
 - arXiv ID: 1707.08945
 - Cited by monitored papers: #2 An Architectural Risk Analysis of Machine Learning Systems (BIML-78)
-- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,,,,
+- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,"Emerging physical systems use deep neural networks in safety-critical situations.
+Adversarial examples can mislead these systems and cause dangerous situations.
+There is no standardized test method for physical adversarial examples.","Small black and white stickers on a real stop sign cause targeted misclassification in 100% of lab images and 84.8% of video frames from a moving vehicle.
+Adversarial perturbations can stay effective under different physical conditions, including viewpoint.","Two-stage evaluation: testers assess physical adversarial manipulations with lab tests and then field tests.
+Threat modeling for physical systems: designers of road sign classifiers treat physical perturbations as an attack path.
+Resilient learning: researchers use physical-world attack results to develop resilient learning algorithms.","Threat Modeling
+Input Validation"
 WP-0207,209,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/209,open,BadNets: Identifying Vulnerabilities in the Machine Learning Model Supply Chain (arXiv 1708.06733),"Academic paper by Tianyu Gu, Brendan Dolan-Gavitt, Siddharth Garg (from the arXiv API)",https://arxiv.org/abs/1708.06733,"2017-08-22 (arXiv v1, from the arXiv API)",,,include,,"From the arXiv abstract (the authors' own claims, not checked): Deep learning-based techniques have achieved state-of-the-art performance on a wide variety of recognition and classification tasks. However, these networks are typically computationally expensive to train, requiring weeks of computation on many GPUs; as a result, many users outsource the training procedure to the cloud or rely on pre-trained models that are then fine-tuned for a specific task. In this paper we show that outsourced training introduces new security risks: an adversary can create a maliciously trained network (a backdoored neural network, or a \emph{BadNet}) that has state-of-the-art performance on the user's training and validation samples, but behaves badly on specific attacker-chosen inputs.",https://arxiv.org/abs/1708.06733,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.","arXiv reference
 - arXiv ID: 1708.06733
 - Cited by monitored papers: #2 An Architectural Risk Analysis of Machine Learning Systems (BIML-78)
-- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,,,,
+- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,"Many users outsource neural network training to the cloud or rely on pre-trained models that they fine-tune, because training takes weeks on many GPUs.
+Outsourced training lets an adversary supply a maliciously trained network.
+Neural network behavior is difficult to explain, so backdoors are stealthy.","A backdoored network can match state-of-the-art accuracy on the user's training and validation samples and still misbehave on attacker-chosen inputs.
+A backdoor in a street sign detector can persist after the network is retrained for another task and cut accuracy by 25% on average when the trigger is present.","Verify models: users inspect and verify neural networks, as they verify and debug software, before they trust them.
+Supply chain scrutiny: users treat outsourced training and pre-trained models as a security risk.
+Trigger testing: testers check model behavior on trigger-bearing inputs, not only on clean validation data.","Supply Chain
+Threat Modeling
+Vulnerability Management"
 WP-0208,210,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/210,open,Towards Poisoning of Deep Learning Algorithms with Back-gradient Optimization (arXiv 1708.08689),"Academic paper by Luis Muñoz-González, Battista Biggio, Ambra Demontis, Andrea Paudice, Vasin Wongrassamee, Emil C. Lupu, and 1 others (from the arXiv API)",https://arxiv.org/abs/1708.08689,"2017-08-29 (arXiv v1, from the arXiv API)",,,include,,"From the arXiv abstract (the authors' own claims, not checked): A number of online services nowadays rely upon machine learning to extract valuable information from data collected in the wild. This exposes learning algorithms to the threat of data poisoning, i.e., a coordinate attack in which a fraction of the training data is controlled by the attacker and manipulated to subvert the learning process. To date, these attacks have been devised only against a limited class of binary learning algorithms, due to the inherent complexity of the gradient-based procedure used to optimize the poisoning points (a.k.a.",https://arxiv.org/abs/1708.08689,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.","arXiv reference
 - arXiv ID: 1708.08689
 - Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)
-- Evidence level: theoretical (provisional). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,,,,
+- Evidence level: theoretical (provisional). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,"Online services rely on machine learning to extract information from data collected in the wild.
+An attacker who controls a fraction of the training data can manipulate the learning process.
+Earlier poisoning attacks covered only a limited class of binary learning algorithms.","Poisoning attacks extend to multiclass problems and to gradient-trained models, including neural networks and deep learning.
+Adversarial training examples transfer across different learning algorithms.
+The authors show poisoning effectiveness on spam filtering, malware detection and handwritten digit recognition.","Treat training data as untrusted: operators of learning services assume part of data collected in the wild can be attacker-controlled.
+Use the attack to test: researchers use back-gradient optimization to evaluate their learners' resilience to poisoning.","Threat Modeling
+Data Protection
+Input Validation"
 WP-0209,211,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/211,open,Privacy Risk in Machine Learning: Analyzing the Connection to Overfitting (arXiv 1709.01604),"Academic paper by Samuel Yeom, Irene Giacomelli, Matt Fredrikson, Somesh Jha (from the arXiv API)",https://arxiv.org/abs/1709.01604,"2017-09-05 (arXiv v1, from the arXiv API)",,,include,,"From the arXiv abstract (the authors' own claims, not checked): Machine learning algorithms, when applied to sensitive data, pose a distinct threat to privacy. A growing body of prior work demonstrates that models produced by these algorithms may leak specific private information in the training data to an attacker, either through the models' structure or their observable behavior. However, the underlying cause of this privacy risk is not well understood beyond a handful of anecdotal accounts that suggest overfitting and influence might play a role.",https://arxiv.org/abs/1709.01604,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.","arXiv reference
 - arXiv ID: 1709.01604
 - Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)
-- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,,,,
+- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,"Machine learning models trained on sensitive data can leak private information about the training data through their structure or observable behavior.
+Anecdotal accounts suggest overfitting and influence play a role in this leakage.
+Training set membership inference and attribute inference attacks let an attacker learn information about the training data from a model.","Overfitting is sufficient to allow membership inference and, when the target attribute meets influence conditions, attribute inference.
+Overfitting is not necessary for these attacks, so other factors also create privacy risk.
+Membership inference and attribute inference are connected, and the connection leads to new effective attacks.","Reduce overfitting: model builders limit overfitting to lower the privacy risk of membership and attribute inference.
+Do not rely on generalization alone: model builders assess privacy risk beyond overfitting, because it is not necessary for the attacks.","Data Protection
+Threat Modeling"
 WP-0210,212,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/212,open,Fooling Vision and Language Models Despite Localization and Attention Mechanism (arXiv 1709.08693),"Academic paper by Xiaojun Xu, Xinyun Chen, Chang Liu, Anna Rohrbach, Trevor Darrell, Dawn Song (from the arXiv API)",https://arxiv.org/abs/1709.08693,"2017-09-25 (arXiv v1, from the arXiv API)",,,include,,"From the arXiv abstract (the authors' own claims, not checked): Adversarial attacks are known to succeed on classifiers, but it has been an open question whether more complex vision systems are vulnerable. In this paper, we study adversarial examples for vision and language models, which incorporate natural language understanding and complex structures such as attention, localization, and modular architectures. In particular, we investigate attacks on a dense captioning model and on two visual question answering (VQA) models.",https://arxiv.org/abs/1709.08693,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.","arXiv reference
 - arXiv ID: 1709.08693
 - Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)
-- Evidence level: theoretical. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,,,,
+- Evidence level: theoretical. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,"Vision systems with a language component use attention, localization and modular architectures.
+Adversarial attacks are known to succeed on classifiers, and it was an open question whether more complex vision systems are vulnerable.","Adversarial examples reach success rates above 90% against a dense captioning model and two visual question answering models.
+Attention, bounding box localization and compositional internal structures are vulnerable to adversarial attacks.","Do not assume attention protects: designers of vision and language models do not treat attention or localization as a defense.
+Test complex models: evaluators run adversarial attacks against captioning and VQA models, not only classifiers.
+Build defenses: researchers use these results to inform defenses for vision systems with a language component.","Threat Modeling
+Input Validation"
 WP-0211,213,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/213,open,Mitigating Adversarial Effects Through Randomization (arXiv 1711.01991),"Academic paper by Cihang Xie, Jianyu Wang, Zhishuai Zhang, Zhou Ren, Alan Yuille (from the arXiv API)",https://arxiv.org/abs/1711.01991,"2017-11-06 (arXiv v1, from the arXiv API)",,,include,,"From the arXiv abstract (the authors' own claims, not checked): Convolutional neural networks have demonstrated high accuracy on various tasks in recent years. However, they are extremely vulnerable to adversarial examples. For example, imperceptible perturbations added to clean images can cause convolutional neural networks to fail.",https://arxiv.org/abs/1711.01991,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.","arXiv reference
 - arXiv ID: 1711.01991
 - Cited by monitored papers: #27 AI Exchange (owaspai.org) , AI Security Overview & Controls Guide
-- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,,,,
+- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,"Deep learning systems are used in security-critical scenarios, such as face recognition that authenticates users to payment apps.
+Such uses give adversaries an incentive to create a backdoor into a learning-based authentication system.
+The adversary may have no knowledge of the model or the training set and may inject only a small number of samples.","About 50 poisoning samples are enough to reach an attack success rate above 90% under the weak threat model.
+A data poisoning attack can create a physically implementable backdoor without touching the training process.
+The backdoor key can be hard for humans to notice.","Defend against weak adversaries: defenders do not assume an attacker needs model or dataset knowledge.
+Research defenses: researchers develop defenses against backdoor poisoning, as the authors call for.","Authentication
+Supply Chain
+Threat Modeling"
 WP-0212,214,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/214,open,Attacking Visual Language Grounding with Adversarial Examples: A Case Study on Neural Image Captioning (arXiv 1712.02051),"Academic paper by Hongge Chen, Huan Zhang, Pin-Yu Chen, Jinfeng Yi, Cho-Jui Hsieh (from the arXiv API)",https://arxiv.org/abs/1712.02051,"2017-12-06 (arXiv v1, from the arXiv API)",,,include,,"From the arXiv abstract (the authors' own claims, not checked): Visual language grounding is widely studied in modern neural image captioning systems, which typically adopts an encoder-decoder framework consisting of two principal components: a convolutional neural network (CNN) for image feature extraction and a recurrent neural network (RNN) for language caption generation. To study the robustness of language grounding to adversarial perturbations in machine vision and perception, we propose Show-and-Fool, a novel algorithm for crafting adversarial examples in neural image captioning. The proposed algorithm provides two evaluation approaches, which check whether neural image captioning systems can be mislead to output some randomly chosen captions or keywords.",https://arxiv.org/abs/1712.02051,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.","arXiv reference
 - arXiv ID: 1712.02051
 - Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)
-- Evidence level: tested, possibly deployed (needs review). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand. Deployment terms found: in the wild.",,,,,,
+- Evidence level: tested, possibly deployed (needs review). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand. Deployment terms found: in the wild.",,,"Character-level neural text classifiers can be attacked with small changes to the input text.
+White-box access to gradients lets an attacker pick the most damaging character changes efficiently.","Only a few character or token manipulations greatly reduce the accuracy of a character-level classifier.
+The atomic flip operation, which swaps one token for another using gradients of the one-hot input vectors, can be adapted to attack a word-level classifier with semantics-preserving constraints.","Adversarial training: model builders use the efficient HotFlip attack to train models that resist it at test time.
+Constrain edits: evaluators keep semantics-preserving constraints when they test word-level classifiers.
+Test text models: security teams include gradient-based text attacks in classifier evaluation.","Input Validation
+Threat Modeling"
 WP-0213,215,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/215,open,Targeted Backdoor Attacks on Deep Learning Systems Using Data Poisoning (arXiv 1712.05526),"Academic paper by Xinyun Chen, Chang Liu, Bo Li, Kimberly Lu, Dawn Song (from the arXiv API)",https://arxiv.org/abs/1712.05526,"2017-12-15 (arXiv v1, from the arXiv API)",,,include,,"From the arXiv abstract (the authors' own claims, not checked): Deep learning models have achieved high performance on many tasks, and thus have been applied to many security-critical scenarios. For example, deep learning-based face recognition systems have been used to authenticate users to access many security-sensitive applications like payment apps. Such usages of deep learning systems provide the adversaries with sufficient incentives to perform attacks against these systems for their adversarial purposes.",https://arxiv.org/abs/1712.05526,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.","arXiv reference
 - arXiv ID: 1712.05526
 - Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)
-- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,,,,
+- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,"Automatic speech recognition systems transcribe audio into text that other systems act on.
+An attacker with white-box access can optimize audio against the model end to end.","Given any audio waveform, the attack produces another waveform over 99.9% similar that transcribes as any chosen phrase of up to 50 characters per second.
+The white-box iterative attack on Mozilla's DeepSpeech implementation has a 100% success rate.","Test speech systems: evaluators treat targeted audio adversarial examples as a threat to speech-to-text.
+Study a new domain: researchers extend adversarial example work to audio, as the authors propose.","Input Validation
+Threat Modeling"
 WP-0214,216,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/216,open,HotFlip: White-Box Adversarial Examples for Text Classification (arXiv 1712.06751),"Academic paper by Javid Ebrahimi, Anyi Rao, Daniel Lowd, Dejing Dou (from the arXiv API)",https://arxiv.org/abs/1712.06751,"2017-12-19 (arXiv v1, from the arXiv API)",,,include,,"From the arXiv abstract (the authors' own claims, not checked): We propose an efficient method to generate white-box adversarial examples to trick a character-level neural classifier. We find that only a few manipulations are needed to greatly decrease the accuracy. Our method relies on an atomic flip operation, which swaps one token for another, based on the gradients of the one-hot input vectors.",https://arxiv.org/abs/1712.06751,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.","arXiv reference
 - arXiv ID: 1712.06751
 - Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)
-- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,,,,
+- Evidence level: tested. Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,"Defenses that mask gradients appear to defeat iterative optimization-based attacks.
+Obfuscated gradients are a kind of gradient masking that gives a false sense of security.","Defenses that rely on obfuscated gradients can be circumvented.
+Seven of the nine non-certified white-box defenses studied at ICLR 2018 relied on obfuscated gradients.
+The authors' new attacks circumvent 6 of those defenses completely and 1 partially.","Check for obfuscated gradients: evaluators look for the characteristic behaviors the paper lists before they accept a defense result.
+Adaptive attacks: evaluators build attacks designed for the specific defense, for each of the three types of obfuscated gradients.
+Do not rely on gradient masking: defense designers do not count a failed iterative attack as proof of resistance to attack.","Threat Modeling
+Input Validation"
 WP-0215,217,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/217,open,Audio Adversarial Examples: Targeted Attacks on Speech-to-Text (arXiv 1801.01944),"Academic paper by Nicholas Carlini, David Wagner (from the arXiv API)",https://arxiv.org/abs/1801.01944,"2018-01-05 (arXiv v1, from the arXiv API)",,,include,,"From the arXiv abstract (the authors' own claims, not checked): We construct targeted audio adversarial examples on automatic speech recognition. Given any audio waveform, we can produce another that is over 99.9% similar, but transcribes as any phrase we choose (recognizing up to 50 characters per second of audio). We apply our white-box iterative optimization-based attack to Mozilla's implementation DeepSpeech end-to-end, and show it has a 100% success rate.",https://arxiv.org/abs/1801.01944,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.","arXiv reference
 - arXiv ID: 1801.01944
 - Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2)
-- Evidence level: theoretical (provisional). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,,,,
+- Evidence level: theoretical (provisional). Basis: automated read of the full PDF text (looked for experiment and evaluation sections and deployment or disclosure terms); not yet checked by hand.",,,"Distributed stochastic gradient descent can include adversarial (Byzantine) workers that send poisoned gradients.
+In high dimension, an adversary can use the non-convexity of the loss function to steer training toward ineffective models.","Convergence of SGD under a minority of Byzantine workers is not enough to prevent poisoning.
+Existing Byzantine-resilient schemes leave a poisoning margin that grows at least like the square root of the dimension.
+The simple attack the authors build is highly effective on CIFAR-10 and MNIST.","Bulyan aggregation: distributed learning operators use Bulyan to cut the attacker's margin to a narrow bound.
+Test beyond convergence: evaluators check the quality of the converged model, not only whether training converges.
+Batch size cost: operators accept a larger required batch size as the price of Bulyan.","Threat Modeling
+Data Protection"
 WP-0216,218,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/218,open,Obfuscated Gradients Give a False Sense of Security: Circumventing Defenses to Adversarial Examples (arXiv 1802.00420),"Academic paper by Anish Athalye, Nicholas Carlini, David Wagner (from the arXiv API)",https://arxiv.org/abs/1802.00420,"2018-02-01 (arXiv v1, from the arXiv API)",,,include,,"From the arXiv abstract (the authors' own claims, not checked): We identify obfuscated gradients, a kind of gradient masking, as a phenomenon that leads to a false sense of security in defenses against adversarial examples. While defenses that cause obfuscated gradients appear to defeat iterative optimization-based attacks, we find defenses relying on this effect can be circumvented. We describe characteristic behaviors of defenses exhibiting the effect, and for each of the three types of obfuscated gradients we discover, we develop attack techniques to overcome it.",https://arxiv.org/abs/1802.00420,"Not in the sheet. The sheet is no longer used. Found by the weekly pass on Nov 3, 2026, as a reference cited by a monitored paper.","arXiv reference
 - arXiv ID: 1802.00420
 - Cited by monitored papers: #26 Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations (NIST AI 100-2); #174 OWASP GenAI Red Teaming Manual Version 1.0
@@ -3775,16 +3864,124 @@ WP-0579,589,https://github.com/billbrietstout/ai-security-whitepaper-monitor/iss
 - Cited by monitored papers: #168 Taxonomy of Failure Modes in AI Agents
 - Evidence level: theoretical (provisional). Basis: automated read of the arXiv abstract only, because the PDF text was not available; not yet checked by hand.",,,,,,
 WP-0580,606,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/606,open,Zero Trust for AI Agents,Anthropic,https://assets.claude.com/4e89a59711a145138bd8edbe7539331abc14ac0b.pdf,"May 18, 2026",,,include,,"Anthropic security framework for deploying autonomous AI agents under Zero Trust: tiered foundational controls, current agentic threats, an implementation workflow, and defensive operations for AI-accelerated attacks.",,,"Evidence
-- Evidence level: theoretical",,,,,,
+- Evidence level: theoretical",,,"Frontier AI models compress the time from vulnerability to exploit from months to hours at a marginal cost measured in dollars.
+Agents execute multi-step operations without human approval at each step, so a manipulated agent can cause harm at machine speed.
+Agentic attackers have unlimited patience and near-zero cost per attempt, so friction-only controls degrade against them.
+Traditional access controls do not stop an agent from misusing permissions it legitimately holds.","Every access request is authenticated and authorized regardless of where it originates.
+Static API keys and shared service-account passwords are not a legitimate entry point, even at the Foundation tier.
+Without verifiable agent identity, an organization cannot enforce least agency, keep audit trails or attribute actions to an agent.
+Agent identifiers are backed by cryptographic material and appear in all logs and access requests.","Never trust, always verify: the platform team authenticates and authorizes each agent request, with no trust granted for network location.
+Assume breach: architects design agent deployments to limit damage by segmenting by identity and using fine-grained access controls.
+Least agency: the platform team grants each agent only the access its specific function needs.
+Impossible, not tedious: security teams prefer controls that remove a capability, such as expiring tokens and hardware-bound credentials, over controls that only throttle.
+Blast radius: security teams match investment to the damage an agent could cause if it fails.
+Tiered capability: organizations adopt Foundation, Enterprise or Advanced controls to match their threat model and regulatory environment.","Access Control
+Authentication
+Secrets Management
+Threat Modeling
+Secure Product Design"
 WP-0581,607,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/607,open,Agent security in the enterprise,OpenAI,https://cdn.openai.com/pdf/6546a5a6-170a-41e8-bf2f-979ff3484db1/agent-security-enterprise.pdf,August 2026,,,include,,"OpenAI guide for CISOs and security teams on agentic risk, limits on agent access and actions, monitoring and response, and a first-actions checklist for production or broader deployment.",,,"Evidence
-- Evidence level: theoretical",,,,,,
+- Evidence level: theoretical",,,"A valid credential may give an agent access to a system without authorizing everything the agent might do there.
+Agents interpret new information, choose among tools and take actions their developers may not have anticipated, all at software speed.
+Retrieved documents and tool responses can influence agent behavior as directly as user instructions.
+The person or organization that deployed an agent remains responsible for the outcome.","Authorization and policy controls remain effective when an agent is mistaken or misaligned, and agent actions are auditable.
+Untrusted context cannot independently authorize a consequential action.
+Security teams can see who authorized a consequential action, what the agent did and what changed, and can stop unsafe work.","Agents as identifiable actors: the deployer distinguishes the responsible user or organization from the agent, its runtime and its task.
+Task-scoped authority: the deployer limits an agent's access, capabilities and execution environment to the task at hand, and requires an independent check for actions such as sending funds.
+Assume context is untrusted: security teams include retrieved content and tool responses in the threat model.
+Agent inventory: security teams record each agent's accountable owner, purpose, reachable systems and data, and possible actions.
+Expansion gate: owners document credible failure and abuse scenarios before they increase an agent's reach.
+Revocable credentials: operators give agents short-lived revocable credentials and keep longer-lived ones outside the agent's context window.","Access Control
+Authentication
+Threat Modeling
+Governance-Risk-Compliance
+Log Management"
 WP-0582,609,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/609,open,Zero Trust Architecture (NIST SP 800-207),National Institute of Standards and Technology (NIST),https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf,August 2020,,,include,,"NIST Special Publication defining zero trust and zero trust architecture: core principles, logical components, deployment models, use cases, threats, and a high-level migration roadmap for enterprises.",,,"Evidence
-- Evidence level: theoretical",,,,,,
+- Evidence level: theoretical",,,"Network location is no longer the prime component of a resource's security posture, because of remote users, BYOD and cloud assets outside the enterprise network.
+Zero trust protects resources such as assets, services and workflows, not network segments.
+Enterprise infrastructure is made of subjects, assets and resources that connect from inside and outside a perimeter.","No asset or user account receives implicit trust based on network location or on asset ownership.
+Authentication and authorization of subject and device are discrete functions performed before a session to an enterprise resource is established.
+Access to individual enterprise resources is granted per session.
+The enterprise collects data on asset state, network traffic and access requests and uses it to improve its security posture.","Dynamic policy: the policy engine decides access from client identity, application state and other behavioral and environmental attributes.
+Least privilege: the enterprise grants access to a resource with the minimum rights needed, per session.
+Continuous monitoring: the enterprise monitors and measures the integrity and security posture of all owned and associated assets.
+Strict enforcement: the enterprise makes authentication and authorization dynamic and strictly enforced before access is allowed.
+Plan the deployment: architects choose a ZTA deployment model, such as device agent or resource portal, to match their use case.","Access Control
+Authentication
+Log Management
+Secure Product Design"
 WP-0583,612,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/612,open,AI Data Center Security Analysis: A High-Performance Computing (HPC) Driven Approach (NIST SP 800-239 IPD),National Institute of Standards and Technology (NIST),https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-239.ipd.pdf,"July 27, 2026",,,include,,"NIST initial public draft analyzing threats and security gaps in purpose-built AI data centers for model training, inference, and applications, contrasting them with HPC systems and outlining possible safeguards.",,,"Evidence
-- Evidence level: theoretical",,,,,,
+- Evidence level: theoretical",,,"The architecture of high-performance computing systems has influenced the design of AI data centers, which are built for model training, inference and applications.
+AI data centers differ from HPC systems in architecture, hardware, software stacks, workflows and data storage.
+AI data centers have an accelerator-dense computing zone and a Management Zone with more monitoring, logging and compliance work than an HPC cluster.
+AI data centers face new threats beyond those of HPC systems, including data poisoning, prompt-based exploitation and AI dataset and model supply chain attacks.","AI data center security has to protect against both traditional cybersecurity threats and AI-specific risks.
+The key threats the draft identifies include denial of service, prompt-based exploitation, supply chain, multi-tenant, insider and firmware integrity threats.","Threat analysis first: AI data center operators start from the HPC threat analysis and add the AI-specific threats the draft lists.
+Zone-based review: operators assess each zone of the reference architecture, including the Management Zone, for gaps.
+Supply chain control: operators treat hardware, software and AI dataset and model supply chains as separate threat areas.
+Monitoring: operators run extensive monitoring, logging and anomaly detection in the Management Zone, typically through the SOC.
+Multi-tenant care: operators address the three-way trust dilemma of multi-tenant AI data centers.","Threat Modeling
+Supply Chain
+Log Management
+Secure Product Design
+Vulnerability Management"
 WP-0584,614,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/614,open,A Zero Trust Architecture Model for Access Control in Cloud-Native Applications in Multi-Cloud Environments (NIST SP 800-207A),National Institute of Standards and Technology (NIST),https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207A.pdf,"September 13, 2023",,,include,,NIST companion to SP 800-207 that applies zero trust architecture to access control for cloud-native applications across multi-cloud environments.,,,"Evidence
-- Evidence level: theoretical",,,,,,
+- Evidence level: theoretical",,,"Cloud-native applications are made of loosely coupled microservices that can run on different machines and in different locations.
+A single transaction can involve several inter-service calls across the network.
+A service mesh commonly provides service discovery, networking, resilience and security services such as authentication and authorization.","No user, service or device receives implicit trust based only on network location, affiliation or ownership.
+Network-tier policies based on IP addresses, subnets or perimeter are insufficient on their own for zero trust.
+Network-tier policies are augmented with identity-tier policies that establish trust in users and services wherever they run.","Identity-tier policy: architects enforce authentication and authorization policies based on application and service identities as well as user identities.
+Service identity: platform teams create, issue and maintain service identities, for example with SPIFFE.
+Gateways and sidecars: platform teams place policy enforcement in edge, ingress, sidecar and egress gateways.
+Token propagation: platform teams issue authentication and authorization tokens that carry user identities through the application infrastructure.
+Multi-location consistency: architects apply the same granular policies on premises and across multiple clouds.","Access Control
+Authentication
+Secure Product Design
+Session Management"
 WP-0585,615,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/615,open,"High-Performance Computing Security: Architecture, Threat Analysis, and Security Posture (NIST SP 800-223)",National Institute of Standards and Technology (NIST),https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-223.pdf,"February 9, 2024",,,include,,"NIST guidance on HPC security architecture, threat analysis, and security posture; foundational context for AI data center security work that builds on HPC designs.",,,"Evidence
-- Evidence level: theoretical",,,,,,
+- Evidence level: theoretical",,,"HPC systems differ in design, applications and missions, so each can have unique security requirements and follow different guidance.
+The complexity and uniqueness of HPC systems impede the sharing of security solutions and knowledge.
+HPC systems train AI and machine learning models, so securing them protects the models and sensitive data.",,"Shared lexicon: security teams describe HPC systems with the reference architecture and its key components so they can share security knowledge.
+Threat analysis: HPC operators analyze threats against each part of the reference architecture.
+Posture review: HPC operators review their current security posture and challenges against the publication's analysis.
+Recommendations: HPC operators apply the publication's recommendations, tailored to the system's own requirements.","Threat Modeling
+Secure Product Design
+Governance-Risk-Compliance"
 WP-0586,616,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/616,open,High-Performance Computing (HPC) Security Overlay (NIST SP 800-234),National Institute of Standards and Technology (NIST),https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-234.pdf,"May 4, 2026",,,include,,"NIST SP 800-53 overlay that tailors controls for HPC environments used for large-scale simulation, data analysis, and AI/ML model training.",,,"Evidence
-- Evidence level: theoretical",,,,,,
+- Evidence level: theoretical",,,"HPC systems provide the computing for large simulations, big data analysis and the training of AI and machine learning models.
+High performance is a fundamental requirement of an HPC system, so security controls have to be adopted without hurting it.
+HPC systems use specialized hardware, software and high-speed networks in intricate user environments.",,"Overlay on a baseline: HPC security managers start from the SP 800-53B moderate baseline and apply the HPC overlay.
+Performance-conscious controls: system administrators adopt the 60 tailored controls in ways that keep HPC performance.
+Customize: program managers adjust the overlay to meet their operational or mission needs.
+Protect AI assets: HPC security managers use the overlay to safeguard AI models and sensitive data in HPC environments.","Governance-Risk-Compliance
+Access Control
+Secure Product Design
+Data Protection"
+WP-0587,619,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/619,open,Designing the AI-First Security Organization,Cloud Security Alliance (CSA),https://cloudsecurityalliance.org/artifacts/designing-the-ai-first-security-organization,,,,include,,"CSA whitepaper from the AI Safety Initiative and CISO community that maps security functions to seven transformation types, and covers governance and decision rights, human-in-the-loop boundaries and failure modes for AI-first security organizations.",,,"Evidence
+- Evidence level: theoretical",,,"Frontier AI models now perform a meaningful share of hands-on security work, such as vulnerability discovery, so machine-scale capacity is available to defenders and attackers.
+Businesses adopt AI that security teams need to defend, security teams adopt AI in their own work, and adversaries use offensive AI; all three change staffing, skills and team structures.
+Agent fleets do more of the routine work, so human roles move from performing tasks to validating output, managing fleets and owning decisions.","Accountability for an automated action stays with a named human owner, even when agents do the work.
+An organization needs a documented answer to who answers for an automated action that halts a business function.","Restructure before resizing: security leaders redesign team structure for machine-scale capacity before they change headcount.
+Transformation types: security leaders map each of eleven security functions to one of seven transformation types, such as consolidating or automating responsibilities.
+Governance in the loop: security leaders run agents inside a pre-authorized envelope and keep human-in-the-loop approval for defined gates.
+Validation skill: security leaders train reviewers to judge agent output, because a reviewer without domain depth has no basis for accepting it.
+Phased start: security leaders follow the five practical starting points in the paper to build an AI-first security organization.","Governance-Risk-Compliance
+Training and Awareness
+Vulnerability Management
+Incident Response"
+WP-0588,620,https://github.com/billbrietstout/ai-security-whitepaper-monitor/issues/620,open,Human-in-the-Loop: When Should a Human Approve an AI Action?,Cloud Security Alliance (CSA),https://cloudsecurityalliance.org/articles/human-in-the-loop-when-should-a-human-approve-an-ai-action,"November 19, 2026",,,include,,"CSA blog whose body is guidance: governance in the loop as the default envelope, four action types that need a named human authorizer, and controls such as an independent policy decision point and agent inventory.",,,"Evidence
+- Evidence level: theoretical",,,"Putting a person in front of every agent action returns AI security operations to human speed, and the approver becomes a chokepoint.
+An agent can misclassify its own actions because of prompt injection, tool-chain composition or goal drift.
+Under queue pressure reviewers may rubber-stamp plausible agent output, which turns a human gate into cosmetic friction.
+AI can gather evidence and assemble audit packages, but it cannot assume personal or organizational accountability for what it submits.","An irreversible action requires a named human authorizer before execution.
+A production-disruptive action outside pre-authorized change classes requires human approval.
+An externally visible action that affects customers, partners, regulators or third parties requires review by a named owner.
+A regulatory attestation or formal risk acceptance requires human sign-off.
+An independent policy decision point outside the agent evaluates every proposed tool call before execution.","Governance in the loop: the organization lets agents act inside a governed envelope of pre-authorized actions, backed by policy, monitoring, sampled validation and audit trails.
+Bounded autonomy: the organization reserves human-in-the-loop for defined gates instead of blanket human approval.
+Complete mediation: the platform checks each tool call against deterministic allowlists and policy rules before execution.
+Least privilege: the organization gives agents only the permissions their approved task needs and verifies them continuously.
+Agent inventory: the organization records what each agent is, who created it, what it can reach and what it may do.
+Accountability metrics: the organization measures validation accuracy, escalation quality and error rates to detect automation bias.","Access Control
+Governance-Risk-Compliance
+Log Management
+Threat Modeling"

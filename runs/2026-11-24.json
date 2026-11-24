@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "date": "2026-11-24",
+  "repository": "billbrietstout/ai-security-whitepaper-monitor",
+  "project_owner": "billbrietstout",
+  "project_number": 2,
+  "project_id": "PVT_kwHOAIE7SM4BpZ2U",
+  "batch_size": 25,
+  "updated": "2026-11-24T17:08:50.165472+00:00",
+  "done": [
+    "WP-0587",
+    "WP-0588"
+  ],
+  "pending": [],
+  "issues": {
+    "WP-0587": 619,
+    "WP-0588": 620
+  },
+  "created_issues": {
+    "WP-0587": 619,
+    "WP-0588": 620
+  },
+  "items": [
+    {
+      "wp_id": "WP-0587",
+      "title": "Designing the AI-First Security Organization",
+      "source": "Cloud Security Alliance (CSA)",
+      "url": "https://cloudsecurityalliance.org/artifacts/designing-the-ai-first-security-organization",
+      "url_key": "https://cloudsecurityalliance.org/artifacts/designing-the-ai-first-security-organization",
+      "date_published": "",
+      "summary": "CSA whitepaper from the AI Safety Initiative and CISO community that maps security functions to seven transformation types, and covers governance and decision rights, human-in-the-loop boundaries and failure modes for AI-first security organizations.",
+      "body": "",
+      "arxiv_id": "",
+      "cited_by": "",
+      "evidence_level": "theoretical",
+      "status": "done",
+      "issue_number": 619,
+      "issue_node_id": "I_kwDOU6p2aM8AAAABiKGJWw",
+      "project_item_id": "PVTI_lAHOAIE7SM4BpZ2UzhLh15Y",
+      "created": true,
+      "also_found": [],
+      "history": [
+        {
+          "at": "2026-11-24T17:08:27.356849+00:00",
+          "step": "pending",
+          "issue_number": null
+        },
+        {
+          "at": "2026-11-24T17:08:36.645736+00:00",
+          "step": "issue_open",
+          "issue_number": 619
+        },
+        {
+          "at": "2026-11-24T17:08:38.714564+00:00",
+          "step": "done",
+          "issue_number": 619,
+          "project_item_id": "PVTI_lAHOAIE7SM4BpZ2UzhLh15Y"
+        }
+      ]
+    },
+    {
+      "wp_id": "WP-0588",
+      "title": "Human-in-the-Loop: When Should a Human Approve an AI Action?",
+      "source": "Cloud Security Alliance (CSA)",
+      "url": "https://cloudsecurityalliance.org/articles/human-in-the-loop-when-should-a-human-approve-an-ai-action",
+      "url_key": "https://cloudsecurityalliance.org/articles/human-in-the-loop-when-should-a-human-approve-an-ai-action",
+      "date_published": "November 19, 2026",
+      "summary": "CSA blog whose body is guidance: governance in the loop as the default envelope, four action types that need a named human authorizer, and controls such as an independent policy decision point and agent inventory.",
+      "body": "",
+      "arxiv_id": "",
+      "cited_by": "",
+      "evidence_level": "theoretical",
+      "status": "done",
+      "issue_number": 620,
+      "issue_node_id": "I_kwDOU6p2aM8AAAABiKGXjQ",
+      "project_item_id": "PVTI_lAHOAIE7SM4BpZ2UzhLh2Hs",
+      "created": true,
+      "also_found": [],
+      "history": [
+        {
+          "at": "2026-11-24T17:08:27.356983+00:00",
+          "step": "pending",
+          "issue_number": null
+        },
+        {
+          "at": "2026-11-24T17:08:48.074589+00:00",
+          "step": "issue_open",
+          "issue_number": 620
+        },
+        {
+          "at": "2026-11-24T17:08:50.165343+00:00",
+          "step": "done",
+          "issue_number": 620,
+          "project_item_id": "PVTI_lAHOAIE7SM4BpZ2UzhLh2Hs"
+        }
+      ]
+    }
+  ]
+}
